@@ -4,8 +4,12 @@ import {
   createRoutesFromElements,
   RouterProvider
 } from 'react-router-dom'
-import { Home } from './Pages'
-import MainLayout from './layout'
+import { 
+  Home,
+  Login,
+  AuthenticatedTest
+ } from './Pages'
+import MainLayout from './layout';
 
 function App () {
   const Router = createBrowserRouter(
@@ -13,6 +17,8 @@ function App () {
       <Route element={<MainLayout />}>
         {/* Public Routes  */}
         <Route index element={<Home />} />
+        <Route path='/login' element={<Login/>}/>
+        <Route path='/test' element={<AuthenticatedTest/>}/>
 
         {/* Private Routes */}
       </Route>

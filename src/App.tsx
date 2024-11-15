@@ -11,7 +11,10 @@ function App () {
   const Router = createBrowserRouter(
     createRoutesFromElements(
       <Route element={<MainLayout />}>
+        {/* Public Routes  */}
         <Route index element={<Home />} />
+
+        {/* Private Routes */}
       </Route>
     )
   )

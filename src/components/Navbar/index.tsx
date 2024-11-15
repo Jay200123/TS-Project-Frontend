@@ -1,7 +1,9 @@
-import { useState } from 'react'
+import { useState } from 'react';
+import { useAuthenticationStore } from '../../state/store'; 
 
 export default function () {
   const [isOpen, setIsOpen] = useState(false)
+  const { logout } = useAuthenticationStore() 
   return (
     <>
       <nav className='w-full h-14 items-center flex justify-between bg-gray-800 text-white'>
@@ -18,14 +20,14 @@ export default function () {
         </div>
 
         <div className={`m-2 p-2 ${isOpen ? 'block' : 'hidden'} md:block`}>
-          <ul className='flex flex-col md:flex-row items-start md:items-center justify-start'>
-            <li className='p-2 text-sm cursor-pointer transition duration-300 hover:bg-gray-700 rounded'>
+          <ul className='flex flex-row md:flex-row items-start md:items-center justify-start'>
+            <li className='p-2 text-sm cursor-pointer transition duration-300 hover:bg-gray-700 rounded md:text-sm'>
               Home
             </li>
-            <li className='p-2 text-sm cursor-pointer transition duration-300 hover:bg-gray-700 rounded'>
+            <li className='p-2 text-sm cursor-pointer transition duration-300 hover:bg-gray-700 rounded  md:text-sm'>
               About
             </li>
-            <li className='p-2 text-sm cursor-pointer transition duration-300 hover:bg-gray-700 rounded'>
+            <li onClick={logout} className='p-2 text-sm cursor-pointer transition duration-300 hover:bg-gray-700 rounded md:text-sm'>
               Contact Us
             </li>
           </ul>

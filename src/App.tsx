@@ -1,10 +1,24 @@
+import {
+  Route,
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider
+} from 'react-router-dom'
+import { Home } from './Pages'
+import MainLayout from './layout'
 
-function App() {
- 
+function App () {
+  const Router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route element={<MainLayout />}>
+        <Route index element={<Home />} />
+      </Route>
+    )
+  )
 
   return (
     <>
-    <h3 className="text-center text-2xl">this is a react application</h3>
+      <RouterProvider router={Router} />
     </>
   )
 }

@@ -1,5 +1,9 @@
-import Home from './Home'
+import Home from './Home';
+import Login from './Login';
+import AuthenticatedTest from './AuthenticatedTest';
 
 export {
-    Home
-    }
+    Home,
+    Login,
+    AuthenticatedTest
+}

@@ -8,7 +8,6 @@ import { PATH } from "../constants";
 const useAuthenticationStore = create<AuthState>()(
     persist((set) => ({
         user: null,
-        isAuth: false,
         loading: false,
         error: null,
         login: async (email, password) => {
@@ -23,7 +22,6 @@ const useAuthenticationStore = create<AuthState>()(
                 set(
                     {
                         user: null,
-                        isAuth: false,
                         loading: false,
                         error: res.data.error.message,
                     }
@@ -32,7 +30,6 @@ const useAuthenticationStore = create<AuthState>()(
             set(
                 {
                     user: res.data.details,
-                    isAuth: true,
                     loading: false,
                     error: null,
                 }

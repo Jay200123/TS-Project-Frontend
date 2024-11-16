@@ -32,6 +32,7 @@ export default function () {
             <div className='hidden md:block w-full md:w-1/2'>
               <Image />
             </div>
+            
             <div className='w-full md:w-1/2 p-4 md:p-6'>
               <div className='flex flex-col items-center'>
                 <img

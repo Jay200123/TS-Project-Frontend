@@ -12,4 +12,9 @@ html {
   margin: 0;
   padding: 0;
   height: 100vh;
+  background-image: url("./assets/ticketing-systems-transformed.jpeg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }

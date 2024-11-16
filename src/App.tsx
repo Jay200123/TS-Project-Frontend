@@ -10,6 +10,7 @@ import {
   AuthenticatedTest,
   Unauthorized
  } from './Pages'
+ import { ProtectedRoute } from './components';
 import MainLayout from './layout';
 
 function App () {
@@ -19,10 +20,17 @@ function App () {
         {/* Public Routes  */}
         <Route index element={<Home />} />
         <Route path='/login' element={<Login/>}/>
-        <Route path='/test' element={<AuthenticatedTest/>}/>
         <Route path="/unauthorized" element={<Unauthorized/>}/>
 
         {/* Private Routes */}
+        <Route
+         path='/test'
+          element={<ProtectedRoute userRole={["admin"]}>
+          <AuthenticatedTest/>
+          </ProtectedRoute>
+          }
+          />
+
       </Route>
     )
   )

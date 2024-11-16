@@ -7,7 +7,6 @@ App Routing - done (private routes not setup)
 
 (pending for today  11-16-2024)
 
-implement protected routes
-implement test crud
-implement test crud state Management
-implement protected routes
+implement protected routes - done
+implement test crud - working
+implement test crud state Management - working

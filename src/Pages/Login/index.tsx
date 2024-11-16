@@ -16,9 +16,10 @@ export default function(){
     },
     validationSchema: authenticationValidationSchema,
     onSubmit: async values => {
-        await login(values.email, values.password)
+        const res = await login(values.email, values.password)
         toast.success('Login successful')
         navigate('/test')
+        console.log(res);
     }
   })
 

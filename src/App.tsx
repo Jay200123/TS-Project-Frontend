@@ -7,7 +7,8 @@ import {
 import { 
   Home,
   Login,
-  AuthenticatedTest
+  AuthenticatedTest,
+  Unauthorized
  } from './Pages'
 import MainLayout from './layout';
 
@@ -19,6 +20,7 @@ function App () {
         <Route index element={<Home />} />
         <Route path='/login' element={<Login/>}/>
         <Route path='/test' element={<AuthenticatedTest/>}/>
+        <Route path="/unauthorized" element={<Unauthorized/>}/>
 
         {/* Private Routes */}
       </Route>

@@ -1,0 +1,13 @@
+User Authentication State Management - Done
+User Login PAGE - done basic (designing)
+ProtectedRoutes - done (but not implemented)
+Navbar - done (basic design)
+Footer - done (basic design)
+App Routing - done (private routes not setup)
+
+(pending for today  11-16-2024)
+
+implement protected routes
+implement test crud
+implement test crud state Management
+implement protected routes

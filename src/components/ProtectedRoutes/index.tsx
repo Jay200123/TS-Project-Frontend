@@ -1,29 +1,25 @@
-import { useEffect } from "react";
-import { Navigate, Outlet } from "react-router-dom";
+import { ReactNode,  } from "react";
+import { Navigate } from "react-router-dom";
 import { useAuthenticationStore } from "../../state/store";
-import { toast } from "react-toastify";
+
 
 interface ProtectedRouteProps {
-  requiredRole: string;
+  userRole: string[]; 
+  children: ReactNode;
 }
 
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ requiredRole }) => {
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ userRole, children }) => {
   const { user } = useAuthenticationStore();
+  
+  if (!user) {
+    return <Navigate to="/" replace />;
+  }
 
-  useEffect(() => {
-    if (!user) {
-      toast.error("You must be logged in to access this page!");
-    } else if (user.role !== requiredRole) {
-      toast.error("You do not have the required role to access this page!");
-    }
-  }, [user, requiredRole]);
+  if (!userRole.includes(user.role)) {
+    return <Navigate to="/unauthorized" replace />;
+  }
 
- 
-  return user && user.role === requiredRole ? (
-    <Outlet/> 
-  ) : (
-    <Navigate to="/" replace />
-  );
+  return <>{children}</>;
 };
 
 export default ProtectedRoute;

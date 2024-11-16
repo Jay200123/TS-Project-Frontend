@@ -7,6 +7,7 @@ interface AuthenticationValues {
 
 interface AuthState {
     user: User | null;
+    isAuth: boolean;    
     loading: boolean;
     error: string | null;
     login: (email: string, password: string) => Promise<void>;

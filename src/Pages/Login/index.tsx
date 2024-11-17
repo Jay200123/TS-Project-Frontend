@@ -9,6 +9,7 @@ import { Image } from '../../components'
 
 export default function () {
   const navigate = useNavigate()
+  const { user } = useAuthenticationStore()
   const { login } = useAuthenticationStore()
 
   const formik = useFormik<AuthenticationValues>({
@@ -17,12 +18,23 @@ export default function () {
       password: ''
     },
     validationSchema: authenticationValidationSchema,
-    onSubmit: async (values) => {
-      await login(values.email, values.password)
-      toast.success('Login successful')
-      navigate('/test')
+    onSubmit: async values => {
+      try {
+        await login(values.email, values.password)
+        toast.success('Login successful')
+      } catch (error) {
+        toast.error('Login failed')
+      }
     }
   })
+
+  if (user?.role.includes('admin')) {
+    navigate('/dashboard')
+  }
+
+  if (user?.role.includes('customer')) {
+    navigate('/test')
+  }
 
   return (
     <>
@@ -32,7 +44,7 @@ export default function () {
             <div className='hidden md:block w-full md:w-1/2'>
               <Image />
             </div>
-            
+
             <div className='w-full md:w-1/2 p-4 md:p-6'>
               <div className='flex flex-col items-center'>
                 <img

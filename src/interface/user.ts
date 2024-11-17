@@ -13,4 +13,16 @@ interface User {
     image: Image[];
 }
 
-export type { User };   
+interface UserState {
+    users: User[];
+    user: User | null;
+    loading: boolean;
+    error: string | null;
+    getAllUsers: () => Promise<void>;
+    getOneUser: (id: string) => Promise<void>;
+    createUser: (formData: FormData) => Promise<void>;
+    updateUserById: (id: string, formData: FormData) => Promise<void>;
+    deleteUserById: (id: string) => Promise<void>;
+}
+
+export type { User, UserState };   

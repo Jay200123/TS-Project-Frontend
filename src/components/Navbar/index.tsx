@@ -14,6 +14,10 @@ export default function () {
     navigate('/login'); 
   }
 
+  const signup = ()=>{
+    navigate('/signup');
+  }
+
   const home = ()=>{
     navigate('/');
   }
@@ -88,7 +92,7 @@ export default function () {
                   <li onClick={login} className='p-2 text-sm cursor-pointer hover:bg-gray-600'>
                   <i className="fa-solid fa-unlock m-1"></i>Sign In
                   </li>
-                  <li className='p-2 text-sm cursor-pointer hover:bg-gray-600'>
+                  <li onClick={signup} className='p-2 text-sm cursor-pointer hover:bg-gray-600'>
                   <i className="fa-solid fa-user-plus m-1"></i> Sign Up
                   </li>
                 </ul>

@@ -4,15 +4,9 @@ import {
   createRoutesFromElements,
   RouterProvider
 } from 'react-router-dom'
-import { 
-  Home,
-  Login,
-  AuthenticatedTest,
-  Unauthorized,
-  SignUp
- } from './Pages'
- import { ProtectedRoute } from './components';
-import MainLayout from './layout';
+import { Home, Login, AuthenticatedTest, Unauthorized, SignUp } from './Pages'
+import { ProtectedRoute } from './components'
+import MainLayout from './layout'
 
 function App () {
   const Router = createBrowserRouter(
@@ -20,20 +14,19 @@ function App () {
       <Route element={<MainLayout />}>
         {/* Public Routes  */}
         <Route index element={<Home />} />
-        <Route path='/login' element={<Login/>}/>
-        <Route path="/unauthorized" element={<Unauthorized/>}/>
-        <Route path="/signup" element={<SignUp/>}/>
+        <Route path='/login' element={<Login />} />
+        <Route path='/unauthorized' element={<Unauthorized />} />
+        <Route path='/signup' element={<SignUp />} />
 
         {/* Private Routes */}
         <Route
-         path='/test'
+          path='/test'
           element={
-          <ProtectedRoute userRole={["admin"]}>
-          <AuthenticatedTest/>
-          </ProtectedRoute>
+            <ProtectedRoute userRole={['admin', 'customer']}>
+              <AuthenticatedTest />
+            </ProtectedRoute>
           }
-          />
-
+        />
       </Route>
     )
   )

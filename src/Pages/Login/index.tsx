@@ -17,7 +17,7 @@ export default function () {
       password: ''
     },
     validationSchema: authenticationValidationSchema,
-    onSubmit: async values => {
+    onSubmit: async (values) => {
       await login(values.email, values.password)
       toast.success('Login successful')
       navigate('/test')
@@ -27,7 +27,7 @@ export default function () {
   return (
     <>
       <form onSubmit={formik.handleSubmit}>
-        <div className='min-h-screen flex items-center justify-center'>
+        <div className='flex items-center justify-center'>
           <div className=' bg-white shadow-lg rounded-lg flex flex-col md:flex-row items-center max-w-4xl p-6 md:p-8 border border-black'>
             <div className='hidden md:block w-full md:w-1/2'>
               <Image />
@@ -51,7 +51,7 @@ export default function () {
               <input
                 type='text'
                 name='email'
-                className='w-full p-2 mb-4 text-sm border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+                className='w-full p-2 mb-4 text-sm border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-none'
                 onChange={formik.handleChange}
                 value={formik.values.email}
               />
@@ -62,7 +62,7 @@ export default function () {
               <input
                 type='password'
                 name='password'
-                className='w-full p-2 mb-4 text-sm border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+                className='w-full p-2 mb-4 text-sm border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-none'
                 onChange={formik.handleChange}
                 value={formik.values.password}
               />

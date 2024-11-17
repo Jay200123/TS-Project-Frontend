@@ -8,7 +8,8 @@ import {
   Home,
   Login,
   AuthenticatedTest,
-  Unauthorized
+  Unauthorized,
+  SignUp
  } from './Pages'
  import { ProtectedRoute } from './components';
 import MainLayout from './layout';
@@ -21,11 +22,13 @@ function App () {
         <Route index element={<Home />} />
         <Route path='/login' element={<Login/>}/>
         <Route path="/unauthorized" element={<Unauthorized/>}/>
+        <Route path="/signup" element={<SignUp/>}/>
 
         {/* Private Routes */}
         <Route
          path='/test'
-          element={<ProtectedRoute userRole={["admin"]}>
+          element={
+          <ProtectedRoute userRole={["admin"]}>
           <AuthenticatedTest/>
           </ProtectedRoute>
           }

@@ -34,7 +34,7 @@ const useAuthenticationStore = create<AuthState>()(
                     error: null,
                 }
             );
-
+            sessionStorage.setItem("access", res.data.access);
         },
         logout: async () => {
             set(
@@ -45,6 +45,7 @@ const useAuthenticationStore = create<AuthState>()(
                 }
             );
             sessionStorage.removeItem("user-auth");
+            sessionStorage.removeItem("access");
         }
     }), {
         name: "user-auth",

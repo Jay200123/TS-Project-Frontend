@@ -1,7 +1,7 @@
 export default function () {
   return (
     <>
-      <footer className='w-full max-h-72 bg-gray-800 flex items-center md:flex-col overflow-hidden'>
+      <footer className='w-full max-h-80 bg-gray-800 flex items-center md:flex-col overflow-hidden'>
         <div className='flex items-center justify-between p-2 border-b border-t border-white w-full max-h-12'>
           <div className='md:w-1/2'>
             <p className='text-white'>
@@ -79,6 +79,9 @@ export default function () {
               Conditions
             </li>
           </ul>
+        </div>
+        <div className="w-full max-h-6 border-t border-white flex justify-end items-center p-4">
+          <p className="text-lg text-white">Copyright<span className="mr-1 ml-1"><i className="fa-regular fa-copyright"></i></span>2023 - Renyel Jay Sioc</p>
         </div>
       </footer>
     </>

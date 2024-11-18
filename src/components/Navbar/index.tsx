@@ -34,7 +34,7 @@ export default function () {
   };
 
   return (
-    <nav className='w-full h-14 items-center flex justify-between bg-gray-800 text-white'>
+    <nav className='w-full h-14 items-center flex justify-between bg-black shadow-sm shadow-black text-white'>
       <div className='m-2 p-2'>
         <h3 className='text-lg'>Navbar Project</h3>
       </div>

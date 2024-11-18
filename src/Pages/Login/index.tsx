@@ -9,7 +9,6 @@ import { Image } from '../../components'
 
 export default function () {
   const navigate = useNavigate()
-  const { user } = useAuthenticationStore()
   const { login } = useAuthenticationStore()
 
   const formik = useFormik<AuthenticationValues>({
@@ -19,22 +18,11 @@ export default function () {
     },
     validationSchema: authenticationValidationSchema,
     onSubmit: async values => {
-      try {
-        await login(values.email, values.password)
-        toast.success('Login successful')
-      } catch (error) {
-        toast.error('Login failed')
-      }
+      const res = await login(values.email, values.password)
+      toast.success('Login successful')
+      res.role === 'admin' ? navigate('/dashboard') : navigate('/test')
     }
   })
-
-  if (user?.role.includes('admin')) {
-    navigate('/dashboard')
-  }
-
-  if (user?.role.includes('customer')) {
-    navigate('/test')
-  }
 
   return (
     <>

@@ -1,7 +1,7 @@
 export default function () {
   return (
     <>
-      <footer className='w-full max-h-80 bg-gray-800 flex items-center md:flex-col overflow-hidden'>
+      <footer className='w-full max-h-80 bg-black flex items-center md:flex-col overflow-hidden'>
         <div className='flex items-center justify-between p-2 border-b border-t border-white w-full max-h-12'>
           <div className='md:w-1/2'>
             <p className='text-white'>

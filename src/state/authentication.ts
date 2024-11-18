@@ -17,16 +17,6 @@ const useAuthenticationStore = create<AuthState>()(
                     password
                 },
             );
-
-            if (res.data.success === false) {
-                set(
-                    {
-                        user: null,
-                        loading: false,
-                        error: res.data.error.message,
-                    }
-                );
-            }
             set(
                 {
                     user: res.data.details,
@@ -35,6 +25,9 @@ const useAuthenticationStore = create<AuthState>()(
                 }
             );
             sessionStorage.setItem("access", res.data.access);
+            const user = res.data.details;
+            
+            return user;
         },
         logout: async () => {
             set(

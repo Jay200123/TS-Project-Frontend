@@ -1,15 +1,14 @@
 import { useAuthenticationStore, useUserStore } from '../../state/store'
-import { useEffect } from 'react';
+// import { useQuery } from '@tanstack/react-query';
 
 export default function(){
     const { user } = useAuthenticationStore();
-    // const { users, getAllUsers } = useUserStore();  
-    
-    // useEffect(() => {
-    //     getAllUsers();
-    // }, [getAllUsers]);
+    // const { users, getAllUsers } = useUserStore();
 
-    // console.log(users);
+    // useQuery({
+    //     queryKey: ['users'],
+    //     queryFn: getAllUsers,
+    //   });
 
     if(!user){
         return <h3>Not authenticated! :(</h3>

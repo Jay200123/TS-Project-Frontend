@@ -28,7 +28,7 @@ export default function () {
     <>
       <form onSubmit={formik.handleSubmit}>
         <div className='flex items-center justify-center'>
-          <div className=' bg-white shadow-lg rounded-lg flex flex-col md:flex-row items-center max-w-4xl p-6 md:p-8 border border-black'>
+          <div className=' bg-white rounded-lg flex flex-col md:flex-row items-center max-w-4xl p-6 md:p-8 shadow-sm shadow-gray-500 border border-gray-500'>
             <div className='hidden md:block w-full md:w-1/2'>
               <Image />
             </div>
@@ -69,7 +69,7 @@ export default function () {
 
               <button
                 type='submit'
-                className='w-full py-2 px-4 bg-blue-500 text-white text-sm font-medium rounded-md hover:bg-blue-600 transition duration-300'
+                className='w-full text-lg py-2 px-4 bg-black text-white font-medium rounded-md transition duration-700 hover:bg-opacity-80 border border-gray-500'
               >
                 Sign In
               </button>

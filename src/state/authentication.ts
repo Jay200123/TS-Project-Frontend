@@ -24,9 +24,15 @@ const useAuthenticationStore = create<AuthState>()(
                     error: null,
                 }
             );
+
+            if (res.data.details.isAuthorized === false) {
+                set({ user: null, loading: false, error: "Please wait for admin approval" });
+                return;
+            }
+            
             sessionStorage.setItem("access", res.data.access);
             const user = res.data.details;
-            
+
             return user;
         },
         logout: async () => {

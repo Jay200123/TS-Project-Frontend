@@ -10,6 +10,7 @@ interface User {
     email: string;
     password: string;
     role: string;
+    isAuthorized: boolean; 
     image: Image[];
 }
 

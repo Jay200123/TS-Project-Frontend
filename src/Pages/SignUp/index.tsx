@@ -1,13 +1,30 @@
 import { Image } from '../../components'
 import { useFormik } from 'formik'
 import { userValidationSchema } from '../../validations'
-import { useUserStore } from '../../state/user'
+import {
+  useUserStore,
+  useBranchStore,
+  useDepartmentStore
+} from '../../state/store'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
+import { useQuery } from '@tanstack/react-query'
 
 export default function () {
   const navigate = useNavigate()
   const { createUser } = useUserStore()
+  const { branches, getAllBranches } = useBranchStore()
+  const { departments, getAllDepartments } = useDepartmentStore()
+
+  useQuery({
+    queryKey: ['branches'],
+    queryFn: getAllBranches
+  })
+
+  useQuery({
+    queryKey: ['departments'],
+    queryFn: getAllDepartments
+  })
 
   const formik = useFormik({
     initialValues: {
@@ -18,6 +35,9 @@ export default function () {
       city: '',
       email: '',
       password: '',
+      role: 'Employee',
+      branch: '',
+      department: '',
       image: []
     },
     validationSchema: userValidationSchema,
@@ -30,6 +50,8 @@ export default function () {
       formData.append('city', values.city)
       formData.append('email', values.email)
       formData.append('password', values.password)
+      formData.append('branch', values.branch)
+      formData.append('department', values.department)
       values.image.forEach(file => {
         formData.append('image', file)
       })
@@ -49,6 +71,11 @@ export default function () {
       }
     }
   })
+
+  const filteredDepartments = departments.filter(
+    d => d.branch._id === formik.values.branch
+  )
+
   return (
     <form
       onSubmit={formik.handleSubmit}
@@ -62,6 +89,58 @@ export default function () {
           <h2 className='text-2xl font-bold text-gray-800 text-center md:text-left'>
             Register Your Account
           </h2>
+
+          <div className='flex flex-col'>
+            <label className='mb-1 text-sm font-medium text-gray-700'>
+              <i className='fa-solid fa-code-branch'></i> Branch
+            </label>
+            <select
+              name='branch'
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.branch}
+              className='p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+            >
+              <option value='' disabled>
+                Select a branch
+              </option>
+              {branches.map(b => (
+                <option key={b._id} value={b._id}>
+                  {b.branch_name}
+                </option>
+              ))}
+            </select>
+            {formik.touched.branch && formik.errors.branch ? (
+              <div className='text-red-500 text-sm'>{formik.errors.branch}</div>
+            ) : null}
+          </div>
+
+          <div className='flex flex-col'>
+            <label className='mb-1 text-sm font-medium text-gray-700'>
+              <i className='fa-solid fa-building mr-1'></i> Department
+            </label>
+            <select
+              name='department'
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.department}
+              className='p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+            >
+              <option value='' disabled>
+                Select a Department
+              </option>
+              {filteredDepartments.map(d => (
+                <option key={d._id} value={d._id}>
+                  {d.department_name}
+                </option>
+              ))}
+            </select>
+            {formik.touched.department && formik.errors.department ? (
+              <div className='text-red-500 text-sm'>
+                {formik.errors.department}
+              </div>
+            ) : null}
+          </div>
 
           <div className='flex flex-col'>
             <label className='mb-1 text-sm font-medium text-gray-700'>

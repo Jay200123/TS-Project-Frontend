@@ -32,7 +32,7 @@ function App () {
             path='/test'
             index
             element={
-              <ProtectedRoute userRole={['customer']}>
+              <ProtectedRoute userRole={['Employee']}>
                 <AuthenticatedTest />
               </ProtectedRoute>
             }
@@ -44,7 +44,7 @@ function App () {
             path='/dashboard'
             index
             element={
-              <ProtectedRoute userRole={['admin']}>
+              <ProtectedRoute userRole={['Admin']}>
                 <Dashboard />
               </ProtectedRoute>
             }

@@ -9,24 +9,29 @@ import { Image } from '../../components'
 
 export default function () {
   const navigate = useNavigate()
-  const { login, error } = useAuthenticationStore();
+  const { login } = useAuthenticationStore()
 
   const formik = useFormik<AuthenticationValues>({
     initialValues: {
       email: '',
       password: ''
     },
+
     validationSchema: authenticationValidationSchema,
     onSubmit: async values => {
       const res = await login(values.email, values.password)
 
-      if (error) {
-        sessionStorage.removeItem("user-auth");
-        return toast.error(error)
-      } 
+      //means at the login state the user's isAuthorized is false 
+      if (res == null) {  
+        sessionStorage.removeItem('user-auth')
+        return toast.error('Please wait for admin approval')
+      }
 
-      toast.success('Login successful')
-      res.role === 'admin' ? navigate('/dashboard') : navigate('/test')
+      //means the user registration is approve by th admin 
+      if (res.isAuthorized) {
+        toast.success('Login successful')
+        res.role === 'Admin' ? navigate('/dashboard') : navigate('/test')
+      }
     }
   })
 

@@ -1,10 +1,10 @@
 import { Outlet } from 'react-router-dom'
-import { Footer, Navbar } from '../components'
+import { Footer, AdminNavbar } from '../components'
 export default function () {
   return (
     <>
       <main className='min-h-screen min-w-screen flex flex-col items-center justify-between'>
-        <Navbar />
+        <AdminNavbar />
         <div>
           <Outlet />
         </div>

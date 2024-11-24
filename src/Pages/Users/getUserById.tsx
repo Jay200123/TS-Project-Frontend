@@ -40,9 +40,9 @@ export default function () {
             <input
               type="text"
               name="fname"
-              value={user?.fname}
-              placeholder="Enter your first name"
-              className="p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              readOnly
+              placeholder={user?.fname}
+              className="p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
@@ -53,9 +53,9 @@ export default function () {
             <input
               type="text"
               name="lname"
-              value={user?.lname}
-              placeholder="Enter your last name"
-              className="p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              readOnly
+              placeholder={user?.lname}
+              className="p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
@@ -66,9 +66,9 @@ export default function () {
             <input
               type="text"
               name="phone"
-              value={user?.phone}
-              placeholder="Enter your contact number"
-              className="p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              readOnly
+              placeholder={user?.phone}
+              className="p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
@@ -79,9 +79,9 @@ export default function () {
             <input
               type="text"
               name="address"
-              value={user?.address}
-              placeholder="Enter your address"
-              className="p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              readOnly
+              placeholder={user?.address}
+              className="p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
@@ -92,9 +92,9 @@ export default function () {
             <input
               type="text"
               name="city"
-              value={user?.city}
-              placeholder="Enter your city"
-              className="p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              readOnly
+              placeholder={user?.city}
+              className="p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
@@ -105,15 +105,15 @@ export default function () {
             <input
               type="email"
               name="email"
-              value={user?.email}
-              placeholder="Enter your email"
-              className="p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              readOnly
+              placeholder={user?.email}
+              className="p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
           <div className="flex justify-center mt-4">
             <button onClick={back} className="w-full px-4 py-2 text-lg font-medium text-white transition duration-700 bg-black border border-gray-500 rounded-md hover:opacity-80">
-             <FaLeftLong/> Go Back
+             <span><FaLeftLong /> </span>Go Back
             </button>
           </div>
         </div>

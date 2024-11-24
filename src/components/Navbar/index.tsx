@@ -1,14 +1,11 @@
 import { useState } from 'react'
-import { useAuthenticationStore } from '../../state/store'
 import { useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify'
 
 export default function () {
   const navigate = useNavigate()
 
   const [isOpen, setIsOpen] = useState(false)
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-  const { logout, user } = useAuthenticationStore()
 
   const login = ()=>{
     navigate('/login'); 
@@ -22,16 +19,6 @@ export default function () {
     navigate('/');
   }
 
-
-  const handleLogout = async () => {
-    try {
-      await logout();
-      navigate("/login");
-      toast.success("Successfully Log Out");
-    } catch (error) {
-      toast.error("Error Logging Out");
-    }
-  };
 
   return (
     <nav className='w-full h-14 items-center flex justify-between bg-black shadow-sm shadow-black text-white'>
@@ -63,24 +50,6 @@ export default function () {
             <span>
               <i className='fa-solid fa-bars m-1'></i>Settings
             </span>
-            {user ? (
-              <div
-                className={`absolute top-full left-0 bg-gray-700 rounded shadow-md z-10 mt-2 p-2 transition-all duration-300 ease-in-out transform ${
-                  isDropdownOpen
-                    ? 'opacity-100 scale-100'
-                    : 'opacity-0 scale-95 pointer-events-none'
-                }`}
-              >
-                <ul onClick={() => setIsDropdownOpen(false)}>
-                  <li className='p-2 text-sm cursor-pointer hover:bg-gray-600'>
-                  <i className="fa-solid fa-circle-user m-1"></i>User Profile
-                  </li>
-                  <li onClick={handleLogout} className='p-2 text-sm cursor-pointer hover:bg-gray-600'>
-                  <i className="fa-solid fa-arrow-right-from-bracket m-1"></i> Sign Out
-                  </li>
-                </ul>
-              </div>
-            ) : (
               <div
                 className={`absolute top-full left-0 bg-gray-700 rounded shadow-md z-10 mt-2 p-2 transition-all duration-300 ease-in-out transform ${
                   isDropdownOpen
@@ -97,7 +66,6 @@ export default function () {
                   </li>
                 </ul>
               </div>
-            )}
           </li>
         </ul>
       </div>

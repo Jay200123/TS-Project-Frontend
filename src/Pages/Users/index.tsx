@@ -105,7 +105,7 @@ export default function () {
           <FadeLoader color='#FFB6C1' loading={true} height={15} width={5} />
         </div>
       ) : (
-        <div className="h-full m-4 p-8 bg-white rounded-lg shadow-lg">
+        <div className="h-auto p-8 bg-white rounded-lg shadow-lg">
           <DataTable
             title='Users Records'
             columns={columns}

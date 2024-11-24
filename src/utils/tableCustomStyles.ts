@@ -1,15 +1,16 @@
 const tableCustomStyles = {
   headCells: {
     style: {
-      backgroundColor: "#F2F2F2",
+      backgroundColor: "#0d0d0d",
       fontSize: "14px",
+      color: "#ffffff",
     },
   },
   cells: {
     style: {
-      backgroundColor: "#F2F2F2",
+      backgroundColor: "#f2f2f2",
       fontSize: "14px",
-      borderBottom: "1px solid #E5E5E5",
+      borderBottom: "1px solid b3b3b3",
     },
   },
 };

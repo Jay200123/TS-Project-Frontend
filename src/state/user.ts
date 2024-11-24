@@ -16,7 +16,7 @@ const useUserStore = create<UserState>((set) => ({
     },
 
     getOneUser: async (id) => {
-        const res = await api.get(`${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/users/${id}`);
+        const res = await api.get(`${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/user/${id}`);
         set({
             user: !Array.isArray(res.data.details) ? res.data.details : null,
             loading: false,
@@ -43,7 +43,7 @@ const useUserStore = create<UserState>((set) => ({
     },
 
     updateUserById: async (id, formData) => {
-        const res = await api.patch(`${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/users/edit/${id}`,
+        const res = await api.patch(`${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/user/edit/${id}`,
             formData,
             {
                 headers: {
@@ -61,7 +61,7 @@ const useUserStore = create<UserState>((set) => ({
     },
 
     deleteUserById: async (id) => {
-        const res = await api.delete(`${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/users/delete/${id}`);
+        const res = await api.delete(`${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/user/${id}`);
         set((state) => ({
             users: state.users.filter((u) => u._id !== id),
             loading: false,

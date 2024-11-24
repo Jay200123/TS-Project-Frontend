@@ -29,7 +29,8 @@ interface UserState {
     getOneUser: (id: string) => Promise<User>;
     createUser: (formData: FormData) => Promise<User>;
     updateUserById: (id: string, formData: FormData) => Promise<User>;
-    deleteUserById: (id: string) => Promise<User>;
+    deleteUserById: (id: string) => Promise<void>;
+    activateUserById: (id: string) => Promise<void>;    
 }
 
 export type { User, UserState };   

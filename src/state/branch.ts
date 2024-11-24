@@ -15,7 +15,7 @@ export const useBranchStore = create<BranchState>((set) => ({
     },
 
     getOneBranch: async (id) => {
-        const res = await axios.get(`${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/branches/${id}`);
+        const res = await axios.get(`${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/branch/${id}`);
         set({
             branch: !Array.isArray(res.data.details) ? res.data.details : null,
             loading: false,
@@ -44,7 +44,7 @@ export const useBranchStore = create<BranchState>((set) => ({
     },
 
     updateBranchById: async (id, formData) => {
-        const res = await axios.patch(`${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/branches/edit/${id}`,
+        const res = await axios.patch(`${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/branch/edit/${id}`,
             formData,
             {
                 headers: {
@@ -63,7 +63,7 @@ export const useBranchStore = create<BranchState>((set) => ({
 
     },
     deleteBranchById: async (id) => {
-        await axios.delete(`${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/branches/delete/${id}`);
+        await axios.delete(`${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/branch/${id}`);
         set((state) => ({
             branches: state.branches.filter((u) => u._id !== id),
         }));

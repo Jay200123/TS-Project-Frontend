@@ -1,5 +1,5 @@
 import AdminLayout from "./AdminLayout";
-import CustomerLayout from "./CustomerLayout";
+import CustomerLayout from "./EmployeeLayout";
 import HomeLayout from "./HomeLayout";
 
 export {

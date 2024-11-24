@@ -26,6 +26,10 @@ export default function () {
     navigate('/users');
   }
 
+  const approve = ()=>{
+    navigate('/approve-users');
+  }
+
   const handleLogout = async () => {
     try {
       await logout()
@@ -37,12 +41,12 @@ export default function () {
   }
 
   return (
-    <nav className='w-full h-14 items-center flex justify-between bg-black shadow-sm shadow-black text-white'>
-      <div className='m-2 p-2'>
+    <nav className='flex items-center justify-between w-full text-white bg-black shadow-sm h-14 shadow-black'>
+      <div className='p-2 m-2'>
         <h3 className='text-lg'>IT Support</h3>
       </div>
 
-      <div className='md:hidden m-2 p-2' onClick={() => setIsOpen(!isOpen)}>
+      <div className='p-2 m-2 md:hidden' onClick={() => setIsOpen(!isOpen)}>
         <div className='space-y-1 cursor-pointer'>
           <span className='block w-6 h-0.5 bg-white'></span>
           <span className='block w-6 h-0.5 bg-white'></span>
@@ -51,26 +55,26 @@ export default function () {
       </div>
 
       <div className={`m-2 p-2 ${isOpen ? 'block' : 'hidden'} md:block`}>
-        <ul className='flex flex-row md:flex-row items-start md:items-center justify-start'>
+        <ul className='flex flex-row items-start justify-start md:flex-row md:items-center'>
           <li
             onClick={dashboard}
-            className='p-2 m-2 text-sm cursor-pointer transition duration-300 hover:bg-gray-700 rounded md:text-sm'
+            className='p-2 m-2 text-sm transition duration-300 rounded cursor-pointer hover:bg-gray-700 md:text-sm'
           >
-            <i className='fas fa-home m-1'></i>Dashboard
+            <i className='m-1 fas fa-home'></i>Dashboard
           </li>
-          <li className='p-2 m-2  text-sm cursor-pointer transition duration-300 hover:bg-gray-700 rounded md:text-sm'>
-            <i className='fas fa-info-circle m-1'></i> Tickets
+          <li className='p-2 m-2 text-sm transition duration-300 rounded cursor-pointer hover:bg-gray-700 md:text-sm'>
+            <i className='m-1 fas fa-info-circle'></i> Tickets
           </li>
-          <li onClick={users} className='p-2 m-2  text-sm cursor-pointer transition duration-300 hover:bg-gray-700 rounded md:text-sm'>
-            <i className='fas fa-phone-alt m-1'></i> Users
+          <li onClick={users} className='p-2 m-2 text-sm transition duration-300 rounded cursor-pointer hover:bg-gray-700 md:text-sm'>
+            <i className='m-1 fas fa-phone-alt'></i> Users
           </li>
 
           <li
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            className='relative m-2 p-3 text-sm cursor-pointer transition duration-300 hover:bg-gray-700 rounded md:text-sm'
+            className='relative p-3 m-2 text-sm transition duration-300 rounded cursor-pointer hover:bg-gray-700 md:text-sm'
           >
             <span>
-              <i className='fa-solid fa-bars m-1'></i>Settings
+              <i className='m-1 fa-solid fa-bars'></i>Settings
             </span>
             {user ? (
               <div
@@ -84,15 +88,15 @@ export default function () {
                   className='flex flex-col gap-1'
                   onClick={() => setIsDropdownOpen(false)}
                 >
-                  <li className='p-2 text-sm flex items-center gap-2 cursor-pointer hover:bg-gray-600'>
+                  <li className='flex items-center gap-2 p-2 text-sm cursor-pointer hover:bg-gray-600'>
                     <i className='fa-solid fa-circle-user'></i> User Profile
                   </li>
-                  <li className='p-2 text-sm flex items-center gap-2 cursor-pointer hover:bg-gray-600'>
+                  <li onClick={approve} className='flex items-center gap-2 p-2 text-sm cursor-pointer hover:bg-gray-600'>
                     <i className='fa-solid fa-circle-user'></i> Approve Users
                   </li>
                   <li
                     onClick={handleLogout}
-                    className='p-2 text-sm flex items-center gap-2 cursor-pointer hover:bg-gray-600'
+                    className='flex items-center gap-2 p-2 text-sm cursor-pointer hover:bg-gray-600'
                   >
                     <i className='fa-solid fa-arrow-right-from-bracket'></i>{' '}
                     Sign Out
@@ -112,13 +116,13 @@ export default function () {
                     onClick={login}
                     className='p-2 text-sm cursor-pointer hover:bg-gray-600'
                   >
-                    <i className='fa-solid fa-unlock m-1'></i>Sign In
+                    <i className='m-1 fa-solid fa-unlock'></i>Sign In
                   </li>
                   <li
                     onClick={signup}
                     className='p-2 text-sm cursor-pointer hover:bg-gray-600'
                   >
-                    <i className='fa-solid fa-user-plus m-1'></i> Sign Up
+                    <i className='m-1 fa-solid fa-user-plus'></i> Sign Up
                   </li>
                 </ul>
               </div>

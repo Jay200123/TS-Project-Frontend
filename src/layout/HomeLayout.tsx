@@ -3,7 +3,7 @@ import { Footer, Navbar } from '../components'
 export default function () {
   return (
     <>
-      <main className='min-h-screen min-w-screen flex flex-col items-center justify-between'>
+      <main className='flex flex-col items-center justify-between min-h-screen min-w-screen'>
         <Navbar />
         <div>
           <Outlet />

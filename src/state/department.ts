@@ -14,7 +14,7 @@ export const useDepartmentStore = create<DepartmentState>((set) => ({
         return res.data.details;
     },
     getOneDepartment: async (id: string) => {
-        const res = await axios.get(`${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/branches/${id}`);
+        const res = await axios.get(`${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/department/${id}`);
         set({
             department: !Array.isArray(res.data.details) ? res.data.details : null,
             loading: false,
@@ -41,7 +41,7 @@ export const useDepartmentStore = create<DepartmentState>((set) => ({
         return res.data.details;
     },
     updateDepartmentById: async (id: string, formData: FormData) => {
-        const res = await axios.patch(`${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/departments/edit/${id}`,
+        const res = await axios.patch(`${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/department/edit/${id}`,
             formData,
             {
                 headers: {
@@ -60,7 +60,7 @@ export const useDepartmentStore = create<DepartmentState>((set) => ({
     },
 
     deleteDepartmentById: async (id: string) => {
-        const res = await axios.delete(`${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/departments/delete/${id}`);
+        const res = await axios.delete(`${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/department/${id}`);
         set((state) => ({
             departments: state.departments.filter((u) =>
                 u._id !== id

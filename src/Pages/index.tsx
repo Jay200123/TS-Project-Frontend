@@ -4,6 +4,7 @@ import AuthenticatedTest from './AuthenticatedTest'
 import Unauthorized from './Unauthorized'
 import SignUp from './SignUp'
 import Dashboard from './Dashboard'
+import UsersTable from './Users'
 
 export {
   Home,
@@ -12,4 +13,5 @@ export {
   Unauthorized,
   SignUp,
   Dashboard,
+  UsersTable
 }

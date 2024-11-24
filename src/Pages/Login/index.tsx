@@ -39,24 +39,24 @@ export default function () {
     <>
       <form onSubmit={formik.handleSubmit}>
         <div className='flex items-center justify-center'>
-          <div className=' bg-white rounded-lg flex flex-col md:flex-row items-center max-w-4xl p-6 md:p-8 shadow-sm shadow-gray-500 border border-gray-500'>
-            <div className='hidden md:block w-full md:w-1/2'>
+          <div className='flex flex-col items-center max-w-4xl p-6 m-8 bg-white border border-gray-500 rounded-lg shadow-sm md:flex-row md:p-8 shadow-gray-500'>
+            <div className='hidden w-full md:block md:w-1/2'>
               <Image />
             </div>
 
-            <div className='w-full md:w-1/2 p-4 md:p-6'>
+            <div className='w-full p-4 md:w-1/2 md:p-6'>
               <div className='flex flex-col items-center'>
                 <img
-                  className='h-24 w-24 rounded-full mb-4'
+                  className='w-24 h-24 mb-4 rounded-full'
                   src={LoginIcon}
                   alt='User Icon'
                 />
-                <h3 className='font-bold text-2xl md:text-3xl text-gray-800 mb-4'>
+                <h3 className='mb-4 text-2xl font-bold text-gray-800 md:text-3xl'>
                   Sign In
                 </h3>
               </div>
 
-              <label className='block text-gray-700 text-sm font-medium mb-2'>
+              <label className='block mb-2 text-sm font-medium text-gray-700'>
                 <i className='fa-solid fa-envelope'></i> Email
               </label>
               <input
@@ -67,7 +67,7 @@ export default function () {
                 value={formik.values.email}
               />
 
-              <label className='block text-gray-700 text-sm font-medium mb-2'>
+              <label className='block mb-2 text-sm font-medium text-gray-700'>
                 <i className='fa-solid fa-key'></i> Password
               </label>
               <input
@@ -80,7 +80,7 @@ export default function () {
 
               <button
                 type='submit'
-                className='w-full text-lg py-2 px-4 bg-black text-white font-medium rounded-md transition duration-700 hover:bg-opacity-80 border border-gray-500'
+                className='w-full px-4 py-2 text-lg font-medium text-white transition duration-700 bg-black border border-gray-500 rounded-md hover:bg-opacity-80'
               >
                 Sign In
               </button>

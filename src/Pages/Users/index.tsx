@@ -16,7 +16,9 @@ export default function () {
   useQuery({
     queryKey: ['users'],
     queryFn: getAllUsers
-  });
+  })
+
+  console.log(users)
 
   const handleDelete = async (id: string) => {
     if (window.confirm('Are you sure you want to delete this User?')) {
@@ -56,10 +58,18 @@ export default function () {
       selector: row => row.email,
       sortable: true
     },
-    // {
-    //     name: 'Branch',
-    //     selector: row => row.branch,
-    // }
+    {
+      name: 'Branch',
+      selector: row => row.branch.branch_name
+    },
+    {
+      name: 'Department',
+      selector: row => row.department.department_name
+    },
+    {
+      name: 'Position',
+      selector: row => (row.position ? row.position.position_name : 'N/A')
+    },
     {
       name: 'Images',
       cell: row => {
@@ -105,7 +115,7 @@ export default function () {
           <FadeLoader color='#FFB6C1' loading={true} height={15} width={5} />
         </div>
       ) : (
-        <div className="h-auto p-8 bg-white rounded-lg shadow-lg">
+        <div className='bg-white rounded-lg shadow-lg p-4 sm:p-6 lg:p-8 max-w-full sm:max-w-6xl overflow-hidden'>
           <DataTable
             title='Users Records'
             columns={columns}

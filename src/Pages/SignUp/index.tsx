@@ -255,6 +255,7 @@ export default function () {
               name="city"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
+              value={formik.values.city}
               placeholder="Enter your city"
               className="p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />

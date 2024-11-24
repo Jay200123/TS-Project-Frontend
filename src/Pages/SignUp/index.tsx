@@ -99,7 +99,7 @@ export default function () {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.branch}
-              className='p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+              className='p-2 text-lg border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-full min-h-[2.5rem]'
             >
               <option value='' disabled>
                 Select a branch
@@ -110,9 +110,13 @@ export default function () {
                 </option>
               ))}
             </select>
-            {formik.touched.branch && formik.errors.branch ? (
-              <div className='text-red-500 text-sm'>{formik.errors.branch}</div>
-            ) : null}
+            <div className='min-h-[1.25rem]'>
+              {formik.touched.branch && formik.errors.branch && (
+                <div className='text-red-500 text-sm'>
+                  {formik.errors.branch}
+                </div>
+              )}
+            </div>
           </div>
 
           <div className='flex flex-col'>

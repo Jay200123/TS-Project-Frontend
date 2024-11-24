@@ -164,7 +164,7 @@ export default function () {
               <i className="mr-1 fa-solid fa-building"></i> Employee Position
             </label>
             <select
-              name="department"
+              name="position"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.position}

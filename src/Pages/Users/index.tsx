@@ -16,9 +16,9 @@ export default function () {
   useQuery({
     queryKey: ['users'],
     queryFn: getAllUsers
-  })
+  });
 
-  console.log(users)
+  const filteredUsers =  users.filter((u)=> u.isAuthorized === true);  
 
   const handleDelete = async (id: string) => {
     if (window.confirm('Are you sure you want to delete this User?')) {
@@ -97,7 +97,7 @@ export default function () {
         <div className='flex items-center text-center'>
           <FaEye
             className='mr-2 text-xl text-green-300'
-            onClick={() => navigate(`/admin/user/${row._id}`)}
+            onClick={() => navigate(`/user/${row._id}`)}
           />
           <FaTrash
             className='text-xl text-red-500'
@@ -115,11 +115,11 @@ export default function () {
           <FadeLoader color='#FFB6C1' loading={true} height={15} width={5} />
         </div>
       ) : (
-        <div className='bg-white rounded-lg shadow-lg p-4 sm:p-6 lg:p-8 max-w-full sm:max-w-6xl overflow-hidden'>
+        <div className='max-w-full p-4 m-6 overflow-hidden bg-white rounded-lg sm:p-6 lg:p-8 sm:max-w-6xl'>
           <DataTable
             title='Users Records'
             columns={columns}
-            data={users}
+            data={filteredUsers}
             pagination
             highlightOnHover
             pointerOnHover

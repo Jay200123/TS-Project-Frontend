@@ -11,6 +11,8 @@ const useUserStore = create<UserState>((set) => ({
     getAllUsers: async () => {
         const res = await api.get(`${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/users`);
         set({ users: res.data.details, loading: false, error: null });
+
+        return res.data.details;
     },
 
     getOneUser: async (id) => {
@@ -20,6 +22,7 @@ const useUserStore = create<UserState>((set) => ({
             loading: false,
             error: null,
         });
+        return res.data.details;
     },
 
     createUser: async (formData) => {
@@ -36,6 +39,7 @@ const useUserStore = create<UserState>((set) => ({
             loading: false,
             error: null
         }))
+        return res.data.details;
     },
 
     updateUserById: async (id, formData) => {
@@ -53,15 +57,17 @@ const useUserStore = create<UserState>((set) => ({
                 u._id === id ? res.data.details : u
             ),
         }));
+        return res.data.details;
     },
 
     deleteUserById: async (id) => {
-        await api.delete(`${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/users/delete/${id}`);
+        const res = await api.delete(`${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/users/delete/${id}`);
         set((state) => ({
             users: state.users.filter((u) => u._id !== id),
             loading: false,
             error: null,
         }));
+        return res.data.details;
     }
 }));
 

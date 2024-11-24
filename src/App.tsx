@@ -10,7 +10,8 @@ import {
   AuthenticatedTest,
   Unauthorized,
   SignUp,
-  Dashboard
+  Dashboard,
+  UsersTable
 } from './Pages'
 import { ProtectedRoute } from './components'
 import { HomeLayout, AdminLayout, CustomerLayout } from './layout'
@@ -49,7 +50,18 @@ function App () {
               </ProtectedRoute>
             }
           />
+           <Route
+            path='/users'
+            index
+            element={
+              <ProtectedRoute userRole={['Admin']}>
+                <UsersTable />
+              </ProtectedRoute>
+            }
+          />
+
         </Route>
+        
       </Route>
     )
   )

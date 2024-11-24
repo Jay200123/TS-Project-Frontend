@@ -11,7 +11,9 @@ import {
   Unauthorized,
   SignUp,
   Dashboard,
-  UsersTable
+  UsersTable,
+  ApproveUserTable,
+  GetUserById,
 } from './Pages'
 import { ProtectedRoute } from './components'
 import { HomeLayout, AdminLayout, CustomerLayout } from './layout'
@@ -56,6 +58,24 @@ function App () {
             element={
               <ProtectedRoute userRole={['Admin']}>
                 <UsersTable />
+              </ProtectedRoute>
+            }
+          />
+           <Route
+            path='/approve-users'
+            index
+            element={
+              <ProtectedRoute userRole={['Admin']}>
+                <ApproveUserTable />
+              </ProtectedRoute>
+            }
+          />
+           <Route
+            path='/user/:id'
+            index
+            element={
+              <ProtectedRoute userRole={['Admin']}>
+                <GetUserById />
               </ProtectedRoute>
             }
           />

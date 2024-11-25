@@ -7,6 +7,7 @@ import Dashboard from "./Dashboard";
 import UsersTable from "./Users";
 import ApproveUserTable from "./Users/approveUser";
 import GetUserById from "./Users/getUserById";
+import AdminProfile from "./Profile/AdminProfile";
 
 export {
   Home,
@@ -18,4 +19,5 @@ export {
   UsersTable,
   ApproveUserTable,
   GetUserById,
+  AdminProfile
 };

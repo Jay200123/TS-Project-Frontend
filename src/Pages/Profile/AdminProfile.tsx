@@ -7,8 +7,6 @@ export default function () {
       ? user.image[Math.floor(Math.random() * user.image.length)]
       : null;
 
-      console.log(user);
-
   return (
     <div className='flex items-center justify-center p-4 m-4'>
       <div className='flex flex-col w-full max-w-5xl p-6 space-y-6 bg-white border border-gray-400 rounded-lg shadow-md md:flex-row md:space-y-0 md:space-x-6'>

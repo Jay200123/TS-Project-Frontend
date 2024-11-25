@@ -36,21 +36,17 @@ export default function () {
       formData.append('address', values?.address)
       formData.append('city', values?.city)
       formData.append('email', values?.email)
-      values.image.forEach(file => {
-        if (file instanceof File) {
-          formData.append('image', file)
-        } else {
-          formData.append('existingImages', JSON.stringify(file))
-        }
+      Array.from(values?.image).forEach((files: any) => {
+        formData.append('image', files)
       })
 
       try {
         const res = await updateUserById(user?._id!, formData)
         toast.success('User Profile Successfully Updated')
 
-        // if(res.role === 'admin') {
-        //   navigate('/admin-profile')
-        // }
+        if (res.role === 'Admin') {
+          navigate('/admin-profile')
+        }
       } catch (error) {
         toast.error('User Registration failed')
 
@@ -74,7 +70,7 @@ export default function () {
         </div>
         <div className='flex flex-col w-full space-y-4 md:w-1/2'>
           <h2 className='text-2xl font-bold text-center text-gray-800 md:text-left'>
-            User Details
+            Edit & Update Information
           </h2>
 
           <div className='flex flex-col'>
@@ -83,13 +79,12 @@ export default function () {
             </label>
             <input
               type='text'
+              id='fname'
               name='fname'
-              readOnly
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.fname}
-              placeholder={user?.fname}
-              className='p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+              className='p-2  border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
             />
           </div>
 
@@ -99,12 +94,12 @@ export default function () {
             </label>
             <input
               type='text'
+              id='lname'
               name='lname'
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.lname}
-              placeholder={user?.lname}
-              className='p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+              className='p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
             />
           </div>
 
@@ -114,13 +109,12 @@ export default function () {
             </label>
             <input
               type='text'
+              id='phone'
               name='phone'
-              readOnly
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.phone}
-              placeholder={user?.phone}
-              className='p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+              className='p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
             />
           </div>
 
@@ -130,13 +124,12 @@ export default function () {
             </label>
             <input
               type='text'
+              id='address'
               name='address'
-              readOnly
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.address}
-              placeholder={user?.address}
-              className='p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+              className='p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
             />
           </div>
 
@@ -147,12 +140,10 @@ export default function () {
             <input
               type='text'
               name='city'
-              readOnly
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.city}
-              placeholder={user?.city}
-              className='p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+              className='p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
             />
           </div>
 
@@ -163,12 +154,10 @@ export default function () {
             <input
               type='email'
               name='email'
-              readOnly
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.email}
-              placeholder={user?.email}
-              className='p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+              className='p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
             />
           </div>
 
@@ -178,14 +167,15 @@ export default function () {
             </label>
             <input
               type='file'
+              id='image'
               name='image'
               multiple
-              onChange={e => {
-                const files = Array.from(e.currentTarget.files || [])
-                formik.setFieldValue('image', [
-                  ...formik.values.image,
-                  ...files
-                ])
+              onBlur={formik.handleBlur}
+              onChange={(event) => {
+                const files = event.currentTarget.files
+                  ? Array.from(event.currentTarget.files)
+                  : []
+                formik.setFieldValue('image', files)
               }}
             />
           </div>
@@ -195,7 +185,7 @@ export default function () {
               type='submit'
               className='w-full px-4 py-2 text-lg font-medium text-white transition duration-700 bg-black border border-gray-500 rounded-md hover:opacity-80'
             >
-              <i className='fa-solid fa-arrow-left mr-1'></i>Go Back
+              Update Information
             </button>
           </div>
         </div>

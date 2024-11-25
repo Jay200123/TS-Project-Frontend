@@ -14,7 +14,8 @@ import {
   UsersTable,
   ApproveUserTable,
   GetUserById,
-  AdminProfile
+  AdminProfile,
+  EditUser
 } from './Pages'
 import { ProtectedRoute } from './components'
 import { HomeLayout, AdminLayout, CustomerLayout } from './layout'
@@ -42,6 +43,7 @@ function App () {
             }
           />
         </Route>
+
         {/* Admin Private Routes */}
         <Route element={<AdminLayout />}>
           <Route
@@ -53,7 +55,7 @@ function App () {
               </ProtectedRoute>
             }
           />
-           <Route
+          <Route
             path='/users'
             index
             element={
@@ -62,7 +64,7 @@ function App () {
               </ProtectedRoute>
             }
           />
-           <Route
+          <Route
             path='/approve-users'
             index
             element={
@@ -71,7 +73,7 @@ function App () {
               </ProtectedRoute>
             }
           />
-           <Route
+          <Route
             path='/user/:id'
             index
             element={
@@ -80,9 +82,9 @@ function App () {
               </ProtectedRoute>
             }
           />
-          
+
           <Route
-            path='/profile'
+            path='/admin-profile'
             index
             element={
               <ProtectedRoute userRole={['Admin']}>
@@ -90,8 +92,15 @@ function App () {
               </ProtectedRoute>
             }
           />
+          <Route
+            path='user/edit/:id'
+            element={
+              <ProtectedRoute userRole={['Admin']}>
+                <EditUser />
+              </ProtectedRoute>
+            }
+          />
         </Route>
-        
       </Route>
     )
   )

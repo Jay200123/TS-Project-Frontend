@@ -87,6 +87,14 @@ const useUserStore = create<UserState>((set) => ({
       users: state.users.map((u) => (u._id === id ? res.data.details : u)),
     }));
   },
+
+  userProfile: async (id) => {
+    const res = await api.get(
+      `${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/user/profile/${id}`
+    );
+    set({ user: res.data.details, loading: false, error: null });
+    return res.data.details;
+  }
 }));
 
 export { useUserStore };

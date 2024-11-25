@@ -11,7 +11,9 @@ export default function(){
     <div className="flex items-center justify-center p-4 m-4">
       <div className="flex flex-col w-full max-w-5xl p-6 space-y-6 bg-white border border-gray-400 rounded-lg shadow-md md:flex-row md:space-y-0 md:space-x-6">
         <div className="hidden w-full md:w-1/2 md:block mr-12">
-          <img className="rounded-full border border-black max-w-sm max-h-sm rounded-l-lg" src={randomImage?.url} alt={randomImage?.originalname} />
+        <div className="flex flex-col items-center justify-center">
+        <img className="rounded-full border border-black max-w-sm max-h-sm rounded-l-lg" src={randomImage?.url} alt={randomImage?.originalname} />
+        </div>
         </div>
         <div className="flex flex-col w-full space-y-4 md:w-1/2">
           <h2 className="text-2xl font-bold text-center text-gray-800 md:text-left">

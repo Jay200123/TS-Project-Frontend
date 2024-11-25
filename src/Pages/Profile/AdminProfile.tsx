@@ -1,11 +1,26 @@
-import { useAuthenticationStore } from '../../state/store'
+import { useAuthenticationStore, useUserStore } from '../../state/store';
+import { useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 
 export default function () {
-  const { user } = useAuthenticationStore()
+  const navigate = useNavigate();
+  const { user: auth } = useAuthenticationStore();
+  const { user, userProfile } = useUserStore();
+
+  useQuery({
+    queryKey: ['user', auth?._id],
+    queryFn: () => userProfile(auth?._id || ''),
+    enabled: !!auth?._id,
+  });
+  
   const randomImage =
     Array.isArray(user?.image) && user.image.length > 0
       ? user.image[Math.floor(Math.random() * user.image.length)]
       : null;
+
+      const updateProfile = () => {
+        navigate(`/user/edit/${user?._id}`);
+      };
 
   return (
     <div className='flex items-center justify-center p-4 m-4'>
@@ -111,7 +126,7 @@ export default function () {
           </div>
 
           <div className='flex justify-center mt-4'>
-            <button className='w-full px-4 py-2 text-lg font-medium text-white transition duration-700 bg-black border border-gray-500 rounded-md hover:opacity-80'>
+            <button onClick={updateProfile} className='w-full px-4 py-2 text-lg font-medium text-white transition duration-700 bg-black border border-gray-500 rounded-md hover:opacity-80'>
               Update Profile
             </button>
           </div>

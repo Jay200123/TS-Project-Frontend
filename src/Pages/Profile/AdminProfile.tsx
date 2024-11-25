@@ -23,7 +23,7 @@ export default function () {
           <h2 className='text-2xl font-bold text-center text-gray-800 md:text-left'>
             User Profile
           </h2>
-          <div className='w-full flex items-center justify-between'>
+          <div className='flex items-center justify-between'>
             <div className='flex flex-col'>
               <label className='mb-1 text-sm font-medium text-gray-700'>
                 <i className='mr-1 fa-solid fa-user'></i> First Name

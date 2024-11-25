@@ -14,6 +14,7 @@ import {
   UsersTable,
   ApproveUserTable,
   GetUserById,
+  AdminProfile
 } from './Pages'
 import { ProtectedRoute } from './components'
 import { HomeLayout, AdminLayout, CustomerLayout } from './layout'
@@ -79,7 +80,16 @@ function App () {
               </ProtectedRoute>
             }
           />
-
+          
+          <Route
+            path='/profile'
+            index
+            element={
+              <ProtectedRoute userRole={['Admin']}>
+                <AdminProfile />
+              </ProtectedRoute>
+            }
+          />
         </Route>
         
       </Route>

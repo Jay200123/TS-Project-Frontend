@@ -32,7 +32,7 @@ export default function () {
   };
 
   const profile = ()=>{
-    navigate('/profile');
+    navigate('/admin-profile');
   };
 
   const handleLogout = async () => {

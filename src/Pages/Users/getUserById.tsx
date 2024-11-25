@@ -1,9 +1,10 @@
 import { useUserStore } from "../../state/store";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { FaLeftLong } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 
 export default function () {
+  const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const { user, getOneUser } = useUserStore();
 
@@ -14,8 +15,8 @@ export default function () {
   });
 
   const back = () => {
-    window.history.back();  
-  }
+    navigate("/users"); 
+  };
 
   const randomImage =
     Array.isArray(user?.image) && user.image.length > 0
@@ -25,8 +26,8 @@ export default function () {
   return (
     <form className="flex items-center justify-center p-4 m-4">
       <div className="flex flex-col w-full max-w-5xl p-6 space-y-6 bg-white border border-gray-400 rounded-lg shadow-md md:flex-row md:space-y-0 md:space-x-6">
-        <div className="hidden w-full md:w-1/2 md:block">
-          <img className="object-cover w-full h-full rounded-l-lg" src={randomImage?.url} alt={randomImage?.originalname} />
+        <div className="hidden w-full md:w-1/2 md:block mr-12">
+          <img className="object-cover max-w-sm max-h-sm rounded-l-lg" src={randomImage?.url} alt={randomImage?.originalname} />
         </div>
         <div className="flex flex-col w-full space-y-4 md:w-1/2">
           <h2 className="text-2xl font-bold text-center text-gray-800 md:text-left">
@@ -113,7 +114,7 @@ export default function () {
 
           <div className="flex justify-center mt-4">
             <button onClick={back} className="w-full px-4 py-2 text-lg font-medium text-white transition duration-700 bg-black border border-gray-500 rounded-md hover:opacity-80">
-             <span><FaLeftLong /> </span>Go Back
+            <i className="fa-solid fa-arrow-left mr-1"></i>Go Back
             </button>
           </div>
         </div>

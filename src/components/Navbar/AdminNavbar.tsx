@@ -1,44 +1,49 @@
-import { useState } from 'react'
-import { useAuthenticationStore } from '../../state/store'
-import { useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify'
+import { useState } from 'react';
+import { useAuthenticationStore } from '../../state/store';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 export default function () {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const [isOpen, setIsOpen] = useState(false)
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-  const { logout, user } = useAuthenticationStore()
+  const [isOpen, setIsOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isTableOpen, setIsTableOpen] = useState(false); 
+  const { logout, user } = useAuthenticationStore();
 
   const login = () => {
     navigate('/login')
-  }
+  };
 
   const signup = () => {
     navigate('/signup')
-  }
+  };
 
   const dashboard = () => {
     navigate('/dashboard')
-  }
+  };
 
   const users = ()=>{
     navigate('/users');
-  }
+  };
 
   const approve = ()=>{
     navigate('/approve-users');
-  }
+  };
+
+  const profile = ()=>{
+    navigate('/profile');
+  };
 
   const handleLogout = async () => {
     try {
       await logout()
-      navigate('/login')
-      toast.success('Successfully Log Out')
+      navigate('/login');
+      toast.success('Successfully Log Out');
     } catch (error) {
-      toast.error('Error Logging Out')
+      toast.error('Error Logging Out');
     }
-  }
+  };
 
   return (
     <nav className='flex items-center justify-between w-full text-white bg-black shadow-sm h-14 shadow-black'>
@@ -65,8 +70,34 @@ export default function () {
           <li className='p-2 m-2 text-sm transition duration-300 rounded cursor-pointer hover:bg-gray-700 md:text-sm'>
             <i className='m-1 fas fa-info-circle'></i> Tickets
           </li>
-          <li onClick={users} className='p-2 m-2 text-sm transition duration-300 rounded cursor-pointer hover:bg-gray-700 md:text-sm'>
-            <i className='m-1 fas fa-phone-alt'></i> Users
+
+          <li
+            onClick={() => setIsTableOpen(!isTableOpen)}
+            className='relative p-3 m-2 text-sm transition duration-300 rounded cursor-pointer hover:bg-gray-700 md:text-sm'
+          >
+            <span>
+              <i className='m-1 fa-solid fa-table'></i>Tables
+            </span>
+            {user ? (
+              <div
+                className={`absolute top-full left-0 bg-gray-700 rounded shadow-md z-10 mt-2 p-2 transition-all duration-300 ease-in-out transform ${
+                  isTableOpen
+                    ? 'opacity-100 scale-100'
+                    : 'opacity-0 scale-95 pointer-events-none'
+                }`}
+              >
+                <ul
+                  className='flex flex-col gap-1'
+                  onClick={() => setIsTableOpen(false)}
+                >
+                  <li onClick={users} className='flex items-center gap-2 p-2 text-sm cursor-pointer hover:bg-gray-600'>
+                    <i className='fa-solid fa-circle-user'></i> Users
+                  </li>
+                </ul>
+              </div>
+            ) : (
+              <></>
+            )}
           </li>
 
           <li
@@ -88,7 +119,7 @@ export default function () {
                   className='flex flex-col gap-1'
                   onClick={() => setIsDropdownOpen(false)}
                 >
-                  <li className='flex items-center gap-2 p-2 text-sm cursor-pointer hover:bg-gray-600'>
+                  <li onClick={profile} className='flex items-center gap-2 p-2 text-sm cursor-pointer hover:bg-gray-600'>
                     <i className='fa-solid fa-circle-user'></i> User Profile
                   </li>
                   <li onClick={approve} className='flex items-center gap-2 p-2 text-sm cursor-pointer hover:bg-gray-600'>

@@ -5,7 +5,9 @@ export default function () {
   const randomImage =
     Array.isArray(user?.image) && user.image.length > 0
       ? user.image[Math.floor(Math.random() * user.image.length)]
-      : null
+      : null;
+
+      console.log(user);
 
   return (
     <div className='flex items-center justify-center p-4 m-4'>
@@ -13,70 +15,77 @@ export default function () {
         <div className='hidden w-full md:w-1/2 md:block mr-12'>
           <div className='flex flex-col h-full items-center justify-center'>
             <img
-              className='rounded-full border border-black max-w-sm max-h-sm rounded-l-lg'
+              className='h-80 w-80 object-cover border border-black rounded-full'
               src={randomImage?.url}
               alt={randomImage?.originalname}
             />
+            <h3 className='text-2xl font-bold mt-1'>{user?.fname} <span> {user?.lname}</span></h3>
           </div>
         </div>
         <div className='flex flex-col w-full space-y-4 md:w-1/2'>
           <h2 className='text-2xl font-bold text-center text-gray-800 md:text-left'>
             User Profile
           </h2>
-          <div className='flex items-center justify-between'>
-            <div className='flex flex-col'>
+          <div className='flex flex-col'>
+            <label className='mb-1 text-sm font-medium text-gray-700'>
+            <i className="fa-solid fa-code-branch mr-[1px]"></i>Branch
+            </label>
+            <input
+              type='text'
+              readOnly
+              placeholder={user?.branch?.branch_name}
+              className='p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+            />
+          </div>
+          <div className='flex items-centerjustify-between w-full'>
+            <div className='flex flex-col w-1/2'>
               <label className='mb-1 text-sm font-medium text-gray-700'>
-                <i className='mr-1 fa-solid fa-user'></i> First Name
+              <i className="fa-solid fa-sitemap mr-[2px]"></i> Department
               </label>
               <input
                 type='text'
-                name='fname'
                 readOnly
-                placeholder={user?.fname}
+                placeholder={user?.department?.department_name}
                 className='p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
               />
             </div>
 
-            <div className='flex flex-col'>
+            <div className='flex flex-col w-1/2 ml-1'>
               <label className='mb-1 text-sm font-medium text-gray-700'>
-                <i className='mr-1 fa-solid fa-user'></i> Last Name
+                <i className='mr-1 fa-solid fa-user'></i> Position
               </label>
               <input
                 type='text'
-                name='lname'
                 readOnly
-                placeholder={user?.lname}
+                placeholder={user?.position?.position_name}
                 className='p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
               />
             </div>
           </div>
 
-          <div className='w-full flex items-center justify-between'>
-            <div className='flex flex-col'>
-              <label className='mb-1 text-sm font-medium text-gray-700'>
-                <i className='mr-1 fa-solid fa-phone'></i> Contact Number
-              </label>
-              <input
-                type='text'
-                name='phone'
-                readOnly
-                placeholder={user?.phone}
-                className='p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
-              />
-            </div>
+          <div className='flex flex-col'>
+            <label className='mb-1 text-sm font-medium text-gray-700'>
+              <i className='mr-1 fa-solid fa-phone'></i> Contact Number
+            </label>
+            <input
+              type='text'
+              name='phone'
+              readOnly
+              placeholder={user?.phone}
+              className='p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+            />
+          </div>
 
-            <div className='flex flex-col'>
-              <label className='mb-1 text-sm font-medium text-gray-700'>
-                <i className='mr-1 fa-solid fa-location-dot'></i> Address
-              </label>
-              <input
-                type='text'
-                name='address'
-                readOnly
-                placeholder={user?.address}
-                className='p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
-              />
-            </div>
+          <div className='flex flex-col'>
+            <label className='mb-1 text-sm font-medium text-gray-700'>
+              <i className='mr-1 fa-solid fa-location-dot'></i> Address
+            </label>
+            <input
+              type='text'
+              readOnly
+              placeholder={user?.address}
+              className='p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+            />
           </div>
 
           <div className='flex flex-col'>
@@ -85,7 +94,6 @@ export default function () {
             </label>
             <input
               type='text'
-              name='city'
               readOnly
               placeholder={user?.city}
               className='p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
@@ -98,7 +106,6 @@ export default function () {
             </label>
             <input
               type='email'
-              name='email'
               readOnly
               placeholder={user?.email}
               className='p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'

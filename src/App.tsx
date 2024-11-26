@@ -19,7 +19,10 @@ import {
   DepartmentTable,
   CreateDepartment,
   EditDepartment,
-  GetDepartmentById
+  GetDepartmentById,
+  PositionTable,
+  CreatePosition,
+  GetPositionById
 } from './Pages'
 import { ProtectedRoute } from './components'
 import { HomeLayout, AdminLayout, CustomerLayout } from './layout'
@@ -106,38 +109,64 @@ function App () {
           />
           {/* Department Routes */}
           <Route
-          path='/departments'
-          element={
-            <ProtectedRoute userRole={['Admin']}>
-              <DepartmentTable />
-            </ProtectedRoute>
-          } 
+            path='/departments'
+            element={
+              <ProtectedRoute userRole={['Admin']}>
+                <DepartmentTable />
+              </ProtectedRoute>
+            }
           />
-           <Route
-          path='/department/create'
-          element={
-            <ProtectedRoute userRole={['Admin']}>
-              <CreateDepartment />
-            </ProtectedRoute>
-          } 
+          <Route
+            path='/department/create'
+            element={
+              <ProtectedRoute userRole={['Admin']}>
+                <CreateDepartment />
+              </ProtectedRoute>
+            }
           />
-           <Route
-          path='/department/:id'
-          element={
-            <ProtectedRoute userRole={['Admin']}>
-              <GetDepartmentById />
-            </ProtectedRoute>
-          } 
+          <Route
+            path='/department/:id'
+            element={
+              <ProtectedRoute userRole={['Admin']}>
+                <GetDepartmentById />
+              </ProtectedRoute>
+            }
           />
-           <Route
-          path='/department/edit/:id'
-          element={
-            <ProtectedRoute userRole={['Admin']}>
-              <EditDepartment />
-            </ProtectedRoute>
-          } 
+          <Route
+            path='/department/edit/:id'
+            element={
+              <ProtectedRoute userRole={['Admin']}>
+                <EditDepartment />
+              </ProtectedRoute>
+            }
           />
 
+          {/* Position Routes */}
+          <Route
+            path='/positions'
+            element={
+              <ProtectedRoute userRole={['Admin']}>
+                <PositionTable />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/position/create'
+            element={
+              <ProtectedRoute userRole={['Admin']}>
+                <CreatePosition />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path='/position/:id'
+            element={
+              <ProtectedRoute userRole={['Admin']}>
+                <GetPositionById />
+              </ProtectedRoute>
+            }
+          />
         </Route>
       </Route>
     )

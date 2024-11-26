@@ -13,6 +13,9 @@ import DepartmentTable from "./Department";
 import CreateDepartment from "./Department/createDepartment";
 import GetDepartmentById from "./Department/getDepartmentById";
 import EditDepartment from "./Department/editDepartment";
+import PositionTable from "./Position";
+import CreatePosition from "./Position/createPosition";
+import GetPositionById from "./Position/getPositionById";
 
 export {
   Home,
@@ -30,4 +33,7 @@ export {
   GetDepartmentById,
   EditDepartment,
   CreateDepartment,
+  PositionTable,
+  CreatePosition,
+  GetPositionById
 };

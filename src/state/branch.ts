@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import axios from "axios";
+import api from "./api";
 import { BranchState } from "../interface";
 import { multipart } from "./multipart";
 
@@ -9,14 +9,14 @@ export const useBranchStore = create<BranchState>((set) => ({
     loading: false,
     error: null,
     getAllBranches: async () => {
-        const res = await axios.get(`${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/branches`);
+        const res = await api.get(`${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/branches`);
         set({ branches: res.data.details, loading: false, error: null });
 
         return res.data.details;    
     },
 
     getOneBranch: async (id) => {
-        const res = await axios.get(`${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/branch/${id}`);
+        const res = await api.get(`${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/branch/${id}`);
         set({
             branch: !Array.isArray(res.data.details) ? res.data.details : null,
             loading: false,
@@ -27,7 +27,7 @@ export const useBranchStore = create<BranchState>((set) => ({
     },
     
     createBranch: async (formData) => {
-        const res = await axios.post(`${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/branches`,
+        const res = await api.post(`${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/branches`,
             formData,
             {
                 headers: multipart
@@ -43,7 +43,7 @@ export const useBranchStore = create<BranchState>((set) => ({
     },
 
     updateBranchById: async (id, formData) => {
-        const res = await axios.patch(`${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/branch/edit/${id}`,
+        const res = await api.patch(`${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/branch/edit/${id}`,
             formData,
             {
                 headers: multipart
@@ -60,7 +60,7 @@ export const useBranchStore = create<BranchState>((set) => ({
 
     },
     deleteBranchById: async (id) => {
-        await axios.delete(`${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/branch/${id}`);
+        await api.delete(`${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/branch/${id}`);
         set((state) => ({
             branches: state.branches.filter((u) => u._id !== id),
         }));

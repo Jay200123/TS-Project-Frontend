@@ -1,60 +1,60 @@
-import { useState } from 'react';
-import { useAuthenticationStore } from '../../state/store';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { useState } from 'react'
+import { useAuthenticationStore } from '../../state/store'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 export default function () {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isTableOpen, setIsTableOpen] = useState(false); 
-  const { logout, user } = useAuthenticationStore();
+  const [isOpen, setIsOpen] = useState(false)
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  const [isTableOpen, setIsTableOpen] = useState(false)
+  const { logout, user } = useAuthenticationStore()
 
   const login = () => {
     navigate('/login')
-  };
+  }
 
   const signup = () => {
     navigate('/signup')
-  };
+  }
 
   const dashboard = () => {
     navigate('/dashboard')
-  };
+  }
 
-  const users = ()=>{
-    navigate('/users');
-  };
+  const users = () => {
+    navigate('/users')
+  }
 
-  const approve = ()=>{
-    navigate('/approve-users');
-  };
+  const approve = () => {
+    navigate('/approve-users')
+  }
 
-  const profile = ()=>{
-    navigate('/admin-profile');
-  };
+  const profile = () => {
+    navigate('/admin-profile')
+  }
 
-  const departments = ()=>{
-    navigate('/departments');
-  };
+  const departments = () => {
+    navigate('/departments')
+  }
 
-  const positions = ()=>{ 
-    navigate('/positions');
+  const positions = () => {
+    navigate('/positions')
   }
 
   const handleLogout = async () => {
     try {
       await logout()
-      navigate('/login');
-      toast.success('Successfully Log Out');
+      navigate('/login')
+      toast.success('Successfully Log Out')
     } catch (error) {
-      toast.error('Error Logging Out');
+      toast.error('Error Logging Out')
     }
-  };
+  }
 
   return (
-    <nav className='flex items-center justify-between w-full text-white bg-black shadow-sm h-14 shadow-black'>
+    <nav className='w-full h-14 items-center flex justify-between shadow-sm shadow-slate-400 text-black'>
       <div className='p-2 m-2'>
         <h3 className='text-lg'>IT Support</h3>
       </div>
@@ -71,17 +71,17 @@ export default function () {
         <ul className='flex flex-row items-start justify-start md:flex-row md:items-center'>
           <li
             onClick={dashboard}
-            className='p-2 m-2 text-sm transition duration-300 rounded cursor-pointer hover:bg-gray-700 md:text-sm'
+            className='p-2 m-2 text-sm transition duration-300 rounded cursor-pointer hover:bg-gray-700 hover:text-white md:text-sm'
           >
             <i className='m-1 fas fa-home'></i>Dashboard
           </li>
-          <li className='p-2 m-2 text-sm transition duration-300 rounded cursor-pointer hover:bg-gray-700 md:text-sm'>
+          <li className='p-2 m-2 text-sm transition duration-300 rounded cursor-pointer hover:bg-gray-700 hover:text-white md:text-sm'>
             <i className='m-1 fas fa-info-circle'></i> Tickets
           </li>
 
           <li
             onClick={() => setIsTableOpen(!isTableOpen)}
-            className='relative p-3 m-2 text-sm transition duration-300 rounded cursor-pointer hover:bg-gray-700 md:text-sm'
+            className='relative p-3 m-2 text-sm transition duration-300 rounded cursor-pointer hover:bg-gray-700 hover:text-white md:text-sm'
           >
             <span>
               <i className='m-1 fa-solid fa-table'></i>Tables
@@ -98,16 +98,25 @@ export default function () {
                   className='flex flex-col gap-1'
                   onClick={() => setIsTableOpen(false)}
                 >
-                  <li onClick={users} className='flex items-center gap-2 p-2 text-sm cursor-pointer hover:bg-gray-600'>
+                  <li
+                    onClick={users}
+                    className='flex items-center gap-2 p-2 text-sm cursor-pointer hover:bg-gray-600 text-white'
+                  >
                     <i className='fa-solid fa-circle-user'></i> Users
                   </li>
 
-                  <li onClick={departments} className='flex items-center gap-2 p-2 text-sm cursor-pointer hover:bg-gray-600'>
+                  <li
+                    onClick={departments}
+                    className='flex items-center gap-2 p-2 text-sm cursor-pointer hover:bg-gray-600 text-white'
+                  >
                     <i className='fa-solid fa-building'></i> Department
                   </li>
 
-                  <li onClick={positions} className='flex items-center gap-2 p-2 text-sm cursor-pointer hover:bg-gray-600'>
-                  <i className="fa-solid fa-location-dot"></i> Position
+                  <li
+                    onClick={positions}
+                    className='flex items-center gap-2 p-2 text-sm cursor-pointer hover:bg-gray-600 text-white'
+                  >
+                    <i className='fa-solid fa-location-dot'></i> Position
                   </li>
                 </ul>
               </div>
@@ -118,7 +127,7 @@ export default function () {
 
           <li
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            className='relative p-3 m-2 text-sm transition duration-300 rounded cursor-pointer hover:bg-gray-700 md:text-sm'
+            className='relative p-3 m-2 text-sm transition duration-300 rounded cursor-pointer hover:bg-gray-700 hover:text-white md:text-sm'
           >
             <span>
               <i className='m-1 fa-solid fa-bars'></i>Settings
@@ -135,15 +144,21 @@ export default function () {
                   className='flex flex-col gap-1'
                   onClick={() => setIsDropdownOpen(false)}
                 >
-                  <li onClick={profile} className='flex items-center gap-2 p-2 text-sm cursor-pointer hover:bg-gray-600'>
+                  <li
+                    onClick={profile}
+                    className='flex items-center gap-2 p-2 text-sm cursor-pointer hover:bg-gray-600 text-white'
+                  >
                     <i className='fa-solid fa-circle-user'></i> User Profile
                   </li>
-                  <li onClick={approve} className='flex items-center gap-2 p-2 text-sm cursor-pointer hover:bg-gray-600'>
+                  <li
+                    onClick={approve}
+                    className='flex items-center gap-2 p-2 text-sm cursor-pointer hover:bg-gray-600 text-white'
+                  >
                     <i className='fa-solid fa-circle-user'></i> Approve Users
                   </li>
                   <li
                     onClick={handleLogout}
-                    className='flex items-center gap-2 p-2 text-sm cursor-pointer hover:bg-gray-600'
+                    className='flex items-center gap-2 p-2 text-sm cursor-pointer hover:bg-gray-600 text-white'
                   >
                     <i className='fa-solid fa-arrow-right-from-bracket'></i>{' '}
                     Sign Out

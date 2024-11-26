@@ -17,6 +17,7 @@ import PositionTable from "./Position";
 import CreatePosition from "./Position/createPosition";
 import GetPositionById from "./Position/getPositionById";
 import EditPosition from "./Position/editPosition";
+import GetAllBranch from "./Branch";
 
 export {
   Home,
@@ -37,5 +38,6 @@ export {
   PositionTable,
   CreatePosition,
   GetPositionById,
-  EditPosition
+  EditPosition,
+  GetAllBranch,
 };

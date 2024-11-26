@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { PositionState } from "../interface";
-import axios from "axios";
+import api from "./api";
+
 
 export const usePositionStore = create<PositionState>((set) => ({
   positions: [],
@@ -8,7 +9,7 @@ export const usePositionStore = create<PositionState>((set) => ({
   loading: false,
   error: null,
   getAllPositions: async () => {
-    const res = await axios.get(
+    const res = await api.get(
       `${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/positions`
     );
     set({ positions: res.data.details, loading: false, error: null });
@@ -17,7 +18,7 @@ export const usePositionStore = create<PositionState>((set) => ({
   },
 
   getOnePosition: async (id: string) => {
-    const res = await axios.get(
+    const res = await api.get(
       `${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/position/${id}`
     );
     set({
@@ -30,15 +31,9 @@ export const usePositionStore = create<PositionState>((set) => ({
   },
 
   createPosition: async (formData: FormData) => {
-    const res = await axios.post(
+    const res = await api.post(
       `${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/positions`,
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
+      formData);
     set((state) => ({
       positions: [...state.positions, res.data.details],
       loading: false,
@@ -48,17 +43,11 @@ export const usePositionStore = create<PositionState>((set) => ({
     return res.data.details;
   },
   updatePositionById: async (id: string, formData: FormData) => {
-    const res = await axios.patch(
+    const res = await api.patch(
       `${import.meta.env.VITE_URI}${
         import.meta.env.VITE_API
       }/position/edit/${id}`,
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
+      formData);
 
     set((state) => ({
       positions: state.positions.map((p) =>
@@ -69,7 +58,7 @@ export const usePositionStore = create<PositionState>((set) => ({
     return res.data.details;
   },
   deletePositionById: async (id: string) => {
-    const res = await axios.delete(
+    const res = await api.delete(
       `${import.meta.env.VITE_URI}${
         import.meta.env.VITE_API
       }/position/${id}`

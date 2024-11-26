@@ -35,6 +35,10 @@ export default function () {
     navigate('/admin-profile');
   };
 
+  const departments = ()=>{
+    navigate('/departments');
+  }
+
   const handleLogout = async () => {
     try {
       await logout()
@@ -92,6 +96,10 @@ export default function () {
                 >
                   <li onClick={users} className='flex items-center gap-2 p-2 text-sm cursor-pointer hover:bg-gray-600'>
                     <i className='fa-solid fa-circle-user'></i> Users
+                  </li>
+
+                  <li onClick={departments} className='flex items-center gap-2 p-2 text-sm cursor-pointer hover:bg-gray-600'>
+                    <i className='fa-solid fa-building'></i> Department
                   </li>
                 </ul>
               </div>

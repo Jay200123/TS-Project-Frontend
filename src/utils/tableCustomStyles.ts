@@ -10,7 +10,7 @@ const tableCustomStyles = {
     style: {
       backgroundColor: "#f2f2f2",
       fontSize: "14px",
-      borderBottom: "1px solid b3b3b3",
+      borderBottom: "1px solid #b3b3b3",
     },
   },
 };

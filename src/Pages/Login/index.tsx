@@ -80,7 +80,7 @@ export default function () {
 
               <button
                 type='submit'
-                className='w-full px-4 py-2 text-lg font-medium text-white transition duration-700 bg-black border border-gray-500 rounded-md hover:bg-opacity-80'
+                className='w-full px-4 py-2 text-lg font-medium text-white transition duration-700 bg-gray-700 border border-gray-500 rounded-md hover:bg-opacity-80'
               >
                 Sign In
               </button>

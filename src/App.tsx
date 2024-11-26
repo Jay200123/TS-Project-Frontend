@@ -15,7 +15,11 @@ import {
   ApproveUserTable,
   GetUserById,
   AdminProfile,
-  EditUser
+  EditUser,
+  DepartmentTable,
+  CreateDepartment,
+  EditDepartment,
+  GetDepartmentById
 } from './Pages'
 import { ProtectedRoute } from './components'
 import { HomeLayout, AdminLayout, CustomerLayout } from './layout'
@@ -100,6 +104,40 @@ function App () {
               </ProtectedRoute>
             }
           />
+          {/* Department Routes */}
+          <Route
+          path='/departments'
+          element={
+            <ProtectedRoute userRole={['Admin']}>
+              <DepartmentTable />
+            </ProtectedRoute>
+          } 
+          />
+           <Route
+          path='/department/create'
+          element={
+            <ProtectedRoute userRole={['Admin']}>
+              <CreateDepartment />
+            </ProtectedRoute>
+          } 
+          />
+           <Route
+          path='/department/:id'
+          element={
+            <ProtectedRoute userRole={['Admin']}>
+              <GetDepartmentById />
+            </ProtectedRoute>
+          } 
+          />
+           <Route
+          path='/department/edit/:id'
+          element={
+            <ProtectedRoute userRole={['Admin']}>
+              <EditDepartment />
+            </ProtectedRoute>
+          } 
+          />
+
         </Route>
       </Route>
     )

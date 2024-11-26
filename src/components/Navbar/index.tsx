@@ -37,26 +37,26 @@ export default function () {
         <ul className='flex flex-row md:flex-row items-start md:items-center justify-start'>
           <li
             onClick={home}
-            className='focus:outline-none p-2 m-2 text-sm cursor-pointer transition duration-500 hover:bg-black hover:text-white rounded md:text-sm'
+            className='focus:outline-none p-2 m-2 text-sm cursor-pointer transition duration-500 hover:bg-gray-700 hover:text-white rounded md:text-sm'
           >
             <i className='fas fa-home m-1'></i>Home
           </li>
-          <li className='focus:outline-none p-2 m-2  text-sm cursor-pointer transition duration-500 hover:bg-black hover:text-white rounded md:text-sm'>
+          <li className='focus:outline-none p-2 m-2  text-sm cursor-pointer transition duration-500 hover:bg-gray-700 hover:text-white rounded md:text-sm'>
             <i className='fas fa-info-circle m-1'></i> About
           </li>
-          <li className='p-2 m-2  text-sm cursor-pointer transition duration-500 hover:bg-black hover:text-white rounded md:text-sm'>
+          <li className='p-2 m-2  text-sm cursor-pointer transition duration-500 hover:bg-gray-700 hover:text-white rounded md:text-sm'>
             <i className='fas fa-phone-alt m-1'></i> Contact Us
           </li>
 
           <li
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            className='relative m-2 p-3 text-sm hover:text-white cursor-pointer transition duration-500 hover:bg-black rounded md:text-sm'
+            className='relative m-2 p-3 text-sm hover:text-white cursor-pointer transition duration-500 hover:bg-gray-700 rounded md:text-sm'
           >
             <span>
               <i className='fa-solid fa-bars m-1'></i>Settings
             </span>
             <div
-              className={`absolute bg-black shadow-slate-300 top-full left-0 rounded shadow-md z-10 mt-2 p-2 transition-all duration-500 ease-in-out transform ${
+              className={`absolute bg-gray-700 shadow-slate-300 top-full left-0 rounded shadow-md z-10 mt-2 p-2 transition-all duration-500 ease-in-out transform ${
                 isDropdownOpen
                   ? 'opacity-100 scale-100'
                   : 'opacity-0 scale-95 pointer-events-none'

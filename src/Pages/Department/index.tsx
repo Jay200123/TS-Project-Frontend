@@ -75,7 +75,9 @@ export default function () {
           <div className='max-w-full p-4 overflow-hidden bg-white rounded-lg sm:p-6 lg:p-8 sm:max-w-6xl'>
           <div className='flex items-center justify-end m-2'>
             <button onClick={()=>navigate('/department/create')}
-             className='text-[16px] bg-black text-white p-[15px] rounded-md transition-all duration-500  hover:bg-white hover:text-black border border-black'>Create Department</button>
+             className='text-[16px] bg-gray-700 text-white p-[15px] rounded-md transition-all duration-500  hover:bg-white hover:text-black border border-gray-700'>
+              Create Department <i className='fa fa-plus'></i>
+              </button>
           </div>
             <DataTable
               title='Department Records'

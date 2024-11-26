@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import axios from "axios";
 import { BranchState } from "../interface";
+import { multipart } from "./multipart";
 
 export const useBranchStore = create<BranchState>((set) => ({
     branches: [],
@@ -29,9 +30,7 @@ export const useBranchStore = create<BranchState>((set) => ({
         const res = await axios.post(`${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/branches`,
             formData,
             {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                },
+                headers: multipart
             }
         );
         set((state) => ({
@@ -47,9 +46,7 @@ export const useBranchStore = create<BranchState>((set) => ({
         const res = await axios.patch(`${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/branch/edit/${id}`,
             formData,
             {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                },
+                headers: multipart
             }
         )
 

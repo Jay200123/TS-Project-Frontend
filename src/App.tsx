@@ -23,14 +23,11 @@ import {
   PositionTable,
   CreatePosition,
   GetPositionById,
-  EditPosition
+  EditPosition,
+  GetAllBranch
 } from './Pages'
 import { ProtectedRoute } from './components'
-import { 
-  HomeLayout,
-  AdminLayout,
-  CustomerLayout
-} from './layout'
+import { HomeLayout, AdminLayout, CustomerLayout } from './layout'
 
 function App () {
   const Router = createBrowserRouter(
@@ -171,11 +168,20 @@ function App () {
               </ProtectedRoute>
             }
           />
-            <Route
+          <Route
             path='/position/edit/:id'
             element={
               <ProtectedRoute userRole={['Admin']}>
                 <EditPosition />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path='/branches'
+            element={
+              <ProtectedRoute userRole={['Admin']}>
+                <GetAllBranch />
               </ProtectedRoute>
             }
           />

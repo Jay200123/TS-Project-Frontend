@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { UserState } from "../interface";
 import axios from "axios";
 import api from "./api";
+import { multipart } from "./multipart";
 
 const useUserStore = create<UserState>((set) => ({
   users: [],
@@ -34,9 +35,7 @@ const useUserStore = create<UserState>((set) => ({
       `${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/users`,
       formData,
       {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+        headers: multipart
       }
     );
     set((state) => ({
@@ -52,9 +51,7 @@ const useUserStore = create<UserState>((set) => ({
       `${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/user/edit/${id}`,
       formData,
       {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+        headers: multipart
       }
     );
 
@@ -77,8 +74,7 @@ const useUserStore = create<UserState>((set) => ({
 
   activateUserById: async (id) => {
     const res = await api.patch(
-      `${import.meta.env.VITE_URI}${
-        import.meta.env.VITE_API
+      `${import.meta.env.VITE_URI}${import.meta.env.VITE_API
       }/user/activate/${id}`
     );
 

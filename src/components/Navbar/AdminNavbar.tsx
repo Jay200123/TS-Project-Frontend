@@ -43,6 +43,10 @@ export default function () {
     navigate('/positions')
   }
 
+  const branches = () => {  
+    navigate('/branches')
+  }
+
   const handleLogout = async () => {
     try {
       await logout()
@@ -117,6 +121,13 @@ export default function () {
                     className='flex items-center gap-2 p-2 text-sm cursor-pointer hover:bg-gray-600 text-white'
                   >
                     <i className='fa-solid fa-location-dot'></i> Position
+                  </li>
+
+                  <li
+                    onClick={branches}
+                    className='flex items-center gap-2 p-2 text-sm cursor-pointer hover:bg-gray-600 text-white'
+                  >
+                    <i className='fa-solid fa-code-branch'></i> Branch
                   </li>
                 </ul>
               </div>

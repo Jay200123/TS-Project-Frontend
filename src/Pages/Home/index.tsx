@@ -1,16 +1,16 @@
 // import HomeImage from '../../assets/ticketing-home-icon.jfif'
-import HomeImage from "../../assets/test-hd.webp";
+import HomeImage from "../../assets/Helpdesk-3.png";
 
 export default function () {
   return (
     <>
-      <div className='max-h-full max-w-full bg-white flex items-center justify-between'>
+      <div className='max-h-full max-w-full bg-transparent flex items-center justify-between'>
         {/* div for home page information */}
         <div className='w-1/2 flex flex-col text-left p-4'>
-          <h1 className='text-sm font-bold md:text-3xl mb-[6px]'>
+          <h1 className='text-sm  text-black font-bold md:text-3xl mb-[6px]'>
             Resolve Your IT Issues with Ease
           </h1>
-          <p className="md:text-[17px] p-[6px] sm:text-sm sm:p-1">
+          <p className="md:text-[17px] p-[6px] text-black sm:text-sm sm:p-1">
             Welcome to our IT Helpdesk Portal. This system is designed to
             streamline your support requests and provide timely resolutions to
             all your IT needs. Whether you’re reporting an issue, requesting

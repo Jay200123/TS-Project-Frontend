@@ -37,6 +37,10 @@ export default function () {
 
   const departments = ()=>{
     navigate('/departments');
+  };
+
+  const positions = ()=>{ 
+    navigate('/positions');
   }
 
   const handleLogout = async () => {
@@ -100,6 +104,10 @@ export default function () {
 
                   <li onClick={departments} className='flex items-center gap-2 p-2 text-sm cursor-pointer hover:bg-gray-600'>
                     <i className='fa-solid fa-building'></i> Department
+                  </li>
+
+                  <li onClick={positions} className='flex items-center gap-2 p-2 text-sm cursor-pointer hover:bg-gray-600'>
+                  <i className="fa-solid fa-location-dot"></i> Position
                   </li>
                 </ul>
               </div>

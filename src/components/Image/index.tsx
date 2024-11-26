@@ -4,7 +4,7 @@ export default function(){
     return(
         <>
         <main>
-            <img className="h-full w-full object-cover rounded-l-lg" src={ticketImage}/>
+            <img className="h-full m-6 w-full object-cover rounded-l-lg" src={ticketImage}/>
         </main>
         </>
     )

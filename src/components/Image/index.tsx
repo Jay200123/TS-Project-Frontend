@@ -1,4 +1,4 @@
-import ticketImage from "../../assets/picture-1.jpeg";   
+import ticketImage from "../../assets/transparent-1.png";   
 
 export default function(){
     return(

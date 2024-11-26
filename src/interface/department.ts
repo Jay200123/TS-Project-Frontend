@@ -14,8 +14,8 @@ interface DepartmentState {
     error: string | null;
     getAllDepartments: () => Promise<Department[]>;
     getOneDepartment: (id: string) => Promise<Department | null>;
-    createDepartment: (formData: FormData) => Promise<Department>;
-    updateDepartmentById: (id: string, formData: FormData) => Promise<Department>;
+    createDepartment: (data: FormData) => Promise<void>;
+    updateDepartmentById: (id: string, data:FormData) => Promise<Department>;
     deleteDepartmentById: (id: string) => Promise<void>;
 }
 

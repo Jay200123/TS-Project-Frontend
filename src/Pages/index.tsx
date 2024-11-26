@@ -8,7 +8,11 @@ import UsersTable from "./Users";
 import ApproveUserTable from "./Users/approveUser";
 import GetUserById from "./Users/getUserById";
 import AdminProfile from "./Profile/AdminProfile";
-import EditUser from "./Users/updateUserById";
+import EditUser from "./Users/editUser";
+import DepartmentTable from "./Department";
+import CreateDepartment from "./Department/createDepartment";
+import GetDepartmentById from "./Department/getDepartmentById";
+import EditDepartment from "./Department/editDepartment";
 
 export {
   Home,
@@ -22,4 +26,8 @@ export {
   GetUserById,
   AdminProfile,
   EditUser,
+  DepartmentTable,
+  GetDepartmentById,
+  EditDepartment,
+  CreateDepartment,
 };

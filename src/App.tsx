@@ -22,10 +22,15 @@ import {
   GetDepartmentById,
   PositionTable,
   CreatePosition,
-  GetPositionById
+  GetPositionById,
+  EditPosition
 } from './Pages'
 import { ProtectedRoute } from './components'
-import { HomeLayout, AdminLayout, CustomerLayout } from './layout'
+import { 
+  HomeLayout,
+  AdminLayout,
+  CustomerLayout
+} from './layout'
 
 function App () {
   const Router = createBrowserRouter(
@@ -158,12 +163,19 @@ function App () {
               </ProtectedRoute>
             }
           />
-
           <Route
             path='/position/:id'
             element={
               <ProtectedRoute userRole={['Admin']}>
                 <GetPositionById />
+              </ProtectedRoute>
+            }
+          />
+            <Route
+            path='/position/edit/:id'
+            element={
+              <ProtectedRoute userRole={['Admin']}>
+                <EditPosition />
               </ProtectedRoute>
             }
           />

@@ -11,11 +11,12 @@ import { toast } from 'react-toastify'
 import { useState } from 'react'
 
 export default function () {
-  const navigate = useNavigate()
-  const { createPosition } = usePositionStore()
-  const { branches, getAllBranches } = useBranchStore()
-  const { departments, getAllDepartments } = useDepartmentStore()
-  const [selectBranch, setSelectedBranch] = useState('')
+  const navigate = useNavigate();
+  const { createPosition } = usePositionStore();
+  const { branches, getAllBranches } = useBranchStore();
+  const { departments, getAllDepartments } = useDepartmentStore();
+  const [selectBranch, setSelectedBranch] = useState('');
+
   useQuery({
     queryKey: ['branches'],
     queryFn: getAllBranches

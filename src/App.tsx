@@ -24,7 +24,10 @@ import {
   CreatePosition,
   GetPositionById,
   EditPosition,
-  GetAllBranch
+  GetAllBranch,
+  CreateBranch,
+  GetBranchById,
+  EditBranch
 } from './Pages'
 import { ProtectedRoute } from './components'
 import { HomeLayout, AdminLayout, CustomerLayout } from './layout'
@@ -177,11 +180,38 @@ function App () {
             }
           />
 
+          {/* Branch Routes */}
           <Route
             path='/branches'
             element={
               <ProtectedRoute userRole={['Admin']}>
                 <GetAllBranch />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/branch/create'
+            element={
+              <ProtectedRoute userRole={['Admin']}>
+                <CreateBranch />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path='/branch/:id'
+            element={
+              <ProtectedRoute userRole={['Admin']}>
+                <GetBranchById />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path='/branch/edit/:id'
+            element={
+              <ProtectedRoute userRole={['Admin']}>
+                <EditBranch />
               </ProtectedRoute>
             }
           />

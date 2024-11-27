@@ -27,7 +27,8 @@ import {
   GetAllBranch,
   CreateBranch,
   GetBranchById,
-  EditBranch
+  EditBranch,
+  EmployeeProfile
 } from './Pages'
 import { ProtectedRoute } from './components'
 import { HomeLayout, AdminLayout, CustomerLayout } from './layout'
@@ -46,11 +47,21 @@ function App () {
         {/* Customer Private Routes */}
         <Route element={<CustomerLayout />}>
           <Route
-            path='/test'
+            path='/employee/profile'
             index
             element={
               <ProtectedRoute userRole={['Employee']}>
-                <AuthenticatedTest />
+                <EmployeeProfile />
+              </ProtectedRoute>
+            }
+          />
+
+<Route
+            path='/employee/profile/edit/:id'
+            index
+            element={
+              <ProtectedRoute userRole={['Employee']}>
+                <EditUser />
               </ProtectedRoute>
             }
           />

@@ -5,6 +5,10 @@ import Footer from "./Footer";
 import ProtectedRoute from "./ProtectedRoutes";
 import Image from "./Image";
 import RegisterImage from "./Image/RegisterImage";
+import TechnicianImage from "./Image/TechnicianImage";
+import EmployeeImage from "./Image/EmployeeImage";
+import LoginImage from "./Image/LoginImage";
+
 export {
     Navbar,
     AdminNavbar,
@@ -12,5 +16,8 @@ export {
     Footer,
     Image,
     RegisterImage,
+    TechnicianImage,
+    EmployeeImage,
+    LoginImage,
     ProtectedRoute,
 }

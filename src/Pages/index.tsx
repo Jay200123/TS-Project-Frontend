@@ -23,6 +23,8 @@ import GetBranchById from "./Branch/getBranchById";
 import EditBranch from "./Branch/editBranch";
 import EmployeeProfile from "./Profile/EmployeeProfile";
 import TechnicialProfile from "./Profile/TechnicialProfile";
+import TechnicianSignup from "./SignUp/TechnicianSignup";
+import SignUpChoice from "./SignUp/SignUpChoice";
 
 export {
   Home,
@@ -49,5 +51,7 @@ export {
   GetBranchById,
   EditBranch,
   EmployeeProfile,
-  TechnicialProfile
+  TechnicialProfile,
+  TechnicianSignup,
+  SignUpChoice
 };

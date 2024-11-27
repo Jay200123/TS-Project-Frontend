@@ -42,7 +42,7 @@ export default function () {
       city: "",
       email: "",
       password: "",
-      role: "",
+      role: "Technician",
       branch: "",
       department: "",
       position: "",
@@ -60,6 +60,7 @@ export default function () {
       formData.append("password", values.password);
       formData.append("branch", values.branch);
       formData.append("position", values.position);
+      formData.append("role", values.role); 
       formData.append("department", values.department);
       values.image.forEach((file) => {
         formData.append("image", file);

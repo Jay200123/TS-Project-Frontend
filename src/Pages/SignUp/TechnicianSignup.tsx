@@ -18,8 +18,6 @@ export default function () {
   const { departments, getAllDepartments } = useDepartmentStore();
   const { positions, getAllPositions } = usePositionStore();
 
-  console.log(departments);
-
   useQuery({
     queryKey: ["branches"],
     queryFn: getAllBranches,

@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 import { useAuthenticationStore } from '../../state/store'
 import { useNavigate } from 'react-router-dom'
 import LoginIcon from '../../assets/bg-icon.jfif'
-import { Image } from '../../components'
+import { LoginImage } from '../../components'
 
 export default function () {
   const navigate = useNavigate()
@@ -41,7 +41,7 @@ export default function () {
         <div className='flex items-center justify-center'>
           <div className='flex flex-col items-center max-w-4xl p-6 m-8 bg-white border border-gray-500 rounded-lg shadow-sm md:flex-row md:p-8 shadow-gray-500'>
             <div className='hidden w-full md:block md:w-1/2'>
-              <Image />
+              <LoginImage />
             </div>
 
             <div className='w-full p-4 md:w-1/2 md:p-6'>

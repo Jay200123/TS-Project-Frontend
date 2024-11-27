@@ -36,7 +36,7 @@ export default function () {
     onSubmit: async values => {
       const formData = new FormData()
       formData.append('department', values.department)
-      formData.append('department_name', values.position_name)
+      formData.append('position_name', values.position_name)
       formData.append('description', values.description)
       try {
         await createPosition(formData)
@@ -63,7 +63,7 @@ export default function () {
       onSubmit={formik.handleSubmit}
       className='flex items-center justify-center p-4 m-4'
     >
-      <div className='flex flex-col w-full max-w-4xl p-6 space-y-6 bg-white border border-gray-400 rounded-lg shadow-md md:flex-row md:space-y-0 md:space-x-6 overflow-hidden min-h-[24rem]'>
+      <div className='flex flex-col w-full max-w-2  xl p-6 space-y-6 bg-white border border-gray-400 rounded-lg shadow-md md:flex-row md:space-y-0 md:space-x-6 overflow-hidden min-h-[24rem]'>
         <div className='hidden w-full md:w-1/2 md:block min-h-[20rem]'>
           <Image />
         </div>

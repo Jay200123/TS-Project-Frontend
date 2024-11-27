@@ -46,6 +46,10 @@ export default function () {
 
         if (res.role === 'Admin') {
           navigate('/admin-profile')
+        } else if (res.role === 'Technician') {
+          navigate('/technician-profile')
+        } else {
+          navigate('/employee-profile')
         }
       } catch (error) {
         toast.error('User Registration failed')
@@ -171,7 +175,7 @@ export default function () {
               name='image'
               multiple
               onBlur={formik.handleBlur}
-              onChange={(event) => {
+              onChange={event => {
                 const files = event.currentTarget.files
                   ? Array.from(event.currentTarget.files)
                   : []

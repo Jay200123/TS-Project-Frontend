@@ -21,6 +21,7 @@ import GetAllBranch from "./Branch";
 import CreateBranch from "./Branch/createBranch";
 import GetBranchById from "./Branch/getBranchById";
 import EditBranch from "./Branch/editBranch";
+import EmployeeProfile from "./Profile/EmployeeProfile";
 
 export {
   Home,
@@ -46,4 +47,5 @@ export {
   CreateBranch,
   GetBranchById,
   EditBranch,
+  EmployeeProfile
 };

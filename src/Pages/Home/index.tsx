@@ -4,10 +4,10 @@ import HomeImage from "../../assets/Helpdesk-3.png";
 export default function () {
   return (
     <>
-      <div className='max-h-full max-w-full bg-transparent flex items-center justify-between'>
+      <div className='flex items-center justify-between max-w-full max-h-full bg-transparent'>
         {/* div for home page information */}
-        <div className='w-1/2 flex flex-col text-left p-4'>
-          <h1 className='text-sm  text-black font-bold md:text-3xl mb-[6px]'>
+        <div className='flex flex-col w-1/2 p-4 text-left'>
+          <h1 className='text-sm  text-gray-700 font-bold md:text-3xl mb-[6px]'>
             Resolve Your IT Issues with Ease
           </h1>
           <p className="md:text-[17px] p-[6px] text-black sm:text-sm sm:p-1">
@@ -18,13 +18,15 @@ export default function () {
             us help you stay productive and connected.
           </p>
           <div className='flex items-center justify-center mt-[12px]'>
-          <button className="rounded-3xl border border-black p-2 text-xl bg-black text-white transition-all duration-500 hover:bg-white hover:text-black">Get Started</button>
+          <button className="p-2 text-xl text-white transition-all duration-500 bg-gray-700 border border-gray-700 rounded-3xl hover:bg-white hover:text-gray-700">
+            Get Started
+            </button>
           </div>
         </div>
         {/* div for home page image */}
-        <div className='w-1/2 flex items-center justify-center'>
+        <div className='flex items-center justify-center w-1/2'>
           <img
-            className=' object-cover items'
+            className='object-cover items'
             src={HomeImage}
             alt='image.jpeg'
           />

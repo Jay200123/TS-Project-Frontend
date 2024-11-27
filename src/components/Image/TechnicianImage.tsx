@@ -2,9 +2,9 @@ import technicianImage from "../../assets/test-technician.jfif";
 
 export default function(){
     return(
-        <div className="h-full">
+        <div className="w-full h-full">
         <img
-          className="max-h-screen w-full object-cover rounded-l-lg"
+          className="object-cover w-full max-h-screen rounded-l-lg"
           src={technicianImage}
           alt="Register Background"
         />

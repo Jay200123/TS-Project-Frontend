@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useAuthenticationStore } from '../../state/store'
+import { toast } from 'react-toastify'
 
 export default function () {
   const navigate = useNavigate()
 
   const [isOpen, setIsOpen] = useState(false)
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  const { logout, user } = useAuthenticationStore()
 
   const login = () => {
     navigate('/login')
@@ -17,6 +20,26 @@ export default function () {
 
   const home = () => {
     navigate('/')
+  }
+
+  const handleProfile = () => {
+    if (user?.role === 'Admin') {
+      navigate('/admin-profile')
+    } else if (user?.role === 'Technician') {
+      navigate('/technician-profile')
+    } else {
+      navigate('/employee-profile')
+    }
+  }
+
+  const handleLogout = async () => {
+    try {
+      await logout()
+      navigate('/login')
+      toast.success('Successfully Log Out')
+    } catch (error) {
+      toast.error('Error Logging Out')
+    }
   }
 
   return (
@@ -62,20 +85,38 @@ export default function () {
                   : 'opacity-0 scale-95 pointer-events-none'
               }`}
             >
-              <ul onClick={() => setIsDropdownOpen(false)}>
-                <li
-                  onClick={login}
-                  className='p-2 text-sm cursor-pointer text-white border-b-[1px] transition-all duration-500 hover:bg-white hover:text-black hover:rounded-md'
-                >
-                  <i className='fa-solid fa-unlock m-1'></i>Sign In
-                </li>
-                <li
-                  onClick={signup}
-                  className='p-2 text-sm cursor-pointer text-white border-b-[1px] transition-all duration-500 hover:bg-white hover:text-black hover:rounded-md'
-                >
-                  <i className='fa-solid fa-user-plus m-1'></i> Sign Up
-                </li>
-              </ul>
+              {user ? (
+                <ul onClick={() => setIsDropdownOpen(false)}>
+                  <li
+                    onClick={handleProfile}
+                    className='p-2 text-sm cursor-pointer text-white border-b-[1px] transition-all duration-500 hover:bg-white hover:text-black hover:rounded-md'
+                  >
+                    <i className='fa-solid fa-unlock m-1'></i>
+                    {`${user.role} Profile`}
+                  </li>
+                  <li
+                    onClick={handleLogout}
+                    className='p-2 text-sm cursor-pointer text-white border-b-[1px] transition-all duration-500 hover:bg-white hover:text-black hover:rounded-md'
+                  >
+                    <i className='fa-solid fa-user-plus m-1'></i> Logout
+                  </li>
+                </ul>
+              ) : (
+                <ul onClick={() => setIsDropdownOpen(false)}>
+                  <li
+                    onClick={login}
+                    className='p-2 text-sm cursor-pointer text-white border-b-[1px] transition-all duration-500 hover:bg-white hover:text-black hover:rounded-md'
+                  >
+                    <i className='fa-solid fa-unlock m-1'></i>Sign In
+                  </li>
+                  <li
+                    onClick={signup}
+                    className='p-2 text-sm cursor-pointer text-white border-b-[1px] transition-all duration-500 hover:bg-white hover:text-black hover:rounded-md'
+                  >
+                    <i className='fa-solid fa-user-plus m-1'></i> Sign Up
+                  </li>
+                </ul>
+              )}
             </div>
           </li>
         </ul>

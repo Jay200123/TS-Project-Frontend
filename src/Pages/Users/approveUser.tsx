@@ -61,6 +61,10 @@ export default function () {
       selector: row => (row.position ? row.position.position_name : 'N/A')
     },
     {
+      name: 'Role',
+      selector: row => (row.position ? row.role : 'N/A')
+    },
+    {
       name: 'Images',
       cell: row => {
         const randomImage =

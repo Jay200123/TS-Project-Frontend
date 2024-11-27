@@ -18,6 +18,9 @@ import CreatePosition from "./Position/createPosition";
 import GetPositionById from "./Position/getPositionById";
 import EditPosition from "./Position/editPosition";
 import GetAllBranch from "./Branch";
+import CreateBranch from "./Branch/createBranch";
+import GetBranchById from "./Branch/getBranchById";
+import EditBranch from "./Branch/editBranch";
 
 export {
   Home,
@@ -40,4 +43,7 @@ export {
   GetPositionById,
   EditPosition,
   GetAllBranch,
+  CreateBranch,
+  GetBranchById,
+  EditBranch,
 };

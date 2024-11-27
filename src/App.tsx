@@ -28,10 +28,16 @@ import {
   CreateBranch,
   GetBranchById,
   EditBranch,
-  EmployeeProfile
+  EmployeeProfile,
+  TechnicialProfile
 } from './Pages'
 import { ProtectedRoute } from './components'
-import { HomeLayout, AdminLayout, CustomerLayout } from './layout'
+import {
+  HomeLayout,
+  AdminLayout,
+  CustomerLayout,
+  TechnicianLayout
+} from './layout'
 
 function App () {
   const Router = createBrowserRouter(
@@ -44,6 +50,7 @@ function App () {
           <Route path='/unauthorized' element={<Unauthorized />} />
           <Route path='/signup' element={<SignUp />} />
         </Route>
+
         {/* Customer Private Routes */}
         <Route element={<CustomerLayout />}>
           <Route
@@ -56,11 +63,31 @@ function App () {
             }
           />
 
-<Route
+          <Route
             path='/employee/profile/edit/:id'
             index
             element={
               <ProtectedRoute userRole={['Employee']}>
+                <EditUser />
+              </ProtectedRoute>
+            }
+          />
+        </Route>
+
+        {/* Technician Private Routes */}
+        <Route element={<TechnicianLayout />}>
+          <Route
+            path='/technician/profile'
+            element={
+              <ProtectedRoute userRole={['Technician']}>
+                <TechnicialProfile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/technician/profile/edit/:id'
+            element={
+              <ProtectedRoute userRole={['Technician']}>
                 <EditUser />
               </ProtectedRoute>
             }

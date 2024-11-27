@@ -18,6 +18,7 @@ export default function () {
   const { departments, getAllDepartments } = useDepartmentStore();
   const { positions, getAllPositions } = usePositionStore();
 
+
   useQuery({
     queryKey: ["branches"],
     queryFn: getAllBranches,
@@ -42,7 +43,7 @@ export default function () {
       city: "",
       email: "",
       password: "",
-      role: "Employee",
+      role: "",
       branch: "",
       department: "",
       position: "",
@@ -89,6 +90,7 @@ export default function () {
     (p) => p.department._id === formik.values.department
   );
 
+
   return (
     <form
       onSubmit={formik.handleSubmit}
@@ -100,7 +102,7 @@ export default function () {
         </div>
         <div className="flex flex-col w-full space-y-4 md:w-1/2">
           <h2 className="text-2xl font-bold text-center text-gray-800 md:text-left">
-            Register Your Account
+            Employee Registration
           </h2>
 
           <div className="flex flex-col">

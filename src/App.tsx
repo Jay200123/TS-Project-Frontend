@@ -7,7 +7,7 @@ import {
 import {
   Home,
   Login,
-  AuthenticatedTest,
+  SignUpChoice,
   Unauthorized,
   SignUp,
   Dashboard,
@@ -29,7 +29,8 @@ import {
   GetBranchById,
   EditBranch,
   EmployeeProfile,
-  TechnicialProfile
+  TechnicialProfile,
+  TechnicianSignup
 } from './Pages'
 import { ProtectedRoute } from './components'
 import {
@@ -48,7 +49,9 @@ function App () {
           <Route index element={<Home />} />
           <Route path='/login' element={<Login />} />
           <Route path='/unauthorized' element={<Unauthorized />} />
-          <Route path='/signup' element={<SignUp />} />
+          <Route path='/signup' element={<SignUpChoice/>}/>
+          <Route path='/employee/signup' element={<SignUp />} />
+          <Route path='technician/signup' element={<TechnicianSignup/>}/>
         </Route>
 
         {/* Customer Private Routes */}

@@ -30,7 +30,11 @@ import {
   EditBranch,
   EmployeeProfile,
   TechnicialProfile,
-  TechnicianSignup
+  TechnicianSignup,
+  DeviceTable,
+  GetDeviceById,
+  CreateDevice,
+  EditDevice
 } from './Pages'
 import { ProtectedRoute } from './components'
 import {
@@ -49,9 +53,9 @@ function App () {
           <Route index element={<Home />} />
           <Route path='/login' element={<Login />} />
           <Route path='/unauthorized' element={<Unauthorized />} />
-          <Route path='/signup' element={<SignUpChoice/>}/>
+          <Route path='/signup' element={<SignUpChoice />} />
           <Route path='/employee/signup' element={<SignUp />} />
-          <Route path='technician/signup' element={<TechnicianSignup/>}/>
+          <Route path='technician/signup' element={<TechnicianSignup />} />
         </Route>
 
         {/* Customer Private Routes */}
@@ -253,6 +257,40 @@ function App () {
             element={
               <ProtectedRoute userRole={['Admin']}>
                 <EditBranch />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Device Routes */}
+          <Route
+            path='/devices'
+            element={
+              <ProtectedRoute userRole={['Admin']}>
+                <DeviceTable />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/device/create'
+            element={
+              <ProtectedRoute userRole={['Admin']}>
+                <CreateDevice />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/device/:id'
+            element={
+              <ProtectedRoute userRole={['Admin']}>
+                <GetDeviceById />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/device/edit/:id'
+            element={
+              <ProtectedRoute userRole={['Admin']}>
+                <EditDevice />
               </ProtectedRoute>
             }
           />

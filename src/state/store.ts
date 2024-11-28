@@ -3,6 +3,7 @@ import { useUserStore } from "./user";
 import { useBranchStore } from "./branch";
 import { useDepartmentStore } from "./department";
 import { usePositionStore } from "./position";
+import { useDeviceStore } from "./device";
 
 export {
   useAuthenticationStore,
@@ -10,4 +11,5 @@ export {
   useBranchStore,
   useDepartmentStore,
   usePositionStore,
+  useDeviceStore
 };

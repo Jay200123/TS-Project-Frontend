@@ -43,8 +43,12 @@ export default function () {
     navigate('/positions')
   }
 
-  const branches = () => {  
+  const branches = () => {
     navigate('/branches')
+  }
+
+  const devices = () => {
+    navigate('/devices')
   }
 
   const handleLogout = async () => {
@@ -130,6 +134,12 @@ export default function () {
                     <i className='fa-solid fa-location-dot'></i> Position
                   </li>
 
+                  <li
+                    onClick={devices}
+                    className='flex items-center gap-2 p-2 text-sm cursor-pointer hover:bg-gray-600 text-white'
+                  >
+                    <i className="fa-solid fa-computer"></i> Devices
+                  </li>
                 </ul>
               </div>
             ) : (

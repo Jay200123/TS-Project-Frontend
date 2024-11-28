@@ -11,7 +11,7 @@ const useAuthenticationStore = create<AuthState>()(
         loading: false,
         error: null,
         login: async (email, password) => {
-            const res = await axios.post(`${import.meta.env.VITE_URI}${import.meta.env.VITE_API}${PATH.USER_LOGIN}`,
+            const res = await axios.post(`${import.meta.env.VITE_API_URI}${PATH.USER_LOGIN}`,
                 {
                     email,
                     password

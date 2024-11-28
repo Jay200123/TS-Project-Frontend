@@ -25,6 +25,10 @@ import EmployeeProfile from "./Profile/EmployeeProfile";
 import TechnicialProfile from "./Profile/TechnicialProfile";
 import TechnicianSignup from "./SignUp/TechnicianSignup";
 import SignUpChoice from "./SignUp/SignUpChoice";
+import DeviceTable from "./Device";
+import GetDeviceById from "./Device/getDeviceById";
+import CreateDevice from "./Device/createDevice";
+import EditDevice from "./Device/editDevice";
 
 export {
   Home,
@@ -53,5 +57,9 @@ export {
   EmployeeProfile,
   TechnicialProfile,
   TechnicianSignup,
-  SignUpChoice
+  SignUpChoice,
+  DeviceTable,
+  GetDeviceById,
+  CreateDevice,
+  EditDevice,
 };

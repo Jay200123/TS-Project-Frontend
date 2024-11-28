@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { PositionState } from "../interface";
 import api from "./api";
+import { PATH } from "../constants";
 
 
 export const usePositionStore = create<PositionState>((set) => ({
@@ -10,7 +11,7 @@ export const usePositionStore = create<PositionState>((set) => ({
   error: null,
   getAllPositions: async () => {
     const res = await api.get(
-      `${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/positions`
+      `${import.meta.env.VITE_API_URI}${PATH.POSITIONS_ROUTES}`
     );
     set({ positions: res.data.details, loading: false, error: null });
 
@@ -19,8 +20,9 @@ export const usePositionStore = create<PositionState>((set) => ({
 
   getOnePosition: async (id: string) => {
     const res = await api.get(
-      `${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/position/${id}`
+      `${import.meta.env.VITE_API_URI}${PATH.DEPARTMENT_ID_ROUTE.replace(":id", id)}`
     );
+
     set({
       position: !Array.isArray(res.data.details) ? res.data.details : null,
       loading: false,
@@ -32,41 +34,25 @@ export const usePositionStore = create<PositionState>((set) => ({
 
   createPosition: async (formData: FormData) => {
     const res = await api.post(
-      `${import.meta.env.VITE_URI}${import.meta.env.VITE_API}/positions`,
+      `${import.meta.env.VITE_API_URI}${PATH.POSITIONS_ROUTES}`,
       formData);
-    set((state) => ({
-      positions: [...state.positions, res.data.details],
-      loading: false,
-      error: null,
-    }));
-
+    set({ position: res.data.details, loading: false, error: null });
     return res.data.details;
   },
   updatePositionById: async (id: string, formData: FormData) => {
     const res = await api.patch(
-      `${import.meta.env.VITE_URI}${
-        import.meta.env.VITE_API
-      }/position/edit/${id}`,
+      `${import.meta.env.VITE_API_URI}${PATH.EDIT_POSITION_ROUTE.replace(":id", id)}`,
       formData);
 
-    set((state) => ({
-      positions: state.positions.map((p) =>
-        p._id === id ? res.data.details : p
-      ),
-    }));
+    set({ position: res.data.details, loading: false, error: null });
 
     return res.data.details;
   },
   deletePositionById: async (id: string) => {
     const res = await api.delete(
-      `${import.meta.env.VITE_URI}${
-        import.meta.env.VITE_API
-      }/position/${id}`
+      `${import.meta.env.VITE_API_URI}${PATH.DEPARTMENT_ID_ROUTE.replace(":id", id)}`,
     );
-    set((state) => ({
-      positions: state.positions.filter((p) => p._id !== id),
-    }));
-
+    set({ position: res.data.details, loading: false, error: null });
     return res.data.details;
   },
 }));

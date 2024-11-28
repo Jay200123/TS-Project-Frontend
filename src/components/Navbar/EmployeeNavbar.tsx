@@ -53,7 +53,7 @@ export default function () {
           <li
             className='hover:text-white p-2 m-2 text-sm cursor-pointer transition duration-300 hover:bg-gray-700 rounded md:text-sm'
           >
-            <i className="fa-solid fa-print m-1"></i>My Devices
+            <i className="fa-solid fa-computer m-1"></i>My Devices
           </li>
 
           <li

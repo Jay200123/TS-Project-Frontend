@@ -19,10 +19,11 @@ export default function () {
   const { users, getAllUsers } = useUserStore()
   const { device, getOneDevice, updateDeviceById } = useDeviceStore()
 
-  const [selectBranch, setSelectedBranch] = useState(device?.owner?.branch._id)
+  const [selectBranch, setSelectedBranch] = useState(device?.owner?.branch?._id)
   const [selectDepartment, setSelectedDepartment] = useState(
-    device?.owner?.department._id
-  )
+    device?.owner?.department?._id
+  );
+
 
   useQuery({
     queryKey: ['branches'],
@@ -93,15 +94,7 @@ export default function () {
       }
     }
   })
-
-  const filteredDepartments = departments?.filter(
-    d => d?.branch?._id && selectBranch?.includes(d.branch._id)
-  )
-
-  const filteredUsers = users?.filter(
-    u => u?.department?._id && selectDepartment?.includes(u.department._id)
-  )
-
+  
   const randomImage =
     Array.isArray(device?.image) && device.image.length > 0
       ? device.image[Math.floor(Math.random() * device.image.length)]
@@ -113,13 +106,15 @@ export default function () {
         onSubmit={formik.handleSubmit}
         className='flex items-center justify-center p-4 m-4'
       >
-        <div className='flex flex-col max-w-3xl p-6 space-y-6 bg-white border border-gray-400 rounded-lg shadow-md md:flex-row md:space-y-0 md:space-x-6 overflow-hidden min-h-[24rem]'>
+        <div className='flex flex-col w-[900px] p-6 space-y-6 bg-white border border-gray-400 rounded-lg shadow-md md:flex-row md:space-y-0 md:space-x-6 overflow-hidden min-h-[24rem]'>
           <div className='hidden w-full md:w-1/2 md:block min-h-[20rem]'>
             <img
               className='object-cover max-w-sm max-h-sm rounded-l-lg'
               src={randomImage?.url}
               alt={randomImage?.originalname}
             />
+            <h5 className='font-bold text-[18px]'>Device Description:</h5>
+            <p className='text-[16px]'>{device?.description}</p>
           </div>
           <div className='flex flex-col w-full space-y-4 md:w-1/2'>
             <h2 className='text-2xl font-bold text-center text-gray-800 md:text-left'>
@@ -161,7 +156,7 @@ export default function () {
                   <option value='' disabled>
                     Select a Department
                   </option>
-                  {filteredDepartments?.map(d => (
+                  {departments?.map(d => (
                     <option key={d._id} value={d._id}>
                       {d.department_name}
                     </option>
@@ -184,7 +179,7 @@ export default function () {
                 <option value='' disabled>
                   Select a User
                 </option>
-                {filteredUsers?.map(u => (
+                {users?.map(u => (
                   <option key={u?._id} value={u?._id}>
                     {u?.fname} {u?.lname}
                   </option>

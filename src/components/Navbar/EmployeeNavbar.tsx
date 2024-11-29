@@ -14,12 +14,20 @@ export default function () {
     navigate('/login')
   }
 
+  const profile = ()=>{
+    navigate('/employee/profile')
+  }
+
   const signup = () => {
     navigate('/signup')
   }
 
   const devices = ()=>{
     navigate('/employee/device')
+  }
+
+  const ticket = ()=>{
+    navigate('/ticket/create')
   }
 
   const handleLogout = async () => {
@@ -49,6 +57,7 @@ export default function () {
       <div className={`m-2 p-2 ${isOpen ? 'block' : 'hidden'} md:block`}>
         <ul className='flex flex-row md:flex-row items-start md:items-center justify-start'>
           <li
+          onClick={ticket}
             className='hover:text-white p-2 m-2 text-sm cursor-pointer transition duration-300 hover:bg-gray-700 rounded md:text-sm'
           >
             <i className="fa-solid fa-ticket m-1"></i>Tickets
@@ -77,7 +86,7 @@ export default function () {
                 }`}
               >
                 <ul onClick={() => setIsDropdownOpen(false)}>
-                  <li className='text-white p-2 text-sm cursor-pointer hover:bg-gray-600'>
+                  <li onClick={profile} className='text-white p-2 text-sm cursor-pointer hover:bg-gray-600'>
                     <i className='fa-solid fa-circle-user m-1'></i>User Profile
                   </li>
                   <li

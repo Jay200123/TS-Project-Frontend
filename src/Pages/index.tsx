@@ -29,6 +29,7 @@ import DeviceTable from "./Device";
 import GetDeviceById from "./Device/getDeviceById";
 import CreateDevice from "./Device/createDevice";
 import EditDevice from "./Device/editDevice";
+import EmployeeDevice from "./EmployeeDevice";
 
 export {
   Home,
@@ -62,4 +63,5 @@ export {
   GetDeviceById,
   CreateDevice,
   EditDevice,
+  EmployeeDevice,
 };

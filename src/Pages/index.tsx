@@ -30,6 +30,7 @@ import GetDeviceById from "./Device/getDeviceById";
 import CreateDevice from "./Device/createDevice";
 import EditDevice from "./Device/editDevice";
 import EmployeeDevice from "./EmployeeDevice";
+import TicketForm from "./Ticket";  
 
 export {
   Home,
@@ -64,4 +65,5 @@ export {
   CreateDevice,
   EditDevice,
   EmployeeDevice,
+  TicketForm,
 };

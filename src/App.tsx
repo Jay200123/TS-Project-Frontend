@@ -34,13 +34,14 @@ import {
   DeviceTable,
   GetDeviceById,
   CreateDevice,
-  EditDevice
+  EditDevice,
+  EmployeeDevice
 } from './Pages'
 import { ProtectedRoute } from './components'
 import {
   HomeLayout,
   AdminLayout,
-  CustomerLayout,
+  EmployeeLayout,
   TechnicianLayout
 } from './layout'
 
@@ -59,7 +60,7 @@ function App () {
         </Route>
 
         {/* Customer Private Routes */}
-        <Route element={<CustomerLayout />}>
+        <Route element={<EmployeeLayout />}>
           <Route
             path='/employee/profile'
             index
@@ -76,6 +77,15 @@ function App () {
             element={
               <ProtectedRoute userRole={['Employee']}>
                 <EditUser />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path='/employee/device'
+            element={
+              <ProtectedRoute userRole={['Employee']}>
+                <EmployeeDevice />
               </ProtectedRoute>
             }
           />

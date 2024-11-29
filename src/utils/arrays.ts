@@ -23,4 +23,7 @@ const type = [
     'Return'
   ]
 
-  export { type, status };
+  const category = ['Hardware', 'Software', 'Network']
+
+
+  export { type, status, category };

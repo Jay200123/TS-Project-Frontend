@@ -5,7 +5,7 @@ export default function () {
     <>
       <main className='min-h-screen min-w-screen flex flex-col items-center justify-between'>
         <EmployeeNavbar />
-        <div>
+        <div className='h-full w-full'>
           <Outlet />
         </div>
         <Footer />

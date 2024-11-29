@@ -25,9 +25,13 @@ export default function () {
     device => device.owner?._id === user?._id
   )
 
+  if(devices.length === 0) {
+    <h3 className='text-center text-sm md:text-[18px]'>No Devices Found</h3>
+  }
+
   return (
     <>
-      {filteredDevices.map(d => (
+      {filteredDevices.map((d) => (
         <div key={d?._id} className='flex flex-col justify-evenly'>
           <div className='flex-col flex md:flex-row items-center justify-start p-1 m-4 sm:h-[300px] md:h-[250px] overflow-hidden rounded-md shadow-lg border border-gray'>
             <div className='w-1/4 flex flex-col items-center justify-center p-2 m-2'>

@@ -1,4 +1,7 @@
-import { useAuthenticationStore, useUserStore } from '../../state/store';
+import { 
+  useAuthenticationStore,
+  useUserStore,
+} from '../../state/store';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 

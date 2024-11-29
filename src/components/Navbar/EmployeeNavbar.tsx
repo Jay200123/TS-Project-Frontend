@@ -18,6 +18,10 @@ export default function () {
     navigate('/signup')
   }
 
+  const devices = ()=>{
+    navigate('/employee/device')
+  }
+
   const handleLogout = async () => {
     try {
       await logout()
@@ -51,6 +55,7 @@ export default function () {
           </li>
 
           <li
+          onClick={devices}
             className='hover:text-white p-2 m-2 text-sm cursor-pointer transition duration-300 hover:bg-gray-700 rounded md:text-sm'
           >
             <i className="fa-solid fa-computer m-1"></i>My Devices

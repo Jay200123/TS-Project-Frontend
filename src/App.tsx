@@ -35,7 +35,9 @@ import {
   GetDeviceById,
   CreateDevice,
   EditDevice,
-  EmployeeDevice
+  EmployeeDevice,
+  TicketForm,
+  CreateDeviceByEmployee
 } from './Pages'
 import { ProtectedRoute } from './components'
 import {
@@ -86,6 +88,22 @@ function App () {
             element={
               <ProtectedRoute userRole={['Employee']}>
                 <EmployeeDevice />
+              </ProtectedRoute>
+            }
+          />
+           <Route
+            path='/employee/create-device'
+            element={
+              <ProtectedRoute userRole={['Employee']}>
+                <CreateDeviceByEmployee />
+              </ProtectedRoute>
+            }
+          />
+            <Route
+            path='/ticket/create'
+            element={
+              <ProtectedRoute userRole={['Employee']}>
+                <TicketForm />
               </ProtectedRoute>
             }
           />

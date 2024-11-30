@@ -72,7 +72,7 @@ export default function () {
 
           <li
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            className='hover:text-white relative m-2 p-3 text-sm cursor-pointer transition duration-300 hover:bg-gray-700 rounded md:text-sm'
+            className='text-black hover:text-white relative m-2 p-3 text-sm cursor-pointer transition duration-300 hover:bg-gray-700 rounded md:text-sm'
           >
             <span>
               <i className='fa-solid fa-bars m-1'></i>Settings

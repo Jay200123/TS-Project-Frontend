@@ -5,3 +5,4 @@ export * from "./branch";
 export * from "./department";
 export * from "./position"; 
 export * from "./device";
+export * from "./ticket";

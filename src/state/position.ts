@@ -20,7 +20,7 @@ export const usePositionStore = create<PositionState>((set) => ({
 
   getOnePosition: async (id: string) => {
     const res = await api.get(
-      `${import.meta.env.VITE_API_URI}${PATH.DEPARTMENT_ID_ROUTE.replace(":id", id)}`
+      `${import.meta.env.VITE_API_URI}${PATH.POSITION_ID_ROUTE.replace(":id", id)}`
     );
 
     set({
@@ -50,7 +50,7 @@ export const usePositionStore = create<PositionState>((set) => ({
   },
   deletePositionById: async (id: string) => {
     const res = await api.delete(
-      `${import.meta.env.VITE_API_URI}${PATH.DEPARTMENT_ID_ROUTE.replace(":id", id)}`,
+      `${import.meta.env.VITE_API_URI}${PATH.POSITION_ID_ROUTE.replace(":id", id)}`,
     );
     set({ position: res.data.details, loading: false, error: null });
     return res.data.details;

@@ -30,8 +30,9 @@ import GetDeviceById from "./Device/getDeviceById";
 import CreateDevice from "./Device/createDevice";
 import EditDevice from "./Device/editDevice";
 import EmployeeDevice from "./EmployeeDevice";
-import TicketForm from "./Ticket";  
+import TicketForm from "./CreateTicket";  
 import CreateDeviceByEmployee from "./Device/createDeviceByEmployee";
+import TicketTable from "./Ticket";
 
 export {
   Home,
@@ -67,5 +68,6 @@ export {
   EditDevice,
   EmployeeDevice,
   TicketForm,
-  CreateDeviceByEmployee
+  CreateDeviceByEmployee,
+  TicketTable,
 };

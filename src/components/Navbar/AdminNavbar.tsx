@@ -51,6 +51,10 @@ export default function () {
     navigate('/devices')
   }
 
+  const tickets = () => { 
+    navigate('/tickets')
+  }
+
   const handleLogout = async () => {
     try {
       await logout()
@@ -62,7 +66,7 @@ export default function () {
   }
 
   return (
-    <nav className='w-full h-14 items-center flex justify-between shadow-sm shadow-slate-400 text-black'>
+    <nav className='flex items-center justify-between w-full text-black shadow-sm h-14 shadow-slate-400'>
       <div className='p-2 m-2'>
         <h3 className='text-lg'>IT Support</h3>
       </div>
@@ -108,37 +112,44 @@ export default function () {
                 >
                   <li
                     onClick={users}
-                    className='flex items-center gap-2 p-2 text-sm cursor-pointer hover:bg-gray-600 text-white'
+                    className='flex items-center gap-2 p-2 text-sm text-white cursor-pointer hover:bg-gray-600'
                   >
                     <i className='fa-solid fa-circle-user'></i> Users
                   </li>
 
                   <li
                     onClick={branches}
-                    className='flex items-center gap-2 p-2 text-sm cursor-pointer hover:bg-gray-600 text-white'
+                    className='flex items-center gap-2 p-2 text-sm text-white cursor-pointer hover:bg-gray-600'
                   >
                     <i className='fa-solid fa-code-branch'></i> Branch
                   </li>
 
                   <li
                     onClick={departments}
-                    className='flex items-center gap-2 p-2 text-sm cursor-pointer hover:bg-gray-600 text-white'
+                    className='flex items-center gap-2 p-2 text-sm text-white cursor-pointer hover:bg-gray-600'
                   >
                     <i className='fa-solid fa-building'></i> Department
                   </li>
 
                   <li
                     onClick={positions}
-                    className='flex items-center gap-2 p-2 text-sm cursor-pointer hover:bg-gray-600 text-white'
+                    className='flex items-center gap-2 p-2 text-sm text-white cursor-pointer hover:bg-gray-600'
                   >
                     <i className='fa-solid fa-location-dot'></i> Position
                   </li>
 
                   <li
                     onClick={devices}
-                    className='flex items-center gap-2 p-2 text-sm cursor-pointer hover:bg-gray-600 text-white'
+                    className='flex items-center gap-2 p-2 text-sm text-white cursor-pointer hover:bg-gray-600'
                   >
                     <i className="fa-solid fa-computer"></i> Devices
+                  </li>
+
+                  <li
+                    onClick={tickets}
+                    className='flex items-center gap-2 p-2 text-sm text-white cursor-pointer hover:bg-gray-600'
+                  >
+                    <i className="fa-solid fa-ticket"></i> Tickets
                   </li>
                 </ul>
               </div>
@@ -168,19 +179,19 @@ export default function () {
                 >
                   <li
                     onClick={profile}
-                    className='flex items-center gap-2 p-2 text-sm cursor-pointer hover:bg-gray-600 text-white'
+                    className='flex items-center gap-2 p-2 text-sm text-white cursor-pointer hover:bg-gray-600'
                   >
                     <i className='fa-solid fa-circle-user'></i> User Profile
                   </li>
                   <li
                     onClick={approve}
-                    className='flex items-center gap-2 p-2 text-sm cursor-pointer hover:bg-gray-600 text-white'
+                    className='flex items-center gap-2 p-2 text-sm text-white cursor-pointer hover:bg-gray-600'
                   >
                     <i className='fa-solid fa-circle-user'></i> Approve Users
                   </li>
                   <li
                     onClick={handleLogout}
-                    className='flex items-center gap-2 p-2 text-sm cursor-pointer hover:bg-gray-600 text-white'
+                    className='flex items-center gap-2 p-2 text-sm text-white cursor-pointer hover:bg-gray-600'
                   >
                     <i className='fa-solid fa-arrow-right-from-bracket'></i>{' '}
                     Sign Out

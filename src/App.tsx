@@ -37,7 +37,8 @@ import {
   EditDevice,
   EmployeeDevice,
   TicketForm,
-  CreateDeviceByEmployee
+  CreateDeviceByEmployee,
+  TicketTable
 } from './Pages'
 import { ProtectedRoute } from './components'
 import {
@@ -321,6 +322,14 @@ function App () {
                 <EditDevice />
               </ProtectedRoute>
             }
+          />
+          <Route
+           path="/tickets"
+           element={
+             <ProtectedRoute userRole={["Admin"]}>
+               <TicketTable />
+             </ProtectedRoute>
+           }
           />
         </Route>
       </Route>

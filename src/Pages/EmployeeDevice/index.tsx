@@ -4,8 +4,10 @@ import {
   useDeviceStore,
   useUserStore
 } from '../../state/store'
+import { useNavigate } from 'react-router-dom'
 
 export default function () {
+  const navigate = useNavigate()
   const { user: auth } = useAuthenticationStore()
   const { user, getOneUser } = useUserStore()
   const { devices, getAllDevices } = useDeviceStore()
@@ -25,14 +27,22 @@ export default function () {
     device => device.owner?._id === user?._id
   )
 
-  if(devices.length === 0) {
-    <h3 className='text-center text-sm md:text-[18px]'>No Devices Found</h3>
+  if (devices.length === 0) {
+    ;<h3 className='text-center text-sm md:text-[18px]'>No Devices Found</h3>
   }
 
   return (
-    <>
-      {filteredDevices.map((d) => (
-        <div key={d?._id} className='flex flex-col justify-evenly'>
+    <div className=' p-7'>
+      <div className='flex items-center justify-end m-2  top-1 right-1'>
+        <button
+          onClick={() => navigate('/employee/create-device')}
+          className='text-sm bg-gray-700 text-white p-[15px] rounded-md transition-all duration-500  hover:bg-white hover:text-black border border-gray-700'
+        >
+          Add New Device<i className='fa fa-plus ml-[2px]'></i>
+        </button>
+      </div>
+      {filteredDevices.map(d => (
+        <div key={d?._id} className='flex flex-col justify-evenly relative'>
           <div className='flex-col flex md:flex-row items-center justify-start p-1 m-4 sm:h-[300px] md:h-[250px] overflow-hidden rounded-md shadow-lg border border-gray'>
             <div className='w-1/4 flex flex-col items-center justify-center p-2 m-2'>
               <h3 className='font-bold text-sm md:text-lg'>
@@ -99,6 +109,6 @@ export default function () {
           </div>
         </div>
       ))}
-    </>
+    </div>
   )
 }

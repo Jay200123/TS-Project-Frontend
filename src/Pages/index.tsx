@@ -31,6 +31,7 @@ import CreateDevice from "./Device/createDevice";
 import EditDevice from "./Device/editDevice";
 import EmployeeDevice from "./EmployeeDevice";
 import TicketForm from "./Ticket";  
+import CreateDeviceByEmployee from "./Device/createDeviceByEmployee";
 
 export {
   Home,
@@ -66,4 +67,5 @@ export {
   EditDevice,
   EmployeeDevice,
   TicketForm,
+  CreateDeviceByEmployee
 };

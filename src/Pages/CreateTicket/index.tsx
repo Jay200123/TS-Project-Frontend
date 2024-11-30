@@ -1,13 +1,15 @@
-import { useAuthenticationStore, useDeviceStore } from '../../state/store'
+import { useAuthenticationStore, useDeviceStore, useTicketStore } from '../../state/store'
 import { useNavigate } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { useFormik } from 'formik'
 import { category } from '../../utils/arrays'
+import { toast } from 'react-toastify'
 
 export default function () {
   const navigate = useNavigate()
   const { user: auth } = useAuthenticationStore()
   const { devices, getOneDevice, getAllDevices } = useDeviceStore()
+  const { createTicket } = useTicketStore();
 
   useQuery({
     queryKey: ['devices'],
@@ -21,19 +23,25 @@ export default function () {
       description: '',
       image: []
     },
-    onSubmit: async values => {
+    onSubmit: async (values) => {
       const formData = new FormData()
       formData.append('device', values.device)
-      formData.append('category', values.category)
+      formData.append('category', values.category.toLowerCase())
       formData.append('description', values.description)
       values.image.forEach(file => {
         formData.append('image', file)
       })
-
-      // await createTicket(formData);
-      // navigate('/tickets');
+      try{
+        await createTicket(formData)
+        navigate('/employee/profile')
+        toast.success('Ticket submitted successfully')  
+      }catch(error){
+        toast.error('An error occurred while creating the ticket')	 
+      }
     }
   })
+
+  console.log(formik.values)
 
   const { data: device } = useQuery({
     queryKey: ['device', formik.values.device],
@@ -46,21 +54,21 @@ export default function () {
   )
 
   return (
-    <form className='flex items-center justify-center p-4 m-4'>
+    <form onSubmit={formik.handleSubmit} className='flex items-center justify-center p-4 m-4'>
       <div className='relative flex flex-col w-full max-w-5xl p-6 space-y-6 bg-white border border-gray-400 rounded-lg shadow-md md:flex-row md:space-y-0 md:space-x-6'>
-        <h2 className='absolute md:text-3xl font-bold text-center text-gray-800 md:text-left text-xl'>
+        <h2 className='absolute text-xl font-bold text-center text-gray-800 md:text-3xl md:text-left'>
           Submit a Ticket
         </h2>
-        <div className='hidden w-full md:w-1/2 md:block mr-12'>
-          <div className='flex flex-col h-full items-center justify-center'>
-            <h3 className='text-xl font-bold mt-1 underline'>Device Image</h3>
+        <div className='hidden w-full mr-12 md:w-1/2 md:block'>
+          <div className='flex flex-col items-center justify-center h-full'>
+            <h3 className='mt-1 text-xl font-bold underline'>Device Image</h3>
             <img
-              className='h-60 w-60 object-cover border mt-4 border-gray-600 rounded-md shadow-lg p-2'
+              className='object-cover p-2 mt-4 border border-gray-600 rounded-md shadow-lg h-60 w-60'
               src={device?.image?.[0]?.url || 'default-placeholder.jpg'}
               alt={device?.image?.[0]?.originalname || 'Select a device first'}
             />
-            <h3 className='font-bold text-lg mt-2'>Device Description</h3>
-            <p className='text-sm mt-1 p-2'>
+            <h3 className='mt-2 text-lg font-bold'>Device Description</h3>
+            <p className='p-2 mt-1 text-sm'>
               {device?.description
                 ? device?.description
                 : 'Select a device first'}

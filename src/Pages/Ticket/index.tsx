@@ -48,7 +48,7 @@ export default function () {
   return (
     <form className='flex items-center justify-center p-4 m-4'>
       <div className='relative flex flex-col w-full max-w-5xl p-6 space-y-6 bg-white border border-gray-400 rounded-lg shadow-md md:flex-row md:space-y-0 md:space-x-6'>
-        <h2 className='absolute text-3xl font-bold text-center text-gray-800 md:text-left'>
+        <h2 className='absolute md:text-3xl font-bold text-center text-gray-800 md:text-left text-xl'>
           Submit a Ticket
         </h2>
         <div className='hidden w-full md:w-1/2 md:block mr-12'>

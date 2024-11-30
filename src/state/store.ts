@@ -4,6 +4,7 @@ import { useBranchStore } from "./branch";
 import { useDepartmentStore } from "./department";
 import { usePositionStore } from "./position";
 import { useDeviceStore } from "./device";
+import { useTicketStore } from "./ticket";
 
 export {
   useAuthenticationStore,
@@ -11,5 +12,6 @@ export {
   useBranchStore,
   useDepartmentStore,
   usePositionStore,
-  useDeviceStore
+  useDeviceStore,
+  useTicketStore,
 };

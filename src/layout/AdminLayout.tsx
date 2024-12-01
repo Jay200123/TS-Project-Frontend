@@ -5,7 +5,7 @@ export default function () {
     <>
       <main className='flex flex-col items-center justify-between min-w-full min-h-screen'>
         <AdminNavbar />
-        <div className='max-w-full max-h-full'>
+        <div className='w-full h-full'>
           <Outlet />
         </div>
         <Footer />

@@ -2,7 +2,7 @@ import { useTicketStore } from "../../state/store";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import {  FaTrash, FaPenAlt } from "react-icons/fa";
+import { FaEye, FaTrash, FaPenAlt } from "react-icons/fa";
 import DataTable, { TableColumn } from "react-data-table-component";
 import { tableCustomStyles } from "../../utils/tableCustomStyles";
 import { Ticket } from "../../interface";
@@ -94,6 +94,10 @@ export default function () {
       name: 'Actions',
       cell: row => (
         <div className='flex items-center text-center'>
+          <FaEye
+            className='mr-2 text-xl text-green-300'
+            onClick={() => navigate(`/ticket/${row._id}`)}
+          />
           <FaPenAlt
             className='mr-2 text-xl text-blue-300'
             onClick={() => navigate(`/ticket/assign/${row._id}`)}

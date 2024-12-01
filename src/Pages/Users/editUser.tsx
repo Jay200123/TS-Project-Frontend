@@ -75,7 +75,7 @@ export default function () {
         if (res.role === 'Admin') {
           navigate('/admin-profile')
         } else if (res.role === 'Technician') {
-          navigate('/technician-profile')
+          navigate('/technician/profile')
         } else {
           navigate('/employee-profile')
         }

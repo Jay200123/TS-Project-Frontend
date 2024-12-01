@@ -35,6 +35,7 @@ import CreateDeviceByEmployee from "./Device/createDeviceByEmployee";
 import TicketTable from "./Ticket";
 import AssignTicket from "./Ticket/assignTicket";
 import TechnicianTickets from "./TechnicianTicket";
+import GetTicketById from "./Ticket/getTicketById";
 
 export {
   Home,
@@ -74,4 +75,5 @@ export {
   TicketTable,
   AssignTicket,
   TechnicianTickets,
+  GetTicketById,
 };

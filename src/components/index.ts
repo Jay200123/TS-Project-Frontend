@@ -8,6 +8,7 @@ import RegisterImage from "./Image/RegisterImage";
 import TechnicianImage from "./Image/TechnicianImage";
 import EmployeeImage from "./Image/EmployeeImage";
 import LoginImage from "./Image/LoginImage";
+import TechnicianNavbar from "./Navbar/TechnicianNavbar";
 
 export {
     Navbar,
@@ -19,5 +20,6 @@ export {
     TechnicianImage,
     EmployeeImage,
     LoginImage,
+    TechnicianNavbar,
     ProtectedRoute,
 }

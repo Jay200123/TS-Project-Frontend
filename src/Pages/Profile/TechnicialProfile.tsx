@@ -38,7 +38,7 @@ export default function () {
         </div>
         <div className='flex flex-col w-full space-y-4 md:w-1/2'>
           <h2 className='text-2xl font-bold text-center text-gray-800 md:text-left'>
-            Customer Profile
+            Technician Profile
           </h2>
           <div className='flex flex-col'>
             <label className='mb-1 text-sm font-medium text-gray-700'>

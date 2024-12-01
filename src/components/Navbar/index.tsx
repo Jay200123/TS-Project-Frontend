@@ -26,7 +26,7 @@ export default function () {
     if (user?.role === 'Admin') {
       navigate('/admin-profile')
     } else if (user?.role === 'Technician') {
-      navigate('/technician-profile')
+      navigate('/technician/profile')
     } else {
       navigate('/employee-profile')
     }

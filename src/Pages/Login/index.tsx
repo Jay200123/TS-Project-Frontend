@@ -29,8 +29,14 @@ export default function () {
 
       //means the user registration is approve by th admin 
       if (res.isAuthorized) {
-        toast.success('Login successful')
-        res.role === 'Admin' ? navigate('/dashboard') : navigate('/employee/profile');
+        toast.success('Login Successful') 
+        if(res.role === "Admin"){
+          navigate('/dashboard')    
+        }else if (res.role === "Technician"){  
+          navigate('/technician/profile')
+        }else {
+          navigate('/employee/profile')
+        }
       }
     }
   })

@@ -22,4 +22,5 @@ export const PATH = {
     TICKETS_ROUTE:'/tickets',
     TICKET_ID_ROUTE:'/ticket/:id',
     EDIT_TICKET_ROUTE:'/ticket/edit/:id',
+    ASSIGN_TICKET_ROUTE:'/ticket/assign/:id',   
 }

@@ -7,10 +7,12 @@ import DataTable, { TableColumn } from "react-data-table-component";
 import { tableCustomStyles } from "../../utils/tableCustomStyles";
 import { Ticket } from "../../interface";
 import FadeLoader from "react-spinners/FadeLoader"; 
+import { useState } from "react";
 
 export default function () {
   const navigate = useNavigate();
   const { tickets, loading, getAllTickets, deleteTicketById } = useTicketStore();
+  const [setTicket, setSelectedTicket] = useState(""); 
 
   useQuery({
     queryKey: ["tickets"],
@@ -23,6 +25,8 @@ export default function () {
       toast.success("Ticket Deleted Successfully");
     }
   }
+
+  const filteredTickets = tickets.filter((ticket) => ticket._id.includes(setTicket));   
 
   const columns: TableColumn<Ticket>[] = [
     {
@@ -120,10 +124,18 @@ export default function () {
       ) : (
         <div>
           <div className="max-w-full p-4 overflow-hidden bg-transparent rounded-lg sm:p-6 lg:p-8 sm:max-w-6xl">
+          <div className="flex items-center justify-end">
+            <input 
+            type="text"
+            className="w-1/4 p-1 mb-4 border border-gray-300 rounded-lg placeholder:text-black"  
+            onChange={(e)=> setSelectedTicket(e.target.value)}
+            placeholder="Find Ticket by ID (Enter Ticket ID)"
+            />
+          </div>
             <DataTable
               title="Ticket Records"
               columns={columns}
-              data={tickets}
+              data={filteredTickets}
               pagination
               highlightOnHover
               pointerOnHover

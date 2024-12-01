@@ -25,12 +25,17 @@ export default function () {
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      assignee: ticket?.assignee || ''
+      assignee: ticket?.assignee?._id || '',
+      level: ticket?.level || '',
+      status: ticket?.status || ''
     },
 
     onSubmit: async values => {
       const formData = new FormData()
-      formData.append('assignee', values.assignee.toString())
+      formData.append('assignee', values.assignee)
+      formData.append('level', values.level)
+      formData.append('status', values.status)
+
       try {
         await assignTicketById(id!, formData)
         toast.success('Ticket Assigned Successfully')
@@ -49,8 +54,11 @@ export default function () {
     u => u?.role === 'Technician' && u?.isAuthorized === true
   )
 
-  const selectedUser = users?.find(u => u?._id === formik.values.assignee);
-  console.log(selectedUser);
+  const selectedUser = users?.find(u => u?._id === formik.values.assignee)
+
+  const level = ['urgent', 'priority', 'non-urgent']
+
+  const status = ['pending', 'resolved', 'in-progress', 'closed']
 
   return (
     <>
@@ -66,8 +74,8 @@ export default function () {
             <i className='fa-solid fa-arrow-left'></i>
           </h3>
           <div className='hidden p-2 w-full mr-12 md:w-1/2 md:block'>
-          <Image />
-          <div className='flex flex-col'>
+            <Image />
+            <div className='flex flex-col'>
               <label className='mb-1 text-sm font-medium text-gray-700'>
                 <i className='fa-solid fa-code-branch'></i> Technician
               </label>
@@ -92,29 +100,44 @@ export default function () {
             <div className='mt-1 flex flex-col text-left'>
               <h3 className='font-bold'>Technician Info</h3>
               <div className='flex justify-center items-center rounded-full'>
-              {selectedUser && selectedUser?.image?.length > 1 ? (
-                <img
-                  className="w-[130px] h-[130px] md:w-[180px] md:h-[180px] shadow-md"
-                  src={
-                    selectedUser?.image[Math.floor(Math.random() * selectedUser?.image.length)]?.url
-                  }
-                  alt="test image"
-                />
-              ) : (
-                <img
-                  className="rounded-full md:w-56 md:h-56"
-                  src={selectedUser?.image[0]?.url || ""}
-                  alt="image" 
-                />
-              )}
+                {selectedUser && selectedUser?.image?.length > 1 ? (
+                  <img
+                    className='w-[130px] h-[130px] md:w-[180px] md:h-[180px] shadow-md'
+                    src={
+                      selectedUser?.image[
+                        Math.floor(Math.random() * selectedUser?.image.length)
+                      ]?.url
+                    }
+                    alt='test image'
+                  />
+                ) : (
+                  <img
+                    className='rounded-full md:w-56 md:h-56'
+                    src={selectedUser?.image[0]?.url || ''}
+                    alt='image'
+                  />
+                )}
               </div>
 
-              <p className='text-md mt-1 font-bold'>Technician Name: <span className='font-normal'>{selectedUser?.fname} {selectedUser?.lname}</span></p>
-              <p className='text-md mt-1 font-bold'>Department: <span className='font-normal'>{selectedUser?.department?.department_name}</span></p>
-              <p className='text-md mt-1 font-bold'>Position: <span className='font-normal'>{selectedUser?.position?.position_name}</span></p>
+              <p className='text-md mt-1 font-bold'>
+                Technician Name:{' '}
+                <span className='font-normal'>
+                  {selectedUser?.fname} {selectedUser?.lname}
+                </span>
+              </p>
+              <p className='text-md mt-1 font-bold'>
+                Department:{' '}
+                <span className='font-normal'>
+                  {selectedUser?.department?.department_name}
+                </span>
+              </p>
+              <p className='text-md mt-1 font-bold'>
+                Position:{' '}
+                <span className='font-normal'>
+                  {selectedUser?.position?.position_name}
+                </span>
+              </p>
             </div>
-
-
           </div>
           <div className='flex flex-col w-full space-y-4 md:w-1/2'>
             <h2 className='text-2xl font-bold text-center text-gray-800 md:text-left'>
@@ -194,26 +217,46 @@ export default function () {
               <label className='mb-1 text-sm font-medium text-gray-700'>
                 <i className='mr-1 fa-solid fa-phone'></i> Ticket Level
               </label>
-              <input
-                type='text'
-                name='date_purchased'
-                readOnly
-                placeholder={ticket?.level}
-                className='p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
-              />
+              <select
+                name='level'
+                id='level'
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                value={formik?.values.level}
+                className='w-full text-base border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[2.5rem]'
+              >
+                <option value='' disabled>
+                  {ticket?.level}
+                </option>
+                {level?.map((l, index) => (
+                  <option key={index} value={l}>
+                    {l}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div className='flex flex-col'>
               <label className='mb-1 text-sm font-medium text-gray-700'>
-                <i className='mr-1 fa-solid fa-phone'></i> Ticket STATUS
+                <i className='mr-1 fa-solid fa-phone'></i> Ticket Level
               </label>
-              <input
-                type='text'
-                name='date_purchased'
-                readOnly
-                placeholder={ticket?.status}
-                className='p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
-              />
+              <select
+                name='status'
+                id='status'
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                value={formik?.values.status}
+                className='w-full text-base border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[2.5rem]'
+              >
+                <option value='' disabled>
+                  {ticket?.status}
+                </option>
+                {status?.map((s, index) => (
+                  <option key={index} value={s}>
+                    {s}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div className='flex flex-col mt-2 md:hidden'>
@@ -225,7 +268,7 @@ export default function () {
                 id='assignee'
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
-                value={formik?.values.assignee.toString()}
+                value={formik?.values.assignee}
                 className='w-full text-base border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[2.5rem]'
               >
                 <option value='' disabled>

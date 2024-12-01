@@ -72,4 +72,9 @@ export const useTicketStore = create<TicketState>((set) => ({
     );
     set({ ticket: res.data.details, loading: false, error: "" });
   },
+
+  assignTicketById: async (id: string, formData: FormData) => {
+    const res = await api.patch(`${import.meta.env.VITE_API_URI}${PATH.ASSIGN_TICKET_ROUTE.replace(":id", id)}`, formData);
+    set({ ticket: res.data.details, loading: false, error: "" });
+  },
 }));

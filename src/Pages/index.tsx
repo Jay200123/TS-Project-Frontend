@@ -33,6 +33,7 @@ import EmployeeDevice from "./EmployeeDevice";
 import TicketForm from "./CreateTicket";  
 import CreateDeviceByEmployee from "./Device/createDeviceByEmployee";
 import TicketTable from "./Ticket";
+import AssignTicket from "./Ticket/assignTicket";
 
 export {
   Home,
@@ -70,4 +71,5 @@ export {
   TicketForm,
   CreateDeviceByEmployee,
   TicketTable,
+  AssignTicket,
 };

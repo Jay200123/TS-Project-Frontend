@@ -39,7 +39,8 @@ import {
   TicketForm,
   CreateDeviceByEmployee,
   TicketTable,
-  AssignTicket
+  AssignTicket,
+  TechnicianTickets
 } from './Pages'
 import { ProtectedRoute } from './components'
 import {
@@ -93,7 +94,7 @@ function App () {
               </ProtectedRoute>
             }
           />
-           <Route
+          <Route
             path='/employee/create-device'
             element={
               <ProtectedRoute userRole={['Employee']}>
@@ -101,7 +102,7 @@ function App () {
               </ProtectedRoute>
             }
           />
-            <Route
+          <Route
             path='/ticket/create'
             element={
               <ProtectedRoute userRole={['Employee']}>
@@ -126,6 +127,15 @@ function App () {
             element={
               <ProtectedRoute userRole={['Technician']}>
                 <EditUser />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path='/technician/tickets'
+            element={
+              <ProtectedRoute userRole={['Technician']}>
+                <TechnicianTickets />
               </ProtectedRoute>
             }
           />
@@ -325,21 +335,21 @@ function App () {
             }
           />
           <Route
-           path="/tickets"
-           element={
-             <ProtectedRoute userRole={["Admin"]}>
-               <TicketTable />
-             </ProtectedRoute>
-           }
+            path='/tickets'
+            element={
+              <ProtectedRoute userRole={['Admin']}>
+                <TicketTable />
+              </ProtectedRoute>
+            }
           />
           <Route
-           path="/ticket/assign/:id"
-           element={
-             <ProtectedRoute userRole={["Admin"]}>
-               <AssignTicket />
-             </ProtectedRoute>
-           }/>
-           
+            path='/ticket/assign/:id'
+            element={
+              <ProtectedRoute userRole={['Admin']}>
+                <AssignTicket />
+              </ProtectedRoute>
+            }
+          />
         </Route>
       </Route>
     )

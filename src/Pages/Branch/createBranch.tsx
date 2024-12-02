@@ -75,7 +75,7 @@ export default function () {
 
             <div className='flex flex-col'>
               <label className='mb-1 text-sm font-medium text-gray-700'>
-                <i className='mr-1 fa-solid fa-phone'></i> Branch Address
+              <i className="fa-solid fa-address-book"></i> Branch Address
               </label>
               <input
                 type='text'
@@ -105,7 +105,7 @@ export default function () {
 
             <div className='flex flex-col'>
               <label className='mb-1 text-sm font-medium text-gray-700'>
-                <i className='mr-1 fa-solid fa-phone'></i> Branch Email
+              <i className="fa-solid fa-envelope"></i> Branch Email
               </label>
               <input
                 type='text'

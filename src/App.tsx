@@ -111,6 +111,14 @@ function App () {
               </ProtectedRoute>
             }
           />
+             <Route
+            path='/employee/ticket/:id'
+            element={
+              <ProtectedRoute userRole={['Employee']}>
+                <GetTicketById />
+              </ProtectedRoute>
+            }
+          />
         </Route>
 
         {/* Technician Private Routes */}
@@ -137,6 +145,15 @@ function App () {
             element={
               <ProtectedRoute userRole={['Technician']}>
                 <TechnicianTickets />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path='/technician/ticket/:id'
+            element={
+              <ProtectedRoute userRole={['Technician']}>
+                <GetTicketById />
               </ProtectedRoute>
             }
           />

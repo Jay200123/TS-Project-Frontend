@@ -90,7 +90,7 @@ export default function () {
 
           <div className='flex flex-col'>
             <label className='mb-1 text-sm font-medium text-gray-700'>
-              <i className='mr-1 fa-solid fa-user'></i> Last Name
+            <i className="fa-solid fa-building"></i> Department Name
             </label>
             <input
               type='text'

@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { useAuthenticationStore, useTicketStore } from '../../state/store'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 export default function () {
   const navigate = useNavigate()
@@ -44,15 +45,16 @@ export default function () {
                 />
               )}
               <button
-              onClick={()=>navigate(`/technician/ticket/${t?._id}`)}
-               className='bg-green-500 p-1 text-xs md:p-3 rounded-md text-sm text-white md:text-lg transition-all duration-500 hover:bg-green-800'>
+                onClick={() => navigate(`/technician/ticket/${t?._id}`)}
+                className='bg-green-500 p-1 md:p-3 rounded-md text-sm text-white md:text-lg transition-all duration-500 hover:bg-green-800'
+              >
                 More Details
               </button>
             </div>
             <div className='w-9/12 p-1'>
               <div className='flex items-center justify-between'>
                 <h1 className='font-bold text-[14px] md:text-[18px] m-1'>
-                  Type:{' '}
+                  Device:{' '}
                   <span className='text-[14px] md:text-[18px] font-medium'>
                     {t?.device?.type}
                   </span>
@@ -80,7 +82,13 @@ export default function () {
               <h3 className='font-bold text-[12px] md:text-[16px] mb-1'>
                 {t?.category[0]?.toUpperCase() + t?.category.slice(1)} Issue
               </h3>
-              <h3 className='font-bold text-[12px] md:text-[16px] mb-1'>
+              <h3
+                className={`underline font-bold text-[12px] md:text-[18px] mb-1 ${
+                  t?.level === 'priority' || t?.level === 'urgent'
+                    ? 'text-red-500'
+                    : 'text-green-500'
+                }`}
+              >
                 {t?.level[0]?.toUpperCase() + t?.level.slice(1)}
               </h3>
               <h3 className='font-bold text-[12px] md:text-[17px] m-1'>
@@ -128,9 +136,25 @@ export default function () {
                     {t?.device?.owner?.department?.department_name}
                   </span>
                 </p>
-                <button className='p-1 md:p-2 bg-gray-700 text-white text-sm md:text-lg rounded-md border border-gray-700 transition-all duration-500 hover:bg-white hover:text-black'>
-                  Update Ticket
-                </button>
+                {t?.status === 'resolved' ? (
+                  <button
+                    onClick={() =>
+                     toast.error('Ticket is already resolved')
+                    }
+                    className={` p-1 md:p-2 bg-gray-700 text-white text-sm md:text-lg rounded-md border border-gray-700 transition-all duration-500 hover:bg-white hover:text-black`}
+                  >
+                    Update Ticket
+                  </button>
+                ) : (
+                  <button
+                    onClick={() =>
+                      navigate(`/technician/ticket/edit/${t?._id}`)
+                    }
+                    className={`p-1 md:p-2 bg-gray-700 text-white text-sm md:text-lg rounded-md border border-gray-700 transition-all duration-500 hover:bg-white hover:text-black`}
+                  >
+                    Update Ticket
+                  </button>
+                )}
               </div>
             </div>
           </div>

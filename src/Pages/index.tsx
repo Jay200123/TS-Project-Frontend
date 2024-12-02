@@ -29,13 +29,14 @@ import DeviceTable from "./Device";
 import GetDeviceById from "./Device/getDeviceById";
 import CreateDevice from "./Device/createDevice";
 import EditDevice from "./Device/editDevice";
-import EmployeeDevice from "./EmployeeDevice";
+import UserDevices from "./UserDevices";
 import TicketForm from "./CreateTicket";  
-import CreateDeviceByEmployee from "./Device/createDeviceByEmployee";
+import CreateDeviceByUsers from "./Device/createDeviceByEmployee";
 import TicketTable from "./Ticket";
 import AssignTicket from "./Ticket/assignTicket";
 import TechnicianTickets from "./TechnicianTicket";
 import GetTicketById from "./Ticket/getTicketById";
+import EditTicketByTechnician from "./Ticket/editTicketByTechnician";
 
 export {
   Home,
@@ -69,11 +70,12 @@ export {
   GetDeviceById,
   CreateDevice,
   EditDevice,
-  EmployeeDevice,
+  UserDevices,
   TicketForm,
-  CreateDeviceByEmployee,
+  CreateDeviceByUsers,
   TicketTable,
   AssignTicket,
   TechnicianTickets,
   GetTicketById,
+  EditTicketByTechnician,
 };

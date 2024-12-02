@@ -16,6 +16,7 @@ interface Ticket {
   category: Category;
   level: Level;
   assignee: User;
+  findings: string;
   image: Image[];
 }
 

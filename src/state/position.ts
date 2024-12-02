@@ -40,7 +40,7 @@ export const usePositionStore = create<PositionState>((set) => ({
     return res.data.details;
   },
   updatePositionById: async (id: string, formData: FormData) => {
-    const res = await api.patch(
+    const res = await api.put(
       `${import.meta.env.VITE_API_URI}${PATH.EDIT_POSITION_ROUTE.replace(":id", id)}`,
       formData);
 

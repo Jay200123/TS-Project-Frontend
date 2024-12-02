@@ -95,7 +95,7 @@ export default function () {
 
           <div className='flex flex-col'>
             <label className='mb-1 text-sm font-medium text-gray-700'>
-              <i className='fa-solid fa-code-branch'></i> Department
+            <i className="fa-solid fa-building"></i> Department
             </label>
             <select
               name='department'
@@ -117,7 +117,7 @@ export default function () {
 
           <div className='flex flex-col'>
             <label className='mb-1 text-sm font-medium text-gray-700'>
-              <i className='mr-1 fa-solid fa-user'></i> Position Name
+            <i className="fa-solid fa-user"></i> Position Name
             </label>
             <input
               type='text'
@@ -132,7 +132,7 @@ export default function () {
 
           <div className='flex flex-col'>
             <label className='mb-1 text-sm font-medium text-gray-700'>
-              <i className='mr-1 fa-solid fa-phone'></i> Department Description
+            <i className="fa-solid fa-pencil"></i> Department Description
             </label>
             <textarea
               id='description'

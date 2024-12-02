@@ -35,13 +35,14 @@ import {
   GetDeviceById,
   CreateDevice,
   EditDevice,
-  EmployeeDevice,
+  UserDevices,
   TicketForm,
-  CreateDeviceByEmployee,
+  CreateDeviceByUsers,
   TicketTable,
   AssignTicket,
   TechnicianTickets,
-  GetTicketById
+  GetTicketById,
+  EditTicketByTechnician
 } from './Pages'
 import { ProtectedRoute } from './components'
 import {
@@ -91,7 +92,7 @@ function App () {
             path='/employee/device'
             element={
               <ProtectedRoute userRole={['Employee']}>
-                <EmployeeDevice />
+                <UserDevices />
               </ProtectedRoute>
             }
           />
@@ -99,7 +100,7 @@ function App () {
             path='/employee/create-device'
             element={
               <ProtectedRoute userRole={['Employee']}>
-                <CreateDeviceByEmployee />
+                <CreateDeviceByUsers />
               </ProtectedRoute>
             }
           />
@@ -111,7 +112,7 @@ function App () {
               </ProtectedRoute>
             }
           />
-             <Route
+          <Route
             path='/employee/ticket/:id'
             element={
               <ProtectedRoute userRole={['Employee']}>
@@ -154,6 +155,31 @@ function App () {
             element={
               <ProtectedRoute userRole={['Technician']}>
                 <GetTicketById />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/technician/ticket/edit/:id'
+            element={
+              <ProtectedRoute userRole={['Technician']}>
+                <EditTicketByTechnician />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/technician/devices'
+            element={
+              <ProtectedRoute userRole={['Technician']}>
+                <UserDevices />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path='/technician/create-device'
+            element={
+              <ProtectedRoute userRole={['Technician']}>
+                <CreateDeviceByUsers />
               </ProtectedRoute>
             }
           />

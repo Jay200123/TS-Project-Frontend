@@ -39,7 +39,7 @@ export default function () {
 
             <div className="flex flex-col">
               <label className="mb-1 text-sm font-medium text-gray-700">
-                <i className="mr-1 fa-solid fa-user"></i> User
+              <i className="fa-solid fa-computer"></i> Device  
               </label>
               <input
                 type="text"
@@ -52,7 +52,7 @@ export default function () {
 
             <div className="flex flex-col">
               <label className="mb-1 text-sm font-medium text-gray-700">
-                <i className="mr-1 fa-solid fa-user"></i> Description
+              <i className="fa-solid fa-pencil"></i> Description
               </label>
               <textarea
                 name="description"
@@ -64,7 +64,7 @@ export default function () {
 
             <div className="flex flex-col">
               <label className="mb-1 text-sm font-medium text-gray-700">
-                <i className="mr-1 fa-solid fa-phone"></i> Date Requested
+              <i className="fa-solid fa-calendar"></i> Date Requested
               </label>
               <input
                 type="text"
@@ -77,7 +77,7 @@ export default function () {
 
             <div className="flex flex-col">
               <label className="mb-1 text-sm font-medium text-gray-700">
-                <i className="mr-1 fa-solid fa-phone"></i> Date Purchased
+              <i className="fa-solid fa-calendar"></i> Date Purchased
               </label>
               <input
                 type="text"
@@ -89,7 +89,7 @@ export default function () {
             </div>
             <div className="flex flex-col">
               <label className="mb-1 text-sm font-medium text-gray-700">
-                <i className="mr-1 fa-solid fa-phone"></i> Device Status
+              <i className="fa-solid fa-circle-info"></i> Device Status
               </label>
               <input
                 type="text"

@@ -1,7 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
 import { useAuthenticationStore, useTicketStore } from '../../state/store'
+import { useNavigate } from 'react-router-dom'
 
 export default function () {
+  const navigate = useNavigate()
   const { user: auth } = useAuthenticationStore()
   const { tickets, getAllTickets } = useTicketStore()
 
@@ -41,7 +43,9 @@ export default function () {
                   alt='image'
                 />
               )}
-              <button className='bg-green-500 p-3 rounded-md text-sm text-white md:text-lg transition-all duration-500 hover:bg-green-800'>
+              <button
+              onClick={()=>navigate(`/technician/ticket/${t?._id}`)}
+               className='bg-green-500 p-1 text-xs md:p-3 rounded-md text-sm text-white md:text-lg transition-all duration-500 hover:bg-green-800'>
                 More Details
               </button>
             </div>
@@ -87,7 +91,7 @@ export default function () {
                 className='placeholder:text-black w-full h-20 p-1 text-[12px] md:text-[16px] border border-gray rounded-md'
                 placeholder={t?.description}
               />
-              <div className='flex items-center justify-between'>
+              <div className='flex flex-col md:flex-row items-center justify-between'>
                 <p className='font-bold text-[12px] md:text-[17px]'>
                   Date Submitted:
                   <span className='underline font-medium text-[10px] md:text-[16px] m-1'>
@@ -124,7 +128,7 @@ export default function () {
                     {t?.device?.owner?.department?.department_name}
                   </span>
                 </p>
-                <button className='p-2 bg-gray-700 text-white text-sm md:text-lg rounded-md border border-gray-700 transition-all duration-500 hover:bg-white hover:text-black'>
+                <button className='p-1 md:p-2 bg-gray-700 text-white text-sm md:text-lg rounded-md border border-gray-700 transition-all duration-500 hover:bg-white hover:text-black'>
                   Update Ticket
                 </button>
               </div>

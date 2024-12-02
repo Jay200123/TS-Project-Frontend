@@ -19,6 +19,7 @@ export const PATH = {
     POSITIONS_ROUTES:'/positions',  
     POSITION_ID_ROUTE:'/position/:id',
     EDIT_POSITION_ROUTE:'/position/edit/:id',
+    
     TICKETS_ROUTE:'/tickets',
     TICKET_ID_ROUTE:'/ticket/:id',
     EDIT_TICKET_ROUTE:'/ticket/edit/:id',

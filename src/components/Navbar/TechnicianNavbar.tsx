@@ -22,6 +22,10 @@ export default function () {
     navigate('/technician/tickets')
   }
 
+  const devices = ()=>{
+    navigate('/technician/devices')
+  }
+
   const handleProfile = () => {
     if (user?.role === 'Admin') {
       navigate('/admin-profile')
@@ -64,7 +68,7 @@ export default function () {
           >
             <i className='m-1 fas fa-home'></i>My Tickets
           </li>
-          <li className='p-2 m-2 text-sm text-gray-700 transition duration-500 rounded cursor-pointer focus:outline-none hover:bg-gray-700 hover:text-white md:text-sm'>
+          <li onClick={devices} className='p-2 m-2 text-sm text-gray-700 transition duration-500 rounded cursor-pointer focus:outline-none hover:bg-gray-700 hover:text-white md:text-sm'>
             <i className='m-1 fas fa-info-circle'></i> Owned Device
           </li>
           <li

@@ -73,7 +73,16 @@ export default function () {
           >
             <i className='fa-solid fa-arrow-left'></i>
           </h3>
-          <div className='hidden p-2 w-full mr-12 md:w-1/2 md:block'>
+          <div className='relative hidden p-2 w-full mr-12 md:w-1/2 md:block'>
+            <div className='absolute font-bold text-lg bottom-1 left-1'>
+              <h3>
+                Submitted by:
+                <span>
+                  {ticket?.device?.owner?.fname} {ticket?.device?.owner?.lname}
+                </span>
+              </h3>
+              <p>{ticket?.device?.owner?.department?.department_name}</p>
+            </div>
             <Image />
             <div className='flex flex-col'>
               <label className='mb-1 text-sm font-medium text-gray-700'>
@@ -141,7 +150,7 @@ export default function () {
           </div>
           <div className='flex flex-col w-full space-y-4 md:w-1/2'>
             <h2 className='text-2xl font-bold text-center text-gray-800 md:text-left'>
-              Ticket Details
+              Assign Technician
             </h2>
 
             <div className='flex flex-col'>

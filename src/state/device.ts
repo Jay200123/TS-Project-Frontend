@@ -46,7 +46,7 @@ export const useDeviceStore = create<DeviceState>((set) => ({
     },
 
     updateDeviceById: async (id: string, formData: FormData) => {
-        const res = await api.patch(
+        const res = await api.put(
             `${import.meta.env.VITE_API_URI}${PATH.EDIT_DEVICE_ROUTE.replace(":id", id)}`,
             formData,
             {

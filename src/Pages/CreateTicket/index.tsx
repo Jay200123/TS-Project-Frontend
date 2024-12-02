@@ -1,4 +1,8 @@
-import { useAuthenticationStore, useDeviceStore, useTicketStore } from '../../state/store'
+import {
+  useAuthenticationStore,
+  useDeviceStore,
+  useTicketStore
+} from '../../state/store'
 import { useNavigate } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { useFormik } from 'formik'
@@ -9,7 +13,7 @@ export default function () {
   const navigate = useNavigate()
   const { user: auth } = useAuthenticationStore()
   const { devices, getOneDevice, getAllDevices } = useDeviceStore()
-  const { createTicket } = useTicketStore();
+  const { createTicket } = useTicketStore()
 
   useQuery({
     queryKey: ['devices'],
@@ -23,7 +27,7 @@ export default function () {
       description: '',
       image: []
     },
-    onSubmit: async (values) => {
+    onSubmit: async values => {
       const formData = new FormData()
       formData.append('device', values.device)
       formData.append('category', values.category.toLowerCase())
@@ -31,17 +35,17 @@ export default function () {
       values.image.forEach(file => {
         formData.append('image', file)
       })
-      try{
+      try {
         await createTicket(formData)
-        navigate('/employee/profile')
-        toast.success('Ticket submitted successfully')  
-      }catch(error){
-        toast.error('An error occurred while creating the ticket')	 
+        auth?.role === 'employee'
+          ? navigate('/employee/profile')
+          : navigate('/technician/profile')
+        toast.success('Ticket submitted successfully')
+      } catch (error) {
+        toast.error('An error occurred while creating the ticket')
       }
     }
   })
-
-  console.log(formik.values)
 
   const { data: device } = useQuery({
     queryKey: ['device', formik.values.device],
@@ -54,7 +58,10 @@ export default function () {
   )
 
   return (
-    <form onSubmit={formik.handleSubmit} className='flex items-center justify-center p-4 m-4'>
+    <form
+      onSubmit={formik.handleSubmit}
+      className='flex items-center justify-center p-4 m-4'
+    >
       <div className='relative flex flex-col w-full max-w-5xl p-6 space-y-6 bg-white border border-gray-400 rounded-lg shadow-md md:flex-row md:space-y-0 md:space-x-6'>
         <h2 className='absolute text-xl font-bold text-center text-gray-800 md:text-3xl md:text-left'>
           Submit a Ticket

@@ -49,13 +49,13 @@ export const useTicketStore = create<TicketState>((set) => ({
   },
 
   updateTicketById: async (id: string, formData: FormData) => {
-    const res = await api.put(
+    const res = await api.patch(
       `${import.meta.env.VITE_API_URI}${PATH.EDIT_TICKET_ROUTE.replace(":id", id)}`,
       formData,
-      {
-        headers: multipart,
-      }
     );
+
+    console.log(`${import.meta.env.VITE_API_URI}${PATH.EDIT_TICKET_ROUTE.replace(":id", id)}`); 
+
 
     set({ ticket: res.data.details, loading: false, error: "" });
   },
@@ -71,7 +71,13 @@ export const useTicketStore = create<TicketState>((set) => ({
   },
 
   assignTicketById: async (id: string, formData: FormData) => {
-    const res = await api.put(`${import.meta.env.VITE_API_URI}${PATH.ASSIGN_TICKET_ROUTE.replace(":id", id)}`, formData);
+    const res = await api.patch(`${import.meta.env.VITE_API_URI}${PATH.ASSIGN_TICKET_ROUTE.replace(":id", id)}`, formData);
     set({ ticket: res.data.details, loading: false, error: "" });
   },
+
+  closeTicketById: async (id: string) => {  
+    const res = await api.patch(`${import.meta.env.VITE_API_URI}${PATH.CLOSET_TICKET_ID_ROUTE.replace(":id", id)}`);
+    set({ ticket: res.data.details, loading: false, error:"" });
+  }
+  
 }));

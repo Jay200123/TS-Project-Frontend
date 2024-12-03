@@ -41,7 +41,7 @@ export const useDepartmentStore = create<DepartmentState>((set) => ({
         return res.data.details;
     },
     updateDepartmentById: async (id: string, data) => {
-        const res = await api.put(`${import.meta.env.VITE_API_URI}${PATH.EDIT_BRANCH_ROUTE.replace(":id", id)}`,
+        const res = await api.patch(`${import.meta.env.VITE_API_URI}${PATH.EDIT_BRANCH_ROUTE.replace(":id", id)}`,
             data,
             {
                 headers: multipart,

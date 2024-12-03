@@ -42,7 +42,8 @@ import {
   AssignTicket,
   TechnicianTickets,
   GetTicketById,
-  EditTicketByTechnician
+  EditTicketByTechnician,
+  EmployeeTicket
 } from './Pages'
 import { ProtectedRoute } from './components'
 import {
@@ -117,6 +118,14 @@ function App () {
             element={
               <ProtectedRoute userRole={['Employee']}>
                 <GetTicketById />
+              </ProtectedRoute>
+            }
+          />
+           <Route
+            path='/employee/tickets'
+            element={
+              <ProtectedRoute userRole={['Employee']}>
+                <EmployeeTicket />
               </ProtectedRoute>
             }
           />

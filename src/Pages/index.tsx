@@ -37,6 +37,7 @@ import AssignTicket from "./Ticket/assignTicket";
 import TechnicianTickets from "./TechnicianTicket";
 import GetTicketById from "./Ticket/getTicketById";
 import EditTicketByTechnician from "./Ticket/editTicketByTechnician";
+import EmployeeTicket from "./EmployeeTicket";
 
 export {
   Home,
@@ -78,4 +79,5 @@ export {
   TechnicianTickets,
   GetTicketById,
   EditTicketByTechnician,
+  EmployeeTicket
 };

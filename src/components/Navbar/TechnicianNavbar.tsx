@@ -66,10 +66,10 @@ export default function () {
             onClick={tickets}
             className='p-2 m-2 text-sm text-gray-700 transition duration-500 rounded cursor-pointer focus:outline-none hover:bg-gray-700 hover:text-white md:text-sm'
           >
-            <i className='m-1 fas fa-home'></i>My Tickets
+            <i className="fa-solid fa-ticket"></i>My Tickets
           </li>
           <li onClick={devices} className='p-2 m-2 text-sm text-gray-700 transition duration-500 rounded cursor-pointer focus:outline-none hover:bg-gray-700 hover:text-white md:text-sm'>
-            <i className='m-1 fas fa-info-circle'></i> Owned Device
+          <i className="fa-solid fa-computer"></i> Owned Device
           </li>
           <li
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}

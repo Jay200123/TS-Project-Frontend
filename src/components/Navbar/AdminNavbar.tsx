@@ -85,10 +85,10 @@ export default function () {
             onClick={dashboard}
             className='p-2 m-2 text-sm transition duration-300 rounded cursor-pointer hover:bg-gray-700 hover:text-white md:text-sm'
           >
-            <i className='m-1 fas fa-home'></i>Dashboard
+            <i className="fa-solid fa-chart-simple"></i>Dashboard
           </li>
-          <li className='p-2 m-2 text-sm transition duration-300 rounded cursor-pointer hover:bg-gray-700 hover:text-white md:text-sm'>
-            <i className='m-1 fas fa-info-circle'></i> Tickets
+          <li onClick={tickets} className='p-2 m-2 text-sm transition duration-300 rounded cursor-pointer hover:bg-gray-700 hover:text-white md:text-sm'>
+            <i className='m-1 fas fa-ticket'></i> Tickets
           </li>
 
           <li
@@ -143,13 +143,6 @@ export default function () {
                     className='flex items-center gap-2 p-2 text-sm text-white cursor-pointer hover:bg-gray-600'
                   >
                     <i className="fa-solid fa-computer"></i> Devices
-                  </li>
-
-                  <li
-                    onClick={tickets}
-                    className='flex items-center gap-2 p-2 text-sm text-white cursor-pointer hover:bg-gray-600'
-                  >
-                    <i className="fa-solid fa-ticket"></i> Tickets
                   </li>
                 </ul>
               </div>

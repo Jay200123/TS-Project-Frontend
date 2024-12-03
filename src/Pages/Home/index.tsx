@@ -1,7 +1,13 @@
-// import HomeImage from '../../assets/ticketing-home-icon.jfif'
 import HomeImage from "../../assets/Helpdesk-3.png";
+import { useNavigate } from "react-router-dom";
 
 export default function () {
+  const navigate = useNavigate();
+  
+  const signup = () => {  
+    navigate("/signup");
+  }
+  
   return (
     <>
       <div className='flex items-center justify-between max-w-full max-h-full bg-transparent'>
@@ -18,7 +24,7 @@ export default function () {
             us help you stay productive and connected.
           </p>
           <div className='flex items-center justify-center mt-[12px]'>
-          <button className="p-2 text-xl text-white transition-all duration-500 bg-gray-700 border border-gray-700 rounded-3xl hover:bg-white hover:text-gray-700">
+          <button onClick={signup} className="p-2 text-xl text-white transition-all duration-500 bg-gray-700 border border-gray-700 rounded-3xl hover:bg-white hover:text-gray-700">
             Get Started
             </button>
           </div>

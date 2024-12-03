@@ -46,7 +46,7 @@ export default function () {
               )}
               <button
                 onClick={() => navigate(`/technician/ticket/${t?._id}`)}
-                className='bg-green-500 p-1 md:p-3 rounded-md text-sm text-white md:text-lg transition-all duration-500 hover:bg-green-800'
+                className='bg-green-500 p-1 md:p-3 m-2 rounded-md text-sm text-white md:text-lg transition-all duration-500 hover:bg-green-800'
               >
                 More Details
               </button>
@@ -136,7 +136,7 @@ export default function () {
                     {t?.device?.owner?.department?.department_name}
                   </span>
                 </p>
-                {t?.status === 'resolved' ? (
+                {t?.status === 'resolved' || t?.status === 'closed' ? (
                   <button
                     onClick={() =>
                      toast.error('Ticket is already resolved')

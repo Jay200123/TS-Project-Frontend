@@ -40,7 +40,7 @@ const useUserStore = create<UserState>((set) => ({
   },
 
   updateUserById: async (id, formData) => {
-    const res = await api.put(
+    const res = await api.patch(
       `${import.meta.env.VITE_API_URI}${PATH.EDIT_USER_ROUTE.replace(":id", id)}`,
       formData,
       {
@@ -61,7 +61,7 @@ const useUserStore = create<UserState>((set) => ({
   },
 
   activateUserById: async (id) => {
-    const res = await api.put(
+    const res = await api.patch(
       `${import.meta.env.VITE_API_URI}${PATH.ACTIVATE_USER_ROUTE.replace(":id", id)}`,
     );
 

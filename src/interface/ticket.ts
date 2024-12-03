@@ -31,6 +31,7 @@ interface TicketState {
   updateTicketById: (ticket: string, formData: FormData) => Promise<void>;
   deleteTicketById: (id: string) => Promise<void>;
   assignTicketById: (id: string, formData: FormData) => Promise<void>;  
+  closeTicketById: (id: string) => Promise<void>; 
 }
 
 export type { Ticket, TicketState };

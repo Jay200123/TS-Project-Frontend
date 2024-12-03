@@ -35,11 +35,10 @@ export default function () {
         toast.success('Ticket updated successfully')
         navigate('/technician/tickets')
       } catch (err) {
-        console.log(err)
         toast.error('Failed to update ticket')
       }
     }
-  })
+  });
 
   const randomImage =
     ticket?.image && ticket.image.length > 0

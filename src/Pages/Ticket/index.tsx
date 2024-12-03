@@ -11,7 +11,7 @@ import { useState } from 'react'
 
 export default function () {
   const navigate = useNavigate()
-  const { tickets, loading, getAllTickets, deleteTicketById } = useTicketStore()
+  const { tickets, loading, getAllTickets, deleteTicketById, closeTicketById } = useTicketStore()
   const [setTicket, setSelectedTicket] = useState('')
 
   useQuery({
@@ -26,11 +26,13 @@ export default function () {
     }
   }
 
-  const handleCheck = async () => {
+  const handleCheck = async (id: string) => {
     if (window.confirm('Are you sure you want to close this Ticket?')) {
+      await closeTicketById(id)
       toast.success('Ticket Closed Successfully')
     }
   }
+
 
   const filteredTickets = tickets.filter(ticket =>
     ticket._id.includes(setTicket)
@@ -139,7 +141,7 @@ export default function () {
 
           {row?.status === "closed" ? (
             <FaCheckCircle
-              className='mr-2 text-xl text-teal-500'
+              className='mr-2 text-xl text-gray-500'
               title='Close Ticket'
               onClick={() => toast.error('Ticket already closed')}
             />
@@ -147,7 +149,7 @@ export default function () {
             <FaCheckCircle
               className='mr-2 text-xl text-teal-500'
               title='Close Ticket'
-              onClick={() => handleCheck()}
+              onClick={() => handleCheck(row?._id)}
             />
           )}
 

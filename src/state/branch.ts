@@ -40,7 +40,7 @@ export const useBranchStore = create<BranchState>((set) => ({
     },
 
     updateBranchById: async (id, formData) => {
-        const res = await api.put(`${import.meta.env.VITE_API_URI}${PATH.EDIT_BRANCH_ROUTE.replace(":id", id)}`,
+        const res = await api.patch(`${import.meta.env.VITE_API_URI}${PATH.EDIT_BRANCH_ROUTE.replace(":id", id)}`,
             formData,
             {
                 headers: multipart

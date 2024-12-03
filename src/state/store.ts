@@ -5,6 +5,7 @@ import { useDepartmentStore } from "./department";
 import { usePositionStore } from "./position";
 import { useDeviceStore } from "./device";
 import { useTicketStore } from "./ticket";
+import { useHistoryStore } from "./history";
 
 export {
   useAuthenticationStore,
@@ -14,4 +15,5 @@ export {
   usePositionStore,
   useDeviceStore,
   useTicketStore,
+  useHistoryStore
 };

@@ -19,9 +19,12 @@ export const PATH = {
     POSITIONS_ROUTES:'/positions',  
     POSITION_ID_ROUTE:'/position/:id',
     EDIT_POSITION_ROUTE:'/position/edit/:id',
-    
     TICKETS_ROUTE:'/tickets',
     TICKET_ID_ROUTE:'/ticket/:id',
     EDIT_TICKET_ROUTE:'/ticket/edit/:id',
-    ASSIGN_TICKET_ROUTE:'/ticket/assign/:id',   
+    ASSIGN_TICKET_ROUTE:'/ticket/assign/:id', 
+    CLOSET_TICKET_ID_ROUTE:'/ticket/close/:id',  
+    HISTORIES_ROUTE:'/histories',   
+    HISTORY_ID_ROUTE:'/history/:id',
+    EDIT_HISTORY_ROUTE:'/history/edit/:id', 
 }

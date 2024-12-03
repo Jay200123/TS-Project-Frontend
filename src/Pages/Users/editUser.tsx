@@ -56,15 +56,15 @@ export default function () {
     onSubmit: async values => {
       const formData = new FormData()
       formData.append('branch', values?.branch.toString())
-      formData.append('department', values?.toString())
-      formData.append('department', values?.toString())
+      formData.append('department', values?.department?.toString())
+      formData.append('position', values?.position?.toString())
       formData.append('fname', values?.fname)
       formData.append('lname', values?.lname)
       formData.append('phone', values?.phone)
       formData.append('address', values?.address)
       formData.append('city', values?.city)
       formData.append('email', values?.email)
-      Array.from(values?.image).forEach((files: any) => {
+     Array.from(values?.image).forEach((files: any) => {
         formData.append('image', files)
       })
 
@@ -73,11 +73,11 @@ export default function () {
         toast.success('User Profile Successfully Updated')
 
         if (res.role === 'Admin') {
-          navigate('/admin-profile')
+          navigate('/admin/profile')
         } else if (res.role === 'Technician') {
           navigate('/technician/profile')
         } else {
-          navigate('/employee-profile')
+          navigate('/employee/profile')
         }
       } catch (error) {
         toast.error('User Registration failed')
@@ -314,11 +314,10 @@ export default function () {
               name='image'
               multiple
               onBlur={formik.handleBlur}
-              onChange={event => {
-                const files = event.currentTarget.files
-                  ? Array.from(event.currentTarget.files)
-                  : []
-                formik.setFieldValue('image', files)
+              onChange={(event) => {
+                const newFiles = Array.from(event.currentTarget.files || []);
+                const currentImages = formik.values.image;
+                formik.setFieldValue('image', [...currentImages, ...newFiles]);
               }}
             />
           </div>

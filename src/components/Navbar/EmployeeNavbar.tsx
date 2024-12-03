@@ -10,11 +10,13 @@ export default function () {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const { logout, user } = useAuthenticationStore()
 
+  const [isTicket, setTicketMenu] = useState(false)
+
   const login = () => {
     navigate('/login')
   }
 
-  const profile = ()=>{
+  const profile = () => {
     navigate('/employee/profile')
   }
 
@@ -22,12 +24,16 @@ export default function () {
     navigate('/signup')
   }
 
-  const devices = ()=>{
+  const devices = () => {
     navigate('/employee/device')
   }
 
-  const ticket = ()=>{
+  const ticket = () => {
     navigate('/ticket/create')
+  }
+
+  const submittedTickets = ()=>{
+    navigate('/employee/tickets')
   }
 
   const handleLogout = async () => {
@@ -54,20 +60,44 @@ export default function () {
         </div>
       </div>
 
-      <div className={`m-2 p-2 ${isOpen ? 'block' : 'hidden'} md:block`}>
+      <div className={`m-2 p-2 ${isTicket ? 'block' : 'hidden'} md:block`}>
         <ul className='flex flex-row md:flex-row items-start md:items-center justify-start'>
           <li
-          onClick={ticket}
-            className='hover:text-white p-2 m-2 text-sm cursor-pointer transition duration-300 hover:bg-gray-700 rounded md:text-sm'
+            onClick={() => setTicketMenu(!isTicket)}
+            className='relative p-2 m-2 text-sm text-black transition duration-500 rounded cursor-pointer hover:text-white hover:bg-gray-700 md:text-sm'
           >
-            <i className="fa-solid fa-ticket m-1"></i>Tickets
+            <span>
+              <i className='m-1 fa-solid fa-bars'></i>Tickets
+            </span>
+            <div
+              className={`absolute text-xs bg-gray-700 shadow-slate-300 top-full left-0 rounded shadow-md z-10 mt-2 p-2 transition-all duration-500 ease-in-out transform ${
+                isTicket
+                  ? 'opacity-100 scale-100'
+                  : 'opacity-0 scale-95 pointer-events-none'
+              }`}
+            >
+              <ul onClick={() => setTicketMenu(false)}>
+                <li
+                  onClick={ticket}
+                  className='p-2 text-sm cursor-pointer text-white border-b-[1px] transition-all duration-500 hover:bg-white hover:text-black hover:rounded-md'
+                >
+                  <i className='m-1 fa-solid fa-ticket'></i>Tickets
+                </li>
+                <li
+                  onClick={submittedTickets}
+                  className='p-2 text-sm cursor-pointer text-white border-b-[1px] transition-all duration-500 hover:bg-white hover:text-black hover:rounded-md'
+                >
+                  <i className='m-1 fa-solid fa-plus'></i> Submit Ticket
+                </li>
+              </ul>
+            </div>
           </li>
 
           <li
-          onClick={devices}
+            onClick={devices}
             className='hover:text-white p-2 m-2 text-sm cursor-pointer transition duration-300 hover:bg-gray-700 rounded md:text-sm'
           >
-            <i className="fa-solid fa-computer m-1"></i>My Devices
+            <i className='fa-solid fa-computer m-1'></i>My Devices
           </li>
 
           <li
@@ -86,7 +116,10 @@ export default function () {
                 }`}
               >
                 <ul onClick={() => setIsDropdownOpen(false)}>
-                  <li onClick={profile} className='text-white p-2 text-sm cursor-pointer hover:bg-gray-600'>
+                  <li
+                    onClick={profile}
+                    className='text-white p-2 text-sm cursor-pointer hover:bg-gray-600'
+                  >
                     <i className='fa-solid fa-circle-user m-1'></i>User Profile
                   </li>
                   <li

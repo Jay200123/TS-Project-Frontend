@@ -43,7 +43,8 @@ import {
   TechnicianTickets,
   GetTicketById,
   EditTicketByTechnician,
-  EmployeeTicket
+  EmployeeTicket,
+  HistoryTable
 } from './Pages'
 import { ProtectedRoute } from './components'
 import {
@@ -121,7 +122,7 @@ function App () {
               </ProtectedRoute>
             }
           />
-           <Route
+          <Route
             path='/employee/tickets'
             element={
               <ProtectedRoute userRole={['Employee']}>
@@ -189,6 +190,22 @@ function App () {
             element={
               <ProtectedRoute userRole={['Technician']}>
                 <CreateDeviceByUsers />
+              </ProtectedRoute>
+            }
+          />
+           <Route
+            path='/technician/all-tickets'
+            element={
+              <ProtectedRoute userRole={['Technician']}>
+                <TicketTable />
+              </ProtectedRoute>
+            }
+          />
+           <Route
+            path='/technician/ticket/:id'
+            element={
+              <ProtectedRoute userRole={['Technician']}>
+                <GetTicketById />
               </ProtectedRoute>
             }
           />
@@ -408,6 +425,14 @@ function App () {
             element={
               <ProtectedRoute userRole={['Admin']}>
                 <GetTicketById />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/histories'
+            element={
+              <ProtectedRoute userRole={['Admin']}>
+                <HistoryTable />
               </ProtectedRoute>
             }
           />

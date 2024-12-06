@@ -14,7 +14,6 @@ export const useHistoryStore = create<HistoryState>((set) => ({
 
         return res?.data?.details;
     },
-
     getOneHistory: async (id: string) => {
         const res = await api.get(`${import.meta.env.VITE_API_URI}${PATH.HISTORY_ID_ROUTE.replace(":id", id)}`);
         set({ history: !Array.isArray(res.data.details) ? res.data.details : null, loading: false, error: "" });

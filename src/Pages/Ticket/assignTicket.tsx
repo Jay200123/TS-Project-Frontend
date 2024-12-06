@@ -111,7 +111,7 @@ export default function () {
               <div className='flex justify-center items-center rounded-full'>
                 {selectedUser && selectedUser?.image?.length > 1 ? (
                   <img
-                    className='w-[130px] h-[130px] md:w-[180px] md:h-[180px] shadow-md'
+                    className='w-[130px] h-[130px] md:w-[180px] md:h-[200px] shadow-md object-cover'
                     src={
                       selectedUser?.image[
                         Math.floor(Math.random() * selectedUser?.image.length)

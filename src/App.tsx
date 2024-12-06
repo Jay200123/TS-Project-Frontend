@@ -44,7 +44,8 @@ import {
   GetTicketById,
   EditTicketByTechnician,
   EmployeeTicket,
-  HistoryTable
+  HistoryTable,
+  GetHistoryById
 } from './Pages'
 import { ProtectedRoute } from './components'
 import {
@@ -428,11 +429,20 @@ function App () {
               </ProtectedRoute>
             }
           />
+          {/* History Routes  */}
           <Route
             path='/histories'
             element={
               <ProtectedRoute userRole={['Admin']}>
                 <HistoryTable />
+              </ProtectedRoute>
+            }
+          />
+           <Route
+            path='/history/:id'
+            element={
+              <ProtectedRoute userRole={['Admin']}>
+                <GetHistoryById />
               </ProtectedRoute>
             }
           />

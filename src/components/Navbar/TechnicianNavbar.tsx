@@ -36,6 +36,10 @@ export default function () {
     }
   }
 
+  const alltickets  = ()=>{
+    navigate('/technician/all-tickets')
+  }
+
   const handleLogout = async () => {
     try {
       await logout()
@@ -62,6 +66,12 @@ export default function () {
 
       <div className={`m-2 p-2 ${isOpen ? 'block' : 'hidden'} md:block`}>
         <ul className='flex flex-row items-start justify-start md:flex-row md:items-center'>
+        <li
+            onClick={alltickets}
+            className='p-2 m-2 text-sm text-gray-700 transition duration-500 rounded cursor-pointer focus:outline-none hover:bg-gray-700 hover:text-white md:text-sm'
+          >
+            <i className="fa-solid fa-ticket"></i>All Tickets
+          </li>
           <li
             onClick={tickets}
             className='p-2 m-2 text-sm text-gray-700 transition duration-500 rounded cursor-pointer focus:outline-none hover:bg-gray-700 hover:text-white md:text-sm'

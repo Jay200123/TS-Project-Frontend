@@ -26,5 +26,6 @@ export const PATH = {
     CLOSET_TICKET_ID_ROUTE:'/ticket/close/:id',  
     HISTORIES_ROUTE:'/histories',   
     HISTORY_ID_ROUTE:'/history/:id',
-    EDIT_HISTORY_ROUTE:'/history/edit/:id', 
+    EDIT_HISTORY_ROUTE:'/history/edit/:id',
+    CLAIM_TICKET_ID_ROUTE:'/ticket/claim/:id',
 }

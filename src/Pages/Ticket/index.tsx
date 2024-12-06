@@ -1,8 +1,13 @@
-import { useTicketStore } from '../../state/store'
+import { useTicketStore, useAuthenticationStore } from '../../state/store'
 import { useQuery } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { FaEye, FaTrash, FaCheckCircle, FaUserAlt } from 'react-icons/fa'
+import {
+  FaEye,
+  FaTrash,
+  FaCheckCircle,
+  FaUserAlt,
+} from 'react-icons/fa'
 import DataTable, { TableColumn } from 'react-data-table-component'
 import { tableCustomStyles } from '../../utils/tableCustomStyles'
 import { Ticket } from '../../interface'
@@ -11,7 +16,9 @@ import { useState } from 'react'
 
 export default function () {
   const navigate = useNavigate()
-  const { tickets, loading, getAllTickets, deleteTicketById, closeTicketById } = useTicketStore()
+  const { tickets, loading, getAllTickets, deleteTicketById, closeTicketById, claimTicketById } =
+    useTicketStore()
+  const { user: auth } = useAuthenticationStore()
   const [setTicket, setSelectedTicket] = useState('')
 
   useQuery({
@@ -22,6 +29,7 @@ export default function () {
   const handleDelete = async (id: string) => {
     if (window.confirm('Are you sure you want to delete this Ticket?')) {
       await deleteTicketById(id)
+      window.location.reload();
       toast.success('Ticket Deleted Successfully')
     }
   }
@@ -29,10 +37,18 @@ export default function () {
   const handleCheck = async (id: string) => {
     if (window.confirm('Are you sure you want to close this Ticket?')) {
       await closeTicketById(id)
+      window.location.reload();
       toast.success('Ticket Closed Successfully')
     }
   }
 
+  const handleAssign = async (id: string, assignee: string) => {
+    if (window.confirm('Are you sure you want to assign this Ticket?')) {
+       await claimTicketById(id, assignee);
+       window.location.reload();
+      toast.success('Ticket Successfully Assigned')
+    }
+  }
 
   const filteredTickets = tickets.filter(ticket =>
     ticket._id.includes(setTicket)
@@ -118,48 +134,72 @@ export default function () {
     },
     {
       name: 'Actions',
-      cell: row => (
-        <div className='flex items-center text-center'>
-          <FaEye
-            className='mr-2 text-xl text-green-500'
-            title='View Ticket'
-            onClick={() => navigate(`/ticket/${row._id}`)}
-          />
-          {row?.assignee ? (
-            <FaUserAlt
-              className='mr-2 text-xl text-gray-500'
-              title='Assign Technician'
-              onClick={() => toast.error('Ticket already assigned')}
+      cell: row =>
+        auth?.role === 'Admin' ? (
+          <div className='flex items-center text-center'>
+            <FaEye
+              className='mr-2 text-xl text-green-500'
+              title='View Ticket'
+              onClick={() => navigate(`/ticket/${row._id}`)}
             />
-          ) : (
-            <FaUserAlt
-              className='mr-2 text-xl text-blue-500'
-              title='Assign Technician'
-              onClick={() => navigate(`/ticket/assign/${row._id}`)}
-            />
-          )}
 
-          {row?.status === "closed" ? (
-            <FaCheckCircle
-              className='mr-2 text-xl text-gray-500'
-              title='Close Ticket'
-              onClick={() => toast.error('Ticket already closed')}
-            />
-          ) : (
-            <FaCheckCircle
-              className='mr-2 text-xl text-teal-500'
-              title='Close Ticket'
-              onClick={() => handleCheck(row?._id)}
-            />
-          )}
+            {row?.assignee ? (
+              <FaUserAlt
+                className='mr-2 text-xl text-gray-500'
+                title='Assign Technician'
+                onClick={() => toast.error('Ticket already assigned')}
+              />
+            ) : (
+              <FaUserAlt
+                className='mr-2 text-xl text-blue-500'
+                title='Assign Technician'
+                onClick={() => navigate(`/ticket/assign/${row._id}`)}
+              />
+            )}
 
-          <FaTrash
-            className='text-xl text-red-500'
-            title='Delete Ticket'
-            onClick={() => handleDelete(row._id)}
-          />
-        </div>
-      )
+            {row?.status === 'closed' ? (
+              <FaCheckCircle
+                className='mr-2 text-xl text-gray-500'
+                title='Close Ticket'
+                onClick={() => toast.error('Ticket already closed')}
+              />
+            ) : (
+              <FaCheckCircle
+                className='mr-2 text-xl text-teal-500'
+                title='Close Ticket'
+                onClick={() => handleCheck(row?._id)}
+              />
+            )}
+
+            <FaTrash
+              className='text-xl text-red-500'
+              title='Delete Ticket'
+              onClick={() => handleDelete(row._id)}
+            />
+          </div>
+        ) : (
+          <div className='flex items-center text-center'>
+            <FaEye
+              className='mr-2 text-xl text-green-500'
+              title='View Ticket'
+              onClick={() => navigate(`/technician/ticket/${row._id}`)}
+            />
+            {row?.assignee ? (
+              <FaUserAlt
+                className='mr-2 text-xl text-gray-500'
+                title='Assign Technician'
+                onClick={() => toast.error('Ticket already assigned')}
+              />
+            ) : (
+              <FaUserAlt
+                className='mr-2 text-xl text-blue-500'
+                title='Assign Technician'
+                onClick={() => handleAssign(row._id, auth?._id.toString()!)}
+
+              />
+            )}
+          </div>
+        )
     }
   ]
 

@@ -54,9 +54,6 @@ export const useTicketStore = create<TicketState>((set) => ({
       formData,
     );
 
-    console.log(`${import.meta.env.VITE_API_URI}${PATH.EDIT_TICKET_ROUTE.replace(":id", id)}`); 
-
-
     set({ ticket: res.data.details, loading: false, error: "" });
   },
 
@@ -75,9 +72,19 @@ export const useTicketStore = create<TicketState>((set) => ({
     set({ ticket: res.data.details, loading: false, error: "" });
   },
 
-  closeTicketById: async (id: string) => {  
+  closeTicketById: async (id: string) => {
     const res = await api.patch(`${import.meta.env.VITE_API_URI}${PATH.CLOSET_TICKET_ID_ROUTE.replace(":id", id)}`);
-    set({ ticket: res.data.details, loading: false, error:"" });
+    set({ ticket: res.data.details, loading: false, error: "" });
+  },
+
+  claimTicketById: async (id: string, assignee: string) => {
+    const res = await api.patch(`${import.meta.env.VITE_API_URI}${PATH.CLAIM_TICKET_ID_ROUTE.replace(":id", id)}`,
+      {
+        assignee
+      }
+    );
+
+    set({ ticket: res.data.details, loading: false, error: "" });
   }
-  
+
 }));

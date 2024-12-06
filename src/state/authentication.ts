@@ -17,6 +17,7 @@ const useAuthenticationStore = create<AuthState>()(
                     password
                 },
             );
+            
             set(
                 {
                     user: res.data.details,

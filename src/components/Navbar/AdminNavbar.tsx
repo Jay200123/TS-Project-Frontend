@@ -55,6 +55,10 @@ export default function () {
     navigate('/tickets')
   }
 
+  const histories = () => {
+    navigate('/histories')
+  }
+
   const handleLogout = async () => {
     try {
       await logout()
@@ -143,6 +147,13 @@ export default function () {
                     className='flex items-center gap-2 p-2 text-sm text-white cursor-pointer hover:bg-gray-600'
                   >
                     <i className="fa-solid fa-computer"></i> Devices
+                  </li>
+
+                  <li
+                    onClick={histories}
+                    className='flex items-center gap-2 p-2 text-sm text-white cursor-pointer hover:bg-gray-600'
+                  >
+                   <i className="fa-solid fa-hourglass-start"></i> History
                   </li>
                 </ul>
               </div>

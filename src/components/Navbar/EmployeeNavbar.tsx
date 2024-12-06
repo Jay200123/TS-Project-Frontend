@@ -87,7 +87,7 @@ export default function () {
                   onClick={submittedTickets}
                   className='p-2 text-sm cursor-pointer text-white border-b-[1px] transition-all duration-500 hover:bg-white hover:text-black hover:rounded-md'
                 >
-                  <i className='m-1 fa-solid fa-plus'></i> Submit Ticket
+                  <i className='m-1 fa-solid fa-plus'></i> All Tickets
                 </li>
               </ul>
             </div>

@@ -39,7 +39,8 @@ import GetTicketById from './Ticket/getTicketById'
 import EditTicketByTechnician from './Ticket/editTicketByTechnician'
 import EmployeeTicket from './EmployeeTicket'
 import HistoryTable from './History'
-import GetHistoryById from './History/getHistoryById' 
+import GetHistoryById from './History/getHistoryById'
+import GetTicketDepartment from './DeparmentTicket'
 
 export {
   Home,
@@ -83,5 +84,6 @@ export {
   EditTicketByTechnician,
   EmployeeTicket,
   HistoryTable,
-  GetHistoryById
+  GetHistoryById,
+  GetTicketDepartment
 }

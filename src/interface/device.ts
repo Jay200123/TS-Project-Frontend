@@ -1,7 +1,7 @@
 import { User } from "./user";
 import { Image } from "./image";
 
-type Type =
+type DeviceType =
   | "Printer"
   | "System Unit"
   | "Laptop"
@@ -17,7 +17,7 @@ type Type =
   | "Access Point"
   | "Cable";
 
-type STATUS =
+type DeviceStatus =
   | "Available"
   | "Used"
   | "Repair"
@@ -28,12 +28,12 @@ type STATUS =
 interface Device extends Document {
   _id: string;
   owner: User;
-  type: Type;
+  type: DeviceType;
   description: string;
   date_requested: Date;
   date_purchased: Date;
   serial_number: string;
-  status: STATUS;
+  status: DeviceStatus;
   image: Image[];
 }
 
@@ -50,4 +50,9 @@ interface DeviceState {
   deleteDeviceById: (id: string) => Promise<void>;
 }
 
-export type { Device, DeviceState }; 
+export type { 
+  Device,
+  DeviceState,
+  DeviceStatus,
+  DeviceType
+ };

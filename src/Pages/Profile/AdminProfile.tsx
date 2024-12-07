@@ -25,14 +25,15 @@ export default function () {
   return (
     <div className='flex items-center justify-center p-4 m-4'>
       <div className='flex flex-col w-full max-w-5xl p-6 space-y-6 bg-white border border-gray-400 rounded-lg shadow-md md:flex-row md:space-y-0 md:space-x-6'>
-        <div className='hidden w-full md:w-1/2 md:block mr-12'>
-          <div className='flex flex-col h-full items-center justify-center'>
+        <div className='hidden w-full mr-12 md:w-1/2 md:block'>
+          <div className='flex flex-col items-center justify-center h-full'>
+          <h3 className='mt-1 text-3xl font-bold underline'>Profile Picture</h3>
             <img
-              className='h-80 w-80 object-cover border border-black rounded-full'
+              className='object-cover border border-black rounded-full h-80 w-80'
               src={randomImage?.url}
               alt={randomImage?.originalname}
             />
-            <h3 className='text-2xl font-bold mt-1'>{user?.fname} <span> {user?.lname}</span></h3>
+            <h3 className='mt-1 text-2xl font-bold'>{user?.fname} <span> {user?.lname}</span></h3>
           </div>
         </div>
         <div className='flex flex-col w-full space-y-4 md:w-1/2'>
@@ -50,7 +51,7 @@ export default function () {
               className='p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
             />
           </div>
-          <div className='flex items-centerjustify-between w-full'>
+          <div className='flex w-full items-centerjustify-between'>
             <div className='flex flex-col w-1/2'>
               <label className='mb-1 text-sm font-medium text-gray-700'>
               <i className="fa-solid fa-sitemap mr-[2px]"></i> Department

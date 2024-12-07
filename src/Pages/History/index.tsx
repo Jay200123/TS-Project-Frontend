@@ -96,13 +96,13 @@ export default function History () {
         <div>
           <button
             onClick={() => navigate(`/history/${row._id}`)}
-            className='btn btn-primary mr-2 text-green-500'
+            className='mr-2 text-green-500 btn btn-primary'
           >
             <FaEye />
           </button>
           <button
             onClick={() => handleDelete(row._id)}
-            className='btn btn-danger text-red-500'
+            className='text-red-500 btn btn-danger'
           >
             <FaTrash />
           </button>
@@ -112,7 +112,7 @@ export default function History () {
   ]
 
   return (
-    <>
+    <div  className='flex items-center justify-center'>
       {loading ? (
         <div className='mt-8 loader'>
           <FadeLoader color='#FFB6C1' loading={true} height={15} width={5} />
@@ -140,6 +140,6 @@ export default function History () {
           />
         </div>
       )}
-    </>
+    </div>
   )
 }

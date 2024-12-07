@@ -32,8 +32,12 @@ export default function () {
     navigate('/ticket/create')
   }
 
-  const submittedTickets = ()=>{
+  const submittedTickets = () => {
     navigate('/employee/tickets')
+  }
+
+  const deparment = ()=>{
+    navigate('/employee/department/tickets')  
   }
 
   const handleLogout = async () => {
@@ -62,35 +66,25 @@ export default function () {
 
       <div className={`m-2 p-2 ${isTicket ? 'block' : 'hidden'} md:block`}>
         <ul className='flex flex-row md:flex-row items-start md:items-center justify-start'>
-          <li
-            onClick={() => setTicketMenu(!isTicket)}
-            className='relative p-2 m-2 text-sm text-black transition duration-500 rounded cursor-pointer hover:text-white hover:bg-gray-700 md:text-sm'
+        <li
+            onClick={deparment}
+            className='hover:text-white p-2 m-2 text-sm cursor-pointer transition duration-300 hover:bg-gray-700 rounded md:text-sm'
           >
-            <span>
-              <i className='m-1 fa-solid fa-bars'></i>Tickets
-            </span>
-            <div
-              className={`absolute text-xs bg-gray-700 shadow-slate-300 top-full left-0 rounded shadow-md z-10 mt-2 p-2 transition-all duration-500 ease-in-out transform ${
-                isTicket
-                  ? 'opacity-100 scale-100'
-                  : 'opacity-0 scale-95 pointer-events-none'
-              }`}
-            >
-              <ul onClick={() => setTicketMenu(false)}>
-                <li
-                  onClick={ticket}
-                  className='p-2 text-sm cursor-pointer text-white border-b-[1px] transition-all duration-500 hover:bg-white hover:text-black hover:rounded-md'
-                >
-                  <i className='m-1 fa-solid fa-ticket'></i>Tickets
-                </li>
-                <li
-                  onClick={submittedTickets}
-                  className='p-2 text-sm cursor-pointer text-white border-b-[1px] transition-all duration-500 hover:bg-white hover:text-black hover:rounded-md'
-                >
-                  <i className='m-1 fa-solid fa-plus'></i> All Tickets
-                </li>
-              </ul>
-            </div>
+            <i className="fa-solid fa-building"></i> Department Ticket
+          </li>
+
+          <li
+            onClick={submittedTickets}
+            className='hover:text-white p-2 m-2 text-sm cursor-pointer transition duration-300 hover:bg-gray-700 rounded md:text-sm'
+          >
+            <i className='m-1 fa-solid fa-ticket'></i> My Tickets
+          </li>
+
+          <li
+            onClick={ticket}
+            className='hover:text-white p-2 m-2 text-sm cursor-pointer transition duration-300 hover:bg-gray-700 rounded md:text-sm'
+          >
+            <i className='m-1 fa-solid fa-plus'></i>Submit Ticket
           </li>
 
           <li

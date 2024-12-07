@@ -2,9 +2,9 @@ import { Device } from "./device";
 import { Image } from "./image";
 import { User } from "./user";
 
-type Status = "pending" | "resolved" | "in-progress" | "closed";
-type Category = "hardware" | "software" | "network";
-type Level = "urgent" | "priority" | "non-urgent";
+type TicketStatus = "pending" | "resolved" | "in-progress" | "closed";
+type TicketCategory = "hardware" | "software" | "network";
+type TicketLevel = "urgent" | "priority" | "non-urgent";
 
 interface Ticket {
   _id: string;
@@ -12,9 +12,9 @@ interface Ticket {
   description: string;
   date_submitted: Date;
   date_resolved: Date;
-  status: Status;
-  category: Category;
-  level: Level;
+  status: TicketStatus;
+  category: TicketCategory;
+  level: TicketLevel;
   assignee: User;
   findings: string;
   image: Image[];
@@ -35,4 +35,10 @@ interface TicketState {
   claimTicketById: (id: string, assignee: string) => Promise<void>; 
 }
 
-export type { Ticket, TicketState };
+export type { 
+  Ticket, 
+  TicketState,
+  TicketStatus, 
+  TicketCategory,
+  TicketLevel
+ };

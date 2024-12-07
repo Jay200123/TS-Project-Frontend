@@ -12,6 +12,11 @@ const tableCustomStyles = {
       fontSize: "14px",
       borderBottom: "1px solid #b3b3b3",
     },
+    table: {
+      style: {
+        backgroundColor: "transparent",
+      },
+    },
   },
 };
 

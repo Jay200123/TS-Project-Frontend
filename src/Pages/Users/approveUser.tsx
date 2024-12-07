@@ -103,7 +103,7 @@ export default function () {
   ]
 
   return (
-    <>
+    <div  className='flex items-center justify-center'>
       {loading ? (
         <div className='mt-8 loader'>
           <FadeLoader color='#FFB6C1' loading={true} height={15} width={5} />
@@ -123,6 +123,6 @@ export default function () {
           />
         </div>
       )}
-    </>
+    </div>
   )
 }

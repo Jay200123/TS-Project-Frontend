@@ -114,18 +114,35 @@ export default function () {
       className='flex items-center justify-center p-4 m-4'
     >
       <div className='relative flex flex-col w-full max-w-5xl p-6 space-y-6 bg-white border border-gray-400 rounded-lg shadow-md md:flex-row md:space-y-0 md:space-x-6'>
-        <h3 onClick={back} className='top-1 left-1 absolute text-3xl m-1 cursor-pointer transition-all duration-500 hover:text-gray-700'><i className="fa-solid fa-arrow-left"></i></h3>
-        <div className='hidden w-full md:w-1/2 md:block mr-12'>
+        <h3 onClick={back} className='absolute m-1 text-3xl transition-all duration-500 cursor-pointer top-1 left-1 hover:text-gray-700'><i className="fa-solid fa-arrow-left"></i></h3>
+        <div className='hidden w-full mr-12 md:w-1/2 md:block'>
           <div className='flex flex-col items-center justify-center'>
-            <h3 className='text-center text-3xl mb-2 font-bold'>User Profile</h3>
+            <h3 className='mb-2 text-3xl font-bold text-center'>User Profile</h3>
             <img
               className='object-cover border border-black w-[280px] h-[280px] m-1 rounded-l-lg'
               src={randomImage?.url}
               alt={randomImage?.originalname}
             />
-            <h3 className='text-2xl font-bold mt-1'>
+            <h3 className='mt-1 text-2xl font-bold'>
               {user?.fname} <span> {user?.lname}</span>
             </h3>
+            <div className='flex flex-col'>
+            <label className='mb-1 text-sm font-medium text-gray-700'>
+              <i className='mr-1 fa-solid fa-image'></i> Profile Image
+            </label>
+            <input
+              type='file'
+              id='image'
+              name='image'
+              multiple
+              onBlur={formik.handleBlur}
+              onChange={(event) => {
+                const newFiles = Array.from(event.currentTarget.files || []);
+                const currentImages = formik.values.image;
+                formik.setFieldValue('image', [...currentImages, ...newFiles]);
+              }}
+            />
+          </div>
           </div>
         </div>
         <div className='flex flex-col w-full space-y-4 md:w-1/2'>
@@ -227,7 +244,7 @@ export default function () {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.fname}
-              className='p-2  border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+              className='p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
             />
           </div>
 
@@ -301,24 +318,6 @@ export default function () {
               onBlur={formik.handleBlur}
               value={formik.values.email}
               className='p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
-            />
-          </div>
-
-          <div className='flex flex-col'>
-            <label className='mb-1 text-sm font-medium text-gray-700'>
-              <i className='mr-1 fa-solid fa-image'></i> Profile Image
-            </label>
-            <input
-              type='file'
-              id='image'
-              name='image'
-              multiple
-              onBlur={formik.handleBlur}
-              onChange={(event) => {
-                const newFiles = Array.from(event.currentTarget.files || []);
-                const currentImages = formik.values.image;
-                formik.setFieldValue('image', [...currentImages, ...newFiles]);
-              }}
             />
           </div>
 

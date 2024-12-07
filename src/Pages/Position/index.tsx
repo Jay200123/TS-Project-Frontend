@@ -70,14 +70,14 @@ export default function () {
   ]
 
   return (
-    <>
+    <div  className='flex items-center justify-center'>
       {loading ? (
         <div className='mt-8 loader'>
           <FadeLoader color='#FFB6C1' loading={true} height={15} width={5} />
         </div>
       ) : (
         <div>
-          <div className='max-w-full p-4 overflow-hidden bg-none rounded-lg sm:p-6 lg:p-8 sm:max-w-6xl'>
+          <div className='max-w-full p-4 overflow-hidden rounded-lg bg-none sm:p-6 lg:p-8 sm:max-w-6xl'>
           <div className='flex items-center justify-end m-2'>
             <button onClick={()=>navigate('/position/create')} 
              className='text-[16px] bg-gray-700 text-white p-[15px] rounded-md transition-all duration-500  hover:bg-white hover:text-black border border-gray-700'>
@@ -98,6 +98,6 @@ export default function () {
           </div>
         </div>
       )}
-    </>
+    </div>
   )
 }

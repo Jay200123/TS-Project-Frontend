@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useFormik } from 'formik'
 import { toast } from 'react-toastify'
 import { Image } from '../../components'
+import { editAssigneeValidationSchema } from '../../validations'
 
 export default function () {
   const navigate = useNavigate()
@@ -29,7 +30,7 @@ export default function () {
       level: ticket?.level || '',
       status: ticket?.status || ''
     },
-
+    validationSchema: editAssigneeValidationSchema,
     onSubmit: async values => {
       const formData = new FormData()
       formData.append('assignee', values.assignee)

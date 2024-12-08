@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useFormik } from 'formik'
 import { toast } from 'react-toastify'
+import { editTicketByTechnicianValidationSchema } from '../../validations'
 
 export default function () {
   const navigate = useNavigate()
@@ -23,7 +24,7 @@ export default function () {
       findings: ticket?.findings || '',
       device_status: ticket?.device?.status || ''
     },
-
+    validationSchema: editTicketByTechnicianValidationSchema,
     onSubmit: async values => {
       const formData = new FormData()
       formData.append('findings', values.findings)
@@ -38,7 +39,7 @@ export default function () {
         toast.error('Failed to update ticket')
       }
     }
-  });
+  })
 
   const randomImage =
     ticket?.image && ticket.image.length > 0
@@ -196,7 +197,7 @@ export default function () {
               className='w-full text-base border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[2.5rem]'
             >
               <option value='' disabled>
-                {formik?.values.device_status} 
+                {formik?.values.device_status}
               </option>
               {device_status?.map((d, index) => (
                 <option key={index} value={d}>

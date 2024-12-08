@@ -8,6 +8,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useFormik } from 'formik'
 import { category } from '../../utils/arrays'
 import { toast } from 'react-toastify'
+import { createTicketValidationSchema } from '../../validations'
 
 export default function () {
   const navigate = useNavigate()
@@ -27,6 +28,7 @@ export default function () {
       description: '',
       image: []
     },
+    validationSchema: createTicketValidationSchema,
     onSubmit: async values => {
       const formData = new FormData()
       formData.append('device', values.device)

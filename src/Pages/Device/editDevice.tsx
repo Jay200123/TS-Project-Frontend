@@ -10,6 +10,8 @@ import { useFormik } from 'formik'
 import { toast } from 'react-toastify'
 import { useState } from 'react'
 import { type, status } from '../../utils/arrays'
+import { editDeviceValidationSchema } from '../../validations'
+
 
 export default function () {
   const { id } = useParams<{ id: string }>()
@@ -58,6 +60,7 @@ export default function () {
       status: device?.status || '',
       image: device?.image || []
     },
+    validationSchema: editDeviceValidationSchema,
     onSubmit: async values => {
       const formData = new FormData()
       formData.append('owner', values.owner)

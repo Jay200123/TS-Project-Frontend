@@ -8,7 +8,8 @@ import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { useFormik } from 'formik'
-import { toast } from 'react-toastify'
+import { toast } from 'react-toastify';
+import { editUserValidationSchema } from '../../validations'
 
 export default function () {
   const navigate = useNavigate()
@@ -51,8 +52,9 @@ export default function () {
       address: user?.address || '',
       city: user?.city || '',
       email: user?.email || '',
-      image: user?.image || []
+      image: user?.image || [],
     },
+    validationSchema: editUserValidationSchema,
     onSubmit: async values => {
       const formData = new FormData()
       formData.append('branch', values?.branch.toString())

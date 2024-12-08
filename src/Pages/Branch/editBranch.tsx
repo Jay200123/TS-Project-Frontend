@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { useFormik } from 'formik'
 import { Image } from '../../components'
 import { toast } from 'react-toastify'
+import { editBranchValidationSchema } from '../../validations'
 
 export default function () {
   const navigate = useNavigate()
@@ -26,6 +27,7 @@ export default function () {
       email: branch?.email || '',
       image: []
     },
+    validationSchema: editBranchValidationSchema,
     onSubmit: async (values) => {
       const formData = new FormData()
       formData.append('branch_name', values.branch_name)

@@ -8,10 +8,13 @@ import { useNavigate } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { tableCustomStyles } from '../../utils/tableCustomStyles'
 import { Device } from '../../interface'
+import { type } from '../../utils/arrays' 
+import { useState } from 'react'
 
 export default function () {
   const navigate = useNavigate()
   const { devices, loading, getAllDevices, deleteDeviceById } = useDeviceStore()
+  const [deviceType, setDeviceType] = useState('');
 
   useQuery({
     queryKey: ['devices'],
@@ -24,6 +27,8 @@ export default function () {
       toast.success('Device Deleted Successfully')
     }
   }
+
+  const filteredDevice = devices?.filter((d)=> d?.type?.includes(deviceType));
 
   const columns: TableColumn<Device>[] = [
     {
@@ -111,7 +116,29 @@ export default function () {
         </div>
       ) : (
         <div className='max-w-full p-4 m-6 overflow-hidden bg-white rounded-lg sm:p-6 lg:p-8 sm:max-w-6xl'>
-           <div className='flex items-center justify-end m-2'>
+           <div className='flex items-center justify-between m-2'>
+           <div className='flex flex-col'>
+              <label className='mb-1 text-sm font-medium text-gray-700'>
+              <i className="fa-solid fa-computer"></i> Filter Device
+              </label>
+              <select
+                name='type'
+                id='type'
+                onChange={(e) => setDeviceType(e.target.value)}
+                value={deviceType}
+                className='w-[150px] text-base border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[2.5rem]'
+              >
+                <option value='' disabled>
+                  Device Type
+                </option>
+                {type?.map((t, index) => (
+                  <option key={index} value={t}>
+                    {t}
+                  </option>
+                ))}
+              </select>
+            </div>
+
             <button onClick={()=>navigate('/device/create')} 
              className='text-[16px] bg-gray-700 text-white p-[15px] rounded-md transition-all duration-500  hover:bg-white hover:text-black border border-gray-700'>
               Create Device<i className='fa fa-plus ml-[2px]'></i>
@@ -120,7 +147,7 @@ export default function () {
           <DataTable
             title='Device Records'
             columns={columns}
-            data={devices}
+            data={filteredDevice}
             pagination
             highlightOnHover
             pointerOnHover

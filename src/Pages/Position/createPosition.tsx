@@ -9,6 +9,7 @@ import { useFormik } from 'formik'
 import { Image } from '../../components'
 import { toast } from 'react-toastify'
 import { useState } from 'react'
+import { createPositionValidationSchema } from '../../validations'
 
 export default function () {
   const navigate = useNavigate();
@@ -33,6 +34,7 @@ export default function () {
       position_name: '',
       description: ''
     },
+    validationSchema: createPositionValidationSchema,
     onSubmit: async values => {
       const formData = new FormData()
       formData.append('department', values.department)

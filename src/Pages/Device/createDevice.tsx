@@ -11,6 +11,7 @@ import { Image } from '../../components'
 import { toast } from 'react-toastify'
 import { useState } from 'react'
 import { type, status } from '../../utils/arrays'; 
+import { createDeviceValidationSchema } from '../../validations'
 
 export default function () {
   const navigate = useNavigate()
@@ -48,6 +49,7 @@ export default function () {
       status: '',
       image: []
     },
+    validationSchema:createDeviceValidationSchema,
     onSubmit: async values => {
       const formData = new FormData()
       formData.append('owner', values.owner)
@@ -94,7 +96,7 @@ export default function () {
           </div>
           <div className='flex flex-col w-full space-y-4 md:w-1/2'>
             <h2 className='text-2xl font-bold text-center text-gray-800 md:text-left'>
-              Create Department
+              Create Device
             </h2>
 
             <div className='flex flex-col'>

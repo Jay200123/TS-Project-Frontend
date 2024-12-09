@@ -1,5 +1,5 @@
 import DataTable, { TableColumn } from 'react-data-table-component'
-import { FaEye, FaTrash } from 'react-icons/fa'
+import { FaEye, FaTrash, FaPenAlt } from 'react-icons/fa'
 import { FadeLoader } from 'react-spinners'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -16,9 +16,7 @@ export default function () {
   useQuery({
     queryKey: ['users'],
     queryFn: getAllUsers
-  });
-
-  const filteredUsers =  users.filter((u)=> u.isAuthorized === true);  
+  })
 
   const handleDelete = async (id: string) => {
     if (window.confirm('Are you sure you want to delete this User?')) {
@@ -30,41 +28,27 @@ export default function () {
   const columns: TableColumn<User>[] = [
     {
       name: 'First Name',
-      selector: row => row.fname,
+      selector: row => row?.fullname,
       sortable: true
     },
-    {
-      name: 'Last Name',
-      selector: row => row.lname,
-      sortable: true
-    },
+
     {
       name: 'Contact Number',
-      selector: row => row.phone,
-      sortable: true
-    },
-    {
-      name: 'Adress',
-      selector: row => row.address,
-      sortable: true
-    },
-    {
-      name: 'City',
-      selector: row => row.city,
+      selector: row => row?.phone,
       sortable: true
     },
     {
       name: 'Email',
-      selector: row => row.email,
+      selector: row => row?.email,
       sortable: true
     },
     {
       name: 'Branch',
-      selector: row => row.branch.branch_name
+      selector: row => row.branch?.branch_name
     },
     {
       name: 'Department',
-      selector: row => row.department.department_name
+      selector: row => row.department?.department_name
     },
     {
       name: 'Position',
@@ -74,35 +58,18 @@ export default function () {
       name: 'Role',
       selector: row => row.role,
       sortable: true
-    }, 
-    {
-      name: 'Images',
-      cell: row => {
-        const randomImage =
-          row.image?.length > 0
-            ? row.image[Math.floor(Math.random() * row.image?.length)]
-            : null
-
-        return (
-          <div className='grid items-center justify-center'>
-            {randomImage && (
-              <img
-                className='object-center w-10 h-10 rounded-full'
-                src={randomImage.url}
-                alt={randomImage.originalname}
-              />
-            )}
-          </div>
-        )
-      }
     },
     {
       name: 'Actions',
       cell: row => (
         <div className='flex items-center text-center'>
           <FaEye
-            className='mr-2 text-xl text-green-300'
+            className='mr-2 text-xl text-green-500'
             onClick={() => navigate(`/user/${row._id}`)}
+          />
+          <FaPenAlt
+            className='mr-2 text-xl text-blue-500'
+            onClick={() => navigate(`/user/edit/${row._id}`)}
           />
           <FaTrash
             className='text-xl text-red-500'
@@ -114,17 +81,25 @@ export default function () {
   ]
 
   return (
-    <div  className='flex items-center justify-center'>
+    <div className='flex items-center justify-center'>
       {loading ? (
         <div className='mt-8 loader'>
           <FadeLoader color='#FFB6C1' loading={true} height={15} width={5} />
         </div>
       ) : (
-        <div className='max-w-full p-4 m-6 overflow-hidden bg-white rounded-lg sm:p-6 lg:p-8 sm:max-w-6xl'>
+        <div className='max-w-full p-4 m-6 overflow-hidden bg-white rounded-lg sm:p-6 lg:p-8 md:w-full'>
+          <div className='flex items-center justify-end m-2'>
+            <button
+              onClick={() => navigate('/admin/signup')}
+              className='text-[16px] bg-gray-700 text-white p-[15px] rounded-md transition-all duration-500  hover:bg-white hover:text-black border border-gray-700'
+            >
+              Add New User<i className='fa fa-plus ml-[2px]'></i>
+            </button>
+          </div>
           <DataTable
             title='Users Records'
             columns={columns}
-            data={filteredUsers}
+            data={users}
             pagination
             highlightOnHover
             pointerOnHover

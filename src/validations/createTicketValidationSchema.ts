@@ -1,9 +1,9 @@
 import * as yup from "yup";
 
-const createPositionValidationSchema = yup.object({
+const createTicketValidationSchema = yup.object({
     device: yup.string().required("Device is required"),
-    category: yup.string().required("Category is required"),
-    description: yup.string().required("Device description is required"),
+    category: yup.string().required("Ticket category is required"),
+    description: yup.string().required(" description is required"),
 });
 
-export default createPositionValidationSchema;
+export default createTicketValidationSchema;

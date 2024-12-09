@@ -12,9 +12,7 @@ import {
   SignUp,
   Dashboard,
   UsersTable,
-  ApproveUserTable,
   GetUserById,
-  AdminProfile,
   EditUser,
   DepartmentTable,
   CreateDepartment,
@@ -28,8 +26,6 @@ import {
   CreateBranch,
   GetBranchById,
   EditBranch,
-  EmployeeProfile,
-  TechnicialProfile,
   TechnicianSignup,
   DeviceTable,
   GetDeviceById,
@@ -37,7 +33,6 @@ import {
   EditDevice,
   UserDevices,
   TicketForm,
-  CreateDeviceByUsers,
   TicketTable,
   AssignTicket,
   TechnicianTickets,
@@ -46,7 +41,8 @@ import {
   EmployeeTicket,
   HistoryTable,
   GetHistoryById,
-  GetTicketDepartment
+  GetTicketDepartment,
+  ChangePassword
 } from './Pages'
 import { ProtectedRoute } from './components'
 import {
@@ -65,46 +61,24 @@ function App () {
           <Route index element={<Home />} />
           <Route path='/login' element={<Login />} />
           <Route path='/unauthorized' element={<Unauthorized />} />
-          <Route path='/signup' element={<SignUpChoice />} />
-          <Route path='/employee/signup' element={<SignUp />} />
-          <Route path='technician/signup' element={<TechnicianSignup />} />
+          <Route
+            path='/change/password'
+            element={
+              <ProtectedRoute userRole={['Employee', 'Technician', 'Admin']}>
+                <ChangePassword />
+              </ProtectedRoute>
+                
+            }
+          />
         </Route>
 
         {/* Customer Private Routes */}
         <Route element={<EmployeeLayout />}>
           <Route
-            path='/employee/profile'
-            index
-            element={
-              <ProtectedRoute userRole={['Employee']}>
-                <EmployeeProfile />
-              </ProtectedRoute>
-            }
-          />
-
-          <Route
-            path='/employee/profile/edit/:id'
-            index
-            element={
-              <ProtectedRoute userRole={['Employee']}>
-                <EditUser />
-              </ProtectedRoute>
-            }
-          />
-
-          <Route
             path='/employee/device'
             element={
               <ProtectedRoute userRole={['Employee']}>
                 <UserDevices />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path='/employee/create-device'
-            element={
-              <ProtectedRoute userRole={['Employee']}>
-                <CreateDeviceByUsers />
               </ProtectedRoute>
             }
           />
@@ -145,23 +119,6 @@ function App () {
         {/* Technician Private Routes */}
         <Route element={<TechnicianLayout />}>
           <Route
-            path='/technician/profile'
-            element={
-              <ProtectedRoute userRole={['Technician']}>
-                <TechnicialProfile />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path='/technician/profile/edit/:id'
-            element={
-              <ProtectedRoute userRole={['Technician']}>
-                <EditUser />
-              </ProtectedRoute>
-            }
-          />
-
-          <Route
             path='/technician/tickets'
             element={
               <ProtectedRoute userRole={['Technician']}>
@@ -194,15 +151,6 @@ function App () {
               </ProtectedRoute>
             }
           />
-
-          <Route
-            path='/technician/create-device'
-            element={
-              <ProtectedRoute userRole={['Technician']}>
-                <CreateDeviceByUsers />
-              </ProtectedRoute>
-            }
-          />
           <Route
             path='/technician/all-tickets'
             element={
@@ -223,6 +171,32 @@ function App () {
 
         {/* Admin Private Routes */}
         <Route element={<AdminLayout />}>
+          {/* SIGN UP ROUTES  */}
+          <Route
+            path='/admin/signup'
+            element={
+              <ProtectedRoute userRole={['Admin']}>
+                <SignUpChoice />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/admin/employee/signup'
+            element={
+              <ProtectedRoute userRole={['Admin']}>
+                <SignUp />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path='/admin/technician/signup'
+            element={
+              <ProtectedRoute userRole={['Admin']}>
+                <TechnicianSignup />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path='/dashboard'
             index
@@ -242,15 +216,6 @@ function App () {
             }
           />
           <Route
-            path='/approve-users'
-            index
-            element={
-              <ProtectedRoute userRole={['Admin']}>
-                <ApproveUserTable />
-              </ProtectedRoute>
-            }
-          />
-          <Route
             path='/user/:id'
             index
             element={
@@ -260,15 +225,6 @@ function App () {
             }
           />
 
-          <Route
-            path='/admin-profile'
-            index
-            element={
-              <ProtectedRoute userRole={['Admin']}>
-                <AdminProfile />
-              </ProtectedRoute>
-            }
-          />
           <Route
             path='user/edit/:id'
             element={

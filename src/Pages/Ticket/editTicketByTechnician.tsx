@@ -113,10 +113,7 @@ export default function () {
               name='owner'
               readOnly
               placeholder={
-                ticket?.device?.owner?.fname +
-                ' ' +
-                ticket?.device?.owner?.lname
-              }
+                ticket?.device?.owner?.fullname}
               className='p-2  placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
             />
           </div>

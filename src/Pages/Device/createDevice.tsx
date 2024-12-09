@@ -158,10 +158,15 @@ export default function () {
                 </option>
                 {filteredUsers?.map(u => (
                   <option key={u?._id} value={u?._id}>
-                    {u?.fname} {u?.lname}
+                    {u?.fullname}
                   </option>
                 ))}
               </select>
+              {formik.touched.owner && formik.errors.owner ? (
+              <div className='text-sm text-red-500'>
+                {formik.errors.owner}
+              </div>
+            ) : null}
             </div>
 
             <div className='flex flex-col'>
@@ -185,6 +190,11 @@ export default function () {
                   </option>
                 ))}
               </select>
+              {formik.touched.type && formik.errors.type ? (
+              <div className='text-sm text-red-500'>
+                {formik.errors.type}
+              </div>
+            ) : null}
             </div>
 
             <div className='flex flex-col'>
@@ -200,6 +210,11 @@ export default function () {
                 value={formik.values.serial_number}
                 className='p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
               />
+               {formik.touched.serial_number && formik.errors.serial_number ? (
+              <div className='text-sm text-red-500'>
+                {formik.errors.serial_number}
+              </div>
+            ) : null}
             </div>
 
             <div className='flex flex-col'>
@@ -215,6 +230,11 @@ export default function () {
                 value={formik.values.description}
                 className='p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
               />
+               {formik.touched.description && formik.errors.description ? (
+              <div className='text-sm text-red-500'>
+                {formik.errors.description}
+              </div>
+            ) : null}
             </div>
 
             <div className='flex flex-col'>
@@ -231,6 +251,11 @@ export default function () {
                 value={formik.values.date_requested}
                 className='p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
               />
+               {formik.touched.date_requested && formik.errors.date_requested ? (
+              <div className='text-sm text-red-500'>
+                {formik.errors.date_requested}
+              </div>
+            ) : null}
             </div>
 
             <div className='flex flex-col'>
@@ -247,6 +272,11 @@ export default function () {
                 value={formik.values.date_purchased}
                 className='p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
               />
+               {formik.touched.date_purchased && formik.errors.date_purchased ? (
+              <div className='text-sm text-red-500'>
+                {formik.errors.date_purchased}
+              </div>
+            ) : null}
             </div>
 
             <div className='flex flex-col'>
@@ -270,6 +300,11 @@ export default function () {
                   </option>
                 ))}
               </select>
+              {formik.touched.status && formik.errors.status ? (
+              <div className='text-sm text-red-500'>
+                {formik.errors.status}
+              </div>
+            ) : null}
             </div>
 
             <div className='flex flex-col'>
@@ -288,12 +323,17 @@ export default function () {
             </div>
 
             <div className='flex justify-center mt-4'>
-              <button
-                type='submit'
-                className='w-full px-4 py-2 text-lg font-medium text-white transition duration-700 bg-black border border-gray-500 rounded-md hover:opacity-80'
-              >
-                Create
-              </button>
+            <button
+              type='submit'
+              className={`w-full px-4 py-2 text-lg font-medium text-white transition duration-700 bg-gray-700 border border-gray-500 rounded-md ${
+                !formik.isValid
+                  ? 'opacity-50 cursor-not-allowed'
+                  : 'hover:opacity-80'
+              }`}
+              disabled={!formik.isValid}
+            >
+            Create Device
+            </button>
             </div>
           </div>
         </div>

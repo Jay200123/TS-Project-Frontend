@@ -1,23 +1,17 @@
 import { Branch } from "./branch";
 import { Department } from "./department";
 import { Position } from "./position";
-import { Image } from "./image";
-
 interface User {
     _id: string;
-    fname: string;
-    lname: string;
+    fullname: string;   
     phone: string;
-    address: string;
-    city: string;
     email: string;
     password: string;
     role: string;
     branch: Branch;
     department: Department;
     position: Position;
-    isAuthorized: boolean;
-    image: Image[];
+    isPasswordChanged: boolean;  
 }
 
 interface UserState {
@@ -29,9 +23,9 @@ interface UserState {
     getOneUser: (id: string) => Promise<User>;
     createUser: (formData: FormData) => Promise<User>;
     updateUserById: (id: string, formData: FormData) => Promise<User>;
-    deleteUserById: (id: string) => Promise<void>;
-    activateUserById: (id: string) => Promise<void>;
-    userProfile: (id: string) => Promise<User>;      
+    deleteUserById: (id: string) => Promise<void>; 
+    changePassword: (id: string, formData: FormData) => Promise<User>;  
+    resetPassword: (id: string) => Promise<void>;  
 }
 
 export type { User, UserState };   

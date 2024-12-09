@@ -204,14 +204,14 @@ export default function () {
   ]
 
   return (
-    <div  className=' flex items-center justify-center'>
+    <div  className='flex items-center justify-center'>
       {loading ? (
         <div className='mt-8 loader'>
           <FadeLoader color='#FFB6C1' loading={true} height={15} width={5} />
         </div>
       ) : (
         <div>
-          <div className='max-w-full p-4 overflow-hidden bg-transparent rounded-lg sm:p-6 lg:p-8 md:w-full'>
+          <div className='p-4 overflow-hidden bg-transparent rounded-lg sm:p-6 lg:p-8 w-[1250px]'>
             <div className='flex items-center justify-end'>
               <input
                 type='text'

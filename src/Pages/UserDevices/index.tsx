@@ -1,8 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import {
-  useAuthenticationStore,
-  useDeviceStore,
-} from '../../state/store'
+import { useAuthenticationStore, useDeviceStore } from '../../state/store'
 
 export default function () {
   const { user: auth } = useAuthenticationStore()
@@ -18,11 +15,15 @@ export default function () {
   )
 
   return (
-    <div className='p-7'>
+    <>
+    <h3 className='m-2 text-sm md:text-lg font-bold'>My Devices</h3>
       {filteredDevices && filteredDevices.length > 0 ? (
         filteredDevices.map(d => (
-          <div key={d?._id} className='relative flex flex-col justify-evenly'>
-            <div className='flex-col flex md:flex-row items-center justify-start p-1 m-4 sm:h-[300px] md:h-[250px] overflow-hidden rounded-md shadow-lg border border-gray'>
+          <div
+            key={d?._id}
+            className='relative flex flex-col justify-evenly items-center w-full md:w-[1200px]'
+          >
+            <div className='flex-col flex md:flex-row items-center justify-start p-1 m-4 sm:h-[300px] md:h-[250px] md:w-full overflow-hidden rounded-md shadow-lg border border-gray'>
               <div className='flex flex-col items-center justify-center w-1/4 p-2 m-2'>
                 <h3
                   className={`flex items-center justify-start text-sm font-bold md:text-lg ${
@@ -46,7 +47,7 @@ export default function () {
                   />
                 ) : (
                   <img
-                    className='rounded-sm md:w-52 md:h-52'
+                    className='rounded-sm md:w-52 md:h-52 '
                     src={d?.image?.[0]?.url || ''}
                     alt='Device'
                   />
@@ -66,7 +67,7 @@ export default function () {
                 <p className='text-[12px] md:text-[16px] m-1 p-1'>
                   {d?.description}
                 </p>
-                <h3 className='font-bold text-[12px] md:text-[16px] mb-1'>
+                <h3 className='font-bold text-[12px] md:text-[16px]  mb-1'>
                   Serial Number:
                   <span className='font-medium underline'>
                     {d?.serial_number}
@@ -74,15 +75,15 @@ export default function () {
                 </h3>
 
                 <div className='flex items-center justify-between'>
-                  <p className='font-bold text-[12px] md:text-[17px]'>
+                  <p className='font-bold text-[12px] md:text-[17px] '>
                     Date Requested:
-                    <span className='underline font-medium text-[10px] md:text-[16px] m-1'>
+                    <span className='underline font-medium text-[10px] md:text-[16px]  m-1'>
                       {d?.date_requested
                         ? new Date(d.date_requested).toISOString().split('T')[0]
                         : 'N/A'}
                     </span>
                   </p>
-                  <p className='font-bold text-[12px] md:text-[17px]'>
+                  <p className='font-bold text-[12px] md:text-[17px] '>
                     Date Purchased:
                     <span className='underline font-medium text-[10px] md:text-[16px] m-1'>
                       {d?.date_purchased
@@ -97,9 +98,9 @@ export default function () {
         ))
       ) : (
         <div className='text-center mt-4'>
-          <h3 className='text-2xl font-bold'>No Devices Found</h3>
+          <h3 className='text-xl font-bold'>No Devices Found</h3>
         </div>
       )}
-    </div>
+    </>
   )
 }

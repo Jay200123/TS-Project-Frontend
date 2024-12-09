@@ -5,17 +5,17 @@ export default function () {
   const navigate = useNavigate()
 
   const employee = () => {
-    navigate('/employee/signup')
+    navigate('/admin/employee/signup')
   }
 
   const technician = () => {
-    navigate('/technician/signup')
+    navigate('/admin/technician/signup')
   }
 
   return (
     <>
-      <h1 className='sm:text-lg md:text-3xl lg:text-4xl font-bold'>
-        Sign Up as
+      <h1 className='sm:text-lg md:text-3xl lg:text-4xl font-bold p-2'>
+        Create Account
       </h1>
       <div className='relative flex items-center justify-center shadow-md rounded-md md:m-6'>
         <div className='flex flex-col w-full max-w-5xl p-8 space-y-6 bg-transparent rounded-lg shadow-md md:flex-row md:space-y-0 md:space-x-6 '>
@@ -38,9 +38,12 @@ export default function () {
             </button>
           </div>
         </div>
-        <h3 className='absolute bottom-0 left-1/2 transform -translate-x-1/2 font-bold text-lg mt-2'>
-          Already have an account? <span onClick={()=>navigate("/login")} className='font-normal cursor-pointer underline'>Login</span> 
+        <h3 
+        onClick={()=>window.history.back()} 
+        className='absolute bottom-0 left-1/2 cursor-pointer transform -translate-x-1/2 font-bold text-lg mt-2'>
+        <i className='fa-solid fa-arrow-left'></i>  Go Back
         </h3>
+
       </div>
     </>
   )

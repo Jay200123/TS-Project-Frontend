@@ -25,7 +25,7 @@ export default function () {
     validationSchema: createDepartmentValidationSchema,
     onSubmit: async values => {
       const formData = new FormData()
-      formData.append('branch', values.branch)
+      formData.append('branch', values.branch )
       formData.append('department_name', values.department_name)
       formData.append('description', values.description)
       try {

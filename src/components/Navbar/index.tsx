@@ -22,16 +22,6 @@ export default function () {
     navigate('/')
   }
 
-  const handleProfile = () => {
-    if (user?.role === 'Admin') {
-      navigate('/admin-profile')
-    } else if (user?.role === 'Technician') {
-      navigate('/technician/profile')
-    } else {
-      navigate('/employee-profile')
-    }
-  }
-
   const handleLogout = async () => {
     try {
       await logout()
@@ -87,13 +77,6 @@ export default function () {
             >
               {user ? (
                 <ul onClick={() => setIsDropdownOpen(false)}>
-                  <li
-                    onClick={handleProfile}
-                    className='p-2 text-sm cursor-pointer text-white border-b-[1px] transition-all duration-500 hover:bg-white hover:text-black hover:rounded-md'
-                  >
-                    <i className='m-1 fa-solid fa-unlock'></i>
-                    {`${user.role} Profile`}
-                  </li>
                   <li
                     onClick={handleLogout}
                     className='p-2 text-sm cursor-pointer text-white border-b-[1px] transition-all duration-500 hover:bg-white hover:text-black hover:rounded-md'

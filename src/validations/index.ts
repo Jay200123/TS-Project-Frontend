@@ -9,9 +9,10 @@ import createPositionValidationSchema from "./createPositionValidationSchema";
 import editPositionValidationSchema from "./editPositionValidationSchema";
 import createDeviceValidationSchema from "./createDeviceValidationSchema";
 import editDeviceValidationSchema from "./editDeviceValidationSchema";
-import createTicketValidationSchema from "./createPositionValidationSchema";
+import createTicketValidationSchema from "./createTicketValidationSchema";
 import editTicketByTechnicianValidationSchema from "../Pages/Ticket/editTicketByTechnician";
 import editAssigneeValidationSchema from "./editTicketAssigneeValidationSchema";
+import editPasswordValidationSchema from "./changePasswordValidationSchema";
 
 export {
     authenticationValidationSchema,
@@ -27,5 +28,6 @@ export {
     editDeviceValidationSchema,
     createTicketValidationSchema,
     editTicketByTechnicianValidationSchema,
-    editAssigneeValidationSchema
+    editAssigneeValidationSchema,
+    editPasswordValidationSchema
 }

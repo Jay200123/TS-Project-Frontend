@@ -39,9 +39,7 @@ export default function () {
       })
       try {
         await createTicket(formData)
-        auth?.role === 'employee'
-          ? navigate('/employee/profile')
-          : navigate('/technician/profile')
+        navigate('/employee/department/tickets')  
         toast.success('Ticket submitted successfully')
       } catch (error) {
         toast.error('An error occurred while creating the ticket')

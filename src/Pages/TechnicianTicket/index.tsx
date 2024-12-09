@@ -129,7 +129,7 @@ export default function () {
                 <p className='font-bold text-[12px] md:text-[17px]'>
                   Submitted By:
                   <span className='font-medium text-[10px] md:text-[16px]'>
-                    {t?.device?.owner?.fname} {t?.device?.owner?.lname}
+                    {t?.device?.owner?.fullname}
                   </span>{' '}
                   from{' '}
                   <span className='font-medium text-[10px] md:text-[16px] m-1'>

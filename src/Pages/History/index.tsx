@@ -118,7 +118,7 @@ export default function History () {
           <FadeLoader color='#FFB6C1' loading={true} height={15} width={5} />
         </div>
       ) : (
-        <div className='max-w-full p-4 m-6 overflow-hidden bg-white rounded-lg sm:p-6 lg:p-8 md:w-full'>
+        <div className='max-w-full p-4 m-6 overflow-hidden bg-white rounded-lg sm:p-6 lg:p-8 md:w-[1200px]'>
           <div className='flex items-center justify-end'>
             <input
               type='text'

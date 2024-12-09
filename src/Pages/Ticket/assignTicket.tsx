@@ -52,7 +52,7 @@ export default function () {
   }
 
   const filteredUsers = users?.filter(
-    u => u?.role === 'Technician' && u?.isAuthorized === true
+    u => u?.role === 'Technician'
   )
 
   const selectedUser = users?.find(u => u?._id === formik.values.assignee)
@@ -79,7 +79,7 @@ export default function () {
               <h3>
                 Submitted by:
                 <span>
-                  {ticket?.device?.owner?.fname} {ticket?.device?.owner?.lname}
+                  {ticket?.device?.owner?.fullname}
                 </span>
               </h3>
               <p>{ticket?.device?.owner?.department?.department_name}</p>
@@ -102,37 +102,18 @@ export default function () {
                 </option>
                 {filteredUsers?.map(u => (
                   <option key={u?._id} value={u?._id}>
-                    {u?.fname} {u?.lname}
+                    {u?.fullname}
                   </option>
                 ))}
               </select>
             </div>
             <div className='mt-1 flex flex-col text-left'>
               <h3 className='font-bold'>Technician Info</h3>
-              <div className='flex justify-center items-center rounded-full'>
-                {selectedUser && selectedUser?.image?.length > 1 ? (
-                  <img
-                    className='w-[130px] h-[130px] md:w-[180px] md:h-[200px] shadow-md object-cover'
-                    src={
-                      selectedUser?.image[
-                        Math.floor(Math.random() * selectedUser?.image.length)
-                      ]?.url
-                    }
-                    alt='test image'
-                  />
-                ) : (
-                  <img
-                    className='rounded-full md:w-56 md:h-56'
-                    src={selectedUser?.image[0]?.url || ''}
-                    alt='image'
-                  />
-                )}
-              </div>
 
               <p className='text-md mt-1 font-bold'>
                 Technician Name:{' '}
                 <span className='font-normal'>
-                  {selectedUser?.fname} {selectedUser?.lname}
+                  {selectedUser?.fullname}
                 </span>
               </p>
               <p className='text-md mt-1 font-bold'>
@@ -286,7 +267,7 @@ export default function () {
                 </option>
                 {filteredUsers?.map(u => (
                   <option key={u?._id} value={u?._id}>
-                    {u?.fname} {u?.lname}
+                    {u?.fullname}
                   </option>
                 ))}
               </select>

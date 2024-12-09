@@ -43,9 +43,6 @@ const useUserStore = create<UserState>((set) => ({
     const res = await api.patch(
       `${import.meta.env.VITE_API_URI}${PATH.EDIT_USER_ROUTE.replace(":id", id)}`,
       formData,
-      {
-        headers: multipart
-      }
     );
 
     set({ user: res.data.details, loading: false, error: null });
@@ -60,27 +57,30 @@ const useUserStore = create<UserState>((set) => ({
     set({ user: res.data.details, loading: false, error: null });
   },
 
-  activateUserById: async (id) => {
+  changePassword: async (id, formData) => {
     const res = await api.patch(
-      `${import.meta.env.VITE_API_URI}${PATH.ACTIVATE_USER_ROUTE.replace(":id", id)}`,
+      `${import.meta.env.VITE_API_URI}${PATH.CHANGE_PASSWORD_ROUTE.replace(":id", id)}`,
+      formData,
+      {
+        headers: multipart
+      }
+    );
+
+    if(!res){
+      set({ user: null, loading: false, error: "Incorrect Password" }); 
+    }
+
+    set({ user: res.data.details, loading: false, error: null });
+    return res.data.details;
+  },
+  resetPassword: async (id) => {
+    const res = await api.patch(
+      `${import.meta.env.VITE_API_URI}${PATH.RESET_PASSWORD_ROUTE.replace(":id", id)}`
     );
 
     set({ user: res.data.details, loading: false, error: null });
-  },
-
-  userProfile: async (id) => {
-    const res = await api.get(
-      `${import.meta.env.VITE_API_URI}${PATH.USER_PROFILE_ROUTE.replace(":id", id)}`
-    );
-
-    set({
-      user: res.data.details,
-      loading: false,
-      error: null
-    });
-
-    return res.data.details;
   }
+
 }));
 
 export { useUserStore };

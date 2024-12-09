@@ -10,14 +10,10 @@ export default function () {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const { logout, user } = useAuthenticationStore()
 
-  const [isTicket, setTicketMenu] = useState(false)
+  const [isTicket] = useState(false)
 
   const login = () => {
     navigate('/login')
-  }
-
-  const profile = () => {
-    navigate('/employee/profile')
   }
 
   const signup = () => {
@@ -26,10 +22,6 @@ export default function () {
 
   const devices = () => {
     navigate('/employee/device')
-  }
-
-  const ticket = () => {
-    navigate('/ticket/create')
   }
 
   const submittedTickets = () => {
@@ -81,13 +73,6 @@ export default function () {
           </li>
 
           <li
-            onClick={ticket}
-            className='hover:text-white p-2 m-2 text-sm cursor-pointer transition duration-300 hover:bg-gray-700 rounded md:text-sm'
-          >
-            <i className='m-1 fa-solid fa-plus'></i>Submit Ticket
-          </li>
-
-          <li
             onClick={devices}
             className='hover:text-white p-2 m-2 text-sm cursor-pointer transition duration-300 hover:bg-gray-700 rounded md:text-sm'
           >
@@ -110,12 +95,6 @@ export default function () {
                 }`}
               >
                 <ul onClick={() => setIsDropdownOpen(false)}>
-                  <li
-                    onClick={profile}
-                    className='text-white p-2 text-sm cursor-pointer hover:bg-gray-600'
-                  >
-                    <i className='fa-solid fa-circle-user m-1'></i>User Profile
-                  </li>
                   <li
                     onClick={handleLogout}
                     className='text-white p-2 text-sm cursor-pointer hover:bg-gray-600'

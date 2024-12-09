@@ -62,7 +62,7 @@ export default function () {
                 type='text'
                 name='assignee'
                 readOnly
-                placeholder={ history?.ticket?.assignee?.fname + ' ' +  history?.ticket?.assignee?.lname}    
+                placeholder={ history?.ticket?.assignee?.fullname}    
                 className='p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
               />
             </div>

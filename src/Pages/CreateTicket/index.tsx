@@ -106,6 +106,11 @@ export default function () {
                 </option>
               ))}
             </select>
+            {formik.touched.device && formik.errors.device ? (
+              <div className='text-sm text-red-500'>
+                {formik.errors.device}
+              </div>
+            ) : null}
           </div>
 
           <div className='flex flex-col'>
@@ -128,6 +133,11 @@ export default function () {
                 </option>
               ))}
             </select>
+            {formik.touched.category && formik.errors.category ? (
+              <div className='text-sm text-red-500'>
+                {formik.errors.category}
+              </div>
+            ) : null}
           </div>
 
           <div className='flex flex-col'>
@@ -141,6 +151,11 @@ export default function () {
               value={formik.values.description}
               className='h-[125px] w-full p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
             />
+             {formik.touched.description && formik.errors.description ? (
+              <div className='text-sm text-red-500'>
+                {formik.errors.description}
+              </div>
+            ) : null}
           </div>
 
           <div className='flex flex-col'>
@@ -159,11 +174,16 @@ export default function () {
             />
           </div>
           <div className='flex justify-center mt-4'>
-            <button
+          <button
               type='submit'
-              className='w-full px-4 py-2 text-lg font-medium text-white transition duration-700 bg-black border border-gray-500 rounded-md hover:opacity-80'
+              className={`w-full px-4 py-2 text-lg font-medium text-white transition duration-700 bg-gray-700 border border-gray-500 rounded-md ${
+                !formik.isValid
+                  ? 'opacity-50 cursor-not-allowed'
+                  : 'hover:opacity-80'
+              }`}
+              disabled={!formik.isValid}
             >
-              Create Ticket
+              Submit Ticket
             </button>
           </div>
         </div>

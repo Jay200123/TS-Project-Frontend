@@ -27,14 +27,6 @@ export default function () {
     navigate('/users')
   }
 
-  const approve = () => {
-    navigate('/approve-users')
-  }
-
-  const profile = () => {
-    navigate('/admin-profile')
-  }
-
   const departments = () => {
     navigate('/departments')
   }
@@ -181,18 +173,6 @@ export default function () {
                   className='flex flex-col gap-1'
                   onClick={() => setIsDropdownOpen(false)}
                 >
-                  <li
-                    onClick={profile}
-                    className='flex items-center gap-2 p-2 text-sm text-white cursor-pointer hover:bg-gray-600'
-                  >
-                    <i className='fa-solid fa-circle-user'></i> User Profile
-                  </li>
-                  <li
-                    onClick={approve}
-                    className='flex items-center gap-2 p-2 text-sm text-white cursor-pointer hover:bg-gray-600'
-                  >
-                    <i className='fa-solid fa-circle-user'></i> Approve Users
-                  </li>
                   <li
                     onClick={handleLogout}
                     className='flex items-center gap-2 p-2 text-sm text-white cursor-pointer hover:bg-gray-600'

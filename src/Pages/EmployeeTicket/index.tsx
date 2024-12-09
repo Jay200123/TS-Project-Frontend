@@ -21,7 +21,7 @@ export default function () {
   )
 
   return (
-    <div className='p-[16px] relative'>
+    <div className=' relative w-full '>
       <div className='absolute p-1 top-1 w-[600px] left-1'>
         <div className='flex items-center justify-between'>
           <h3 className='text-sm md:text-2xl font-bold'>{ filteredTickets.length === 0 ? "No Tickets Yet" : "My Tickets"}</h3>
@@ -44,7 +44,7 @@ export default function () {
         </div>
       </div>
       {filteredTickets.map(t => (
-        <div key={t?._id} className='p-6 flex flex-col justify-evenly'>
+        <div key={t?._id} className='p-6 flex flex-col justify-evenly w-[1200px]'>
           <div className='flex-col flex md:flex-row items-center justify-start p-2 m-4 sm:h-[300px] md:h-[450px] overflow-hidden rounded-md shadow-lg border border-gray'>
             <div className='flex flex-col items-center justify-center w-1/4 p-2 m-2'>
               <h3 className='text-xs md:text-lg font-bold text-center'>

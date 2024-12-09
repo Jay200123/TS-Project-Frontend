@@ -5,8 +5,10 @@ import DataTable, { TableColumn } from 'react-data-table-component'
 import { Ticket } from '../../interface'
 import FadeLoader from 'react-spinners/FadeLoader'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export default function () {
+  const navigate = useNavigate()
   const { user } = useAuthenticationStore()
   const { tickets, getAllTickets, loading } = useTicketStore()
   const [setTicket, setSelectedTicket] = useState('')
@@ -30,6 +32,10 @@ export default function () {
     ticket._id.includes(setTicket)
   )
 
+  const ticket = () => {
+    navigate('/ticket/create')
+  }
+
   const columns: TableColumn<Ticket>[] = [
     {
       name: 'Ticket ID',
@@ -38,8 +44,7 @@ export default function () {
     },
     {
       name: 'User',
-      selector: row =>
-        `${row?.device?.owner?.fname} ${row?.device?.owner?.lname}`,
+      selector: row => `${row?.device?.owner?.fullname}`,
       sortable: true
     },
     {
@@ -103,9 +108,7 @@ export default function () {
     {
       name: 'Technician',
       selector: row =>
-        row?.assignee
-          ? `${row?.assignee?.fname} ${row?.assignee?.lname}`
-          : 'Not Assigned',
+        row?.assignee ? `${row?.assignee?.fullname}` : 'Not Assigned',
       sortable: true
     }
   ]
@@ -119,13 +122,19 @@ export default function () {
       ) : (
         <div>
           <div className='max-w-full p-4overflow-hidden bg-transparent rounded-lg sm:p-6 lg:p-8 sm:max-w-6xl'>
-            <div className='flex items-center justify-end'>
+            <div className='flex items-center justify-between'>
               <input
                 type='text'
                 className='w-1/4 p-1 mb-4 border border-gray-300 rounded-lg placeholder:text-black'
                 onChange={e => setSelectedTicket(e.target.value)}
                 placeholder='Find Ticket by ID (Enter Ticket ID)'
               />
+              <button
+                onClick={() => ticket()}
+                className='text-[16px] bg-gray-700 text-white p-[15px] rounded-md transition-all duration-500  hover:bg-white hover:text-black border border-gray-700'
+              >
+                Create Ticket<i className='fa fa-plus ml-[2px]'></i>
+              </button>
             </div>
             <DataTable
               title='Ticket Records'

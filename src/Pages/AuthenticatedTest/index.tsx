@@ -1,4 +1,4 @@
-import { useAuthenticationStore, useUserStore } from '../../state/store'
+import { useAuthenticationStore } from '../../state/store'
 // import { useQuery } from '@tanstack/react-query';
 
 export default function(){
@@ -16,7 +16,7 @@ export default function(){
 
     return (
         <>
-        <h3>You are authenticated! { user?.fname}</h3>
+        <h3>You are authenticated! { user?.fullname}</h3>
         </>
     )
 }

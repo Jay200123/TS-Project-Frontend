@@ -184,7 +184,7 @@ export default function () {
                 </option>
                 {users?.map(u => (
                   <option key={u?._id} value={u?._id}>
-                    {u?.fname} {u?.lname}
+                    {u?.fullname}
                   </option>
                 ))}
               </select>

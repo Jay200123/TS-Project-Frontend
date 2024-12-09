@@ -36,7 +36,7 @@ export default function History () {
     {
       name: 'User',
       selector: row =>
-        `${row.ticket?.device?.owner.fname} ${row.ticket?.device?.owner.lname}`,
+        `${row.ticket?.device?.owner.fullname}`,
       sortable: true
     },
     {
@@ -118,7 +118,7 @@ export default function History () {
           <FadeLoader color='#FFB6C1' loading={true} height={15} width={5} />
         </div>
       ) : (
-        <div className='max-w-full p-4 m-6 overflow-hidden bg-white rounded-lg sm:p-6 lg:p-8 sm:max-w-6xl'>
+        <div className='max-w-full p-4 m-6 overflow-hidden bg-white rounded-lg sm:p-6 lg:p-8 md:w-full'>
           <div className='flex items-center justify-end'>
             <input
               type='text'

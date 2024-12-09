@@ -22,9 +22,9 @@ export default function () {
 
   return (
     <div className='p-[16px] relative'>
-      <div className='absolute p-1 top-1 w-full left-1'>
+      <div className='absolute p-1 top-1 w-[600px] left-1'>
         <div className='flex items-center justify-between'>
-          <h3 className='text-sm md:text-2xl font-bold'>My Tickets</h3>
+          <h3 className='text-sm md:text-2xl font-bold'>{ filteredTickets.length === 0 ? "No Tickets Yet" : "My Tickets"}</h3>
 
           <div className='flex flex-col mr-2'>
             <select
@@ -144,7 +144,7 @@ export default function () {
                 <p className='font-bold text-[12px] md:text-[17px]'>
                   Technician:
                   <span className='font-medium text-[10px] md:text-[16px] m-1'>
-                    {t?.assignee ? `${t?.assignee?.fname} ${t?.assignee?.lname}` : 'Not Assigned'}
+                    {t?.assignee ? `${t?.assignee?.fullname}` : 'Not Assigned'}
                   </span>
                 </p>
               </div>

@@ -28,4 +28,7 @@ export const PATH = {
     HISTORY_ID_ROUTE:'/history/:id',
     EDIT_HISTORY_ROUTE:'/history/edit/:id',
     CLAIM_TICKET_ID_ROUTE:'/ticket/claim/:id',
+    CHANGE_PASSWORD_ROUTE:'/change/password/:id',
+    RESET_PASSWORD_ROUTE:'/reset/password/:id',    
+
 }

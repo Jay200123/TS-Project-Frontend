@@ -46,13 +46,9 @@ export default function () {
       branch: user?.branch || '',
       department: user?.department || '',
       position: user?.position || '',
-      fname: user?.fname || '',
-      lname: user?.lname || '',
+      fullname: user?.fullname || '',
       phone: user?.phone || '',
-      address: user?.address || '',
-      city: user?.city || '',
       email: user?.email || '',
-      image: user?.image || [],
     },
     validationSchema: editUserValidationSchema,
     onSubmit: async values => {
@@ -60,29 +56,15 @@ export default function () {
       formData.append('branch', values?.branch.toString())
       formData.append('department', values?.department?.toString())
       formData.append('position', values?.position?.toString())
-      formData.append('fname', values?.fname)
-      formData.append('lname', values?.lname)
+      formData.append('fullname', values?.fullname)
       formData.append('phone', values?.phone)
-      formData.append('address', values?.address)
-      formData.append('city', values?.city)
       formData.append('email', values?.email)
-     Array.from(values?.image).forEach((files: any) => {
-        formData.append('image', files)
-      })
-
       try {
-        const res = await updateUserById(user?._id!, formData)
-        toast.success('User Profile Successfully Updated')
-
-        if (res.role === 'Admin') {
-          navigate('/admin/profile')
-        } else if (res.role === 'Technician') {
-          navigate('/technician/profile')
-        } else {
-          navigate('/employee/profile')
-        }
+        await updateUserById(user?._id!, formData)
+        toast.success('User Information Successfully Updated')
+        navigate(`/users`);
       } catch (error) {
-        toast.error('User Registration failed')
+        toast.error('User Update information failed to update')
 
         if (error instanceof Error) {
           toast.error(error.message)
@@ -91,20 +73,8 @@ export default function () {
         }
       }
     }
-  })
+  }) 
 
-  const filteredDepartments = departments?.filter(
-    d => d.branch._id === formik.values.branch
-  )
-
-  const filteredPositions = positions?.filter(
-    p => p.department._id === formik.values.department
-  )
-
-  const randomImage =
-    Array.isArray(user?.image) && user.image.length > 0
-      ? user.image[Math.floor(Math.random() * user.image.length)]
-      : null
 
       const back = () => {  
         window.history.back()
@@ -117,37 +87,7 @@ export default function () {
     >
       <div className='relative flex flex-col w-full max-w-5xl p-6 space-y-6 bg-white border border-gray-400 rounded-lg shadow-md md:flex-row md:space-y-0 md:space-x-6'>
         <h3 onClick={back} className='absolute m-1 text-3xl transition-all duration-500 cursor-pointer top-1 left-1 hover:text-gray-700'><i className="fa-solid fa-arrow-left"></i></h3>
-        <div className='hidden w-full mr-12 md:w-1/2 md:block'>
-          <div className='flex flex-col items-center justify-center'>
-            <h3 className='mb-2 text-3xl font-bold text-center'>User Profile</h3>
-            <img
-              className='object-cover border border-black w-[280px] h-[280px] m-1 rounded-l-lg'
-              src={randomImage?.url}
-              alt={randomImage?.originalname}
-            />
-            <h3 className='mt-1 text-2xl font-bold'>
-              {user?.fname} <span> {user?.lname}</span>
-            </h3>
-            <div className='flex flex-col'>
-            <label className='mb-1 text-sm font-medium text-gray-700'>
-              <i className='mr-1 fa-solid fa-image'></i> Profile Image
-            </label>
-            <input
-              type='file'
-              id='image'
-              name='image'
-              multiple
-              onBlur={formik.handleBlur}
-              onChange={(event) => {
-                const newFiles = Array.from(event.currentTarget.files || []);
-                const currentImages = formik.values.image;
-                formik.setFieldValue('image', [...currentImages, ...newFiles]);
-              }}
-            />
-          </div>
-          </div>
-        </div>
-        <div className='flex flex-col w-full space-y-4 md:w-1/2'>
+        <div className='flex flex-col w-full space-y-4 md:w-full'>
           <h2 className='text-2xl font-bold text-center text-gray-800 md:text-left'>
             Edit & Update Information
           </h2>
@@ -158,6 +98,7 @@ export default function () {
             </label>
             <select
               name='branch'
+              id='branch'
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.branch.toString()}
@@ -189,13 +130,14 @@ export default function () {
               name='department'
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
+              id='department'
               value={formik.values.department.toString()}
               className='p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
             >
               <option value='' disabled>
                 Select a Department
               </option>
-              {filteredDepartments?.map(d => (
+              {departments?.map(d => (
                 <option key={d._id} value={d._id}>
                   {d.department_name}
                 </option>
@@ -214,6 +156,7 @@ export default function () {
             </label>
             <select
               name='position'
+              id='position'
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.position.toString()}
@@ -222,7 +165,7 @@ export default function () {
               <option value='' disabled>
                 Select Your Position
               </option>
-              {filteredPositions?.map(p => (
+              {positions?.map(p => (
                 <option key={p._id} value={p._id}>
                   {p.position_name}
                 </option>
@@ -237,30 +180,15 @@ export default function () {
 
           <div className='flex flex-col'>
             <label className='mb-1 text-sm font-medium text-gray-700'>
-              <i className='mr-1 fa-solid fa-user'></i> First Name
+              <i className='mr-1 fa-solid fa-user'></i> Full Name
             </label>
             <input
               type='text'
-              id='fname'
-              name='fname'
+              id='fullname'
+              name='fullname'
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              value={formik.values.fname}
-              className='p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
-            />
-          </div>
-
-          <div className='flex flex-col'>
-            <label className='mb-1 text-sm font-medium text-gray-700'>
-              <i className='mr-1 fa-solid fa-user'></i> Last Name
-            </label>
-            <input
-              type='text'
-              id='lname'
-              name='lname'
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.lname}
+              value={formik.values.fullname}
               className='p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
             />
           </div>
@@ -276,35 +204,6 @@ export default function () {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.phone}
-              className='p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
-            />
-          </div>
-
-          <div className='flex flex-col'>
-            <label className='mb-1 text-sm font-medium text-gray-700'>
-              <i className='mr-1 fa-solid fa-location-dot'></i> Address
-            </label>
-            <input
-              type='text'
-              id='address'
-              name='address'
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.address}
-              className='p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
-            />
-          </div>
-
-          <div className='flex flex-col'>
-            <label className='mb-1 text-sm font-medium text-gray-700'>
-              <i className='mr-1 fa-solid fa-city'></i> City
-            </label>
-            <input
-              type='text'
-              name='city'
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.city}
               className='p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
             />
           </div>

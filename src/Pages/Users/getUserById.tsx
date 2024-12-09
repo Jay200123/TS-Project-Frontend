@@ -1,4 +1,4 @@
-import { useUserStore } from "../../state/store";
+import { useUserStore, useBranchStore, useDepartmentStore, usePositionStore } from "../../state/store";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +7,9 @@ export default function () {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const { user, getOneUser } = useUserStore();
+  const { branch, getOneBranch } = useBranchStore();
+  const { department, getOneDepartment } = useDepartmentStore();
+  const { position, getOnePosition } = usePositionStore();
 
   useQuery({
     queryKey: ["user", id],
@@ -14,48 +17,84 @@ export default function () {
     enabled: !!id,
   });
 
+  useQuery({
+    queryKey: ["branch", user?.branch?.toString()],
+    queryFn: () => getOneBranch(user?.branch.toString()!),
+    enabled: !!user?.branch?.toString(),
+  });
+
+  useQuery({
+    queryKey: ["department", user?.department?.toString()],
+    queryFn: () => getOneDepartment(user?.department?.toString()!),
+    enabled: !!user?.department?.toString(),
+  });
+
+  useQuery({
+    queryKey: ["position", user?.position?.toString()],
+    queryFn: () => getOnePosition(user?.position?.toString()!),
+    enabled: !!user?.position?.toString(),
+  });
+
   const back = () => {
     navigate("/users"); 
   };
 
-  const randomImage =
-    Array.isArray(user?.image) && user.image.length > 0
-      ? user.image[Math.floor(Math.random() * user.image.length)]
-      : null;
-
   return (
-    <form className="flex items-center justify-center p-4 m-4">
+    <div className="flex items-center justify-center p-4 m-4">
       <div className="flex flex-col w-full max-w-5xl p-6 space-y-6 bg-white border border-gray-400 rounded-lg shadow-md md:flex-row md:space-y-0 md:space-x-6">
-        <div className="hidden w-full md:w-1/2 md:block mr-12">
-          <img className="object-cover max-w-sm max-h-sm rounded-l-lg" src={randomImage?.url} alt={randomImage?.originalname} />
-        </div>
-        <div className="flex flex-col w-full space-y-4 md:w-1/2">
+        <div className="flex flex-col w-full space-y-4 md:w-full">
           <h2 className="text-2xl font-bold text-center text-gray-800 md:text-left">
             User Details
           </h2>
-
+                    
           <div className="flex flex-col">
             <label className="mb-1 text-sm font-medium text-gray-700">
-              <i className="mr-1 fa-solid fa-user"></i> First Name
+            <i className="fa-solid fa-code-branch"></i>Branch
             </label>
             <input
               type="text"
-              name="fname"
+              name="branch"
               readOnly
-              placeholder={user?.fname}
+              placeholder={branch?.branch_name}
               className="p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
           <div className="flex flex-col">
             <label className="mb-1 text-sm font-medium text-gray-700">
-              <i className="mr-1 fa-solid fa-user"></i> Last Name
+            <i className="mr-1 fa-solid fa-building"></i>Department
             </label>
             <input
               type="text"
-              name="lname"
+              name="department"
               readOnly
-              placeholder={user?.lname}
+              placeholder={department?.department_name}
+              className="p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <div className="flex flex-col">
+            <label className="mb-1 text-sm font-medium text-gray-700">
+            <i className="mr-1 fa-solid fa-user"></i>Position
+            </label>
+            <input
+              type="text"
+              name="position"
+              readOnly
+              placeholder={position?.position_name}
+              className="p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <div className="flex flex-col">
+            <label className="mb-1 text-sm font-medium text-gray-700">
+              <i className="mr-1 fa-solid fa-user"></i> Full Name
+            </label>
+            <input
+              type="text"
+              name="fullname"
+              readOnly
+              placeholder={user?.fullname}
               className="p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
@@ -69,32 +108,6 @@ export default function () {
               name="phone"
               readOnly
               placeholder={user?.phone}
-              className="p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-
-          <div className="flex flex-col">
-            <label className="mb-1 text-sm font-medium text-gray-700">
-              <i className="mr-1 fa-solid fa-location-dot"></i> Address
-            </label>
-            <input
-              type="text"
-              name="address"
-              readOnly
-              placeholder={user?.address}
-              className="p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-
-          <div className="flex flex-col">
-            <label className="mb-1 text-sm font-medium text-gray-700">
-              <i className="mr-1 fa-solid fa-city"></i> City
-            </label>
-            <input
-              type="text"
-              name="city"
-              readOnly
-              placeholder={user?.city}
               className="p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
@@ -119,6 +132,6 @@ export default function () {
           </div>
         </div>
       </div>
-    </form>
+    </div>
   );
 }

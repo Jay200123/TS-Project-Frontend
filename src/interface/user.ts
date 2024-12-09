@@ -3,6 +3,7 @@ import { Department } from "./department";
 import { Position } from "./position";
 interface User {
     _id: string;
+    idnumber: string;
     fullname: string;   
     phone: string;
     email: string;

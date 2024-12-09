@@ -334,7 +334,7 @@ export default function () {
                 type='submit'
                 className='w-full px-4 py-2 text-lg font-medium text-white transition duration-700 bg-black border border-gray-500 rounded-md hover:opacity-80'
               >
-                Create
+              Update Device
               </button>
             </div>
           </div>

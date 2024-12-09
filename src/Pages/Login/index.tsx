@@ -20,23 +20,18 @@ export default function () {
     validationSchema: authenticationValidationSchema,
     onSubmit: async values => {
       const res = await login(values.email, values.password)
-
-      //means at the login state the user's isAuthorized is false 
-      if (res == null) {  
-        sessionStorage.removeItem('user-auth')
-        return toast.error('Please wait for admin approval')
-      }
-
-      //means the user registration is approve by th admin 
-      if (res.isAuthorized) {
-        toast.success('Login Successful') 
-        if(res.role === "Admin"){
-          navigate('/dashboard')    
-        }else if (res.role === "Technician"){  
-          navigate('/technician/profile')
-        }else {
-          navigate('/employee/profile')
+      if (res.isPasswordChanged) {
+        toast.success('Login Successful')
+        if (res.role === 'Admin') {
+          navigate('/dashboard')
+        } else if (res.role === 'Technician') {
+          navigate('/technician/all-tickets')
+        } else if (res?.role === 'Employee') {
+          navigate('/employee/department/tickets')
         }
+      } else {
+        toast.error('Please change your password')  
+        navigate('/change/password')
       }
     }
   })

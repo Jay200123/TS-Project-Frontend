@@ -33,7 +33,7 @@ export default function () {
   const columns: TableColumn<Device>[] = [
     {
       name: 'Owner',
-      selector: row => `${row.owner.fname} ${row.owner.lname}`,
+      selector: row => `${row.owner.fullname}`,
       sortable: true
     },
     {
@@ -115,7 +115,7 @@ export default function () {
           <FadeLoader color='#FFB6C1' loading={true} height={15} width={5} />
         </div>
       ) : (
-        <div className='max-w-full p-4 m-6 overflow-hidden bg-white rounded-lg sm:p-6 lg:p-8 sm:max-w-6xl'>
+        <div className='max-w-full p-4 m-6 overflow-hidden bg-none rounded-lg sm:p-6 lg:p-8 md:w-full'>
            <div className='flex items-center justify-between m-2'>
            <div className='flex flex-col'>
               <label className='mb-1 text-sm font-medium text-gray-700'>

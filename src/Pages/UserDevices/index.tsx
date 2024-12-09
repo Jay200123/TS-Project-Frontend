@@ -3,10 +3,8 @@ import {
   useAuthenticationStore,
   useDeviceStore,
 } from '../../state/store'
-import { useNavigate } from 'react-router-dom'
 
 export default function () {
-  const navigate = useNavigate()
   const { user: auth } = useAuthenticationStore()
   const { devices, getAllDevices } = useDeviceStore()
 
@@ -21,24 +19,6 @@ export default function () {
 
   return (
     <div className='p-7'>
-      <div className='flex items-center justify-end m-2 top-1 right-1'>
-
-        {auth?.role === 'Employee' ?  (
-            <button
-            onClick={() => navigate('/employee/create-device')}
-            className='text-sm top-1 right-1 bg-gray-700 text-white p-[15px] rounded-md transition-all duration-500  hover:bg-white hover:text-black border border-gray-700'
-          >
-            Add New Device<i className='fa fa-plus ml-[2px]'></i>
-          </button>
-        ) : (
-          <button
-            onClick={() => navigate('/technician/create-device')}
-            className='text-sm top-1 right-1 bg-gray-700 text-white p-[15px] rounded-md transition-all duration-500  hover:bg-white hover:text-black border border-gray-700'
-          >
-            Add New Device<i className='fa fa-plus ml-[2px]'></i>
-          </button>
-        )}
-      </div>
       {filteredDevices && filteredDevices.length > 0 ? (
         filteredDevices.map(d => (
           <div key={d?._id} className='relative flex flex-col justify-evenly'>

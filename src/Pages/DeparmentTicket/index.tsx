@@ -36,6 +36,20 @@ export default function () {
     navigate('/ticket/create')
   }
 
+  if (filteredTickets.length === 0) {
+    return (
+      <div className='flex flex-col p-2 items-center justify-center h-full'>
+        <h1 className='text-3xl text-gray-500'>No Tickets found</h1>
+        <button
+          onClick={() => ticket()}
+          className='text-[16px] m-2 bg-gray-700 text-white p-[15px] rounded-md transition-all duration-500  hover:bg-white hover:text-black border border-gray-700'
+        >
+          Create Ticket<i className='fa fa-plus ml-[2px]'></i>
+        </button>
+      </div>
+    )
+  }
+
   const columns: TableColumn<Ticket>[] = [
     {
       name: 'Ticket ID',
@@ -121,7 +135,7 @@ export default function () {
         </div>
       ) : (
         <div>
-          <div className='max-w-full p-4overflow-hidden bg-transparent rounded-lg sm:p-6 lg:p-8 sm:max-w-6xl'>
+          <div className='p-4 overflow-hidden bg-transparent rounded-lg w-full sm:p-6 lg:p-8 md:max-w-5xl h-full'>
             <div className='flex items-center justify-between'>
               <input
                 type='text'

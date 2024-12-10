@@ -7,26 +7,18 @@ export default function () {
   const navigate = useNavigate()
 
   const [isOpen, setIsOpen] = useState(false)
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const { logout, user } = useAuthenticationStore()
 
   const login = () => {
     navigate('/login')
   }
 
-  const signup = () => {
-    navigate('/signup')
-  }
-
   const tickets = () => {
     navigate('/technician/tickets')
   }
 
-  const devices = ()=>{
-    navigate('/technician/devices')
-  }
 
-  const alltickets  = ()=>{
+  const alltickets = () => {
     navigate('/technician/all-tickets')
   }
 
@@ -56,62 +48,34 @@ export default function () {
 
       <div className={`m-2 p-2 ${isOpen ? 'block' : 'hidden'} md:block`}>
         <ul className='flex flex-row items-start justify-start md:flex-row md:items-center'>
-        <li
+          <li
             onClick={alltickets}
             className='p-2 m-2 text-sm text-gray-700 transition duration-500 rounded cursor-pointer focus:outline-none hover:bg-gray-700 hover:text-white md:text-sm'
           >
-            <i className="fa-solid fa-ticket"></i>All Tickets
+            <i className='fa-solid fa-ticket'></i>All Tickets
           </li>
           <li
             onClick={tickets}
             className='p-2 m-2 text-sm text-gray-700 transition duration-500 rounded cursor-pointer focus:outline-none hover:bg-gray-700 hover:text-white md:text-sm'
           >
-            <i className="fa-solid fa-ticket"></i>My Tickets
+            <i className='fa-solid fa-ticket'></i>My Tickets
           </li>
-          <li onClick={devices} className='p-2 m-2 text-sm text-gray-700 transition duration-500 rounded cursor-pointer focus:outline-none hover:bg-gray-700 hover:text-white md:text-sm'>
-          <i className="fa-solid fa-computer"></i> Owned Device
-          </li>
-          <li
-            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            className='relative p-3 m-2 text-sm text-gray-700 transition duration-500 rounded cursor-pointer hover:text-white hover:bg-gray-700 md:text-sm'
-          >
-            <span>
-              <i className='m-1 fa-solid fa-bars'></i>Settings
-            </span>
-            <div
-              className={`absolute bg-gray-700 shadow-slate-300 top-full left-0 rounded shadow-md z-10 mt-2 p-2 transition-all duration-500 ease-in-out transform ${
-                isDropdownOpen
-                  ? 'opacity-100 scale-100'
-                  : 'opacity-0 scale-95 pointer-events-none'
-              }`}
+          {user ? (
+            <li
+              onClick={handleLogout}
+              className='text-black p-2 text-sm cursor-pointer transition-all duration-500 rounded-sm hover:bg-gray-600 hover:text-white'
             >
-              {user ? (
-                <ul onClick={() => setIsDropdownOpen(false)}>
-                  <li
-                    onClick={handleLogout}
-                    className='p-2 text-sm cursor-pointer text-white border-b-[1px] transition-all duration-500 hover:bg-white hover:text-black hover:rounded-md'
-                  >
-                    <i className='m-1 fa-solid fa-user-plus'></i> Logout
-                  </li>
-                </ul>
-              ) : (
-                <ul onClick={() => setIsDropdownOpen(false)}>
-                  <li
-                    onClick={login}
-                    className='p-2 text-sm cursor-pointer text-white border-b-[1px] transition-all duration-500 hover:bg-white hover:text-black hover:rounded-md'
-                  >
-                    <i className='m-1 fa-solid fa-unlock'></i>Sign In
-                  </li>
-                  <li
-                    onClick={signup}
-                    className='p-2 text-sm cursor-pointer text-white border-b-[1px] transition-all duration-500 hover:bg-white hover:text-black hover:rounded-md'
-                  >
-                    <i className='m-1 fa-solid fa-user-plus'></i> Sign Up
-                  </li>
-                </ul>
-              )}
-            </div>
-          </li>
+              <i className='fa-solid fa-arrow-right-from-bracket m-1'></i> Sign
+              Out
+            </li>
+          ) : (
+            <li
+              onClick={login}
+              className='p-2 m-2 text-sm text-gray-700 transition duration-500 rounded cursor-pointer hover:bg-gray-700 hover:text-white md:text-sm'
+            >
+              <i className='fa-solid fa-right-to-bracket'></i> Sign In
+            </li>
+          )}
         </ul>
       </div>
     </nav>

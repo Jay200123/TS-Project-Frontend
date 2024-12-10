@@ -34,7 +34,7 @@ export default function () {
     }
   }
 
-  const filteredUsers = users?.filter(u => u?.fullname.includes(findUser) || u?.idnumber.includes(findUser))
+  const filteredUsers = users?.filter(u => u?.fullname?.includes(findUser) || u?.idnumber?.includes(findUser))
 
   const columns: TableColumn<User>[] = [
     {

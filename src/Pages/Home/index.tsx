@@ -5,7 +5,7 @@ export default function () {
   const navigate = useNavigate();
   
   const signup = () => {  
-    navigate("/signup");
+    navigate("/login");
   }
   
   return (

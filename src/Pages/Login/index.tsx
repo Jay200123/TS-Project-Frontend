@@ -9,7 +9,7 @@ import { LoginImage } from '../../components'
 
 export default function () {
   const navigate = useNavigate()
-  const { login } = useAuthenticationStore()
+  const { login } = useAuthenticationStore()  
 
   const formik = useFormik<AuthenticationValues>({
     initialValues: {
@@ -19,19 +19,27 @@ export default function () {
 
     validationSchema: authenticationValidationSchema,
     onSubmit: async values => {
-      const res = await login(values.email, values.password)
-      if (res.isPasswordChanged) {
-        toast.success('Login Successful')
-        if (res.role === 'Admin') {
-          navigate('/dashboard')
-        } else if (res.role === 'Technician') {
-          navigate('/technician/all-tickets')
-        } else if (res?.role === 'Employee') {
-          navigate('/employee/department/tickets')
+      try {
+        const res = await login(values.email, values.password)
+        if (res.isPasswordChanged) {
+          toast.success('Login Successful')
+          if (res.role === 'Admin') {
+            navigate('/dashboard')
+          } else if (res.role === 'Technician') {
+            navigate('/technician/all-tickets')
+          } else if (res?.role === 'Employee') {
+            navigate('/employee/department/tickets')
+          }
+        } else {
+          toast.error('Please change your password')
+          navigate('/change/password')
         }
-      } else {
-        toast.error('Please change your password')  
-        navigate('/change/password')
+      } catch (err) {
+        toast.error('Invalid email or password', {
+          position: 'top-center', 
+          autoClose: 5000, 
+          closeOnClick: true,
+        });
       }
     }
   })

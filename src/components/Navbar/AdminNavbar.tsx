@@ -7,7 +7,6 @@ export default function () {
   const navigate = useNavigate()
 
   const [isOpen, setIsOpen] = useState(false)
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const [isTableOpen, setIsTableOpen] = useState(false)
   const { logout, user } = useAuthenticationStore()
 
@@ -15,9 +14,6 @@ export default function () {
     navigate('/login')
   }
 
-  const signup = () => {
-    navigate('/signup')
-  }
 
   const dashboard = () => {
     navigate('/dashboard')
@@ -43,7 +39,7 @@ export default function () {
     navigate('/devices')
   }
 
-  const tickets = () => { 
+  const tickets = () => {
     navigate('/tickets')
   }
 
@@ -81,9 +77,12 @@ export default function () {
             onClick={dashboard}
             className='p-2 m-2 text-sm transition duration-300 rounded cursor-pointer hover:bg-gray-700 hover:text-white md:text-sm'
           >
-            <i className="fa-solid fa-chart-simple"></i>Dashboard
+            <i className='fa-solid fa-chart-simple'></i>Dashboard
           </li>
-          <li onClick={tickets} className='p-2 m-2 text-sm transition duration-300 rounded cursor-pointer hover:bg-gray-700 hover:text-white md:text-sm'>
+          <li
+            onClick={tickets}
+            className='p-2 m-2 text-sm transition duration-300 rounded cursor-pointer hover:bg-gray-700 hover:text-white md:text-sm'
+          >
             <i className='m-1 fas fa-ticket'></i> Tickets
           </li>
 
@@ -138,14 +137,14 @@ export default function () {
                     onClick={devices}
                     className='flex items-center gap-2 p-2 text-sm text-white cursor-pointer hover:bg-gray-600'
                   >
-                    <i className="fa-solid fa-computer"></i> Devices
+                    <i className='fa-solid fa-computer'></i> Devices
                   </li>
 
                   <li
                     onClick={histories}
                     className='flex items-center gap-2 p-2 text-sm text-white cursor-pointer hover:bg-gray-600'
                   >
-                   <i className="fa-solid fa-hourglass-start"></i> History
+                    <i className='fa-solid fa-hourglass-start'></i> History
                   </li>
                 </ul>
               </div>
@@ -153,60 +152,22 @@ export default function () {
               <></>
             )}
           </li>
-
-          <li
-            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            className='relative p-3 m-2 text-sm transition duration-300 rounded cursor-pointer hover:bg-gray-700 hover:text-white md:text-sm'
-          >
-            <span>
-              <i className='m-1 fa-solid fa-bars'></i>Settings
-            </span>
-            {user ? (
-              <div
-                className={`absolute top-full left-0 bg-gray-700 rounded shadow-md z-10 mt-2 p-2 transition-all duration-300 ease-in-out transform ${
-                  isDropdownOpen
-                    ? 'opacity-100 scale-100'
-                    : 'opacity-0 scale-95 pointer-events-none'
-                }`}
-              >
-                <ul
-                  className='flex flex-col gap-1'
-                  onClick={() => setIsDropdownOpen(false)}
-                >
-                  <li
-                    onClick={handleLogout}
-                    className='flex items-center gap-2 p-2 text-sm text-white cursor-pointer hover:bg-gray-600'
-                  >
-                    <i className='fa-solid fa-arrow-right-from-bracket'></i>{' '}
-                    Sign Out
-                  </li>
-                </ul>
-              </div>
-            ) : (
-              <div
-                className={`absolute top-full left-0 bg-gray-700 rounded shadow-md z-10 mt-2 p-2 transition-all duration-300 ease-in-out transform ${
-                  isDropdownOpen
-                    ? 'opacity-100 scale-100'
-                    : 'opacity-0 scale-95 pointer-events-none'
-                }`}
-              >
-                <ul onClick={() => setIsDropdownOpen(false)}>
-                  <li
-                    onClick={login}
-                    className='p-2 text-sm cursor-pointer hover:bg-gray-600'
-                  >
-                    <i className='m-1 fa-solid fa-unlock'></i>Sign In
-                  </li>
-                  <li
-                    onClick={signup}
-                    className='p-2 text-sm cursor-pointer hover:bg-gray-600'
-                  >
-                    <i className='m-1 fa-solid fa-user-plus'></i> Sign Up
-                  </li>
-                </ul>
-              </div>
-            )}
-          </li>
+          {user ? (
+            <li
+              onClick={handleLogout}
+              className='text-black p-2 text-sm cursor-pointer transition-all duration-500 rounded-sm hover:bg-gray-600 hover:text-white'
+            >
+              <i className='fa-solid fa-arrow-right-from-bracket m-1'></i> Sign
+              Out
+            </li>
+          ) : (
+            <li
+              onClick={login}
+              className='p-2 m-2 text-sm text-gray-700 transition duration-500 rounded cursor-pointer hover:bg-gray-700 hover:text-white md:text-sm'
+            >
+              <i className='fa-solid fa-right-to-bracket'></i> Sign In
+            </li>
+          )}
         </ul>
       </div>
     </nav>

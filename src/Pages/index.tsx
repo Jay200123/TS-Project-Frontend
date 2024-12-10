@@ -37,6 +37,7 @@ import HistoryTable from './History'
 import GetHistoryById from './History/getHistoryById'
 import GetTicketDepartment from './DeparmentTicket'
 import ChangePassword from './ChangePassword'
+import GetHistoryByDeviceId from './History/getHistoryByDeviceId'
 
 export {
   Home,
@@ -77,5 +78,6 @@ export {
   HistoryTable,
   GetHistoryById,
   GetTicketDepartment,
-  ChangePassword
+  ChangePassword,
+  GetHistoryByDeviceId
 }

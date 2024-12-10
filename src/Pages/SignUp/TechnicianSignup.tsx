@@ -58,8 +58,8 @@ export default function () {
 
       try {
         await createUser(formData)
-        toast.success('Registration successful please wait for admin approval')
-        navigate('/login')
+        toast.success('Account created successfully') 
+        navigate('/users')
       } catch (error) {
         toast.error('User Registration failed')
 

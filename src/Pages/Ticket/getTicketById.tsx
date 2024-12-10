@@ -83,7 +83,7 @@ export default function () {
 
               <div className='flex flex-col'>
                 <label className='mb-1 text-sm font-medium text-gray-700'>
-                  <i className='mr-1 fa-solid fa-user'></i> Department
+                  <i className='mr-1 fa-solid fa-building'></i> Department
                 </label>
                 <input
                   type='text'
@@ -108,7 +108,7 @@ export default function () {
           {user?.role === 'Admin' || user?.role === 'Employee' ? (
             <div className='flex flex-col'>
               <label className='mb-1 text-sm font-medium text-gray-700'>
-                <i className='mr-1 fa-solid fa-phone'></i> Assignee
+                <i className='mr-1 fa-solid fa-user'></i> Assignee
               </label>
               <input
                 type='text'
@@ -124,7 +124,7 @@ export default function () {
 
           <div className='flex flex-col'>
             <label className='mb-1 text-sm font-medium text-gray-700'>
-              <i className='mr-1 fa-solid fa-phone'></i> Device
+              <i className='mr-1 fa-solid fa-computer'></i> Device
             </label>
             <input
               type='text'
@@ -149,7 +149,7 @@ export default function () {
 
           <div className='flex flex-col'>
             <label className='mb-1 text-sm font-medium text-gray-700'>
-              <i className='mr-1 fa-solid fa-user'></i> Device Description
+              <i className='mr-1 fa-solid fa-pencil'></i> Device Description
             </label>
             <textarea
               name='description'
@@ -161,7 +161,7 @@ export default function () {
 
           <div className='flex flex-col'>
             <label className='mb-1 text-sm font-medium text-gray-700'>
-              <i className='mr-1 fa-solid fa-phone'></i> Date Submitted
+              <i className='mr-1 fa-solid fa-calendar-days'></i> Date Submitted
             </label>
             <input
               type='text'
@@ -180,7 +180,7 @@ export default function () {
 
           <div className='flex flex-col'>
             <label className='mb-1 text-sm font-medium text-gray-700'>
-              <i className='mr-1 fa-solid fa-phone'></i> Date Resolved
+              <i className='mr-1 fa-solid fa-calendar-days'></i> Date Resolved
             </label>
             <input
               type='text'
@@ -199,7 +199,7 @@ export default function () {
 
           <div className='flex flex-col'>
             <label className='mb-1 text-sm font-medium text-gray-700'>
-              <i className='mr-1 fa-solid fa-phone'></i> Ticket Level
+              <i className='mr-1 fa-solid fa-star'></i> Ticket Level
             </label>
             <input
               type='text'
@@ -211,7 +211,7 @@ export default function () {
           </div>
           <div className='flex flex-col'>
             <label className='mb-1 text-sm font-medium text-gray-700'>
-              <i className='mr-1 fa-solid fa-phone'></i> Ticket Status
+              <i className='mr-1 fa-solid fa-circle-info'></i> Ticket Status
             </label>
             <input
               type='text'

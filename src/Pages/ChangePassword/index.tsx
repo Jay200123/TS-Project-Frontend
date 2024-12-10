@@ -30,6 +30,7 @@ export default function () {
 
       if (values?.newPassword !== values?.confirmPassword) {
         toast.error('Password does not match')
+        return;
       }
 
       const res = await changePassword(auth?._id!, formData)

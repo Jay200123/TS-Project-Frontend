@@ -57,12 +57,22 @@ export default function () {
     'Return'
   ]
 
+  const back = () => {
+    window.history.back()
+  }
+
   return (
     <form
       onSubmit={formik.handleSubmit}
-      className='flex items-center justify-center'
+      className=' flex items-center justify-center'
     >
-      <div className='flex flex-col m-5 w-full max-w-5xl p-6 space-y-6 bg-white border border-gray-400 rounded-lg shadow-md md:flex-row md:space-y-0 md:space-x-6'>
+      <div className='relative flex flex-col m-5 w-full max-w-5xl p-6 space-y-6 bg-white border border-gray-400 rounded-lg shadow-md md:flex-row md:space-y-0 md:space-x-6'>
+      <h3
+            onClick={back}
+            className='top-1 left-1 absolute text-3xl m-1 cursor-pointer transition-all duration-500 hover:text-gray-700'
+          >
+            <i className='fa-solid fa-arrow-left'></i>
+          </h3>
         <div className='hidden w-full mr-12 md:w-1/2 md:block'>
           <div className='flex flex-col items-center justify-center'>
             <h3 className='text-2xl mb-1 font-bold'>Ticket Image</h3>
@@ -96,6 +106,11 @@ export default function () {
                 placeholder='findings...'
                 className='p-2 w-[350px] h-[120px] placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
               />
+              {formik.touched.findings && formik.errors.findings ? (
+              <div className='text-sm text-red-500'>
+                {formik.errors.findings}
+              </div>
+            ) : null}
             </div>
           </div>
         </div>
@@ -202,6 +217,11 @@ export default function () {
                 </option>
               ))}
             </select>
+            {formik.touched.device_status && formik.errors.device_status ? (
+              <div className='text-sm text-red-500'>
+                {formik.errors.device_status}
+              </div>
+            ) : null}
           </div>
 
           <div className='flex flex-col'>
@@ -255,10 +275,15 @@ export default function () {
               }
               className='p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
             />
+            {formik.touched.date_resolved && formik.errors.date_resolved ? (
+              <div className='text-sm text-red-500'>
+                {formik.errors.date_resolved}
+              </div>
+            ) : null}
           </div>
           <div className='flex flex-col'>
             <label className='mb-1 text-sm font-medium text-gray-700'>
-              <i className='fa-solid fa-code-branch'></i> Technician
+              <i className='fa-solid fa-code-branch'></i> Status
             </label>
             <select
               name='status'
@@ -277,11 +302,21 @@ export default function () {
                 </option>
               ))}
             </select>
+            {formik.touched.status && formik.errors.status ? (
+              <div className='text-sm text-red-500'>
+                {formik.errors.status}
+              </div>
+            ) : null}
           </div>
           <div className='flex justify-center mt-4'>
-            <button
+          <button
               type='submit'
-              className='w-full px-4 py-2 text-lg font-medium text-white transition duration-700 bg-black border border-gray-500 rounded-md hover:opacity-80'
+              className={`w-full px-4 py-2 text-lg font-medium text-white transition duration-700 bg-gray-700 border border-gray-500 rounded-md ${
+                !formik.isValid
+                  ? 'opacity-50 cursor-not-allowed'
+                  : 'hover:opacity-80'
+              }`}
+              disabled={!formik.isValid}
             >
               Update Ticket
             </button>

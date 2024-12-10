@@ -8,16 +8,20 @@ import { useNavigate } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { tableCustomStyles } from '../../utils/tableCustomStyles'
 import { Position } from '../../interface'
+import { useState } from 'react'  
 
 export default function () {
   const navigate = useNavigate()
   const { positions, loading, getAllPositions, deletePositionById } =
     usePositionStore()
+    const[findPosition, setFindPosition] = useState('');  
 
   useQuery({
     queryKey: ['positions'],
     queryFn: getAllPositions
   });
+
+  const filteredPositions = positions?.filter(p => p?.position_name?.includes(findPosition) || p?.description?.includes(findPosition))
 
   const handleDelete = async (id: string) => {
     if (window.confirm('Are you sure you want to delete this Position?')) {
@@ -78,7 +82,13 @@ export default function () {
       ) : (
         <div>
           <div className='max-w-full p-4 overflow-hidden rounded-lg bg-none sm:p-6 lg:p-8 md:w-full'>
-          <div className='flex items-center justify-end m-2'>
+          <div className='flex items-center justify-between m-2'>
+          <input
+                type='text'
+                className='w-1/4 p-1 mb-4 border border-gray-300 rounded-lg placeholder:text-black'
+                onChange={e => setFindPosition(e.target.value)}
+                placeholder='Find Position'
+              />
             <button onClick={()=>navigate('/position/create')} 
              className='text-[16px] bg-gray-700 text-white p-[15px] rounded-md transition-all duration-500  hover:bg-white hover:text-black border border-gray-700'>
               Create Position<i className='fa fa-plus'></i>
@@ -87,7 +97,7 @@ export default function () {
             <DataTable
               title='Position Records'
               columns={columns}
-              data={positions}
+              data={filteredPositions}
               pagination
               highlightOnHover
               pointerOnHover

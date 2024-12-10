@@ -10,7 +10,7 @@ import editPositionValidationSchema from "./editPositionValidationSchema";
 import createDeviceValidationSchema from "./createDeviceValidationSchema";
 import editDeviceValidationSchema from "./editDeviceValidationSchema";
 import createTicketValidationSchema from "./createTicketValidationSchema";
-import editTicketByTechnicianValidationSchema from "../Pages/Ticket/editTicketByTechnician";
+import editTicketByTechnicianValidationSchema from "./editTicketByTechnicianValidationSchema";
 import editAssigneeValidationSchema from "./editTicketAssigneeValidationSchema";
 import editPasswordValidationSchema from "./changePasswordValidationSchema";
 

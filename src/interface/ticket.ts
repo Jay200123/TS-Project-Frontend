@@ -2,7 +2,7 @@ import { Device } from "./device";
 import { Image } from "./image";
 import { User } from "./user";
 
-type TicketStatus = "pending" | "resolved" | "in-progress" | "closed";
+type TicketStatus = "new" | "pending" | "resolved" | "in-progress" | "closed";
 type TicketCategory = "hardware" | "software" | "network";
 type TicketLevel = "urgent" | "priority" | "non-urgent";
 

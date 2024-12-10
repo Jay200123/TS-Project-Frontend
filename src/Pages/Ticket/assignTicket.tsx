@@ -5,6 +5,7 @@ import { useFormik } from 'formik'
 import { toast } from 'react-toastify'
 import { Image } from '../../components'
 import { editAssigneeValidationSchema } from '../../validations'
+import { level, ticketStatus } from '../../utils/arrays'
 
 export default function () {
   const navigate = useNavigate()
@@ -52,14 +53,10 @@ export default function () {
   }
 
   const filteredUsers = users?.filter(
-    u => u?.role === 'Technician'
+    u => u?.role === 'Technician' && u?.isPasswordChanged === true  
   )
 
   const selectedUser = users?.find(u => u?._id === formik.values.assignee)
-
-  const level = ['urgent', 'priority', 'non-urgent']
-
-  const status = ['pending', 'resolved', 'in-progress', 'closed']
 
   return (
     <>
@@ -242,7 +239,7 @@ export default function () {
                 <option value='' disabled>
                   {ticket?.status}
                 </option>
-                {status?.map((s, index) => (
+                {ticketStatus?.map((s, index) => (
                   <option key={index} value={s}>
                     {s}
                   </option>

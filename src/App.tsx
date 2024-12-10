@@ -42,7 +42,8 @@ import {
   HistoryTable,
   GetHistoryById,
   GetTicketDepartment,
-  ChangePassword
+  ChangePassword,
+  GetHistoryByDeviceId
 } from './Pages'
 import { ProtectedRoute } from './components'
 import {
@@ -67,7 +68,6 @@ function App () {
               <ProtectedRoute userRole={['Employee', 'Technician', 'Admin']}>
                 <ChangePassword />
               </ProtectedRoute>
-                
             }
           />
         </Route>
@@ -114,6 +114,14 @@ function App () {
               </ProtectedRoute>
             }
           />
+          <Route
+            path='/employee/history/device/:id'
+            element={
+              <ProtectedRoute userRole={['Employee']}>
+                <GetHistoryByDeviceId />
+              </ProtectedRoute>
+            }
+          />
         </Route>
 
         {/* Technician Private Routes */}
@@ -140,14 +148,6 @@ function App () {
             element={
               <ProtectedRoute userRole={['Technician']}>
                 <EditTicketByTechnician />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path='/technician/devices'
-            element={
-              <ProtectedRoute userRole={['Technician']}>
-                <UserDevices />
               </ProtectedRoute>
             }
           />
@@ -408,6 +408,14 @@ function App () {
             element={
               <ProtectedRoute userRole={['Admin']}>
                 <GetHistoryById />
+              </ProtectedRoute>
+            }
+          />
+           <Route
+            path='/history/device/:id'
+            element={
+              <ProtectedRoute userRole={['Admin']}>
+                <GetHistoryByDeviceId />
               </ProtectedRoute>
             }
           />

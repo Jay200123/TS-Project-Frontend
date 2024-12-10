@@ -128,6 +128,9 @@ export default function () {
               <div className='flex items-center justify-between mt-2'>
                 <p className='font-bold text-[12px] md:text-[17px]'>
                   Submitted By:
+                  <span className='font-medium text-[10px] md:text-[16px] mr-1'>
+                    {t?.device?.owner?.position?.position_name}
+                  </span>
                   <span className='font-medium text-[10px] md:text-[16px]'>
                     {t?.device?.owner?.fullname}
                   </span>{' '}

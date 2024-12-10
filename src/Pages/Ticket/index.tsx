@@ -2,22 +2,24 @@ import { useTicketStore, useAuthenticationStore } from '../../state/store'
 import { useQuery } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import {
-  FaEye,
-  FaTrash,
-  FaCheckCircle,
-  FaUserAlt,
-} from 'react-icons/fa'
+import { FaEye, FaTrash, FaCheckCircle, FaUserAlt } from 'react-icons/fa'
 import DataTable, { TableColumn } from 'react-data-table-component'
 import { tableCustomStyles } from '../../utils/tableCustomStyles'
 import { Ticket } from '../../interface'
 import FadeLoader from 'react-spinners/FadeLoader'
 import { useState } from 'react'
+import { TicketStatus } from '../../interface'
 
 export default function () {
   const navigate = useNavigate()
-  const { tickets, loading, getAllTickets, deleteTicketById, closeTicketById, claimTicketById } =
-    useTicketStore()
+  const {
+    tickets,
+    loading,
+    getAllTickets,
+    deleteTicketById,
+    closeTicketById,
+    claimTicketById
+  } = useTicketStore()
   const { user: auth } = useAuthenticationStore()
   const [setTicket, setSelectedTicket] = useState('')
 
@@ -26,10 +28,26 @@ export default function () {
     queryFn: getAllTickets
   })
 
+  type StatusCount = Record<TicketStatus, number>
+
+  const statusCounts = tickets?.reduce<StatusCount>(
+    (acc, ticket) => {
+      acc[ticket?.status] = (acc[ticket?.status] || 0) + 1
+      return acc
+    },
+    {
+      new: 0,
+      pending: 0,
+      resolved: 0,
+      'in-progress': 0,
+      closed: 0
+    }
+  )
+
   const handleDelete = async (id: string) => {
     if (window.confirm('Are you sure you want to delete this Ticket?')) {
       await deleteTicketById(id)
-      window.location.reload();
+      window.location.reload()
       toast.success('Ticket Deleted Successfully')
     }
   }
@@ -37,22 +55,25 @@ export default function () {
   const handleCheck = async (id: string) => {
     if (window.confirm('Are you sure you want to close this Ticket?')) {
       await closeTicketById(id)
-      window.location.reload();
+      window.location.reload()
       toast.success('Ticket Closed Successfully')
     }
   }
 
   const handleAssign = async (id: string, assignee: string) => {
     if (window.confirm('Are you sure you want to assign this Ticket?')) {
-       await claimTicketById(id, assignee);
-       window.location.reload();
+      await claimTicketById(id, assignee)
+      window.location.reload()
       toast.success('Ticket Successfully Assigned')
     }
   }
 
-  const filteredTickets = tickets.filter(ticket =>
-    ticket._id.includes(setTicket)
-  )
+  const filteredTickets = tickets
+  .filter(ticket => ticket._id.includes(setTicket))
+  .sort((a, b) => {
+    const status = ['pending', 'in-progress', 'resolved', 'closed'];
+    return status.indexOf(a.status) - status.indexOf(b.status);
+  });
 
   const columns: TableColumn<Ticket>[] = [
     {
@@ -62,8 +83,7 @@ export default function () {
     },
     {
       name: 'User',
-      selector: row =>
-        `${row?.device?.owner?.fullname}`,
+      selector: row => `${row?.device?.owner?.fullname}`,
       sortable: true
     },
     {
@@ -125,11 +145,9 @@ export default function () {
       sortable: true
     },
     {
-      name: 'Technician',
+      name: 'Assigned to',
       selector: row =>
-        row?.assignee
-          ? `${row?.assignee?.fullname}`
-          : 'Not Assigned',
+        row?.assignee ? `${row?.assignee?.fullname}` : 'Not Assigned',
       sortable: true
     },
     {
@@ -195,7 +213,6 @@ export default function () {
                 className='mr-2 text-xl text-blue-500'
                 title='Assign Technician'
                 onClick={() => handleAssign(row._id, auth?._id.toString()!)}
-
               />
             )}
           </div>
@@ -204,14 +221,19 @@ export default function () {
   ]
 
   return (
-    <div  className='flex items-center justify-center'>
+    <div className='flex items-center justify-center'>
       {loading ? (
         <div className='mt-8 loader'>
           <FadeLoader color='#FFB6C1' loading={true} height={15} width={5} />
         </div>
       ) : (
         <div>
-          <div className='p-4 overflow-hidden bg-transparent rounded-lg sm:p-6 lg:p-8 w-[1250px]'>
+            <h3 className='text-lg font-semibold m-[2px] text-red-500'>New: {statusCounts?.new}</h3>
+            <h3 className='text-lg font-semibold m-[2px] text-orange-500'>Pending: {statusCounts?.pending}</h3>
+            <h3 className='text-lg font-semibold m-[2px] text-green-500'>Resolved: {statusCounts?.resolved}</h3>
+            <h3 className='text-lg font-semibold m-[2px] text-blue-500'>In Progress: {statusCounts?.['in-progress']}</h3>
+            <h3 className='text-lg font-semibold m-[2px] text-gray-500'>Closed: {statusCounts?.closed}</h3>
+          <div className='p-4 overflow-hidden bg-transparent rounded-lg w-full sm:p-6 lg:p-8 md:max-w-5xl h-full'>
             <div className='flex items-center justify-end'>
               <input
                 type='text'

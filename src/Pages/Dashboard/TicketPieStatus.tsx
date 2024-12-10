@@ -20,6 +20,7 @@ export default function () {
             return acc;
         },
         {
+            new: 0,
             pending: 0,
             resolved: 0,
             "in-progress": 0,

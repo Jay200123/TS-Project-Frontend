@@ -1,7 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
 import { useAuthenticationStore, useDeviceStore } from '../../state/store'
+import { useNavigate } from 'react-router-dom'
 
 export default function () {
+  const navigate = useNavigate()
   const { user: auth } = useAuthenticationStore()
   const { devices, getAllDevices } = useDeviceStore()
 
@@ -16,7 +18,7 @@ export default function () {
 
   return (
     <>
-    <h3 className='m-2 text-sm md:text-lg font-bold'>My Devices</h3>
+      <h3 className='m-2 text-sm md:text-lg font-bold'>My Devices</h3>
       {filteredDevices && filteredDevices.length > 0 ? (
         filteredDevices.map(d => (
           <div
@@ -91,6 +93,16 @@ export default function () {
                         : 'N/A'}
                     </span>
                   </p>
+                </div>
+                <div className='flex items-center justify-end'>
+                  <button
+                    className='p-2 m-[2px] text-[16px] font-semibold text-white bg-blue-500 rounded-md border border-blue-500 transition-all duration-500 hover:opacity-80'
+                    onClick={() =>
+                      navigate(`/employee/history/device/${d?._id}`)
+                    }
+                  >
+                   Device History
+                  </button>
                 </div>
               </div>
             </div>

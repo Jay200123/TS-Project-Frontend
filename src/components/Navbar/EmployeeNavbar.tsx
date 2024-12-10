@@ -7,7 +7,6 @@ export default function () {
   const navigate = useNavigate()
 
   const [isOpen, setIsOpen] = useState(false)
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const { logout, user } = useAuthenticationStore()
 
   const [isTicket] = useState(false)
@@ -16,9 +15,6 @@ export default function () {
     navigate('/login')
   }
 
-  const signup = () => {
-    navigate('/signup')
-  }
 
   const devices = () => {
     navigate('/employee/device')
@@ -79,56 +75,22 @@ export default function () {
             <i className='fa-solid fa-computer m-1'></i>My Devices
           </li>
 
-          <li
-            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            className='text-black hover:text-white relative m-2 p-3 text-sm cursor-pointer transition duration-300 hover:bg-gray-700 rounded md:text-sm'
-          >
-            <span>
-              <i className='fa-solid fa-bars m-1'></i>Settings
-            </span>
-            {user ? (
-              <div
-                className={`absolute top-full left-0 bg-gray-700 rounded shadow-md z-10 mt-2 p-2 transition-all duration-300 ease-in-out transform ${
-                  isDropdownOpen
-                    ? 'opacity-100 scale-100'
-                    : 'opacity-0 scale-95 pointer-events-none'
-                }`}
-              >
-                <ul onClick={() => setIsDropdownOpen(false)}>
-                  <li
-                    onClick={handleLogout}
-                    className='text-white p-2 text-sm cursor-pointer hover:bg-gray-600'
-                  >
-                    <i className='fa-solid fa-arrow-right-from-bracket m-1'></i>{' '}
-                    Sign Out
-                  </li>
-                </ul>
-              </div>
-            ) : (
-              <div
-                className={`absolute top-full left-0 bg-gray-700 rounded shadow-md z-10 mt-2 p-2 transition-all duration-300 ease-in-out transform ${
-                  isDropdownOpen
-                    ? 'opacity-100 scale-100'
-                    : 'opacity-0 scale-95 pointer-events-none'
-                }`}
-              >
-                <ul onClick={() => setIsDropdownOpen(false)}>
-                  <li
-                    onClick={login}
-                    className='hover:text-white p-2 text-sm cursor-pointer hover:bg-gray-600'
-                  >
-                    <i className='fa-solid fa-unlock m-1'></i>Sign In
-                  </li>
-                  <li
-                    onClick={signup}
-                    className='hover:text-white p-2 text-sm cursor-pointer hover:bg-gray-600'
-                  >
-                    <i className='fa-solid fa-user-plus m-1'></i> Sign Up
-                  </li>
-                </ul>
-              </div>
-            )}
-          </li>
+          {user ? (
+            <li
+              onClick={handleLogout}
+              className='text-black p-2 text-sm cursor-pointer transition-all duration-500 rounded-sm hover:bg-gray-600 hover:text-white'
+            >
+              <i className='fa-solid fa-arrow-right-from-bracket m-1'></i> Sign
+              Out
+            </li>
+          ) : (
+            <li
+              onClick={login}
+              className='p-2 m-2 text-sm text-gray-700 transition duration-500 rounded cursor-pointer hover:bg-gray-700 hover:text-white md:text-sm'
+            >
+              <i className='fa-solid fa-right-to-bracket'></i> Sign In
+            </li>
+          )}
         </ul>
       </div>
     </nav>

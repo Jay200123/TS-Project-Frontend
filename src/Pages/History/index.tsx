@@ -1,6 +1,6 @@
 import { useHistoryStore } from '../../state/store'
 import { useQuery } from '@tanstack/react-query'
-import { FaEye, FaTrash } from 'react-icons/fa'
+import { FaEye, FaTrash, FaHourglass } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import DataTable, { TableColumn } from 'react-data-table-component'
@@ -22,7 +22,7 @@ export default function History () {
 
  
   const filteredHistory = histories.filter((h) =>
-    h?.ticket._id.includes(setFilter) || h?.ticket?.device?._id.includes(setFilter) || h?.ticket?.device?.type.includes(setFilter)
+    h?.ticket._id.includes(setFilter) || h?.ticket?.device?.type?.includes(setFilter) || h?.ticket?.device?.type.includes(setFilter)
   );
 
   const handleDelete = async (id: string) => {
@@ -93,21 +93,21 @@ export default function History () {
     {
       name: 'Actions',
       cell: row => (
-        <div>
-          <button
+        <div className='flex items-center justify-between p-2'>
+          <FaEye
             onClick={() => navigate(`/history/${row._id}`)}
-            className='mr-2 text-green-500 btn btn-primary'
-          >
-            <FaEye />
-          </button>
-          <button
+            className='mr-2 text-green-500 text-[16px] '
+          />
+          <FaTrash
             onClick={() => handleDelete(row._id)}
-            className='text-red-500 btn btn-danger'
-          >
-            <FaTrash />
-          </button>
+            className='text-red-500 mr-2 text-[16px]'
+          />
+          <FaHourglass
+            onClick={() => navigate(`/history/device/${row.ticket.device._id}`)}
+            className='text-blue-500 mr-2 text-[16px]'
+          />
         </div>
-      )
+      ) 
     }
   ]
 
@@ -124,7 +124,7 @@ export default function History () {
               type='text'
               className='w-1/4 p-1 mb-4 border border-gray-300 rounded-lg placeholder:text-black'
               onChange={e => setSelectedFilter(e.target.value)}
-              placeholder='Enter device or Ticket ID'
+              placeholder='Enter Ticket ID or Device Type'
             />
           </div>
           <DataTable

@@ -1,6 +1,5 @@
 import { useDeviceStore } from "../../state/store";
 import { useQuery } from "@tanstack/react-query";
-import { DeviceStatus } from "../../interface";
 import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -10,6 +9,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import { DeviceStatusCount } from "../../interface";
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
@@ -21,9 +21,8 @@ export default function () {
     queryFn: getAllDevices,
   });
 
-  type StatusCount = Record<DeviceStatus, number>;
 
-  const statusCounts = devices?.reduce<StatusCount>(
+  const statusCounts = devices?.reduce<DeviceStatusCount>(
     (acc, device) => {
       acc[device.status] = (acc[device.status] || 0) + 1;
       return acc;

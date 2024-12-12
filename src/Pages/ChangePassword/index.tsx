@@ -11,20 +11,17 @@ export default function () {
   const { error, user: auth } = useAuthenticationStore()
   const { changePassword } = useUserStore()
 
-  const [showPassword, setShowPassword] = useState(false)
   const [showNewPassword, setShowNewPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
   const formik = useFormik({
     initialValues: {
-      password: '',
       newPassword: '',
       confirmPassword: ''
     },
     validationSchema: editPasswordValidationSchema,
     onSubmit: async values => {
       const formData = new FormData()
-      formData.append('password', values.password)
       formData.append('newPassword', values.newPassword)
       formData.append('confirmPassword', values.confirmPassword)
 
@@ -48,9 +45,6 @@ export default function () {
     }
   })
 
-  const togglePassword = () => {
-    setShowPassword(!showPassword)
-  }
 
   const toggleNewPassword = () => {
     setShowNewPassword(!showNewPassword)
@@ -70,38 +64,6 @@ export default function () {
           <h2 className='text-2xl font-bold text-center text-gray-800 md:text-left'>
             Change Password
           </h2>
-          <div className='flex flex-col'>
-            <label className='mb-1 text-sm font-medium text-gray-700'>
-              <i className='fa-solid fa-asterisk m-[2px]'></i>Default Password
-            </label>
-            <div className='flex items-center justify-start'>
-              <input
-                type={showPassword ? 'text' : 'password'}
-                name='password'
-                id='password'
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                value={formik.values.password}
-                className='p-2 w-full placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
-              />
-              {showPassword ? (
-                <FaEyeSlash
-                  onClick={() => togglePassword()}
-                  className={`text-lg -ml-7 cursor-pointer`}
-                />
-              ) : (
-                <FaEye
-                  onClick={() => togglePassword()}
-                  className={`text-lg -ml-7 cursor-pointer`}
-                />
-              )}
-            </div>
-            {formik.touched.password && formik.errors.password ? (
-              <div className='text-sm text-red-500'>
-                {formik.errors.password}
-              </div>
-            ) : null}
-          </div>
 
           <div className='flex flex-col'>
             <label className='mb-1 text-sm font-medium text-gray-700'>

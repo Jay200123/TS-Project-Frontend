@@ -1,6 +1,5 @@
 import { useDeviceStore } from "../../state/store";
 import { useQuery } from "@tanstack/react-query";
-import { DeviceType } from "../../interface";
 import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -10,6 +9,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import { TypeCount } from "../../interface";
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
@@ -20,8 +20,6 @@ export default function () {
     queryKey: ["devices"],
     queryFn: getAllDevices,
   });
-
-  type TypeCount = Record<DeviceType, number>;
 
   const typeCounts = devices?.reduce<TypeCount>(
     (acc, device) => {

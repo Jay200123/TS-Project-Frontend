@@ -77,8 +77,8 @@ export default function () {
 
   const columns: TableColumn<Ticket>[] = [
     {
-      name: 'Ticket ID',
-      selector: row => row?._id,
+      name: 'Ticket No.',
+      selector: row => row?.ticketNumber,
       sortable: true
     },
     {

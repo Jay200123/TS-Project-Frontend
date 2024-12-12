@@ -24,7 +24,7 @@ export default function () {
       (t?.device?.owner?.department?.department_name ===
         user?.department?.department_name &&
         t?.status === 'pending') ||
-      t?.status === 'in-progress'
+      t?.status === 'in-progress' ||  t?.status === 'new'
   )
 
   //will filter the ticket based on the ticket id on input textbox

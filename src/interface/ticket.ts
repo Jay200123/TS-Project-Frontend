@@ -17,6 +17,8 @@ interface Ticket {
   level: TicketLevel;
   assignee: User;
   findings: string;
+  counter: number;
+  ticketNumber: string;
   image: Image[];
 }
 

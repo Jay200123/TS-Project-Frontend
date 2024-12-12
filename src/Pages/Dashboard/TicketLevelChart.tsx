@@ -9,7 +9,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { TicketLevel } from "../../interface";
+import { TicketLevelCount } from "../../interface";
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
@@ -21,9 +21,7 @@ export default function () {
     queryFn: getAllTickets,
   });
 
-  type levelCounts = Record<TicketLevel, number>;
-
-  const levelCounts = tickets?.reduce<levelCounts>(
+  const levelCounts = tickets?.reduce<TicketLevelCount>(
     (acc, tickets) => {
       acc[tickets.level] = (acc[tickets.level] || 0) + 1;
       return acc;

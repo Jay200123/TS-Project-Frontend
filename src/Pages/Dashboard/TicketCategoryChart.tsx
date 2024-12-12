@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 ChartJS.register(ArcElement, Tooltip, Legend);
-import { TicketCategory } from "../../interface";
+import { TicketCategoryCount } from "../../interface";
 
 export default function () {
   const { tickets, getAllTickets } = useTicketStore();
@@ -12,9 +12,7 @@ export default function () {
     queryFn: getAllTickets,
   });
 
-  type StatusCount = Record<TicketCategory, number>;
-
-  const categoryCounts = tickets?.reduce<StatusCount>(
+  const categoryCounts = tickets?.reduce<TicketCategoryCount>(
     (acc, ticket) => {
       acc[ticket?.category] = (acc[ticket?.category] || 0) + 1;
       return acc;

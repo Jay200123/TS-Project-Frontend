@@ -19,10 +19,10 @@ export default function () {
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      date_resolved: ticket?.date_resolved || '',
       status: ticket?.status || '',
       findings: ticket?.findings || '',
-      device_status: ticket?.device?.status || ''
+      device_status: ticket?.device?.status || '',
+      image: ticket?.image || []
     },
     validationSchema: editTicketByTechnicianValidationSchema,
     onSubmit: async values => {
@@ -30,7 +30,10 @@ export default function () {
       formData.append('findings', values.findings)
       formData.append('status', values.status)
       formData.append('device_status', values?.device_status)
-      formData.append('date_resolved', values.date_resolved.toString())
+      Array.from(values?.image).forEach((files: any) => {
+        formData.append('image', files)
+      })
+
       try {
         await updateTicketById(ticket!._id, formData)
         toast.success('Ticket updated successfully')
@@ -67,12 +70,12 @@ export default function () {
       className=' flex items-center justify-center'
     >
       <div className='relative flex flex-col m-5 w-full max-w-5xl p-6 space-y-6 bg-white border border-gray-400 rounded-lg shadow-md md:flex-row md:space-y-0 md:space-x-6'>
-      <h3
-            onClick={back}
-            className='top-1 left-1 absolute text-3xl m-1 cursor-pointer transition-all duration-500 hover:text-gray-700'
-          >
-            <i className='fa-solid fa-arrow-left'></i>
-          </h3>
+        <h3
+          onClick={back}
+          className='top-1 left-1 absolute text-3xl m-1 cursor-pointer transition-all duration-500 hover:text-gray-700'
+        >
+          <i className='fa-solid fa-arrow-left'></i>
+        </h3>
         <div className='hidden w-full mr-12 md:w-1/2 md:block'>
           <div className='flex flex-col items-center justify-center'>
             <h3 className='text-2xl mb-1 font-bold'>Ticket Image</h3>
@@ -107,10 +110,10 @@ export default function () {
                 className='p-2 w-[350px] h-[120px] placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
               />
               {formik.touched.findings && formik.errors.findings ? (
-              <div className='text-sm text-red-500'>
-                {formik.errors.findings}
-              </div>
-            ) : null}
+                <div className='text-sm text-red-500'>
+                  {formik.errors.findings}
+                </div>
+              ) : null}
             </div>
           </div>
         </div>
@@ -127,8 +130,7 @@ export default function () {
               type='text'
               name='owner'
               readOnly
-              placeholder={
-                ticket?.device?.owner?.fullname}
+              placeholder={ticket?.device?.owner?.fullname}
               className='p-2  placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
             />
           </div>
@@ -258,31 +260,6 @@ export default function () {
 
           <div className='flex flex-col'>
             <label className='mb-1 text-sm font-medium text-gray-700'>
-              <i className='mr-1 fa-solid fa-phone'></i> Date Resolved
-            </label>
-            <input
-              type='date'
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-              name='date_resolved'
-              id='date_resolved'
-              placeholder={
-                ticket?.date_resolved
-                  ? new Date(ticket?.date_resolved.toLocaleString())
-                      .toISOString()
-                      .split('T')[0]
-                  : 'Not Resolved Yet'
-              }
-              className='p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
-            />
-            {formik.touched.date_resolved && formik.errors.date_resolved ? (
-              <div className='text-sm text-red-500'>
-                {formik.errors.date_resolved}
-              </div>
-            ) : null}
-          </div>
-          <div className='flex flex-col'>
-            <label className='mb-1 text-sm font-medium text-gray-700'>
               <i className='fa-solid fa-code-branch'></i> Status
             </label>
             <select
@@ -303,13 +280,29 @@ export default function () {
               ))}
             </select>
             {formik.touched.status && formik.errors.status ? (
-              <div className='text-sm text-red-500'>
-                {formik.errors.status}
-              </div>
+              <div className='text-sm text-red-500'>{formik.errors.status}</div>
             ) : null}
           </div>
+          <div className='flex flex-col'>
+            <label className='mb-1 text-sm font-medium text-gray-700'>
+              <i className='mr-1 fa-solid fa-image'></i> Device Image
+            </label>
+            <input
+              type='file'
+              id='image'
+              name='image'
+              multiple
+              onBlur={formik.handleBlur}
+              onChange={event => {
+                const files = event.currentTarget.files
+                  ? Array.from(event.currentTarget.files)
+                  : []
+                formik.setFieldValue('image', files)
+              }}
+            />
+          </div>
           <div className='flex justify-center mt-4'>
-          <button
+            <button
               type='submit'
               className={`w-full px-4 py-2 text-lg font-medium text-white transition duration-700 bg-gray-700 border border-gray-500 rounded-md ${
                 !formik.isValid

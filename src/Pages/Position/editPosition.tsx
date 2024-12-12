@@ -37,7 +37,7 @@ export default function EditPosition () {
   })
 
   const filteredDepartments = departments?.filter(
-    d => d.branch?._id === selectBranch || d._id === position?.department?._id
+    d => d.branch?._id === selectBranch || d?._id === position?.department?._id
   )
 
   const formik = useFormik({
@@ -98,7 +98,7 @@ export default function EditPosition () {
                 Select a Branch
               </option>
               {branches?.map(b => (
-                <option key={b._id} value={b._id}>
+                <option key={b?._id} value={b?._id}>
                   {b.branch_name}
                 </option>
               ))}
@@ -120,7 +120,7 @@ export default function EditPosition () {
                 Select a Department
               </option>
               {filteredDepartments?.map(d => (
-                <option key={d._id} value={d._id}>
+                <option key={d?._id} value={d?._id}>
                   {d.department_name}
                 </option>
               ))}

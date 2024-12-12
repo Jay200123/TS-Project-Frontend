@@ -24,7 +24,7 @@ export default function () {
       <h3 className='text-sm md:text-2xl font-bold'>My Tickets</h3>
       {filteredTickets.map(t => (
         <div key={t?._id} className='relative flex flex-col justify-evenly'>
-          <div className='flex-col flex md:flex-row items-center justify-start p-2 m-4 sm:h-[300px] md:h-[450px] overflow-hidden rounded-md shadow-lg border border-gray'>
+          <div className='flex-col flex md:flex-row items-center justify-start p-2 m-4 h-[300px] md:h-[550px] overflow-hidden rounded-md shadow-lg border border-gray'>
             <div className='flex flex-col items-center justify-center w-1/4 p-2 m-2'>
               <h3 className='text-xs md:text-lg font-bold text-center'>
                 Ticket Image
@@ -99,6 +99,14 @@ export default function () {
                 className='placeholder:text-black w-full h-20 p-1 text-[12px] md:text-[16px] border border-gray rounded-md'
                 placeholder={t?.description}
               />
+               <h3 className='font-bold text-[12px] md:text-[17px] m-1'>
+                Findings:
+              </h3>
+              <textarea
+                readOnly
+                className='placeholder:text-black w-full h-20 p-1 text-[12px] md:text-[16px] border border-gray rounded-md'
+                placeholder={t?.findings}
+              />
               <div className='flex flex-col md:flex-row items-center justify-between'>
                 <p className='font-bold text-[12px] md:text-[17px]'>
                   Date Submitted:
@@ -129,7 +137,7 @@ export default function () {
                 <p className='font-bold text-[12px] md:text-[17px]'>
                   Submitted By:
                   <span className='font-medium text-[10px] md:text-[16px] mr-1'>
-                    {t?.device?.owner?.position?.position_name}
+                    {t?.device?.owner?.position?.position_name},
                   </span>
                   <span className='font-medium text-[10px] md:text-[16px]'>
                     {t?.device?.owner?.fullname}
@@ -142,7 +150,7 @@ export default function () {
                 {t?.status === 'resolved' || t?.status === 'closed' ? (
                   <button
                     onClick={() =>
-                     toast.error('Ticket is already resolved')
+                     toast.error('Ticket Closed')
                     }
                     className={` p-1 md:p-2 bg-gray-700 text-white text-sm md:text-lg rounded-md border border-gray-700 transition-all duration-500 hover:bg-white hover:text-black`}
                   >

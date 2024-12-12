@@ -72,11 +72,11 @@ export default function () {
   })
 
   const filteredDepartments = departments?.filter(
-    d => d.branch._id === formik.values.branch
+    d => d.branch?._id === formik.values.branch
   )
 
   const filteredPositions = positions?.filter(
-    p => p.department._id === formik.values.department
+    p => p.department?._id === formik.values.department
   )
 
   const back = () => {
@@ -118,7 +118,7 @@ export default function () {
                 Select a branch
               </option>
               {branches?.map(b => (
-                <option key={b._id} value={b._id}>
+                <option key={b?._id} value={b?._id}>
                   {b.branch_name}
                 </option>
               ))}
@@ -147,7 +147,7 @@ export default function () {
                 Select a Department
               </option>
               {filteredDepartments?.map(d => (
-                <option key={d._id} value={d._id}>
+                <option key={d?._id} value={d?._id}>
                   {d.department_name}
                 </option>
               ))}
@@ -174,7 +174,7 @@ export default function () {
                 Select Your Position
               </option>
               {filteredPositions?.map(p => (
-                <option key={p._id} value={p._id}>
+                <option key={p?._id} value={p?._id}>
                   {p.position_name}
                 </option>
               ))}

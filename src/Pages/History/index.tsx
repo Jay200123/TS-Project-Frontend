@@ -1,6 +1,6 @@
 import { useHistoryStore } from '../../state/store'
 import { useQuery } from '@tanstack/react-query'
-import { FaEye, FaTrash, FaHourglass } from 'react-icons/fa'
+import { FaEye, FaTrash } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import DataTable, { TableColumn } from 'react-data-table-component'
@@ -101,10 +101,6 @@ export default function History () {
           <FaTrash
             onClick={() => handleDelete(row._id)}
             className='text-red-500 mr-2 text-[16px]'
-          />
-          <FaHourglass
-            onClick={() => navigate(`/history/device/${row.ticket.device._id}`)}
-            className='text-blue-500 mr-2 text-[16px]'
           />
         </div>
       ) 

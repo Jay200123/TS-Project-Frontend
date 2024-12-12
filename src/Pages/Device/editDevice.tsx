@@ -12,7 +12,6 @@ import { useState } from 'react'
 import { type, status } from '../../utils/arrays'
 import { editDeviceValidationSchema } from '../../validations'
 
-
 export default function () {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
@@ -24,8 +23,7 @@ export default function () {
   const [selectBranch, setSelectedBranch] = useState(device?.owner?.branch?._id)
   const [selectDepartment, setSelectedDepartment] = useState(
     device?.owner?.department?._id
-  );
-
+  )
 
   useQuery({
     queryKey: ['branches'],
@@ -58,6 +56,7 @@ export default function () {
       date_purchased: device?.date_purchased || '',
       serial_number: device?.serial_number || '',
       status: device?.status || '',
+      price: device?.price || 0,
       image: device?.image || []
     },
     validationSchema: editDeviceValidationSchema,
@@ -66,6 +65,7 @@ export default function () {
       formData.append('owner', values.owner)
       formData.append('type', values.type)
       formData.append('description', values.description)
+      formData.append('price', values.price.toString())
       formData.append(
         'date_requested',
         values.date_requested
@@ -97,7 +97,7 @@ export default function () {
       }
     }
   })
-  
+
   const randomImage =
     Array.isArray(device?.image) && device.image.length > 0
       ? device.image[Math.floor(Math.random() * device.image.length)]
@@ -148,7 +148,7 @@ export default function () {
 
               <div className='flex flex-col ml-3'>
                 <label className='mb-1 text-sm font-medium text-gray-700'>
-                <i className="fa-solid fa-pencil"></i> Department
+                  <i className='fa-solid fa-pencil'></i> Department
                 </label>
                 <select
                   name='department'
@@ -192,7 +192,7 @@ export default function () {
 
             <div className='flex flex-col'>
               <label className='mb-1 text-sm font-medium text-gray-700'>
-              <i className="fa-solid fa-computer"></i> Device
+                <i className='fa-solid fa-computer'></i> Device
               </label>
               <select
                 name='type'
@@ -215,7 +215,7 @@ export default function () {
 
             <div className='flex flex-col'>
               <label className='mb-1 text-sm font-medium text-gray-700'>
-              <i className="fa-solid fa-calendar"></i>
+                <i className='fa-solid fa-calendar'></i>
                 Date Requested
               </label>
               <input
@@ -237,7 +237,7 @@ export default function () {
 
             <div className='flex flex-col'>
               <label className='mb-1 text-sm font-medium text-gray-700'>
-              <i className="fa-solid fa-calendar"></i>
+                <i className='fa-solid fa-calendar'></i>
                 Date Purchased
               </label>
               <input
@@ -259,7 +259,7 @@ export default function () {
 
             <div className='flex flex-col'>
               <label className='mb-1 text-sm font-medium text-gray-700'>
-              <i className="fa-solid fa-barcode"></i> Serial Number
+                <i className='fa-solid fa-barcode'></i> Serial Number
               </label>
               <input
                 type='text'
@@ -274,7 +274,7 @@ export default function () {
 
             <div className='flex flex-col'>
               <label className='mb-1 text-sm font-medium text-gray-700'>
-              <i className="fa-solid fa-pencil"></i>
+                <i className='fa-solid fa-pencil'></i>
                 Description
               </label>
               <textarea
@@ -289,7 +289,22 @@ export default function () {
 
             <div className='flex flex-col'>
               <label className='mb-1 text-sm font-medium text-gray-700'>
-              <i className="fa-solid fa-circle-info"></i> Device Status
+                <i className='fa-solid fa-peso-sign'></i>
+                Device Price
+              </label>
+              <textarea
+                id='price'
+                name='price'
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.price}
+                className='p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+              />
+            </div>
+
+            <div className='flex flex-col'>
+              <label className='mb-1 text-sm font-medium text-gray-700'>
+                <i className='fa-solid fa-circle-info'></i> Device Status
               </label>
               <select
                 name='status'
@@ -334,7 +349,7 @@ export default function () {
                 type='submit'
                 className='w-full px-4 py-2 text-lg font-medium text-white transition duration-700 bg-black border border-gray-500 rounded-md hover:opacity-80'
               >
-              Update Device
+                Update Device
               </button>
             </div>
           </div>

@@ -46,6 +46,7 @@ export default function () {
       date_requested: '',
       date_purchased: '',
       serial_number: '',
+      price: '',
       status: '',
       image: []
     },
@@ -58,6 +59,7 @@ export default function () {
       formData.append('date_requested', values.date_requested)
       formData.append('date_purchased', values.date_purchased)
       formData.append('serial_number', values.serial_number)
+      formData.append('price', values.price)
       formData.append('status', values.status)
       values.image.forEach(file => {
         formData.append('image', file)
@@ -213,6 +215,26 @@ export default function () {
                {formik.touched.serial_number && formik.errors.serial_number ? (
               <div className='text-sm text-red-500'>
                 {formik.errors.serial_number}
+              </div>
+            ) : null}
+            </div>
+
+            <div className='flex flex-col'>
+              <label className='mb-1 text-sm font-medium text-gray-700'>
+              <i className="fa-solid fa-peso-sign"></i> Price
+              </label>
+              <input
+                type='number'
+                id='price'
+                name='price'
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.price}
+                className='p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+              />
+               {formik.touched.price && formik.errors.price ? (
+              <div className='text-sm text-red-500'>
+                {formik.errors.price}
               </div>
             ) : null}
             </div>

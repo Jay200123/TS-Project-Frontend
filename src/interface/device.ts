@@ -34,6 +34,7 @@ interface Device extends Document {
   date_purchased: Date;
   serial_number: string;
   status: DeviceStatus;
+  price: number;
   image: Image[];
 }
 

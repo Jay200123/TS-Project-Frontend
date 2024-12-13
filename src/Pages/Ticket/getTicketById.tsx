@@ -17,6 +17,7 @@ export default function () {
     window.history.back()
   }
 
+
   const randomImage =
     ticket?.image && ticket.image.length > 0
       ? ticket.image[Math.floor(Math.random() * ticket.image.length)]
@@ -24,7 +25,13 @@ export default function () {
 
   return (
     <div className='flex items-center justify-center p-4 m-4'>
-      <div className='flex flex-col w-full max-w-5xl p-6 space-y-6 bg-white border border-gray-400 rounded-lg shadow-md md:flex-row md:space-y-0 md:space-x-6'>
+      <div className='relative flex flex-col w-full max-w-5xl p-6 space-y-6 bg-white border border-gray-400 rounded-lg shadow-md md:flex-row md:space-y-0 md:space-x-6'>
+        <h3
+          onClick={back}
+          className='absolute m-1 text-3xl transition-all duration-500 cursor-pointer top-1 left-1 hover:text-gray-700'
+        >
+          <i className='fa-solid fa-arrow-left'></i>
+        </h3>
         <div className='hidden w-full mr-12 md:w-1/2 md:block'>
           <div className='flex flex-col items-center justify-center'>
             <h3 className='text-2xl mb-1 font-bold'>Ticket Image</h3>
@@ -33,6 +40,7 @@ export default function () {
               src={randomImage?.url}
               alt={randomImage?.originalname}
             />
+            <h3 className='text-xl mb-1 font-bold'>{ticket?.ticketNumber}</h3>
             <div className='flex flex-col mt-2'>
               <label className='mb-1 text-sm font-medium text-gray-700'>
                 <i className='mr-1 fa-solid fa-user'></i> Concern
@@ -41,6 +49,17 @@ export default function () {
                 name='description'
                 readOnly
                 placeholder={ticket?.description}
+                className='p-2 w-[350px] h-[120px] placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+              />
+            </div>
+            <div className='flex flex-col mt-2'>
+              <label className='mb-1 text-sm font-medium text-gray-700'>
+                <i className='fa-solid fa-magnifying-glass'></i> Findings
+              </label>
+              <textarea
+                name='description'
+                readOnly
+                placeholder={ticket?.findings}
                 className='p-2 w-[350px] h-[120px] placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
               />
             </div>
@@ -61,9 +80,7 @@ export default function () {
                   type='text'
                   name='owner'
                   readOnly
-                  placeholder={
-                    ticket?.device?.owner?.fullname
-                  }
+                  placeholder={ticket?.device?.owner?.fullname}
                   className='p-2  placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
                 />
               </div>
@@ -114,7 +131,7 @@ export default function () {
                 type='text'
                 name='assignee'
                 readOnly
-                placeholder={ticket?.assignee?.fullname}    
+                placeholder={ticket?.assignee?.fullname}
                 className='p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
               />
             </div>
@@ -220,14 +237,6 @@ export default function () {
               placeholder={ticket?.status}
               className='p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
             />
-          </div>
-          <div className='flex justify-center mt-4'>
-            <button
-              onClick={back}
-              className='w-full px-4 py-2 text-lg font-medium text-white transition duration-700 bg-black border border-gray-500 rounded-md hover:opacity-80'
-            >
-              <i className='mr-1 fa-solid fa-arrow-left'></i>Go Back
-            </button>
           </div>
         </div>
       </div>

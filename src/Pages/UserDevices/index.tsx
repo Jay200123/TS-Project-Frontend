@@ -76,7 +76,7 @@ export default function () {
                   </span>
                 </h3>
 
-                <div className='flex items-center justify-between'>
+                <div className='flex items-center justify-between w-full'>
                   <p className='font-bold text-[12px] md:text-[17px] '>
                     Date Requested:
                     <span className='underline font-medium text-[10px] md:text-[16px]  m-1'>
@@ -96,7 +96,7 @@ export default function () {
                 </div>
                 <div className='flex items-center justify-end'>
                   <button
-                    className='p-2 m-[2px] text-[16px] font-semibold text-white bg-blue-500 rounded-md border border-blue-500 transition-all duration-500 hover:opacity-80'
+                    className='md:p-2 m-[2px] p-1 text-xs md:text-[16px] font-semibold text-white bg-blue-500 rounded-md border border-blue-500 transition-all duration-500 hover:opacity-80'
                     onClick={() =>
                       navigate(`/employee/history/device/${d?._id}`)
                     }

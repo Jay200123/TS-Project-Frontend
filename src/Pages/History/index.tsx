@@ -22,7 +22,7 @@ export default function History () {
 
  
   const filteredHistory = histories.filter((h) =>
-    h?.ticket._id.includes(setFilter) || h?.ticket?.device?.type?.includes(setFilter) || h?.ticket?.device?.type.includes(setFilter)
+    h?.ticket?._id.includes(setFilter) || h?.ticket?.device?.type?.includes(setFilter) || h?.ticket?.device?.type.includes(setFilter)
   );
 
   const handleDelete = async (id: string) => {

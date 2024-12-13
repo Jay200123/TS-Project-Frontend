@@ -57,6 +57,10 @@ export default function () {
     }
   }
 
+  const technicianTickets = () => { 
+    navigate('admin/tickets/reports')
+  }
+
   return (
     <nav className='flex items-center justify-between w-full text-black shadow-sm h-14 shadow-slate-400'>
       <div className='p-2 m-2'>
@@ -73,12 +77,19 @@ export default function () {
 
       <div className={`m-2 p-2 ${isOpen ? 'block' : 'hidden'} md:block`}>
         <ul className='flex flex-row items-start justify-start md:flex-row md:items-center'>
+        <li
+            onClick={technicianTickets}
+            className='p-2 m-2 text-sm transition duration-300 rounded cursor-pointer hover:bg-gray-700 hover:text-white md:text-sm'
+          >
+            <i className="fa-solid fa-clipboard"></i> Ticket Performance Reports
+          </li>
           <li
             onClick={dashboard}
             className='p-2 m-2 text-sm transition duration-300 rounded cursor-pointer hover:bg-gray-700 hover:text-white md:text-sm'
           >
             <i className='fa-solid fa-chart-simple'></i>Dashboard
           </li>
+
           <li
             onClick={tickets}
             className='p-2 m-2 text-sm transition duration-300 rounded cursor-pointer hover:bg-gray-700 hover:text-white md:text-sm'

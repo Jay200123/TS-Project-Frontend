@@ -39,7 +39,7 @@ export default function () {
       })
       try {
         await createTicket(formData)
-        navigate('/employee/department/tickets')  
+        navigate('/employee/department/tickets')
         toast.success('Ticket submitted successfully')
       } catch (error) {
         toast.error('An error occurred while creating the ticket')
@@ -57,6 +57,10 @@ export default function () {
     device => device.owner._id === auth?._id
   )
 
+  const back = () => {
+    window.history.back()
+  }
+
   return (
     <form
       onSubmit={formik.handleSubmit}
@@ -64,7 +68,8 @@ export default function () {
     >
       <div className='relative flex flex-col w-full max-w-5xl p-6 space-y-6 bg-white border border-gray-400 rounded-lg shadow-md md:flex-row md:space-y-0 md:space-x-6'>
         <h2 className='absolute text-xl font-bold text-center text-gray-800 md:text-3xl md:text-left'>
-          Submit a Ticket
+          <i onClick={back} className='fa-solid fa-arrow-left mr-2 cursor-pointer transition-all duration-500 hover:opacity-80'></i>
+          <span>Submit a Ticket</span>{' '}
         </h2>
         <div className='hidden w-full mr-12 md:w-1/2 md:block'>
           <div className='flex flex-col items-center justify-center h-full'>
@@ -105,9 +110,7 @@ export default function () {
               ))}
             </select>
             {formik.touched.device && formik.errors.device ? (
-              <div className='text-sm text-red-500'>
-                {formik.errors.device}
-              </div>
+              <div className='text-sm text-red-500'>{formik.errors.device}</div>
             ) : null}
           </div>
 
@@ -149,7 +152,7 @@ export default function () {
               value={formik.values.description}
               className='h-[125px] w-full p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
             />
-             {formik.touched.description && formik.errors.description ? (
+            {formik.touched.description && formik.errors.description ? (
               <div className='text-sm text-red-500'>
                 {formik.errors.description}
               </div>
@@ -172,7 +175,7 @@ export default function () {
             />
           </div>
           <div className='flex justify-center mt-4'>
-          <button
+            <button
               type='submit'
               className={`w-full px-4 py-2 text-lg font-medium text-white transition duration-700 bg-gray-700 border border-gray-500 rounded-md ${
                 !formik.isValid

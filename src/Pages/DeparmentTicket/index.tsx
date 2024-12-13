@@ -18,7 +18,6 @@ export default function () {
     queryFn: getAllTickets
   })
 
-  //filters the ticket based on the department of the current user with ticket status
   const departmentTickets = tickets?.filter(
     t =>
       (t?.device?.owner?.department?.department_name ===
@@ -27,7 +26,6 @@ export default function () {
       t?.status === 'in-progress' ||  t?.status === 'new'
   )
 
-  //will filter the ticket based on the ticket id on input textbox
   const filteredTickets = departmentTickets.filter(ticket =>
     ticket._id.includes(setTicket)
   )

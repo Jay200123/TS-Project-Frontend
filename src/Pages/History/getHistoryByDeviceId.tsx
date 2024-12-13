@@ -22,9 +22,19 @@ export default function () {
     )
   }
 
+  const back = ()=>{
+    window.history.back()
+  }
+
   return (
     <div className='p-7'>
       <div className='flex items-center justify-between'>
+      <h3
+          onClick={back}
+          className='text-3xl m-1 cursor-pointer transition-all duration-500 hover:text-gray-700'
+        >
+          <i className='fa-solid fa-arrow-left'></i>
+        </h3>
         <h3 className='text-sm md:text-2xl font-bold'>Device History</h3>
         <h3 className='text-sm md:text-xl font-bold'>
           Total History: {historyCount}

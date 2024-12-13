@@ -69,11 +69,11 @@ export default function () {
   }
 
   const filteredTickets = tickets
-  .filter(ticket => ticket._id.includes(setTicket))
-  .sort((a, b) => {
-    const status = ['pending', 'in-progress', 'resolved', 'closed'];
-    return status.indexOf(a.status) - status.indexOf(b.status);
-  });
+    .filter(ticket => ticket._id.includes(setTicket))
+    .sort((a, b) => {
+      const status = ['pending', 'in-progress', 'resolved', 'closed']
+      return status.indexOf(a.status) - status.indexOf(b.status)
+    })
 
   const columns: TableColumn<Ticket>[] = [
     {
@@ -228,13 +228,24 @@ export default function () {
         </div>
       ) : (
         <div>
-            <h3 className='text-lg font-semibold m-[2px] text-red-500'>New: {statusCounts?.new}</h3>
-            <h3 className='text-lg font-semibold m-[2px] text-orange-500'>Pending: {statusCounts?.pending}</h3>
-            <h3 className='text-lg font-semibold m-[2px] text-green-500'>Resolved: {statusCounts?.resolved}</h3>
-            <h3 className='text-lg font-semibold m-[2px] text-blue-500'>In Progress: {statusCounts?.['in-progress']}</h3>
-            <h3 className='text-lg font-semibold m-[2px] text-gray-500'>Closed: {statusCounts?.closed}</h3>
+          <h3 className='text-lg font-semibold m-[2px] text-red-500'>
+            New: {statusCounts?.new}
+          </h3>
+          <h3 className='text-lg font-semibold m-[2px] text-orange-500'>
+            Pending: {statusCounts?.pending}
+          </h3>
+          <h3 className='text-lg font-semibold m-[2px] text-green-500'>
+            Resolved: {statusCounts?.resolved}
+          </h3>
+          <h3 className='text-lg font-semibold m-[2px] text-blue-500'>
+            In Progress: {statusCounts?.['in-progress']}
+          </h3>
+          <h3 className='text-lg font-semibold m-[2px] text-gray-500'>
+            Closed: {statusCounts?.closed}
+          </h3>
           <div className='p-4 overflow-hidden bg-transparent rounded-lg w-full sm:p-6 lg:p-8 md:max-w-5xl h-full'>
             <div className='flex items-center justify-end'>
+              
               <input
                 type='text'
                 className='w-1/4 p-1 mb-4 border border-gray-300 rounded-lg placeholder:text-black'

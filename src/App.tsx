@@ -43,7 +43,8 @@ import {
   GetHistoryById,
   GetTicketDepartment,
   ChangePassword,
-  GetHistoryByDeviceId
+  GetHistoryByDeviceId,
+  GetTechnicianTickets
 } from './Pages'
 import { ProtectedRoute } from './components'
 import {
@@ -418,6 +419,14 @@ function App () {
                 <GetHistoryByDeviceId />
               </ProtectedRoute>
             }
+          />
+          <Route
+          path='admin/tickets/reports'
+          element={
+            <ProtectedRoute userRole={['Admin']}>
+              <GetTechnicianTickets/>
+            </ProtectedRoute>
+          }
           />
         </Route>
       </Route>

@@ -18,14 +18,14 @@ export default function () {
 
   return (
     <>
-      <h3 className='m-2 text-sm md:text-lg font-bold'>My Devices</h3>
+      <h3 className='m-2 text-sm font-bold md:text-lg'>My Devices</h3>
       {filteredDevices && filteredDevices.length > 0 ? (
         filteredDevices.map(d => (
           <div
             key={d?._id}
-            className='relative flex flex-col justify-evenly items-center w-full md:w-[1200px]'
+            className='flex flex-col justify-between m-6 items-center w-full h-full md:max-w-[1300px]'
           >
-            <div className='flex-col flex md:flex-row items-center justify-start p-1 m-4 sm:h-[300px] md:h-[250px] md:w-full overflow-hidden rounded-md shadow-lg border border-gray'>
+            <div className='flex-col flex md:flex-row items-center justify-start 300px md:h-[250px] md:w-full overflow-hidden rounded-md shadow-lg border border-gray'>
               <div className='flex flex-col items-center justify-center w-1/4 p-2 m-2'>
                 <h3
                   className={`flex items-center justify-start text-sm font-bold md:text-lg ${
@@ -109,7 +109,7 @@ export default function () {
           </div>
         ))
       ) : (
-        <div className='text-center mt-4'>
+        <div className='mt-4 text-center'>
           <h3 className='text-xl font-bold'>No Devices Found</h3>
         </div>
       )}

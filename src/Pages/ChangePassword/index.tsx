@@ -77,15 +77,15 @@ export default function () {
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
                 value={formik.values.newPassword}
-                className='p-2 w-full placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+                className='w-full p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
               />
               {showNewPassword ? (
-                <FaEyeSlash
+                <FaEye
                   onClick={() => toggleNewPassword()}
                   className={`text-lg -ml-7 cursor-pointer`}
                 />
               ) : (
-                <FaEye
+                <FaEyeSlash
                   onClick={() => toggleNewPassword()}
                   className={`text-lg -ml-7 cursor-pointer`}
                 />
@@ -110,15 +110,15 @@ export default function () {
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
                 value={formik.values.confirmPassword}
-                className='p-2 w-full placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+                className='w-full p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
               />
               {showConfirmPassword ? (
-                <FaEyeSlash
+                <FaEye
                   onClick={() => toogleConfirmPassword()}
                   className={`text-lg -ml-7 cursor-pointer`}
                 />
               ) : (
-                <FaEye
+                <FaEyeSlash
                   onClick={() => toogleConfirmPassword()}
                   className={`text-lg -ml-7 cursor-pointer`}
                 />

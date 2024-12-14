@@ -1,15 +1,19 @@
 import { useFormik } from 'formik'
 import { authenticationValidationSchema } from '../../validations'
 import { AuthenticationValues } from '../../interface'
+import { FaEye, FaEyeSlash } from 'react-icons/fa6'
 import { toast } from 'react-toastify'
 import { useAuthenticationStore } from '../../state/store'
 import { useNavigate } from 'react-router-dom'
 import LoginIcon from '../../assets/bg-icon.jfif'
 import { LoginImage } from '../../components'
+import { useState } from 'react'
 
 export default function () {
   const navigate = useNavigate()
-  const { login } = useAuthenticationStore()  
+  const { login } = useAuthenticationStore()
+ 
+  const[showPassword, setShowPassword] = useState(false); 
 
   const formik = useFormik<AuthenticationValues>({
     initialValues: {
@@ -42,7 +46,11 @@ export default function () {
         });
       }
     }
-  })
+  });
+
+  const togglePassword = () => {
+    setShowPassword(!showPassword)
+  }
 
   return (
     <>
@@ -79,14 +87,26 @@ export default function () {
               <label className='block mb-2 text-sm font-medium text-gray-700'>
                 <i className='fa-solid fa-key'></i> Password
               </label>
+              <div className='flex items-center justify-start'>
               <input
-                type='password'
+                type={`${showPassword ? 'text' : 'password'}`}  
                 name='password'
                 className='w-full p-2 mb-4 text-sm border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-none'
                 onChange={formik.handleChange}
                 value={formik.values.password}
               />
-
+                {showPassword ? (
+                <FaEye
+                  onClick={() => togglePassword()}
+                  className={`text-lg -ml-6 mb-[14px] cursor-pointer`}
+                />
+              ) : (
+                <FaEyeSlash
+                  onClick={() => togglePassword()}
+                  className={`text-lg -ml-6 mb-[14px] cursor-pointer`}
+                />
+              )}
+              </div>
               <button
                 type='submit'
                 className='w-full px-4 py-2 text-lg font-medium text-white transition duration-700 bg-gray-700 border border-gray-500 rounded-md hover:bg-opacity-80'

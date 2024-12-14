@@ -20,9 +20,9 @@ export default function () {
   )
 
   return (
-    <div className='w-full h-full flex flex-col items-center justify-start p-2'>
+    <div className='flex flex-col items-center justify-start w-full h-full p-2'>
       <div className='flex items-center justify-between mb-3'>
-        <h3 className='text-sm md:text-2xl font-bold'>
+        <h3 className='text-sm font-bold md:text-2xl'>
           {filteredTickets.length === 0 ? 'No Tickets Yet' : 'My Tickets'}
         </h3>
         <div className='flex flex-col m-3'>
@@ -48,7 +48,7 @@ export default function () {
         >
           <div className='flex-col flex md:flex-row items-center justify-start p-2 m-4 sm:h-[300px] md:h-[450px] overflow-hidden rounded-md shadow-lg border border-gray'>
             <div className='flex flex-col items-center justify-center w-1/4 p-2 m-2'>
-              <h3 className='text-xs md:text-lg font-bold text-center'>
+              <h3 className='text-xs font-bold text-center md:text-lg'>
                 Ticket Image
               </h3>
               {t?.image?.length > 1 ? (
@@ -66,13 +66,13 @@ export default function () {
                   alt='image'
                 />
               )}
-              <h3 className='text-xs md:text-lg font-bold text-center'>
+              <h3 className='text-xs font-bold text-center md:text-lg'>
                 Ticket No. : {t?.ticketNumber}
               </h3>
               <a 
               href={t?.image[0]?.url}
               download
-              className='text-xs md:text-lg p-1 md:p-2 font-semibold text-center underline'    
+              className='p-1 text-xs font-semibold text-center underline md:text-lg md:p-2'    
               >
                 Download Image
               </a>
@@ -125,7 +125,7 @@ export default function () {
                 className='placeholder:text-black w-full h-20 p-1 text-[12px] md:text-[16px] border border-gray rounded-md'
                 placeholder={t?.description}
               />
-              <div className='flex flex-col md:flex-row items-center justify-between'>
+              <div className='flex flex-col items-center justify-between md:flex-row'>
                 <p className='font-bold text-[12px] md:text-[17px]'>
                   Date Submitted:
                   <span className='underline font-medium text-[10px] md:text-[16px] m-1'>

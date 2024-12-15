@@ -6,6 +6,7 @@ import { usePositionStore } from "./position";
 import { useDeviceStore } from "./device";
 import { useTicketStore } from "./ticket";
 import { useHistoryStore } from "./history";
+import { useEquipmentStore } from "./equipment";
 
 export {
   useAuthenticationStore,
@@ -15,5 +16,6 @@ export {
   usePositionStore,
   useDeviceStore,
   useTicketStore,
-  useHistoryStore
+  useHistoryStore,
+  useEquipmentStore,
 };

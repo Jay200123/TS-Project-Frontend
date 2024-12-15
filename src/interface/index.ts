@@ -8,3 +8,4 @@ export * from "./device";
 export * from "./ticket";
 export * from "./history";
 export * from "./dashboard";
+export * from "./equipment";

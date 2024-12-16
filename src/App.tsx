@@ -49,6 +49,8 @@ import {
   CreateEquipment,
   GetEquipmentById,
   EditEquipment,
+  BorrowTable,
+  CreateBorrow,
 } from "./Pages";
 import { ProtectedRoute } from "./components";
 import {
@@ -464,6 +466,23 @@ function App() {
             element={
               <ProtectedRoute userRole={["Admin"]}>
                 <EditEquipment />
+              </ProtectedRoute>
+            }
+          />
+          {/* Borrow Routes */}
+          <Route
+            path="/borrows"
+            element={
+              <ProtectedRoute userRole={["Admin"]}>
+                <BorrowTable />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/borrow/create"
+            element={
+              <ProtectedRoute userRole={["Admin"]}>
+                <CreateBorrow />
               </ProtectedRoute>
             }
           />

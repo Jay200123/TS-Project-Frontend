@@ -7,6 +7,7 @@ import { useDeviceStore } from "./device";
 import { useTicketStore } from "./ticket";
 import { useHistoryStore } from "./history";
 import { useEquipmentStore } from "./equipment";
+import { useBorrowStore } from "./borrow";
 
 export {
   useAuthenticationStore,
@@ -18,4 +19,5 @@ export {
   useTicketStore,
   useHistoryStore,
   useEquipmentStore,
+  useBorrowStore,
 };

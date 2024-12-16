@@ -32,7 +32,7 @@ export default function () {
       sortable: true,
     },
     {
-      name: "Equipment Price",
+      name: "Price",
       selector: (row) => row?.price,
       sortable: true,
     },
@@ -43,17 +43,17 @@ export default function () {
     },
     {
       name: "Borrowed Quantity",
-      selector: (row) => row?.borrowedQuantity,
+      selector: (row) => `${row?.borrowedQuantity} pcs.`,
       sortable: true,
     },
     {
       name: "Damaged Quantity",
-      selector: (row) => row?.damagedQuantity,
+      selector: (row) => `${row?.damagedQuantity} pcs.`,
       sortable: true,
     },
     {
       name: "Lost Quantity",
-      selector: (row) => row?.lostQuantity,
+      selector: (row) => `${row?.lostQuantity} pcs.`,
       sortable: true,
     },
     {
@@ -83,11 +83,11 @@ export default function () {
         <div className="flex items-center text-center">
           <FaEye
             className="mr-2 text-xl text-green-300"
-            onClick={() => navigate(`/branch/${row._id}`)}
+            onClick={() => navigate(`/equipment/${row._id}`)}
           />
           <FaPencilAlt
             className="mr-2 text-xl text-blue-500"
-            onClick={() => navigate(`/branch/edit/${row._id}`)}
+            onClick={() => navigate(`/equipment/edit/${row._id}`)}
           />
           <FaTrash
             className="text-xl text-red-500"
@@ -109,10 +109,10 @@ export default function () {
           <div className="max-w-full p-4 overflow-hidden rounded-lg bg-none sm:p-6 lg:p-8 md:w-full">
             <div className="flex items-center justify-end m-2">
               <button
-                onClick={() => navigate("/department/create")}
+                onClick={() => navigate("/equipment/create")}
                 className="text-[16px] bg-gray-700 text-white p-[15px] rounded-md transition-all duration-500  hover:bg-white hover:text-black border border-gray-700"
               >
-                Create Department <i className="fa fa-plus"></i>
+                Create Equipment <i className="fa fa-plus"></i>
               </button>
             </div>
             <DataTable

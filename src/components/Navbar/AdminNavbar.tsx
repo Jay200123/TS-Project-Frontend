@@ -50,6 +50,10 @@ export default function () {
     navigate("/equipments");
   };
 
+  const borrow = ()=>{
+    navigate("/borrows");
+  }
+
   const handleLogout = async () => {
     try {
       await logout();
@@ -98,6 +102,12 @@ export default function () {
             className="p-2 m-2 text-sm transition duration-300 rounded cursor-pointer hover:bg-gray-700 hover:text-white md:text-sm"
           >
             <i className="m-1 fas fa-ticket"></i> Tickets
+          </li>
+          <li
+            onClick={borrow}
+            className="p-2 m-2 text-sm transition duration-300 rounded cursor-pointer hover:bg-gray-700 hover:text-white md:text-sm"
+          >
+           <i className="mr-1 fa-solid fa-handshake"></i>Borrow Items
           </li>
 
           <li

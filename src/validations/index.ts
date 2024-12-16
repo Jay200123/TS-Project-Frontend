@@ -13,21 +13,25 @@ import createTicketValidationSchema from "./createTicketValidationSchema";
 import editTicketByTechnicianValidationSchema from "./editTicketByTechnicianValidationSchema";
 import editAssigneeValidationSchema from "./editTicketAssigneeValidationSchema";
 import editPasswordValidationSchema from "./changePasswordValidationSchema";
+import createEquipmentValidationSchema from "./createEquipment";
+import editEquipmentValidationSchema from "./editEquipment";
 
 export {
-    authenticationValidationSchema,
-    userValidationSchema,
-    editUserValidationSchema,
-    createBranchValidationSchema,
-    editBranchValidationSchema,
-    createDepartmentValidationSchema,
-    editDepartmentValidationSchema,
-    createPositionValidationSchema,
-    editPositionValidationSchema,
-    createDeviceValidationSchema,
-    editDeviceValidationSchema,
-    createTicketValidationSchema,
-    editTicketByTechnicianValidationSchema,
-    editAssigneeValidationSchema,
-    editPasswordValidationSchema
-}
+  authenticationValidationSchema,
+  userValidationSchema,
+  editUserValidationSchema,
+  createBranchValidationSchema,
+  editBranchValidationSchema,
+  createDepartmentValidationSchema,
+  editDepartmentValidationSchema,
+  createPositionValidationSchema,
+  editPositionValidationSchema,
+  createDeviceValidationSchema,
+  editDeviceValidationSchema,
+  createTicketValidationSchema,
+  editTicketByTechnicianValidationSchema,
+  editAssigneeValidationSchema,
+  editPasswordValidationSchema,
+  createEquipmentValidationSchema,
+  editEquipmentValidationSchema,
+};

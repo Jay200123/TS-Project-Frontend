@@ -33,4 +33,7 @@ export const PATH = {
   EQUIPMENTS_ROUTE: "/equipments",
   EQUIPMENT_ID_ROUTE: "/equipment/:id",
   EDIT_EQUIPMENT_ROUTE: "/equipment/edit/:id",
+  BORROWS_ROUTES: "/borrows",
+  BORROW_ID_ROUTE: "/borrow/:id",
+  EDIT_BORROW_ROUTE: "/borrow/edit/:id",
 };

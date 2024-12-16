@@ -43,6 +43,8 @@ import EquipmentTable from "./Equipment";
 import CreateEquipment from "./Equipment/createEquipment";
 import GetEquipmentById from "./Equipment/getEquipmentById";
 import EditEquipment from "./Equipment/editEquipment";
+import BorrowTable from "./Borrow";
+import CreateBorrow from "./Borrow/createBorrow";
 
 export {
   Home,
@@ -90,4 +92,6 @@ export {
   CreateEquipment,
   GetEquipmentById,
   EditEquipment,
+  BorrowTable,
+  CreateBorrow,
 };

@@ -36,7 +36,7 @@ export default function () {
 
   if (filteredTickets.length === 0) {
     return (
-      <div className='flex flex-col p-2 items-center justify-center h-full'>
+      <div className='flex flex-col items-center justify-center h-full p-2'>
         <h1 className='text-3xl text-gray-500'>No Tickets found</h1>
         <button
           onClick={() => ticket()}
@@ -50,8 +50,8 @@ export default function () {
 
   const columns: TableColumn<Ticket>[] = [
     {
-      name: 'Ticket ID',
-      selector: row => row?._id,
+      name: 'Ticket No.',
+      selector: row => row?.ticketNumber,
       sortable: true
     },
     {
@@ -133,7 +133,7 @@ export default function () {
         </div>
       ) : (
         <div>
-          <div className='p-4 overflow-hidden bg-transparent rounded-lg w-full sm:p-6 lg:p-8 md:max-w-5xl h-full'>
+          <div className='w-full h-full p-4 overflow-hidden bg-transparent rounded-lg sm:p-6 lg:p-8 md:max-w-5xl'>
             <div className='flex items-center justify-between'>
               <input
                 type='text'

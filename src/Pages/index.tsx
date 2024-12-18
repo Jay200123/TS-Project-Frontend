@@ -45,6 +45,9 @@ import GetEquipmentById from "./Equipment/getEquipmentById";
 import EditEquipment from "./Equipment/editEquipment";
 import BorrowTable from "./Borrow";
 import CreateBorrow from "./Borrow/createBorrow";
+import EditBorrow from "./Borrow/editBorrow";
+import GetBorrowById from "./Borrow/getBorrowById";
+import TechnicianBorrow from "./Borrow/technicianBorrow";
 
 export {
   Home,
@@ -94,4 +97,7 @@ export {
   EditEquipment,
   BorrowTable,
   CreateBorrow,
+  EditBorrow,
+  GetBorrowById,
+  TechnicianBorrow,
 };

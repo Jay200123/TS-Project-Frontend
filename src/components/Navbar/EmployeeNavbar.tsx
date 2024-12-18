@@ -28,6 +28,10 @@ export default function () {
     navigate('/employee/department/tickets')  
   }
 
+  const borrow = ()=>{
+    navigate('/borrow/employee')
+  }
+
   const handleLogout = async () => {
     try {
       await logout()
@@ -39,12 +43,12 @@ export default function () {
   }
 
   return (
-    <nav className='w-full h-14 items-center flex justify-between shadow-sm shadow-slate-400 text-black'>
-      <div className='m-2 p-2'>
+    <nav className='flex items-center justify-between w-full text-black shadow-sm h-14 shadow-slate-400'>
+      <div className='p-2 m-2'>
         <h3 className='text-lg'>IT Support</h3>
       </div>
 
-      <div className='md:hidden m-2 p-2' onClick={() => setIsOpen(!isOpen)}>
+      <div className='p-2 m-2 md:hidden' onClick={() => setIsOpen(!isOpen)}>
         <div className='space-y-1 cursor-pointer'>
           <span className='block w-6 h-0.5 bg-white'></span>
           <span className='block w-6 h-0.5 bg-white'></span>
@@ -53,34 +57,40 @@ export default function () {
       </div>
 
       <div className={`m-2 p-2 ${isTicket ? 'block' : 'hidden'} md:block`}>
-        <ul className='flex flex-row md:flex-row items-start md:items-center justify-start'>
+        <ul className='flex flex-row items-start justify-start md:flex-row md:items-center'>
         <li
             onClick={deparment}
-            className='hover:text-white p-2 m-2 text-sm cursor-pointer transition duration-300 hover:bg-gray-700 rounded md:text-sm'
+            className='p-2 m-2 text-sm transition duration-300 rounded cursor-pointer hover:text-white hover:bg-gray-700 md:text-sm'
           >
             <i className="fa-solid fa-building"></i> Department Ticket
           </li>
 
           <li
             onClick={submittedTickets}
-            className='hover:text-white p-2 m-2 text-sm cursor-pointer transition duration-300 hover:bg-gray-700 rounded md:text-sm'
+            className='p-2 m-2 text-sm transition duration-300 rounded cursor-pointer hover:text-white hover:bg-gray-700 md:text-sm'
           >
             <i className='m-1 fa-solid fa-ticket'></i> My Tickets
+          </li>
+          <li
+            onClick={borrow}
+            className='p-2 m-2 text-sm transition duration-300 rounded cursor-pointer hover:text-white hover:bg-gray-700 md:text-sm'
+          >
+            <i className="mr-1 fa-solid fa-handshake"></i>Borrow Items
           </li>
 
           <li
             onClick={devices}
-            className='hover:text-white p-2 m-2 text-sm cursor-pointer transition duration-300 hover:bg-gray-700 rounded md:text-sm'
+            className='p-2 m-2 text-sm transition duration-300 rounded cursor-pointer hover:text-white hover:bg-gray-700 md:text-sm'
           >
-            <i className='fa-solid fa-computer m-1'></i>My Devices
+            <i className='m-1 fa-solid fa-computer'></i>My Devices
           </li>
 
           {user ? (
             <li
               onClick={handleLogout}
-              className='text-black p-2 text-sm cursor-pointer transition-all duration-500 rounded-sm hover:bg-gray-600 hover:text-white'
+              className='p-2 text-sm text-black transition-all duration-500 rounded-sm cursor-pointer hover:bg-gray-600 hover:text-white'
             >
-              <i className='fa-solid fa-arrow-right-from-bracket m-1'></i> Sign
+              <i className='m-1 fa-solid fa-arrow-right-from-bracket'></i> Sign
               Out
             </li>
           ) : (

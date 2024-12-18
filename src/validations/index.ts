@@ -15,6 +15,7 @@ import editAssigneeValidationSchema from "./editTicketAssigneeValidationSchema";
 import editPasswordValidationSchema from "./changePasswordValidationSchema";
 import createEquipmentValidationSchema from "./createEquipment";
 import editEquipmentValidationSchema from "./editEquipment";
+import createBorrowValidationSchema from "./createBorrowValidationSchema";
 
 export {
   authenticationValidationSchema,
@@ -34,4 +35,5 @@ export {
   editPasswordValidationSchema,
   createEquipmentValidationSchema,
   editEquipmentValidationSchema,
+  createBorrowValidationSchema,
 };

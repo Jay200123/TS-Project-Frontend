@@ -14,6 +14,7 @@ interface Borrow {
   quantity: number;
   counter: number;
   borrowNumber: string;
+  signature: string;  
   createdAt: Date;
 }
 

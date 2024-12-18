@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { Image } from "../../components";
 import { toast } from "react-toastify";
-import { createDeviceValidationSchema } from "../../validations";
+import { createBorrowValidationSchema } from "../../validations";
 import SignatureCanvas from "react-signature-canvas";
 import { useRef, useState } from "react";
 
@@ -75,7 +75,7 @@ export default function () {
       quantity: "",
       signature: signature || "",
     },
-    validationSchema: createDeviceValidationSchema,
+    validationSchema: createBorrowValidationSchema,
     onSubmit: async (values) => {
       const formData = new FormData();
       formData.append("user", values.user);
@@ -130,9 +130,12 @@ export default function () {
               />
             </div>
             <div className="flex items-center justify-center w-full mt-3 space-x-4">
-              <button onClick={clearSignature}>Clear</button>
-              <button onClick={saveSignature}>Save</button>
+              <button type="button" onClick={clearSignature}>Clear</button>
+              <button type="button" onClick={saveSignature}>Save</button>
             </div>
+            {formik.touched.signature && formik.errors.signature ? (
+              <div className="text-sm text-red-500">{formik.errors.signature}</div>
+            ) : null}
           </div>
           <div className="flex flex-col w-full space-y-4 md:w-1/2">
             <h2 className="text-2xl font-bold text-center text-gray-800 md:text-left">

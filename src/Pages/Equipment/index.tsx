@@ -38,7 +38,7 @@ export default function () {
     },
     {
       name: "Quantity",
-      selector: (row) => row?.quantity,
+      selector: (row) => `${row?.quantity} pcs.`,
       sortable: true,
     },
     {

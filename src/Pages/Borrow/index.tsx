@@ -2,7 +2,7 @@ import DataTable, { TableColumn } from "react-data-table-component";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaPencilAlt, FaTrash } from "react-icons/fa";
-import { useBorrowStore } from "../../state/store";
+import { useBorrowStore, useAuthenticationStore } from "../../state/store";
 import { toast } from "react-toastify";
 import { Borrow } from "../../interface";
 import { FadeLoader } from "react-spinners";
@@ -12,6 +12,11 @@ export default function () {
   const navigate = useNavigate();
   const { borrows, loading, getAllBorrows, deleteBorrowById } =
     useBorrowStore();
+
+  const { user: auth } = useAuthenticationStore();
+  const isAuthorize = auth?.role === "Admin";
+
+  const userBorrows = borrows.filter((borrow) => borrow.user._id === auth?._id);
 
   useQuery({
     queryKey: ["borrows"],
@@ -90,21 +95,36 @@ export default function () {
       sortable: true,
     },
     {
+      name: "E-Signature",
+      cell: (row) => (
+        <img src={row?.signature} alt="signature" className="m-1 w-14 h-14" />
+      ),
+    },
+    {
       name: "Actions",
       cell: (row) => (
         <div className="flex items-center text-center">
-          <FaEye
-            className="mr-2 text-xl text-green-500"
-            onClick={() => navigate(`/borrow/${row._id}`)}
-          />
-          <FaPencilAlt
-            className="mr-2 text-xl text-blue-500"
-            onClick={() => navigate(`/borrow/edit/${row._id}`)}
-          />
-          <FaTrash
-            className="text-xl text-red-500"
-            onClick={() => handleDelete(row._id)}
-          />
+          {isAuthorize ? (
+            <>
+              <FaEye
+                className="mr-2 text-xl text-green-500"
+                onClick={() => navigate(`/borrow/${row._id}`)}
+              />
+              <FaPencilAlt
+                className="mr-2 text-xl text-blue-500"
+                onClick={() => navigate(`/borrow/edit/${row._id}`)}
+              />
+              <FaTrash
+                className="text-xl text-red-500"
+                onClick={() => handleDelete(row._id)}
+              />
+            </>
+          ) : (
+            <FaEye
+              className="mr-2 text-xl text-green-500"
+              onClick={() => navigate(`/employee/borrow/${row._id}`)}
+            />
+          )}
         </div>
       ),
     },
@@ -120,17 +140,19 @@ export default function () {
         <div className="flex items-center justify-center">
           <div className="max-w-full p-4 overflow-hidden rounded-lg bg-none sm:p-6 lg:p-8 md:w-full">
             <div className="flex items-center justify-end m-2">
-              <button
-                onClick={() => navigate("/borrow/create")}
-                className="text-[16px] bg-gray-700 text-white p-[15px] rounded-md transition-all duration-500  hover:bg-white hover:text-black border border-gray-700"
-              >
-                Borrow Forms <i className="fa fa-plus"></i>
-              </button>
+              {isAuthorize ? (
+                <button
+                  onClick={() => navigate("/borrow/create")}
+                  className="text-[16px] bg-gray-700 text-white p-[15px] rounded-md transition-all duration-500  hover:bg-white hover:text-black border border-gray-700"
+                >
+                  Borrow Forms <i className="fa fa-plus"></i>
+                </button>
+              ) : null}
             </div>
             <DataTable
               title="Borrow Records"
               columns={columns}
-              data={borrows}
+              data={isAuthorize ? borrows : userBorrows}
               pagination
               highlightOnHover
               pointerOnHover

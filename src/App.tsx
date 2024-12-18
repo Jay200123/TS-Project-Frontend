@@ -51,6 +51,9 @@ import {
   EditEquipment,
   BorrowTable,
   CreateBorrow,
+  EditBorrow,
+  GetBorrowById,
+  TechnicianBorrow,
 } from "./Pages";
 import { ProtectedRoute } from "./components";
 import {
@@ -129,6 +132,30 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/borrow/employee"
+            element={
+              <ProtectedRoute userRole={["Employee"]}>
+                <BorrowTable />
+              </ProtectedRoute>
+            }
+          />
+           <Route
+            path="/employee/borrow/create"
+            element={
+              <ProtectedRoute userRole={["Employee"]}>
+                <CreateBorrow />
+              </ProtectedRoute>
+            }
+          />
+           <Route
+            path="/employee/borrow/:id"
+            element={
+              <ProtectedRoute userRole={["Employee"]}>
+                <GetBorrowById />
+              </ProtectedRoute>
+            }
+          />
         </Route>
 
         {/* Technician Private Routes */}
@@ -171,6 +198,38 @@ function App() {
             element={
               <ProtectedRoute userRole={["Technician"]}>
                 <GetTicketById />
+              </ProtectedRoute>
+            }
+          />
+            <Route
+            path="/technician/borrows"
+            element={
+              <ProtectedRoute userRole={["Technician"]}>
+                <TechnicianBorrow />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/technician/borrow/create"
+            element={
+              <ProtectedRoute userRole={["Technician"]}>
+                <CreateBorrow />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/technician/borrow/:id"
+            element={
+              <ProtectedRoute userRole={["Technician"]}>
+                <GetBorrowById />
+              </ProtectedRoute>
+            }
+          />
+           <Route
+            path="/technician/borrow/edit/:id"
+            element={
+              <ProtectedRoute userRole={["Technician"]}>
+                <EditBorrow />
               </ProtectedRoute>
             }
           />
@@ -483,6 +542,22 @@ function App() {
             element={
               <ProtectedRoute userRole={["Admin"]}>
                 <CreateBorrow />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/borrow/:id"
+            element={
+              <ProtectedRoute userRole={["Admin"]}>
+                <GetBorrowById />
+              </ProtectedRoute>
+            }
+          />
+           <Route
+            path="/borrow/edit/:id"
+            element={
+              <ProtectedRoute userRole={["Admin"]}>
+                <EditBorrow />
               </ProtectedRoute>
             }
           />

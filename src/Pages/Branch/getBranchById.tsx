@@ -1,10 +1,8 @@
 import { useBranchStore } from '../../state/store'
 import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
 
 export default function () {
-  const navigate = useNavigate()
   const { id } = useParams<{ id: string }>()
   const { branch, getOneBranch } = useBranchStore()
 
@@ -20,15 +18,21 @@ export default function () {
       : null
 
   const back = () => {
-    navigate('/branches')
+   window.history.back()
   }
 
   return (
     <form className='flex items-center justify-center p-4 m-4'>
-      <div className='flex flex-col w-full max-w-5xl p-6 space-y-6 bg-white border border-gray-400 rounded-lg shadow-md md:flex-row md:space-y-0 md:space-x-6'>
-        <div className='hidden w-full md:w-1/2 md:block mr-12'>
+      <div className='relative flex flex-col w-full max-w-5xl p-6 space-y-6 bg-white border border-gray-400 rounded-lg shadow-md md:flex-row md:space-y-0 md:space-x-6'>
+      <h3
+          onClick={back}
+          className='absolute m-1 text-3xl transition-all duration-500 cursor-pointer top-1 left-1 hover:text-gray-700'
+        >
+          <i className='fa-solid fa-arrow-left'></i>
+        </h3>
+        <div className='hidden w-full mr-12 md:w-1/2 md:block'>
           <img
-            className='object-cover max-w-sm max-h-sm rounded-l-lg'
+            className='object-cover max-w-sm rounded-l-lg max-h-sm'
             src={randomImage?.url}
             alt={randomImage?.originalname}
           />
@@ -88,14 +92,6 @@ export default function () {
               placeholder={branch?.email}
               className='p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
             />
-          </div>
-          <div className='flex justify-center mt-4'>
-            <button
-              onClick={back}
-              className='w-full px-4 py-2 text-lg font-medium text-white transition duration-700 bg-black border border-gray-500 rounded-md hover:opacity-80'
-            >
-              <i className='fa-solid fa-arrow-left mr-1'></i>Go Back
-            </button>
           </div>
         </div>
       </div>

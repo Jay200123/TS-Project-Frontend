@@ -11,7 +11,7 @@ import { toast } from 'react-toastify'
 import { useState } from 'react'
 import { editPositionValidationSchema } from '../../validations'
 
-export default function EditPosition () {
+export default function () {
   const navigate = useNavigate()
   const { id } = useParams<{ id: string }>()
   const { departments, getAllDepartments } = useDepartmentStore()
@@ -76,7 +76,7 @@ export default function EditPosition () {
       className='flex items-center justify-center p-4 m-4'
     >
       <div className='flex flex-col w-full max-w-5xl p-6 space-y-6 bg-white border border-gray-400 rounded-lg shadow-md md:flex-row md:space-y-0 md:space-x-6'>
-        <div className='hidden w-full md:w-1/2 md:block mr-12'>
+        <div className='hidden w-full mr-12 md:w-1/2 md:block'>
           <Image />
         </div>
         <div className='flex flex-col w-full space-y-4 md:w-1/2'>

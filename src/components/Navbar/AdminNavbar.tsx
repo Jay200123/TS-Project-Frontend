@@ -96,20 +96,20 @@ export default function () {
         <ul className="flex flex-row items-start justify-start md:flex-row md:items-center">
           <li
             onClick={technicianTickets}
-            className="p-2 m-2 text-sm transition duration-300 rounded cursor-pointer hover:bg-gray-700 hover:text-white md:text-sm"
+            className="p-2 m-2 text-sm text-gray-700 transition duration-300 rounded cursor-pointer hover:bg-gray-700 hover:text-white md:text-sm"
           >
             <i className="fa-solid fa-clipboard"></i> Ticket Performance Reports
           </li>
           <li
             onClick={dashboard}
-            className="p-2 m-2 text-sm transition duration-300 rounded cursor-pointer hover:bg-gray-700 hover:text-white md:text-sm"
+            className="p-2 m-2 text-sm text-gray-700 transition duration-300 rounded cursor-pointer hover:bg-gray-700 hover:text-white md:text-sm"
           >
             <i className="fa-solid fa-chart-simple"></i>Dashboard
           </li>
 
           <li
             onClick={getAlltickets}
-            className="relative p-2 m-2 text-sm transition duration-300 rounded cursor-pointer hover:bg-gray-700 hover:text-white md:text-sm"
+            className="relative p-2 m-2 text-sm text-gray-700 transition duration-300 rounded cursor-pointer hover:bg-gray-700 hover:text-white md:text-sm"
           >
             <h3 className="absolute top-0 w-4 h-4 text-sm text-center text-white bg-red-500 rounded-full right-1">{newTickets?.length}</h3>
             <i className="m-1 fas fa-ticket"></i> Tickets
@@ -123,7 +123,7 @@ export default function () {
 
           <li
             onClick={() => setIsTableOpen(!isTableOpen)}
-            className="relative p-3 m-2 text-sm transition duration-300 rounded cursor-pointer hover:bg-gray-700 hover:text-white md:text-sm"
+            className="relative p-3 m-2 text-sm text-gray-700 transition duration-300 rounded cursor-pointer hover:bg-gray-700 hover:text-white md:text-sm"
           >
             <span>
               <i className="m-1 fa-solid fa-table"></i>Tables

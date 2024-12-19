@@ -2,143 +2,155 @@ import {
   useDeviceStore,
   useBranchStore,
   useDepartmentStore,
-  useUserStore
-} from '../../state/store'
-import { useQuery } from '@tanstack/react-query'
-import { useNavigate, useParams } from 'react-router-dom'
-import { useFormik } from 'formik'
-import { toast } from 'react-toastify'
-import { useState } from 'react'
-import { type, status } from '../../utils/arrays'
-import { editDeviceValidationSchema } from '../../validations'
+  useUserStore,
+} from "../../state/store";
+import { useQuery } from "@tanstack/react-query";
+import { useNavigate, useParams } from "react-router-dom";
+import { useFormik } from "formik";
+import { toast } from "react-toastify";
+import { useState } from "react";
+import { type, status } from "../../utils/arrays";
+import { editDeviceValidationSchema } from "../../validations";
 
 export default function () {
-  const { id } = useParams<{ id: string }>()
-  const navigate = useNavigate()
-  const { branches, getAllBranches } = useBranchStore()
-  const { departments, getAllDepartments } = useDepartmentStore()
-  const { users, getAllUsers } = useUserStore()
-  const { device, getOneDevice, updateDeviceById } = useDeviceStore()
+  const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
+  const { branches, getAllBranches } = useBranchStore();
+  const { departments, getAllDepartments } = useDepartmentStore();
+  const { users, getAllUsers } = useUserStore();
+  const { device, getOneDevice, updateDeviceById } = useDeviceStore();
 
-  const [selectBranch, setSelectedBranch] = useState(device?.owner?.branch?._id)
+  const [selectBranch, setSelectedBranch] = useState(
+    device?.owner?.branch?._id
+  );
   const [selectDepartment, setSelectedDepartment] = useState(
     device?.owner?.department?._id
-  )
+  );
 
   useQuery({
-    queryKey: ['branches'],
-    queryFn: getAllBranches
-  })
+    queryKey: ["branches"],
+    queryFn: getAllBranches,
+  });
 
   useQuery({
-    queryKey: ['departments'],
-    queryFn: getAllDepartments
-  })
+    queryKey: ["departments"],
+    queryFn: getAllDepartments,
+  });
 
   useQuery({
-    queryKey: ['users'],
-    queryFn: getAllUsers
-  })
+    queryKey: ["users"],
+    queryFn: getAllUsers,
+  });
 
   useQuery({
-    queryKey: ['device', id],
+    queryKey: ["device", id],
     queryFn: () => getOneDevice(id!),
-    enabled: !!id
-  })
+    enabled: !!id,
+  });
 
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      owner: device?.owner?._id || '',
-      type: device?.type || '',
-      description: device?.description || '',
-      date_requested: device?.date_requested || '',
-      date_purchased: device?.date_purchased || '',
-      serial_number: device?.serial_number || '',
-      status: device?.status || '',
+      owner: device?.owner?._id || "",
+      type: device?.type || "",
+      description: device?.description || "",
+      date_requested: device?.date_requested || "",
+      date_purchased: device?.date_purchased || "",
+      serial_number: device?.serial_number || "",
+      status: device?.status || "",
       price: device?.price || 0,
-      image: device?.image || []
+      image: device?.image || [],
     },
     validationSchema: editDeviceValidationSchema,
-    onSubmit: async values => {
-      const formData = new FormData()
-      formData.append('owner', values.owner)
-      formData.append('type', values.type)
-      formData.append('description', values.description)
-      formData.append('price', values.price.toString())
+    onSubmit: async (values) => {
+      const formData = new FormData();
+      formData.append("owner", values.owner);
+      formData.append("type", values.type);
+      formData.append("description", values.description);
+      formData.append("price", values.price.toString());
       formData.append(
-        'date_requested',
+        "date_requested",
         values.date_requested
           ? new Date(values.date_requested).toISOString()
-          : ''
-      )
+          : ""
+      );
       formData.append(
-        'date_purchased',
+        "date_purchased",
         values.date_purchased
           ? new Date(values.date_purchased).toISOString()
-          : ''
-      )
-      formData.append('serial_number', values.serial_number)
-      formData.append('status', values.status)
+          : ""
+      );
+      formData.append("serial_number", values.serial_number);
+      formData.append("status", values.status);
       Array.from(values?.image).forEach((files: any) => {
-        formData.append('image', files)
-      })
+        formData.append("image", files);
+      });
       try {
-        await updateDeviceById(device?._id!, formData)
-        toast.success('Device Info Successfully Updated')
-        navigate('/devices')
+        await updateDeviceById(device?._id!, formData);
+        toast.success("Device Info Successfully Updated");
+        navigate("/devices");
       } catch (error) {
-        toast.error('An unexpected error occurred')
+        toast.error("An unexpected error occurred");
         if (error instanceof Error) {
-          toast.error(error.message)
+          toast.error(error.message);
         } else {
-          toast.error('An unexpected error occurred')
+          toast.error("An unexpected error occurred");
         }
       }
-    }
-  })
+    },
+  });
 
   const randomImage =
     Array.isArray(device?.image) && device.image.length > 0
       ? device.image[Math.floor(Math.random() * device.image.length)]
-      : null
+      : null;
+
+  const back = () => {
+    window.history.back();
+  };
 
   return (
     <>
       <form
         onSubmit={formik.handleSubmit}
-        className='flex items-center justify-center p-4 m-4'
+        className="flex items-center justify-center p-4 m-4"
       >
-        <div className='flex flex-col w-[900px] p-6 space-y-6 bg-white border border-gray-400 rounded-lg shadow-md md:flex-row md:space-y-0 md:space-x-6 overflow-hidden min-h-[24rem]'>
-          <div className='hidden w-full md:w-1/2 md:block min-h-[20rem]'>
+        <div className="relative flex flex-col w-[900px] p-6 space-y-6 bg-white border border-gray-400 rounded-lg shadow-md md:flex-row md:space-y-0 md:space-x-6 overflow-hidden min-h-[24rem]">
+          <h3
+            onClick={back}
+            className="absolute m-1 text-3xl transition-all duration-500 cursor-pointer top-1 left-1 hover:text-gray-700"
+          >
+            <i className="fa-solid fa-arrow-left"></i>
+          </h3>
+          <div className="hidden w-full md:w-1/2 md:block min-h-[20rem]">
             <img
-              className='object-cover max-w-sm max-h-sm rounded-l-lg'
+              className="object-cover max-w-sm rounded-l-lg max-h-sm"
               src={randomImage?.url}
               alt={randomImage?.originalname}
             />
-            <h5 className='font-bold text-[18px]'>Device Description:</h5>
-            <p className='text-[16px]'>{device?.description}</p>
+            <h5 className="font-bold text-[18px]">Device Description:</h5>
+            <p className="text-[16px]">{device?.description}</p>
           </div>
-          <div className='flex flex-col w-full space-y-4 md:w-1/2'>
-            <h2 className='text-2xl font-bold text-center text-gray-800 md:text-left'>
+          <div className="flex flex-col w-full space-y-4 md:w-1/2">
+            <h2 className="text-2xl font-bold text-center text-gray-800 md:text-left">
               Edit & Update Information
             </h2>
 
-            <div className='flex items-center justify-between'>
-              <div className='flex flex-col'>
-                <label className='mb-1 text-sm font-medium text-gray-700'>
-                  <i className='fa-solid fa-code-branch'></i> Branch
+            <div className="flex items-center justify-between">
+              <div className="flex flex-col">
+                <label className="mb-1 text-sm font-medium text-gray-700">
+                  <i className="fa-solid fa-code-branch"></i> Branch
                 </label>
                 <select
-                  name='branch'
-                  onChange={e => setSelectedBranch(e.target.value)}
+                  name="branch"
+                  onChange={(e) => setSelectedBranch(e.target.value)}
                   value={selectBranch}
-                  className='w-full text-base border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[2.5rem]'
+                  className="w-full text-base border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[2.5rem]"
                 >
-                  <option value='' disabled>
+                  <option value="" disabled>
                     Select a Branch
                   </option>
-                  {branches?.map(b => (
+                  {branches?.map((b) => (
                     <option key={b._id} value={b._id}>
                       {b.branch_name}
                     </option>
@@ -146,20 +158,20 @@ export default function () {
                 </select>
               </div>
 
-              <div className='flex flex-col ml-3'>
-                <label className='mb-1 text-sm font-medium text-gray-700'>
-                  <i className='fa-solid fa-pencil'></i> Department
+              <div className="flex flex-col ml-3">
+                <label className="mb-1 text-sm font-medium text-gray-700">
+                  <i className="fa-solid fa-pencil"></i> Department
                 </label>
                 <select
-                  name='department'
-                  onChange={e => setSelectedDepartment(e.target.value)}
+                  name="department"
+                  onChange={(e) => setSelectedDepartment(e.target.value)}
                   value={selectDepartment}
-                  className='p-2 text-base border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-full min-h-[2.5rem]'
+                  className="p-2 text-base border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-full min-h-[2.5rem]"
                 >
-                  <option value='' disabled>
+                  <option value="" disabled>
                     Select a Department
                   </option>
-                  {departments?.map(d => (
+                  {departments?.map((d) => (
                     <option key={d._id} value={d._id}>
                       {d.department_name}
                     </option>
@@ -167,22 +179,22 @@ export default function () {
                 </select>
               </div>
             </div>
-            <div className='flex flex-col'>
-              <label className='mb-1 text-sm font-medium text-gray-700'>
-                <i className='fa-solid fa-user'></i> Device User
+            <div className="flex flex-col">
+              <label className="mb-1 text-sm font-medium text-gray-700">
+                <i className="fa-solid fa-user"></i> Device User
               </label>
               <select
-                name='owner'
-                id='owner'
+                name="owner"
+                id="owner"
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
                 value={formik?.values.owner}
-                className='w-full text-base border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[2.5rem]'
+                className="w-full text-base border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[2.5rem]"
               >
-                <option value='' disabled>
+                <option value="" disabled>
                   Select a User
                 </option>
-                {users?.map(u => (
+                {users?.map((u) => (
                   <option key={u?._id} value={u?._id}>
                     {u?.fullname}
                   </option>
@@ -190,19 +202,19 @@ export default function () {
               </select>
             </div>
 
-            <div className='flex flex-col'>
-              <label className='mb-1 text-sm font-medium text-gray-700'>
-                <i className='fa-solid fa-computer'></i> Device
+            <div className="flex flex-col">
+              <label className="mb-1 text-sm font-medium text-gray-700">
+                <i className="fa-solid fa-computer"></i> Device
               </label>
               <select
-                name='type'
-                id='type'
+                name="type"
+                id="type"
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
                 value={formik?.values.type}
-                className='w-full text-base border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[2.5rem]'
+                className="w-full text-base border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[2.5rem]"
               >
-                <option value='' disabled>
+                <option value="" disabled>
                   Device Type
                 </option>
                 {type?.map((t, index) => (
@@ -213,108 +225,108 @@ export default function () {
               </select>
             </div>
 
-            <div className='flex flex-col'>
-              <label className='mb-1 text-sm font-medium text-gray-700'>
-                <i className='fa-solid fa-calendar'></i>
+            <div className="flex flex-col">
+              <label className="mb-1 text-sm font-medium text-gray-700">
+                <i className="fa-solid fa-calendar"></i>
                 Date Requested
               </label>
               <input
-                type='date'
-                id='date_requested'
-                name='date_requested'
+                type="date"
+                id="date_requested"
+                name="date_requested"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={
                   formik.values.date_requested
                     ? new Date(formik.values.date_requested)
                         .toISOString()
-                        .split('T')[0]
-                    : ''
+                        .split("T")[0]
+                    : ""
                 }
-                className='p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+                className="p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
 
-            <div className='flex flex-col'>
-              <label className='mb-1 text-sm font-medium text-gray-700'>
-                <i className='fa-solid fa-calendar'></i>
+            <div className="flex flex-col">
+              <label className="mb-1 text-sm font-medium text-gray-700">
+                <i className="fa-solid fa-calendar"></i>
                 Date Purchased
               </label>
               <input
-                type='date'
-                id='date_purchased'
-                name='date_purchased'
+                type="date"
+                id="date_purchased"
+                name="date_purchased"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={
                   formik.values.date_purchased
                     ? new Date(formik.values.date_purchased)
                         .toISOString()
-                        .split('T')[0]
-                    : ''
+                        .split("T")[0]
+                    : ""
                 }
-                className='p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+                className="p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
 
-            <div className='flex flex-col'>
-              <label className='mb-1 text-sm font-medium text-gray-700'>
-                <i className='fa-solid fa-barcode'></i> Serial Number
+            <div className="flex flex-col">
+              <label className="mb-1 text-sm font-medium text-gray-700">
+                <i className="fa-solid fa-barcode"></i> Serial Number
               </label>
               <input
-                type='text'
-                id='serial_number'
-                name='serial_number'
+                type="text"
+                id="serial_number"
+                name="serial_number"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.serial_number}
-                className='p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+                className="p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
 
-            <div className='flex flex-col'>
-              <label className='mb-1 text-sm font-medium text-gray-700'>
-                <i className='fa-solid fa-pencil'></i>
+            <div className="flex flex-col">
+              <label className="mb-1 text-sm font-medium text-gray-700">
+                <i className="fa-solid fa-pencil"></i>
                 Description
               </label>
               <textarea
-                id='description'
-                name='description'
+                id="description"
+                name="description"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.description}
-                className='p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+                className="p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
 
-            <div className='flex flex-col'>
-              <label className='mb-1 text-sm font-medium text-gray-700'>
-                <i className='fa-solid fa-peso-sign'></i>
+            <div className="flex flex-col">
+              <label className="mb-1 text-sm font-medium text-gray-700">
+                <i className="fa-solid fa-peso-sign"></i>
                 Device Price
               </label>
               <textarea
-                id='price'
-                name='price'
+                id="price"
+                name="price"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.price}
-                className='p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+                className="p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
 
-            <div className='flex flex-col'>
-              <label className='mb-1 text-sm font-medium text-gray-700'>
-                <i className='fa-solid fa-circle-info'></i> Device Status
+            <div className="flex flex-col">
+              <label className="mb-1 text-sm font-medium text-gray-700">
+                <i className="fa-solid fa-circle-info"></i> Device Status
               </label>
               <select
-                name='status'
-                id='status'
+                name="status"
+                id="status"
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
                 value={formik?.values.status}
-                className='w-full text-base border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[2.5rem]'
+                className="w-full text-base border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[2.5rem]"
               >
-                <option value='' disabled>
+                <option value="" disabled>
                   Device Status
                 </option>
                 {status?.map((s, index) => (
@@ -325,29 +337,29 @@ export default function () {
               </select>
             </div>
 
-            <div className='flex flex-col'>
-              <label className='mb-1 text-sm font-medium text-gray-700'>
-                <i className='mr-1 fa-solid fa-image'></i> Device Image
+            <div className="flex flex-col">
+              <label className="mb-1 text-sm font-medium text-gray-700">
+                <i className="mr-1 fa-solid fa-image"></i> Device Image
               </label>
               <input
-                type='file'
-                id='image'
-                name='image'
+                type="file"
+                id="image"
+                name="image"
                 multiple
                 onBlur={formik.handleBlur}
-                onChange={event => {
+                onChange={(event) => {
                   const files = event.currentTarget.files
                     ? Array.from(event.currentTarget.files)
-                    : []
-                  formik.setFieldValue('image', files)
+                    : [];
+                  formik.setFieldValue("image", files);
                 }}
               />
             </div>
 
-            <div className='flex justify-center mt-4'>
+            <div className="flex justify-center mt-4">
               <button
-                type='submit'
-                className='w-full px-4 py-2 text-lg font-medium text-white transition duration-700 bg-black border border-gray-500 rounded-md hover:opacity-80'
+                type="submit"
+                className="w-full px-4 py-2 text-lg font-medium text-white transition duration-700 bg-black border border-gray-500 rounded-md hover:opacity-80"
               >
                 Update Device
               </button>
@@ -356,5 +368,5 @@ export default function () {
         </div>
       </form>
     </>
-  )
+  );
 }

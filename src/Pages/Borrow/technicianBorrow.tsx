@@ -2,7 +2,7 @@ import DataTable, { TableColumn } from "react-data-table-component";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaPencilAlt, FaTrash } from "react-icons/fa";
-import { useBorrowStore, useAuthenticationStore } from "../../state/store";
+import { useBorrowStore } from "../../state/store";
 import { toast } from "react-toastify";
 import { Borrow } from "../../interface";
 import { FadeLoader } from "react-spinners";

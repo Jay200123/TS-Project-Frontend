@@ -6,7 +6,7 @@ export default function () {
     <>
       <main className='flex flex-col items-center justify-between min-h-screen min-w-screen'>
         <TechnicianNavbar />
-        <div className='w-full h-full'>
+        <div className='max-w-full max-h-full'>
         <Outlet />
         </div>
         <Footer />

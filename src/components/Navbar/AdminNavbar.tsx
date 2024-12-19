@@ -1,10 +1,21 @@
 import { useState } from "react";
-import { useAuthenticationStore } from "../../state/store";
+import { useAuthenticationStore, useTicketStore } from "../../state/store";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useQuery } from "@tanstack/react-query";
 
 export default function () {
   const navigate = useNavigate();
+  const { tickets, getAllTickets } = useTicketStore();
+  
+  useQuery({
+    queryKey: ['tickets'],
+    queryFn: getAllTickets,
+  });
+
+  const newTickets = tickets?.filter((t) => t?.status?.includes("new"));
+  console.log(newTickets.length);
+
 
   const [isOpen, setIsOpen] = useState(false);
   const [isTableOpen, setIsTableOpen] = useState(false);
@@ -38,7 +49,7 @@ export default function () {
     navigate("/devices");
   };
 
-  const tickets = () => {
+  const getAlltickets = () => {
     navigate("/tickets");
   };
 
@@ -98,9 +109,10 @@ export default function () {
           </li>
 
           <li
-            onClick={tickets}
-            className="p-2 m-2 text-sm transition duration-300 rounded cursor-pointer hover:bg-gray-700 hover:text-white md:text-sm"
+            onClick={getAlltickets}
+            className="relative p-2 m-2 text-sm transition duration-300 rounded cursor-pointer hover:bg-gray-700 hover:text-white md:text-sm"
           >
+            <h3 className="absolute top-0 w-4 h-4 text-sm text-center text-white bg-red-500 rounded-full right-1">{newTickets?.length}</h3>
             <i className="m-1 fas fa-ticket"></i> Tickets
           </li>
           <li

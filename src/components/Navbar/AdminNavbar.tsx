@@ -14,7 +14,6 @@ export default function () {
   });
 
   const newTickets = tickets?.filter((t) => t?.status?.includes("new"));
-  console.log(newTickets.length);
 
 
   const [isOpen, setIsOpen] = useState(false);

@@ -21,12 +21,12 @@ export default function () {
 
   return (
     <div className='p-7'>
-      <h3 className='text-sm md:text-2xl font-bold'>My Tickets</h3>
+      <h3 className='text-sm font-bold md:text-2xl'>My Tickets</h3>
       {filteredTickets.map(t => (
         <div key={t?._id} className='relative flex flex-col justify-evenly'>
-          <div className='flex-col flex md:flex-row items-center justify-start p-2 m-4 h-[300px] md:h-[550px] overflow-hidden rounded-md shadow-lg border border-gray'>
+          <div className='flex-col flex md:flex-row items-center justify-start p-2 m-4 h-[300px] md:h-[550px] w-[75rem] overflow-hidden rounded-md shadow-lg border border-gray'>
             <div className='flex flex-col items-center justify-center w-1/4 p-2 m-2'>
-              <h3 className='text-xs md:text-lg font-bold text-center'>
+              <h3 className='text-xs font-bold text-center md:text-lg'>
                 Ticket Image
               </h3>
               {t?.image?.length > 1 ? (
@@ -46,7 +46,7 @@ export default function () {
               )}
               <button
                 onClick={() => navigate(`/technician/ticket/${t?._id}`)}
-                className='bg-green-500 p-1 md:p-3 m-2 rounded-md text-sm text-white md:text-lg transition-all duration-500 hover:bg-green-800'
+                className='p-1 m-2 text-sm text-white transition-all duration-500 bg-green-500 rounded-md md:p-3 md:text-lg hover:bg-green-800'
               >
                 More Details
               </button>
@@ -107,7 +107,7 @@ export default function () {
                 className='placeholder:text-black w-full h-20 p-1 text-[12px] md:text-[16px] border border-gray rounded-md'
                 placeholder={t?.findings}
               />
-              <div className='flex flex-col md:flex-row items-center justify-between'>
+              <div className='flex flex-col items-center justify-between md:flex-row'>
                 <p className='font-bold text-[12px] md:text-[17px]'>
                   Date Submitted:
                   <span className='underline font-medium text-[10px] md:text-[16px] m-1'>

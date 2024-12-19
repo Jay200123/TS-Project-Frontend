@@ -25,22 +25,22 @@ export default function () {
 
   return (
     <div className='flex items-center justify-center p-4 m-4'>
-      <div className='relative flex flex-col w-full max-w-5xl p-6 space-y-6 bg-white border border-gray-400 rounded-lg shadow-md md:flex-row md:space-y-0 md:space-x-6'>
+      <div className='relative flex flex-col w-full p-6 space-y-6 bg-white border border-gray-400 rounded-lg shadow-md md:w-[50rem] md:flex-row md:space-y-0 md:space-x-6'>
         <h3
           onClick={back}
           className='absolute m-1 text-3xl transition-all duration-500 cursor-pointer top-1 left-1 hover:text-gray-700'
         >
           <i className='fa-solid fa-arrow-left'></i>
         </h3>
-        <div className='hidden w-full mr-12 md:w-1/2 md:block'>
+        <div className='hidden w-full p-6 md:w-1/2 md:block'>
           <div className='flex flex-col items-center justify-center'>
-            <h3 className='text-2xl mb-1 font-bold'>Ticket Image</h3>
+            <h3 className='mb-1 text-2xl font-bold'>Ticket Image</h3>
             <img
               className='object-cover md:w-[350px] md:h-[350px] rounded-l-lg'
               src={randomImage?.url}
               alt={randomImage?.originalname}
             />
-            <h3 className='text-xl mb-1 font-bold'>{ticket?.ticketNumber}</h3>
+            <h3 className='mb-1 text-xl font-bold'>Ticket Number: {ticket?.ticketNumber}</h3>
             <div className='flex flex-col mt-2'>
               <label className='mb-1 text-sm font-medium text-gray-700'>
                 <i className='mr-1 fa-solid fa-user'></i> Concern
@@ -81,7 +81,7 @@ export default function () {
                   name='owner'
                   readOnly
                   placeholder={ticket?.device?.owner?.fullname}
-                  className='p-2  placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+                  className='p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
                 />
               </div>
 
@@ -94,7 +94,7 @@ export default function () {
                   name='position'
                   readOnly
                   placeholder={ticket?.device?.owner?.position?.position_name}
-                  className='p-2  placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+                  className='p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
                 />
               </div>
 
@@ -172,7 +172,7 @@ export default function () {
               name='description'
               readOnly
               placeholder={ticket?.device?.description}
-              className='p-2 h-20 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+              className='h-20 p-2 placeholder-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
             />
           </div>
 

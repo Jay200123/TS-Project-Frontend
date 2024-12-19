@@ -45,19 +45,29 @@ export default function () {
     }
   })
 
+  const back = () => {  
+    window.history.back()
+  }
+
   return (
     <>
       <form
         onSubmit={formik.handleSubmit}
         className='flex items-center justify-center p-4 m-4'
       >
-        <div className='flex flex-col w-full max-w-5xl p-6 space-y-6 bg-white border border-gray-400 rounded-lg shadow-md md:flex-row md:space-y-0 md:space-x-6'>
-          <div className='hidden w-full md:w-1/2 md:block mr-12'>
+        <div className='relative flex flex-col w-full max-w-5xl p-6 space-y-6 bg-white border border-gray-400 rounded-lg shadow-md md:flex-row md:space-y-0 md:space-x-6'>
+        <h3
+          onClick={back}
+          className='absolute m-1 text-3xl transition-all duration-500 cursor-pointer top-1 left-1 hover:text-gray-700'
+        >
+          <i className='fa-solid fa-arrow-left'></i>
+        </h3>
+          <div className='hidden w-full mr-12 md:w-1/2 md:block'>
             <Image />
           </div>
           <div className='flex flex-col w-full space-y-4 md:w-1/2'>
             <h2 className='text-2xl font-bold text-center text-gray-800 md:text-left'>
-              Create Department
+              Create Branch
             </h2>
 
             <div className='flex flex-col'>

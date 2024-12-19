@@ -117,7 +117,7 @@ export default function () {
           </li>
           <li
             onClick={borrow}
-            className="p-2 m-2 text-sm transition duration-300 rounded cursor-pointer hover:bg-gray-700 hover:text-white md:text-sm"
+            className="p-2 m-2 text-sm text-gray-700 transition duration-300 rounded cursor-pointer hover:bg-gray-700 hover:text-white md:text-sm"
           >
            <i className="mr-1 fa-solid fa-handshake"></i>Borrow Items
           </li>
@@ -197,7 +197,7 @@ export default function () {
           {user ? (
             <li
               onClick={handleLogout}
-              className="p-2 text-sm text-black transition-all duration-500 rounded-sm cursor-pointer hover:bg-gray-600 hover:text-white"
+              className="p-2 text-sm text-gray-700 transition-all duration-500 rounded-sm cursor-pointer hover:bg-gray-600 hover:text-white"
             >
               <i className="m-1 fa-solid fa-arrow-right-from-bracket"></i> Sign
               Out

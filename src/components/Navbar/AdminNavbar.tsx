@@ -64,6 +64,10 @@ export default function () {
     navigate("/borrows");
   }
 
+  const inventory = () => { 
+    navigate("/inventories"); 
+  }
+
   const handleLogout = async () => {
     try {
       await logout();
@@ -105,6 +109,12 @@ export default function () {
             className="p-2 m-2 text-sm text-gray-700 transition duration-300 rounded cursor-pointer hover:bg-gray-700 hover:text-white md:text-sm"
           >
             <i className="fa-solid fa-chart-simple"></i>Dashboard
+          </li>
+          <li
+            onClick={inventory}
+            className="p-2 m-2 text-sm text-gray-700 transition duration-300 rounded cursor-pointer hover:bg-gray-700 hover:text-white md:text-sm"
+          >
+            <i className="mr-1 fa-solid fa-clipboard"></i>Inventory
           </li>
 
           <li

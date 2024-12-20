@@ -21,7 +21,11 @@ export const useHistoryStore = create<HistoryState>((set) => ({
         return res?.data?.details;
     },
     deleteHistoryById: async (id: string) => {
-        const res = await api.delete(`${import.meta.env.VITE_API_URI}${PATH.HISTORY_ID_ROUTE.replace(":id", id)}`);
-        set({ history: res.data.details, loading: false, error: "" });
+        await api.delete(`${import.meta.env.VITE_API_URI}${PATH.HISTORY_ID_ROUTE.replace(":id", id)}`);
+        set((state) =>({
+            histories: state.histories.filter((history) => history?._id !== id),
+            loading: false,
+            error: "",
+        }))
     }
 }));

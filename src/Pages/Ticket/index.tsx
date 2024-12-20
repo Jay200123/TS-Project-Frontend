@@ -1,260 +1,285 @@
-import { useTicketStore, useAuthenticationStore } from '../../state/store'
-import { useQuery } from '@tanstack/react-query'
-import { useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify'
-import { FaEye, FaTrash, FaCheckCircle, FaUserAlt } from 'react-icons/fa'
-import DataTable, { TableColumn } from 'react-data-table-component'
-import { tableCustomStyles } from '../../utils/tableCustomStyles'
-import { Ticket } from '../../interface'
-import FadeLoader from 'react-spinners/FadeLoader'
-import { useState } from 'react'
-import { TicketStatus } from '../../interface'
+import { useTicketStore, useAuthenticationStore } from "../../state/store";
+import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { FaEye, FaTrash, FaCheckCircle, FaUserAlt } from "react-icons/fa";
+import DataTable, { TableColumn } from "react-data-table-component";
+import { tableCustomStyles } from "../../utils/tableCustomStyles";
+import { Ticket } from "../../interface";
+import FadeLoader from "react-spinners/FadeLoader";
+import { useState } from "react";
+import { TicketStatus } from "../../interface";
 
 export default function () {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const {
     tickets,
     loading,
     getAllTickets,
     deleteTicketById,
     closeTicketById,
-    claimTicketById
-  } = useTicketStore()
-  const { user: auth } = useAuthenticationStore()
-  const [setTicket, setSelectedTicket] = useState('')
+    claimTicketById,
+  } = useTicketStore();
+  const { user: auth } = useAuthenticationStore();
+  const [setTicket, setSelectedTicket] = useState("");
 
   useQuery({
-    queryKey: ['tickets'],
-    queryFn: getAllTickets
-  })
+    queryKey: ["tickets"],
+    queryFn: getAllTickets,
+  });
 
-  type StatusCount = Record<TicketStatus, number>
+  type StatusCount = Record<TicketStatus, number>;
 
   const statusCounts = tickets?.reduce<StatusCount>(
     (acc, ticket) => {
-      acc[ticket?.status] = (acc[ticket?.status] || 0) + 1
-      return acc
+      acc[ticket?.status] = (acc[ticket?.status] || 0) + 1;
+      return acc;
     },
     {
       new: 0,
       pending: 0,
       resolved: 0,
-      'in-progress': 0,
-      closed: 0
+      "in-progress": 0,
+      closed: 0,
     }
-  )
+  );
 
   const handleDelete = async (id: string) => {
-    if (window.confirm('Are you sure you want to delete this Ticket?')) {
-      await deleteTicketById(id)
-      window.location.reload()
-      toast.success('Ticket Deleted Successfully')
+    if (window.confirm("Are you sure you want to delete this Ticket?")) {
+      await deleteTicketById(id);
+      window.location.reload();
+      toast.success("Ticket Deleted Successfully");
     }
-  }
+  };
 
   const handleCheck = async (id: string) => {
-    if (window.confirm('Are you sure you want to close this Ticket?')) {
-      await closeTicketById(id)
-      window.location.reload()
-      toast.success('Ticket Closed Successfully')
+    if (window.confirm("Are you sure you want to close this Ticket?")) {
+      await closeTicketById(id);
+      window.location.reload();
+      toast.success("Ticket Closed Successfully");
     }
-  }
+  };
 
   const handleAssign = async (id: string, assignee: string) => {
-    if (window.confirm('Are you sure you want to assign this Ticket?')) {
-      await claimTicketById(id, assignee)
-      window.location.reload()
-      toast.success('Ticket Successfully Assigned')
+    if (window.confirm("Are you sure you want to assign this Ticket?")) {
+      await claimTicketById(id, assignee);
+      window.location.reload();
+      toast.success("Ticket Successfully Assigned");
     }
-  }
+  };
 
   const filteredTickets = tickets
-    .filter(ticket => ticket._id.includes(setTicket))
+    .filter((ticket) => ticket._id.includes(setTicket))
     .sort((a, b) => {
-      const status = ['pending', 'in-progress', 'resolved', 'closed']
-      return status.indexOf(a.status) - status.indexOf(b.status)
-    })
+      const status = ["pending", "in-progress", "resolved", "closed"];
+      return status.indexOf(a.status) - status.indexOf(b.status);
+    });
 
   const columns: TableColumn<Ticket>[] = [
     {
-      name: 'Ticket No.',
-      selector: row => row?.ticketNumber,
-      sortable: true
+      name: "Ticket No.",
+      selector: (row) => row?.ticketNumber,
+      sortable: true,
     },
     {
-      name: 'User',
-      selector: row => `${row?.device?.owner?.fullname}`,
-      sortable: true
+      name: "User",
+      selector: (row) => `${row?.device?.owner?.fullname}`,
+      sortable: true,
     },
     {
-      name: 'Branch',
-      selector: row => row?.device?.owner?.branch?.branch_name,
-      sortable: true
+      name: "Branch",
+      selector: (row) => row?.device?.owner?.branch?.branch_name,
+      sortable: true,
     },
     {
-      name: 'Department',
-      selector: row => row?.device?.owner?.department?.department_name,
-      sortable: true
+      name: "Department",
+      selector: (row) => row?.device?.owner?.department?.department_name,
+      sortable: true,
     },
     {
-      name: 'Position',
-      selector: row => row?.device?.owner?.position?.position_name,
-      sortable: true
+      name: "Position",
+      selector: (row) => row?.device?.owner?.position?.position_name,
+      sortable: true,
     },
     {
-      name: 'Device',
-      selector: row => row?.device?.type,
-      sortable: true
+      name: "Device",
+      selector: (row) => row?.device?.type,
+      sortable: true,
     },
     {
-      name: 'Category',
-      selector: row => row?.category,
-      sortable: true
+      name: "Category",
+      selector: (row) => row?.category,
+      sortable: true,
     },
     {
-      name: 'Level',
-      selector: row => row?.level,
-      sortable: true
+      name: "Level",
+      selector: (row) => row?.level,
+      sortable: true,
     },
     {
-      name: 'Issue',
-      selector: row => row?.description,
-      sortable: true
+      name: "Issue",
+      selector: (row) => row?.description,
+      sortable: true,
     },
     {
-      name: 'Status',
-      selector: row => row?.status,
-      sortable: true
+      name: "Status",
+      selector: (row) => row?.status,
+      sortable: true,
+      cell: (row) => {
+        // Define background colors for each status
+        const statusStyles = {
+          new: "bg-red-100 text-red-500",
+          pending: "bg-orange-100 text-orange-500",
+          resolved: "bg-green-100 text-green-500",
+          "in-progress": "bg-blue-100 text-blue-500",
+          closed: "bg-gray-100 text-gray-500",
+        };
+
+        // Get the appropriate style for the status
+        const statusStyle = statusStyles[row?.status] || "bg-white text-black";
+
+        return (
+          <div
+            className={`p-2 rounded ${statusStyle}`}
+            style={{
+              textAlign: "center",
+              fontWeight: "bold",
+              backgroundColor: statusStyle,
+            }}
+          >
+            {row.status}
+          </div>
+        );
+      },
     },
     {
-      name: 'Date Submitted',
-      selector: row =>
+      name: "Date Submitted",
+      selector: (row) =>
         new Date(row.date_submitted.toLocaleString())
           .toISOString()
-          .split('T')[0],
-      sortable: true
+          .split("T")[0],
+      sortable: true,
     },
     {
-      name: 'Date Resolved',
-      selector: row =>
+      name: "Date Resolved",
+      selector: (row) =>
         row?.date_resolved
           ? new Date(row.date_resolved.toLocaleString())
               .toISOString()
-              .split('T')[0]
-          : 'Not Resolved',
-      sortable: true
+              .split("T")[0]
+          : "Not Resolved",
+      sortable: true,
     },
     {
-      name: 'Assigned to',
-      selector: row =>
-        row?.assignee ? `${row?.assignee?.fullname}` : 'Not Assigned',
-      sortable: true
+      name: "Assigned to",
+      selector: (row) =>
+        row?.assignee ? `${row?.assignee?.fullname}` : "Not Assigned",
+      sortable: true,
     },
     {
-      name: 'Actions',
-      cell: row =>
-        auth?.role === 'Admin' ? (
-          <div className='flex items-center text-center'>
+      name: "Actions",
+      cell: (row) =>
+        auth?.role === "Admin" ? (
+          <div className="flex items-center text-center">
             <FaEye
-              className='mr-2 text-xl text-green-500'
-              title='View Ticket'
+              className="mr-2 text-xl text-green-500"
+              title="View Ticket"
               onClick={() => navigate(`/ticket/${row._id}`)}
             />
 
             {row?.assignee ? (
               <FaUserAlt
-                className='mr-2 text-xl text-gray-500'
-                title='Assign Technician'
-                onClick={() => toast.error('Ticket already assigned')}
+                className="mr-2 text-xl text-gray-500"
+                title="Assign Technician"
+                onClick={() => toast.error("Ticket already assigned")}
               />
             ) : (
               <FaUserAlt
-                className='mr-2 text-xl text-blue-500'
-                title='Assign Technician'
+                className="mr-2 text-xl text-blue-500"
+                title="Assign Technician"
                 onClick={() => navigate(`/ticket/assign/${row._id}`)}
               />
             )}
 
-            {row?.status === 'closed' ? (
+            {row?.status === "closed" ? (
               <FaCheckCircle
-                className='mr-2 text-xl text-gray-500'
-                title='Close Ticket'
-                onClick={() => toast.error('Ticket already closed')}
+                className="mr-2 text-xl text-gray-500"
+                title="Close Ticket"
+                onClick={() => toast.error("Ticket already closed")}
               />
             ) : (
               <FaCheckCircle
-                className='mr-2 text-xl text-teal-500'
-                title='Close Ticket'
+                className="mr-2 text-xl text-teal-500"
+                title="Close Ticket"
                 onClick={() => handleCheck(row?._id)}
               />
             )}
 
             <FaTrash
-              className='text-xl text-red-500'
-              title='Delete Ticket'
+              className="text-xl text-red-500"
+              title="Delete Ticket"
               onClick={() => handleDelete(row._id)}
             />
           </div>
         ) : (
-          <div className='flex items-center text-center'>
+          <div className="flex items-center text-center">
             <FaEye
-              className='mr-2 text-xl text-green-500'
-              title='View Ticket'
+              className="mr-2 text-xl text-green-500"
+              title="View Ticket"
               onClick={() => navigate(`/technician/ticket/${row._id}`)}
             />
             {row?.assignee ? (
               <FaUserAlt
-                className='mr-2 text-xl text-gray-500'
-                title='Assign Technician'
-                onClick={() => toast.error('Ticket already assigned')}
+                className="mr-2 text-xl text-gray-500"
+                title="Assign Technician"
+                onClick={() => toast.error("Ticket already assigned")}
               />
             ) : (
               <FaUserAlt
-                className='mr-2 text-xl text-blue-500'
-                title='Assign Technician'
+                className="mr-2 text-xl text-blue-500"
+                title="Assign Technician"
                 onClick={() => handleAssign(row._id, auth?._id.toString()!)}
               />
             )}
           </div>
-        )
-    }
-  ]
+        ),
+    },
+  ];
 
   return (
-    <div className='flex items-center justify-center'>
+    <div className="flex items-center justify-center">
       {loading ? (
-        <div className='mt-8 loader'>
-          <FadeLoader color='#FFB6C1' loading={true} height={15} width={5} />
+        <div className="mt-8 loader">
+          <FadeLoader color="#FFB6C1" loading={true} height={15} width={5} />
         </div>
       ) : (
         <div>
-          <h3 className='text-lg font-semibold m-[2px] text-red-500'>
+          <h3 className="text-lg font-semibold m-[2px] text-red-500">
             New: {statusCounts?.new}
           </h3>
-          <h3 className='text-lg font-semibold m-[2px] text-orange-500'>
+          <h3 className="text-lg font-semibold m-[2px] text-orange-500">
             Pending: {statusCounts?.pending}
           </h3>
-          <h3 className='text-lg font-semibold m-[2px] text-green-500'>
+          <h3 className="text-lg font-semibold m-[2px] text-green-500">
             Resolved: {statusCounts?.resolved}
           </h3>
-          <h3 className='text-lg font-semibold m-[2px] text-blue-500'>
-            In Progress: {statusCounts?.['in-progress']}
+          <h3 className="text-lg font-semibold m-[2px] text-blue-500">
+            In Progress: {statusCounts?.["in-progress"]}
           </h3>
-          <h3 className='text-lg font-semibold m-[2px] text-gray-500'>
+          <h3 className="text-lg font-semibold m-[2px] text-gray-500">
             Closed: {statusCounts?.closed}
           </h3>
-          <div className='p-4 overflow-hidden bg-transparent rounded-lg w-full sm:p-6 lg:p-8 md:max-w-5xl h-full'>
-            <div className='flex items-center justify-end'>
-              
+          <div className="w-full h-full p-4 overflow-hidden bg-transparent rounded-lg sm:p-6 lg:p-8 md:max-w-5xl">
+            <div className="flex items-center justify-end">
               <input
-                type='text'
-                className='w-1/4 p-1 mb-4 border border-gray-300 rounded-lg placeholder:text-black'
-                onChange={e => setSelectedTicket(e.target.value)}
-                placeholder='Find Ticket by ID (Enter Ticket ID)'
+                type="text"
+                className="w-1/4 p-1 mb-4 border border-gray-300 rounded-lg placeholder:text-black"
+                onChange={(e) => setSelectedTicket(e.target.value)}
+                placeholder="Find Ticket by ID (Enter Ticket ID)"
               />
             </div>
             <DataTable
-              title='Ticket Records'
+              title="Ticket Records"
               columns={columns}
               data={filteredTickets}
               pagination
@@ -268,5 +293,5 @@ export default function () {
         </div>
       )}
     </div>
-  )
+  );
 }

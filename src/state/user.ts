@@ -11,14 +11,18 @@ const useUserStore = create<UserState>((set) => ({
   loading: false,
   error: null,
   getAllUsers: async () => {
-    const res = await api.get(`${import.meta.env.VITE_API_URI}${PATH.USERS_ROUTE}`);
+    const res = await api.get(
+      `${import.meta.env.VITE_API_URI}${PATH.USERS_ROUTE}`
+    );
     set({ users: res.data.details, loading: false, error: null });
 
     return res.data.details;
   },
 
   getOneUser: async (id) => {
-    const res = await api.get(`${import.meta.env.VITE_API_URI}${PATH.USER_ID_ROUTE.replace(":id", id)}`);
+    const res = await api.get(
+      `${import.meta.env.VITE_API_URI}${PATH.USER_ID_ROUTE.replace(":id", id)}`
+    );
     set({
       user: !Array.isArray(res.data.details) ? res.data.details : null,
       loading: false,
@@ -32,55 +36,84 @@ const useUserStore = create<UserState>((set) => ({
       `${import.meta.env.VITE_API_URI}${PATH.USERS_ROUTE}`,
       formData,
       {
-        headers: multipart
+        headers: multipart,
       }
     );
-    set({ user: res.data.details, loading: false, error: null });
+    set((state) => ({
+      users: [...state.users, res.data.details],
+      loading: false,
+      error: null,
+    }));
     return res.data.details;
   },
 
   updateUserById: async (id, formData) => {
     const res = await api.patch(
-      `${import.meta.env.VITE_API_URI}${PATH.EDIT_USER_ROUTE.replace(":id", id)}`,
-      formData,
+      `${import.meta.env.VITE_API_URI}${PATH.EDIT_USER_ROUTE.replace(
+        ":id",
+        id
+      )}`,
+      formData
     );
 
-    set({ user: res.data.details, loading: false, error: null });
+    set((state) => ({
+      users: state?.users?.map((u) => (u?._id == id ? res.data.details : u)),
+      loading: false,
+      error: "",
+    }));
     return res.data.details;
   },
 
   deleteUserById: async (id) => {
-    const res = await api.delete(
+    await api.delete(
       `${import.meta.env.VITE_API_URI}${PATH.USER_ID_ROUTE.replace(":id", id)}`
     );
 
-    set({ user: res.data.details, loading: false, error: null });
+    set((state) => ({
+      users: state.users.filter((u) => u?._id !== id),
+      loading: false,
+      error: "",
+    }));
   },
 
   changePassword: async (id, formData) => {
     const res = await api.patch(
-      `${import.meta.env.VITE_API_URI}${PATH.CHANGE_PASSWORD_ROUTE.replace(":id", id)}`,
+      `${import.meta.env.VITE_API_URI}${PATH.CHANGE_PASSWORD_ROUTE.replace(
+        ":id",
+        id
+      )}`,
       formData,
       {
-        headers: multipart
+        headers: multipart,
       }
     );
 
-    if(!res){
-      set({ user: null, loading: false, error: "Incorrect Password" }); 
+    if (!res) {
+      set({ user: null, loading: false, error: "Incorrect Password" });
     }
 
-    set({ user: res.data.details, loading: false, error: null });
+    set((state) => ({
+      users: state?.users?.map((u) => (u?._id == id ? res.data.details : u)),
+      loading: false,
+      error: "",
+    }));
+
     return res.data.details;
   },
   resetPassword: async (id) => {
     const res = await api.patch(
-      `${import.meta.env.VITE_API_URI}${PATH.RESET_PASSWORD_ROUTE.replace(":id", id)}`
+      `${import.meta.env.VITE_API_URI}${PATH.RESET_PASSWORD_ROUTE.replace(
+        ":id",
+        id
+      )}`
     );
 
-    set({ user: res.data.details, loading: false, error: null });
-  }
-
+    set((state) => ({
+      users: state?.users?.map((u) => (u?._id == id ? res.data.details : u)),
+      loading: false,
+      error: "",
+    }));
+  },
 }));
 
 export { useUserStore };

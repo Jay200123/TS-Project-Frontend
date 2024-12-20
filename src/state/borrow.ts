@@ -34,8 +34,12 @@ export const useBorrowStore = create<BorrowState>((set) => ({
         headers: multipart,
       }
     );
-    set({ borrow: res?.data?.details, loading: false, error: null });
+
+    set((state) => ({
+      borrows: [...state.borrows, res?.data?.details],
+    }));
   },
+
   updateBorrowById: async (id, data) => {
     const res = await api.patch(
       `${import.meta.env.VITE_API_URI}${PATH.EDIT_BORROW_ROUTE.replace(
@@ -47,15 +51,22 @@ export const useBorrowStore = create<BorrowState>((set) => ({
         headers: multipart,
       }
     );
-    set({ borrow: res?.data?.details, loading: false, error: null });
+
+    set((state) => ({
+      borrows: state?.borrows?.map((b) =>
+        b?._id === id ? res?.data?.details : b
+      ),
+    }));
   },
   deleteBorrowById: async (id) => {
-    const res = await api.delete(
+    await api.delete(
       `${import.meta.env.VITE_API_URI}${PATH.BORROW_ID_ROUTE.replace(
         ":id",
         id
       )}`
     );
-    set({ borrow: res?.data?.details, loading: false, error: null });
+    set((state) => ({
+      borrows: state?.borrows?.filter((b) => b?._id !== id),
+    }));
   },
 }));

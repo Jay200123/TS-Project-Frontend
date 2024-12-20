@@ -10,7 +10,9 @@ export const useTicketStore = create<TicketState>((set) => ({
   loading: false,
   error: "",
   getAllTickets: async () => {
-    const res = await api.get(`${import.meta.env.VITE_API_URI}${PATH.TICKETS_ROUTE}`);
+    const res = await api.get(
+      `${import.meta.env.VITE_API_URI}${PATH.TICKETS_ROUTE}`
+    );
     set({
       tickets: res.data.details,
       loading: false,
@@ -44,47 +46,93 @@ export const useTicketStore = create<TicketState>((set) => ({
         headers: multipart,
       }
     );
-
-    set({ ticket: res.data.details, loading: false, error: "" });
+    set((state) => ({
+      tickets: [...state.tickets, res.data.details],
+      loading: false,
+      error: "",
+    }));
   },
 
   updateTicketById: async (id: string, formData: FormData) => {
     const res = await api.patch(
-      `${import.meta.env.VITE_API_URI}${PATH.EDIT_TICKET_ROUTE.replace(":id", id)}`,
-      formData,
+      `${import.meta.env.VITE_API_URI}${PATH.EDIT_TICKET_ROUTE.replace(
+        ":id",
+        id
+      )}`,
+      formData
     );
 
-    set({ ticket: res.data.details, loading: false, error: "" });
+    set((state) => ({
+      tickets: state?.tickets?.map((t) =>
+        t?._id == id ? res.data.details : t
+      ),
+      loading: false,
+      error: "",
+    }));
   },
 
   deleteTicketById: async (id: string) => {
-    const res = await api.delete(
+    await api.delete(
       `${import.meta.env.VITE_API_URI}${PATH.TICKET_ID_ROUTE.replace(
         ":id",
         id
       )}`
     );
-    set({ ticket: res.data.details, loading: false, error: "" });
+    set((state) => ({
+      tickets: state?.tickets?.filter((t) => t?._id !== id),
+    }));
   },
 
   assignTicketById: async (id: string, formData: FormData) => {
-    const res = await api.patch(`${import.meta.env.VITE_API_URI}${PATH.ASSIGN_TICKET_ROUTE.replace(":id", id)}`, formData);
-    set({ ticket: res.data.details, loading: false, error: "" });
+    const res = await api.patch(
+      `${import.meta.env.VITE_API_URI}${PATH.ASSIGN_TICKET_ROUTE.replace(
+        ":id",
+        id
+      )}`,
+      formData
+    );
+    set((state) => ({
+      tickets: state?.tickets?.map((t) =>
+        t?._id == id ? res.data.details : t
+      ),
+      loading: false,
+      error: "",
+    }));
   },
 
   closeTicketById: async (id: string) => {
-    const res = await api.patch(`${import.meta.env.VITE_API_URI}${PATH.CLOSET_TICKET_ID_ROUTE.replace(":id", id)}`);
-    set({ ticket: res.data.details, loading: false, error: "" });
+    const res = await api.patch(
+      `${import.meta.env.VITE_API_URI}${PATH.CLOSET_TICKET_ID_ROUTE.replace(
+        ":id",
+        id
+      )}`
+    );
+    set((state) => ({
+      tickets: state?.tickets?.map((t) =>
+        t?._id == id ? res.data.details : t
+      ),
+      loading: false,
+      error: "",
+    }));
   },
 
   claimTicketById: async (id: string, assignee: string) => {
-    const res = await api.patch(`${import.meta.env.VITE_API_URI}${PATH.CLAIM_TICKET_ID_ROUTE.replace(":id", id)}`,
+    const res = await api.patch(
+      `${import.meta.env.VITE_API_URI}${PATH.CLAIM_TICKET_ID_ROUTE.replace(
+        ":id",
+        id
+      )}`,
       {
-        assignee
+        assignee,
       }
     );
 
-    set({ ticket: res.data.details, loading: false, error: "" });
-  }
-
+    set((state) => ({
+      tickets: state?.tickets?.map((t) =>
+        t?._id == id ? res.data.details : t
+      ),
+      loading: false,
+      error: "",
+    }));
+  },
 }));

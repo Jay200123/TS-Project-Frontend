@@ -41,7 +41,11 @@ export const useEquipmentStore = create<EquipmentState>((set) => ({
       }
     );
 
-    set({ equipment: res.data.details, loading: false, error: null });
+    set((state) => ({
+      equipments: [...state.equipments, res.data.details],
+      loading: false,
+      error: null,
+    }));
 
     return res.data.details;
   },
@@ -56,15 +60,21 @@ export const useEquipmentStore = create<EquipmentState>((set) => ({
         headers: multipart,
       }
     );
-    set({ equipment: res.data.details, loading: false, error: null });
+    set((state) => ({
+      equipments: state?.equipments?.map((e) =>
+        e?._id == id ? res.data.details : e
+      ),
+    }));
   },
   deleteEquipmentById: async (id: string) => {
-    const res = await api.delete(
+    await api.delete(
       `${import.meta.env.VITE_API_URI}${PATH.EQUIPMENT_ID_ROUTE.replace(
         ":id",
         id
       )}`
     );
-    set({ equipment: res.data.details, loading: false, error: null });
+    set((state) => ({
+      equipments: state?.equipments?.filter((e) => e?._id !== id),
+    }));
   },
 }));

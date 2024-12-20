@@ -48,6 +48,7 @@ import CreateBorrow from "./Borrow/createBorrow";
 import EditBorrow from "./Borrow/editBorrow";
 import GetBorrowById from "./Borrow/getBorrowById";
 import TechnicianBorrow from "./Borrow/technicianBorrow";
+import Inventory from "./Inventory";
 
 export {
   Home,
@@ -100,4 +101,5 @@ export {
   EditBorrow,
   GetBorrowById,
   TechnicianBorrow,
+  Inventory,
 };
